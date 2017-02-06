@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import AVFoundation
 
+
 class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //Difficulty

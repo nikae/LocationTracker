@@ -13,15 +13,7 @@ import CoreLocation
 import MapKit
 
 
-
-protocol startEndUpdatengLocationDelegate {
-    func startUpdatingLocation()
-    func startUpdatingLocation_SetUp()
-    func endUpdatingLocation()
-    func endUpdatingLocation_SetUp()    
-}
-
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITabBarDelegate, startEndUpdatengLocationDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITabBarDelegate {
    var managedObjectContext: NSManagedObjectContext?
     
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -64,6 +56,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
     }
     
+    //MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?

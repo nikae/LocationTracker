@@ -13,7 +13,7 @@ class CountDownVC: UIViewController {
     var timerCount = 3
     var timerRunning = false
     
-    let delegate: startEndUpdatengLocationDelegate? = nil
+  //  let delegate: startEndUpdatengLocationDelegate? = nil
     
     @IBOutlet weak var timerLabel: UILabel!
     
