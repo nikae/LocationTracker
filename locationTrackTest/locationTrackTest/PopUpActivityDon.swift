@@ -10,15 +10,6 @@ import UIKit
 import MapKit
 import AVFoundation
 
-extension NSLayoutConstraint {
-    
-    override open var description: String {
-        let id = identifier ?? ""
-        return "id: \(id), constant: \(constant)" //you may print whatever you want here
-    }
-}
-
-
 class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //Difficulty
