@@ -20,9 +20,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var theMap: MKMapView!
     @IBOutlet weak var theLabel: UILabel!
     @IBOutlet weak var startEndButtnHit: UIButton!
-    //might need to change name
+  
     @IBOutlet weak var tabStart: UITabBarItem!
-    //Sports Pickers
+   
     @IBOutlet weak var sportsView: UIView!
     @IBOutlet weak var walkButton: UIButton!
     @IBOutlet weak var runBurron: UIButton!
@@ -41,6 +41,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
@@ -51,6 +52,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         mapView.setUpMapView(view: theMap, delegate: self)
         mapView.zoomMap(val: 0.075, superVisor: manager, view: theMap)
+        
         activityPicker.getSavedSportsButton(button: startEndButtnHit,navigationBar: navigationBar, off: true)
         activityPicker.activityPickerView(view: sportsView, walk: walkButton, run: runBurron, hike: hikeButton, bike: bikeButton)
         
@@ -60,7 +62,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?
-    
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
 
@@ -94,11 +95,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             break
             
         }
-
         
     }
-
-    
+   
         
 //MARK: -Setup Location Manager
     func setUpLocationManager() {
@@ -106,6 +105,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     manager = CLLocationManager()
     manager.delegate = self
     manager.desiredAccuracy = kCLLocationAccuracyBest
+    manager.activityType = .fitness
     manager.requestAlwaysAuthorization()
     } else {
     theLabel.text = "Location services are not enabled"
@@ -119,6 +119,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         let spanX = 0.007
         let spanY = 0.007
+//        var location = CLLocation()
+//        for L in myLocations {
+//           location = L
+//        }
         let newRegion = MKCoordinateRegion(center: theMap.userLocation.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
         theMap.setRegion(newRegion, animated: true)
         
@@ -129,6 +133,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             let c2 = myLocations[destinationIndex].coordinate
             var a = [c1, c2]
             let polyline = MKPolyline(coordinates: &a, count: a.count)
+            polyline.title = "polyline"
             theMap.add(polyline)
         }
         
@@ -154,11 +159,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
     }
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-//        //WIerd
-//        let points = MKMultiPoint()
-//        print("*********************\(points.points())******************************************")
+    func removeOveraly()
+    {
+        // Overlays that must be removed from the map
+        var overlaysToRemove = [MKOverlay]()
         
+        // All overlays on the map
+        let overlays = self.theMap.overlays
+        
+        for overlay in overlays
+        {
+            if overlay.title! == "polyline"
+            {
+                overlaysToRemove.append(overlay)
+            }
+        }
+        
+        self.theMap.removeOverlays(overlaysToRemove)
+    }
+    
+
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+       
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
         for location in myLocations {
             if location.speed > 0 && location.speed <= 0.5 {
@@ -179,7 +201,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                polylineRenderer.strokeColor = polyLineColor_red()
             }
         }
-      
         polylineRenderer.lineWidth = 8
         return polylineRenderer
        
@@ -196,7 +217,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     func startUpdatingLocation_SetUp(){
-      //  tabStart.title = "END"
+        tabStart.title = "END"
         swipeUpSportsPick.isEnabled = false
         tapGesture.isEnabled = false
         activityPicker.getSavedSportsButton(button: self.startEndButtnHit,navigationBar: self.navigationBar, off: false)
@@ -207,7 +228,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     func endUpdatingLocation_SetUp(){
-     //   tabStart.title = "START"
+        tabStart.title = "START"
         swipeUpSportsPick.isEnabled = true
         tapGesture.isEnabled = true
         mapView.zoomMap(val: 0.015, superVisor: manager, view: theMap)
@@ -243,16 +264,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         popUp.didMove(toParentViewController: self)
         
     }
-
-    var launchBool: Bool = false {
+    
+       var launchBool: Bool = false {
         didSet {
             if launchBool == true {
                 popUpCountDown()
              
               
             } else {
-                
-                //
+
                 distanceLabel_String = "0.00"
                 timeLabel_String = "0:0"
                 paceLabel_String = "0.00"
@@ -262,8 +282,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 let alertController = UIAlertController(title: "Are You Done?", message: "If not press cancel to continue", preferredStyle: .actionSheet)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
                     (action: UIAlertAction) in
+                    
                     self.launchBool = true
-                    print("Youve pressed OK Button")
+                    print("You've pressed Cancel Button")
                 }
                 let oKAction = UIAlertAction(title: "OK", style: .default)
                 {
@@ -271,6 +292,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.popUpActivityManager()
                     self.endUpdatingLocation_SetUp()
                     self.endUpdatingLocation()
+                    self.removeOveraly()
                     }
 
                 alertController.addAction(oKAction)
@@ -290,22 +312,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         activityPicker.moveSportsViewDown(view: sportsView, button: startEndButtnHit, tapGesture: tapGesture, swipeDownGesture: swipeDownsportsPick, swipeUpGesture: swipeUpSportsPick, moveUp: true)
         theMap.isUserInteractionEnabled = false
         mapView.zoomMap(val: 0.15, superVisor: manager, view: theMap)
-    //    tabStart.title = ""
-    //    tabStart.isEnabled = false
+        tabStart.title = ""
+        tabStart.isEnabled = false
     }
     @IBAction func sportsViewSwipeUp(_ sender: UISwipeGestureRecognizer) {
         activityPicker.moveSportsViewDown(view: sportsView, button: startEndButtnHit, tapGesture: tapGesture, swipeDownGesture: swipeDownsportsPick, swipeUpGesture: swipeUpSportsPick, moveUp: true)
         mapView.zoomMap(val: 0.15, superVisor: manager, view: theMap)
         theMap.isUserInteractionEnabled = false
-     //   tabStart.title = ""
-     //   tabStart.isEnabled = false
+        tabStart.title = ""
+        tabStart.isEnabled = false
     }
     @IBAction func sportsViewSwipeDown(_ sender: UISwipeGestureRecognizer) {
         activityPicker.moveSportsViewDown(view: sportsView, button: startEndButtnHit, tapGesture: tapGesture, swipeDownGesture: swipeDownsportsPick, swipeUpGesture: swipeUpSportsPick, moveUp: false)
         mapView.zoomMap(val: 0.075, superVisor: manager, view: theMap)
         theMap.isUserInteractionEnabled = true
-     //   tabStart.title = "START"
-     //   tabStart.isEnabled = true
+        tabStart.title = "START"
+        tabStart.isEnabled = true
     }
     //Pick Activate Hit
     @IBAction func activateHit(_ key: UIButton){
@@ -315,8 +337,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         activityPicker.moveSportsViewDown(view: sportsView, button: startEndButtnHit, tapGesture: tapGesture, swipeDownGesture: swipeDownsportsPick, swipeUpGesture: swipeUpSportsPick, moveUp: false)
         mapView.zoomMap(val: 0.075, superVisor: manager, view: theMap)
         theMap.isUserInteractionEnabled = true
-      //  tabStart.title = "START"
-      //  tabStart.isEnabled = true
+        tabStart.title = "START"
+        tabStart.isEnabled = true
     }
 
     @IBAction func startHit(_ sender: UIButton) {

@@ -9,9 +9,10 @@
 import UIKit
 import MapKit
 import AVFoundation
+import CoreLocation
 
 
-class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
 
     //Difficulty
     @IBOutlet weak var easy: UIButton!
@@ -47,9 +48,16 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     @IBOutlet weak var imageView: UIImageView!
    
     
+    var manager: CLLocationManager!
+    let mapView = MyMapView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpLocationManager()
+        mapView.setUpMapView(view: mapView_ActivityDone, delegate: self)
+        mapView.zoomMap(val: 0.075, superVisor: manager,view: mapView_ActivityDone)
+  
         textView_ActivityDone.layer.borderWidth = 0.5
         textView_ActivityDone.layer.borderColor = UIColor.gray.cgColor
         textView_ActivityDone.layer.cornerRadius = 10
@@ -74,7 +82,36 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         
+        var coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
+        let polyline = MKPolyline(coordinates: &coordinates, count: myLocations.count)
+        self.mapView_ActivityDone.add(polyline)
+        print(print("coordinates: \(coordinates)"))
+        
     }
+    
+    //MARK: -setUp Location Manager
+    func setUpLocationManager() {
+        if (CLLocationManager.locationServicesEnabled()) {
+            manager = CLLocationManager()
+            manager.delegate = self
+            manager.desiredAccuracy = kCLLocationAccuracyBest
+            manager.activityType = .fitness
+            manager.requestAlwaysAuthorization()
+        } else {
+            print("Location services are not enabled")
+        }
+    }
+
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = .black
+        polylineRenderer.lineWidth = 5
+        return polylineRenderer
+        
+    }
+
+
     
     //MARK: -Camera / Add Picture
     func addPhoto(_ recognizer: UITapGestureRecognizer) {
@@ -298,11 +335,13 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     
     @IBAction func doneActivityHit(_ sender: UIButton) {
+        myLocations.removeAll()
         self.view.removeFromSuperview()
     }
    
     @IBAction func dismissHit(_ sender: UIButton) {
-            self.view.removeFromSuperview()      
+            self.view.removeFromSuperview()
+        myLocations.removeAll()
     }
 
 }

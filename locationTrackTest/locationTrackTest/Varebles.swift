@@ -69,18 +69,11 @@ var arrayOfWhatToSee: [String] = []
 let systemSoundID: SystemSoundID = 1104
 
  var myLocations: [CLLocation] = []
-
+ 
+//var polyline = MKPolyline()
 
 var activity_String = ""
 
-//
-//extension NSLayoutConstraint {
-//
-//    override open var description: String {
-//        let id = identifier ?? ""
-//        return "id: \(id), constant: \(constant)" //you may print whatever you want here
-//    }
-//}
 
 
 
