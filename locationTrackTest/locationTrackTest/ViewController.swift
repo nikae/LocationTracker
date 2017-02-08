@@ -34,13 +34,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     
     var manager: CLLocationManager!
-   
+    
+    let healthManager:HealthKitManager = HealthKitManager()
+    var height: HKQuantitySample?
+    
     let activityPicker = ActivityPicker()
     let mapView = MyMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
+ 
+           }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -57,6 +61,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         activityPicker.activityPickerView(view: sportsView, walk: walkButton, run: runBurron, hike: hikeButton, bike: bikeButton)
         
     }
+    
+    //MARK -Healt Kit
+    func getPermission(){
+        healthManager.authorizeHealthKit { (authorized,  error) -> Void in
+            if authorized {
+                
+                self.setHeight()
+            } else {
+                if error != nil {
+                    print(error ?? "Error HealtKitMethods")
+                }
+                print("Permission denied.")
+            }
+        }
+    }
+
+    func setHeight() {
+        let heightSample = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)
+        self.healthManager.getHeight(sampleType: heightSample!, completion: { (userHeight, error) -> Void in
+            if( error != nil ) {
+                print("Error: \(error?.localizedDescription)")
+                return
+            }
+            
+            var heightString = ""
+            self.height = userHeight as? HKQuantitySample
+            
+            // The height is formatted to the user's locale.
+            if let meters = self.height?.quantity.doubleValue(for: HKUnit.meter()) {
+                let formatHeight = LengthFormatter()
+                formatHeight.isForPersonHeightUse = true
+                heightString = formatHeight.string(fromMeters: meters)
+            }
+                DispatchQueue.main.async(execute: { () -> Void in
+                heightString_Var = heightString
+            })
+        })
+        
+    }
+
     
     //MARK -TabBar controller
     var viewController0: UIViewController?
@@ -107,23 +151,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     manager.desiredAccuracy = kCLLocationAccuracyBest
     manager.activityType = .fitness
     manager.requestAlwaysAuthorization()
+    manager.allowsBackgroundLocationUpdates = true
+        
     } else {
     theLabel.text = "Location services are not enabled"
     }
+        
  }
+   
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         theLabel.text = "\(locations[0])"
         myLocations.append(locations[0] as CLLocation)
         
-        
         let spanX = 0.007
         let spanY = 0.007
-//        var location = CLLocation()
-//        for L in myLocations {
-//           location = L
-//        }
-        let newRegion = MKCoordinateRegion(center: theMap.userLocation.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
+        
+        //Testing
+        var location = CLLocation()
+        for L in myLocations {
+           location = L
+        }
+        let newRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
         theMap.setRegion(newRegion, animated: true)
         
         if (myLocations.count > 1){
@@ -156,6 +205,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 print("Problem with the data recives drom geocoder")
             }
         })
+        
+        if startLocation == nil {
+            startLocation = locations.first as CLLocation!
+        } else {
+            let lastDistance = lastLocation.distance(from: locations.last as CLLocation!)
+            distanceTraveled += lastDistance * 0.000621371
+            distanceLabel_String = String(format: "%.2f", distanceTraveled)
+            //print(distanceLabel_String)
+           
+            
+        }
+        
+        lastLocation = locations.last as CLLocation!
 
     }
     
@@ -205,12 +267,52 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         return polylineRenderer
        
     }
+    
+// need to come back
+//    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+//        print(newHeading.magneticHeading)
+//        //theMap.camera.heading = newHeading.magneticHeading
+//    }
 
-//MARK: -Start/End Updating Locations
+   //MARK -Updare Activity Time
+    func updateTime() {
+//can be wrong
+        let currentTime = NSDate.timeIntervalSinceReferenceDate
+        var timePassed: TimeInterval = currentTime - zeroTime
+        let hours = UInt8(timePassed / 3600.0)
+        timePassed -= (TimeInterval(hours) * 3600)
+        let minutes = UInt8(timePassed / 60.0)
+        timePassed -= (TimeInterval(minutes) * 60)
+        let seconds = UInt8(timePassed)
+        timePassed -= TimeInterval(seconds)
+        //let millisecsX10 = UInt8(timePassed * 100)
+        
+        let strHours = String(format: "%02d", hours)
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        //let strMSX10 = String(format: "%02d", millisecsX10)
+        
+        timeLabel_String = "\(strHours):\(strMinutes):\(strSeconds)"
+        print(timeLabel_String)
+        
+        if timeLabel_String == "60:00:00" {
+            timer.invalidate()
+            manager.stopUpdatingLocation()
+        }
+    }
+    
+    //MARK: -Start/End Updating Locations
     func startUpdatingLocation(){
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true)
+        zeroTime = NSDate.timeIntervalSinceReferenceDate
         if (CLLocationManager.locationServicesEnabled()) {
-            self.manager.startUpdatingLocation()
+            
+            manager.startUpdatingLocation()
+           // manager.startUpdatingHeading()
+            
         } else {
+
+            
             self.theLabel.text = "Location services are not enabled"
         }
         
@@ -224,6 +326,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     func endUpdatingLocation(){
+         timer.invalidate()
          manager.stopUpdatingLocation()
     }
     
@@ -272,13 +375,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
              
               
             } else {
-
-                distanceLabel_String = "0.00"
-                timeLabel_String = "0:0"
-                paceLabel_String = "0.00"
-                altitudeLabel_String = "0.00"
                 
-                self.endUpdatingLocation()
+                
+                //distanceLabel_String = "0.00"
+                //timeLabel_String = "0:0"
+                //paceLabel_String = "0.00"
+                //altitudeLabel_String = "0.00"
+                
+               
                 let alertController = UIAlertController(title: "Are You Done?", message: "If not press cancel to continue", preferredStyle: .actionSheet)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
                     (action: UIAlertAction) in
@@ -293,6 +397,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.endUpdatingLocation_SetUp()
                     self.endUpdatingLocation()
                     self.removeOveraly()
+
+                    
+                    self.endUpdatingLocation()
+                    
                     }
 
                 alertController.addAction(oKAction)

@@ -54,6 +54,7 @@ enum SportColors {
 }
 
 
+var blueColor = UIColor(red: 0/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1)
 
 
 

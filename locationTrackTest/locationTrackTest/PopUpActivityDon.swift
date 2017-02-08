@@ -56,14 +56,13 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         
         setUpLocationManager()
         mapView.setUpMapView(view: mapView_ActivityDone, delegate: self)
-        mapView.zoomMap(val: 0.075, superVisor: manager,view: mapView_ActivityDone)
+        mapView.zoomMap(val: 0.04, superVisor: manager,view: mapView_ActivityDone)
+        mapView_ActivityDone.showsUserLocation = false
   
         textView_ActivityDone.layer.borderWidth = 0.5
         textView_ActivityDone.layer.borderColor = UIColor.gray.cgColor
         textView_ActivityDone.layer.cornerRadius = 10
-        
-        
-        
+      
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         textView_ActivityDone.delegate = self
         activityNameTF.delegate = self
@@ -85,7 +84,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         var coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
         let polyline = MKPolyline(coordinates: &coordinates, count: myLocations.count)
         self.mapView_ActivityDone.add(polyline)
-        print(print("coordinates: \(coordinates)"))
+        //print("coordinates: \(coordinates)")
         
     }
     
@@ -105,7 +104,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = .black
+        polylineRenderer.strokeColor = blueColor
         polylineRenderer.lineWidth = 5
         return polylineRenderer
         

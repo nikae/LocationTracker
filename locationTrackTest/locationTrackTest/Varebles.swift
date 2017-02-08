@@ -16,6 +16,9 @@ let sportsButtonDefoults = UserDefaults.standard
 let sportsButtonDefoultsKey = "sportsButtonDefoultsKey"
 let sportsButtonDefoultsKey_End = "sportsButtonDefoultsKey_End"
 
+let distanceDefoults = UserDefaults.standard
+let distanceDefoultsKey = "distance"
+
 //MARK: -Activity Names
 var walkString = "Walk"
 var runString = "Run"
@@ -74,9 +77,17 @@ let systemSoundID: SystemSoundID = 1104
 
 var activity_String = ""
 
+//HealtKit
+var zeroTime = TimeInterval()
+var timer : Timer = Timer()
 
+//let locationManager = CLLocationManager()
+var startLocation: CLLocation!
+var lastLocation: CLLocation!
+var distanceTraveled = 0.0
 
-
+//if Ill need enywhere
+var heightString_Var = ""
 
 
 
