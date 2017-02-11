@@ -13,6 +13,7 @@ import AVFoundation
 
 //MARK: -UsersDefoult
 let sportsButtonDefoults = UserDefaults.standard
+let profilePictureDefoults = UserDefaults.standard
 let sportsButtonDefoultsKey = "sportsButtonDefoultsKey"
 let sportsButtonDefoultsKey_End = "sportsButtonDefoultsKey_End"
 

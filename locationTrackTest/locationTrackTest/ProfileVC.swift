@@ -23,10 +23,12 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
+    @IBOutlet weak var totalActivitiesScrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         scrollView.delegate = self
+        totalActivitiesScrollView.delegate = self
         titleLabel.isHidden = true
         
         
@@ -38,6 +40,14 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
         avatarImage.layer.borderWidth = 0.5
         //avatarImage.layer.borderColor = UIColor.black.cgColor
         avatarImage.clipsToBounds = true
+        
+        if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
+        {
+            if let image = UIImage(data: savedImgData as Data)
+            {
+                avatarImage.image = image
+            }
+        }
     }
     
     //MARK: -Camera / Add Picture
@@ -76,7 +86,15 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         //print(info.debugDescription)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+
+            let imageData = UIImageJPEGRepresentation(image, 1)
+             profilePictureDefoults.set(imageData, forKey: "image")
+            profilePictureDefoults.synchronize()
+            
             avatarImage.image = image
+            
+         
+            
         } else {
             print("Somthing went wrong")
         }
