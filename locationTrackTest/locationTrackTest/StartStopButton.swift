@@ -114,8 +114,8 @@ struct ActivityPicker {
         let yPositionOfView = view.frame.origin.y + 220
         let yPositionOfButton = button.frame.origin.y + 220
         let heightOfView = view.frame.size.height
-            
         let widthOfView = view.frame.size.width
+            
         let heightOfButton = button.frame.size.height
         let widthOfButton = button.frame.size.width
         
@@ -157,6 +157,7 @@ struct ActivityPicker {
     
         
     }
+
     
 
 }

@@ -89,5 +89,9 @@ var distanceTraveled = 0.0
 //if Ill need enywhere
 var heightString_Var = ""
 
+var arrayOfAltitude: [Double] = []
 
+var totalTimeSeconds: Double = 0
+var distanceRanInMetres: Double = 0
 
+var paceArray: [Int] = []

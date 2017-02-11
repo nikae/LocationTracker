@@ -18,12 +18,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var theMap: MKMapView!
-    @IBOutlet weak var theLabel: UILabel!
+    //@IBOutlet weak var theLabel: UILabel!
     @IBOutlet weak var startEndButtnHit: UIButton!
   
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var altitudeLabel: UILabel!
+    
     @IBOutlet weak var tabStart: UITabBarItem!
    
     @IBOutlet weak var sportsView: UIView!
+    @IBOutlet weak var resultsDisplayView: UIView!
+    
     @IBOutlet weak var walkButton: UIButton!
     @IBOutlet weak var runBurron: UIButton!
     @IBOutlet weak var hikeButton: UIButton!
@@ -40,17 +47,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     let activityPicker = ActivityPicker()
     let mapView = MyMapView()
+    let viewSlider = ViewSlider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+               
            }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        //SAMPLE
-        theLabel.text = "Location Info Here"
         
         setUpLocationManager()
         
@@ -59,6 +64,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         activityPicker.getSavedSportsButton(button: startEndButtnHit,navigationBar: navigationBar, off: true)
         activityPicker.activityPickerView(view: sportsView, walk: walkButton, run: runBurron, hike: hikeButton, bike: bikeButton)
+        
+        resultsDisplayView.isHidden = true
         
     }
     
@@ -154,14 +161,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     manager.allowsBackgroundLocationUpdates = true
         
     } else {
-    theLabel.text = "Location services are not enabled"
+    print("Location services are not enabled")
     }
         
  }
    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        theLabel.text = "\(locations[0])"
+       
         myLocations.append(locations[0] as CLLocation)
         
         let spanX = 0.007
@@ -206,19 +213,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             }
         })
         
+        
         if startLocation == nil {
             startLocation = locations.first as CLLocation!
         } else {
-            let lastDistance = lastLocation.distance(from: locations.last as CLLocation!)
-            distanceTraveled += lastDistance * 0.000621371
-            distanceLabel_String = String(format: "%.2f", distanceTraveled)
-            //print(distanceLabel_String)
-           
-            
+            let lastDistance = lastLocation.distance(from: locations.last as CLLocation!) //In Meter
+            distanceTraveled += lastDistance * 0.000621371192 //In Miles
+            //1 Meter = 0.000621371192 Miles 
+            //1 Mile = 1609.344 Meters
+            distanceLabel_String = String(format: "%.2f  mi", distanceTraveled)
+            distanceLabel.text = String(format: "%.2f  mi", distanceTraveled)
+             let altitude = lastLocation.altitude // In Meters
+            let altitudeInFeets = altitude / 0.3048 //In Feets
+             arrayOfAltitude.append(altitudeInFeets)
+            let maxAltitude = arrayOfAltitude.max()
+            altitudeLabel_String = String(format: "%.2f ft", maxAltitude!)
+            altitudeLabel.text = String(format: "%.2f ft", altitudeInFeets)
         }
         
         lastLocation = locations.last as CLLocation!
 
+        
+        
     }
     
     func removeOveraly()
@@ -267,16 +283,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         return polylineRenderer
        
     }
+   //MARK -Calculate Pace method
+    func paceInSeconds (hours: Double, minutes:Double, seconds: Double, distance: Double) -> Double {
+        return ((hours*60) + (minutes*60) + seconds) / distance
+    }
     
-// need to come back
-//    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-//        print(newHeading.magneticHeading)
-//        //theMap.camera.heading = newHeading.magneticHeading
-//    }
-
    //MARK -Updare Activity Time
     func updateTime() {
-//can be wrong
         let currentTime = NSDate.timeIntervalSinceReferenceDate
         var timePassed: TimeInterval = currentTime - zeroTime
         let hours = UInt8(timePassed / 3600.0)
@@ -293,13 +306,39 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //let strMSX10 = String(format: "%02d", millisecsX10)
         
         timeLabel_String = "\(strHours):\(strMinutes):\(strSeconds)"
-        print(timeLabel_String)
+        timeLabel.text = "\(strHours):\(strMinutes):\(strSeconds)"
+  
+        //MARK -Calculate Pace
+        if distanceTraveled != 0 {
+            
+        let paceMinutes = paceInSeconds(hours: Double(hours), minutes: Double(minutes), seconds: Double(seconds), distance: distanceTraveled) / 60
+        let roundedPaceMinutes = Double(floor(paceMinutes))
+        let decimalPaceSeconds = paceMinutes - roundedPaceMinutes
+        _ = Int(floor(roundedPaceMinutes))
+        let paceSeconds = Int(floor(decimalPaceSeconds * 60))
+        let paceSecondsZero = String(format: "%02d", paceSeconds)
+            
+        paceLabel_String = paceSecondsZero
+        paceLabel.text = "--'-"
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(30), execute: {
+//                self.paceLabel.text = paceSecondsZero
+//            })
+
+           //print(paceLabel_String)
+        } else {
+            paceLabel_String = "--'-"
+            paceLabel.text = "--'-"
+        }
         
-        if timeLabel_String == "60:00:00" {
+        
+        if timeLabel_String == "24:00:00" {
             timer.invalidate()
             manager.stopUpdatingLocation()
+            //set notification
         }
     }
+    
+    
     
     //MARK: -Start/End Updating Locations
     func startUpdatingLocation(){
@@ -308,12 +347,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if (CLLocationManager.locationServicesEnabled()) {
             
             manager.startUpdatingLocation()
-           // manager.startUpdatingHeading()
             
-        } else {
+            
+            resultsDisplayView.isHidden = false
+             viewSlider.moveViewDownOrUp(view: resultsDisplayView, moveUp: false)
+        
+            
+                    } else {
 
             
-            self.theLabel.text = "Location services are not enabled"
+            print("Location services are not enabled")
         }
         
     }
@@ -323,6 +366,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         swipeUpSportsPick.isEnabled = false
         tapGesture.isEnabled = false
         activityPicker.getSavedSportsButton(button: self.startEndButtnHit,navigationBar: self.navigationBar, off: false)
+        
+        profileTabBarItem.isEnabled = false
+        tracksTabBarItem.isEnabled = false
+        tabStart.isEnabled = false
+        
     }
     
     func endUpdatingLocation(){
@@ -335,8 +383,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         swipeUpSportsPick.isEnabled = true
         tapGesture.isEnabled = true
         mapView.zoomMap(val: 0.015, superVisor: manager, view: theMap)
-        theLabel.text = "Location Info Here"
         activityPicker.getSavedSportsButton(button: startEndButtnHit,navigationBar: navigationBar, off: true)
+        
+        profileTabBarItem.isEnabled = true
+        tracksTabBarItem.isEnabled = true
+        tabStart.isEnabled = true
+   
+        timeLabel.text = ""
+        paceLabel.text = ""
+        distanceLabel.text = ""
+        altitudeLabel.text = ""
+        
+        resultsDisplayView.isHidden = true
+        
        
     }
     
@@ -348,13 +407,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         popUp.view.frame = self.view.frame
         self.view.addSubview(popUp.view)
         popUp.didMove(toParentViewController: self)
+        self.startUpdatingLocation_SetUp()
         //wait
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
             //Remove popUp
             popUp.view.removeFromSuperview()
             //Do Map
             self.startUpdatingLocation()
-            self.startUpdatingLocation_SetUp()
+    
         })
     }
     
@@ -373,16 +433,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             if launchBool == true {
                 popUpCountDown()
              
-              
             } else {
                 
-                
-                //distanceLabel_String = "0.00"
-                //timeLabel_String = "0:0"
-                //paceLabel_String = "0.00"
-                //altitudeLabel_String = "0.00"
-                
-               
                 let alertController = UIAlertController(title: "Are You Done?", message: "If not press cancel to continue", preferredStyle: .actionSheet)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
                     (action: UIAlertAction) in
@@ -397,10 +449,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.endUpdatingLocation_SetUp()
                     self.endUpdatingLocation()
                     self.removeOveraly()
-
                     
-                    self.endUpdatingLocation()
-                    
+                   
+        
                     }
 
                 alertController.addAction(oKAction)
@@ -449,6 +500,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         tabStart.isEnabled = true
     }
 
+    //MARK -Start / End Hit
     @IBAction func startHit(_ sender: UIButton) {
          launchBool = !launchBool
         

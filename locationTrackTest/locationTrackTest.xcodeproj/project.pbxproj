@@ -25,6 +25,7 @@
 		249666921E42BA4F009335E2 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249666911E42BA4F009335E2 /* ProfileVC.swift */; };
 		24D1BFC91E4A961C007151E8 /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFC81E4A961C007151E8 /* Methods.swift */; };
 		24D1BFCB1E4A9FE0007151E8 /* HealtKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */; };
+		24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCC1E4D4691007151E8 /* viewSlider.swift */; };
 		24FFF3FD1DFDCE5B0088B86C /* sportIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24FFF3FC1DFDCE5B0088B86C /* sportIcons.xcassets */; };
 		24FFF3FF1DFDD4030088B86C /* StartStopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FFF3FE1DFDD4030088B86C /* StartStopButton.swift */; };
 		24FFF4011DFDE4420088B86C /* Varebles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FFF4001DFDE4420088B86C /* Varebles.swift */; };
@@ -72,6 +73,7 @@
 		249666911E42BA4F009335E2 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		24D1BFC81E4A961C007151E8 /* Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
 		24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealtKitManager.swift; sourceTree = "<group>"; };
+		24D1BFCC1E4D4691007151E8 /* viewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewSlider.swift; sourceTree = "<group>"; };
 		24FFF3FC1DFDCE5B0088B86C /* sportIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = sportIcons.xcassets; path = ../sportIcons.xcassets; sourceTree = "<group>"; };
 		24FFF3FE1DFDD4030088B86C /* StartStopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartStopButton.swift; sourceTree = "<group>"; };
 		24FFF4001DFDE4420088B86C /* Varebles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varebles.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				240DD1461DED193100F68A28 /* Map.swift */,
 				240DD1441DED025A00F68A28 /* ObjectColors.swift */,
 				24FFF3FE1DFDD4030088B86C /* StartStopButton.swift */,
+				24D1BFCC1E4D4691007151E8 /* viewSlider.swift */,
 				245038661E31CCBE00CF1707 /* PopUpActivityDon.swift */,
 				245038681E32B3A700CF1707 /* CountDownVC.swift */,
 				2466AC9E1DFE1010001331DD /* CoreDataStack.swift */,
@@ -334,6 +337,7 @@
 				24FFF4011DFDE4420088B86C /* Varebles.swift in Sources */,
 				24D1BFCB1E4A9FE0007151E8 /* HealtKitManager.swift in Sources */,
 				240DD1141DE531B100F68A28 /* ViewController.swift in Sources */,
+				24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */,
 				245038691E32B3A700CF1707 /* CountDownVC.swift in Sources */,
 				240DD1471DED193100F68A28 /* Map.swift in Sources */,
 				240DD1121DE531B100F68A28 /* AppDelegate.swift in Sources */,
