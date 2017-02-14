@@ -8,28 +8,37 @@
 
 import UIKit
 
-let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
-let offset_B_LabelHeader:CGFloat = 95.0 // At this offset the Black label reaches the Header
-let distance_W_LabelHeader:CGFloat = 5.0 // The distance between the bottom of the Header and the top of the White Label
+enum contentTypes {
+    case tweets, media
+}
 
-class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+     var contentToDisplay : contentTypes = .tweets
     
     @IBOutlet weak var navigationBar: UINavigationBar!
-    
-    @IBOutlet var scrollView:UIScrollView!
-    @IBOutlet weak var avatarImage: UIImageView!
-    @IBOutlet var header:UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var userNameLabel: UILabel!
-    
     @IBOutlet weak var totalActivitiesScrollView: UIScrollView!
+    @IBOutlet var tableView : UITableView!
+    @IBOutlet var headerView : UIView!
+    @IBOutlet var profileView : UIView!
+    @IBOutlet var segmentedView : UIView!
+    @IBOutlet weak var avatarImage: UIImageView!
+    
+    @IBOutlet var handleLabel : UILabel!
+    @IBOutlet var headerLabel : UILabel!
+   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scrollView.delegate = self
-        totalActivitiesScrollView.delegate = self
-        titleLabel.isHidden = true
+        
+        tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
+
+        //scrollView.delegate = self
+        //totalActivitiesScrollView.delegate = self
+        //handleLabel.isHidden = true
         
         
         avatarImage.contentMode = .scaleAspectFill
@@ -38,7 +47,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
 
         avatarImage.layer.cornerRadius = avatarImage.frame.height/2
         avatarImage.layer.borderWidth = 0.5
-        //avatarImage.layer.borderColor = UIColor.black.cgColor
         avatarImage.clipsToBounds = true
         
         if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
@@ -49,6 +57,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
             }
         }
     }
+    
+    
     
     //MARK: -Camera / Add Picture
     func addPhoto() {
@@ -145,28 +155,65 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
         
     }
     
+    // MARK: -Table view processing
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch contentToDisplay {
+        case .tweets:
+            return 40
+            
+        case .media:
+            return 20
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        
+        
+        switch contentToDisplay {
+        case .tweets:
+            cell.textLabel?.text = "Tweet Tweet!"
+            
+        case .media:
+            cell.textLabel?.text = "Piccies!"
+            cell.imageView?.image = UIImage(named: "header_bg")
+        }
+        
+        
+        
+        return cell
+    }
+
+    
+    //MARK -ScrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offset = scrollView.contentOffset.y
+        let offset = scrollView.contentOffset.y + headerView.bounds.height
+        
         var avatarTransform = CATransform3DIdentity
         var headerTransform = CATransform3DIdentity
-        
-        
         
         // PULL DOWN -----------------
         
         if offset < 0 {
             
-            let headerScaleFactor:CGFloat = -(offset) / header.bounds.height
-            let headerSizevariation = ((header.bounds.height * (1.0 + headerScaleFactor)) - header.bounds.height)/2.0
+            let headerScaleFactor:CGFloat = -(offset) / headerView.bounds.height
+            let headerSizevariation = ((headerView.bounds.height * (1.0 + headerScaleFactor)) - headerView.bounds.height)/2
             headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
             headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
             
-            header.layer.transform = headerTransform
             
-            titleLabel.isHidden = true
+            // Hide views if scrolled super fast
+            headerView.layer.zPosition = 0
+          //  handleLabel.isHidden = true
             
-
         }
             
             // SCROLL UP/DOWN ------------
@@ -179,15 +226,16 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
             
             //  ------------ Label
             
-            let labelTransform = CATransform3DMakeTranslation(0, max(-distance_W_LabelHeader, offset_B_LabelHeader - offset), 0)
-            titleLabel.layer.transform = labelTransform
+           // handleLabel.isHidden = false
+            let alignToNameLabel = -offset + handleLabel.frame.origin.y + headerView.frame.height + offset_HeaderStop
             
-            titleLabel.isHidden = false
+            headerLabel.frame.origin = CGPoint(x: headerLabel.frame.origin.x, y: max(alignToNameLabel, distance_W_LabelHeader + offset_HeaderStop))
             
             
             //  ------------ Blur
             
-           titleLabel?.alpha = min (1.0, (offset - offset_B_LabelHeader)/distance_W_LabelHeader)
+            // headerBlurImageView?.alpha = min (1.0, (offset - alignToNameLabel)/distance_W_LabelHeader)
+            
             // Avatar -----------
             
             let avatarScaleFactor = (min(offset_HeaderStop, offset)) / avatarImage.bounds.height / 1.4 // Slow down the animation
@@ -195,30 +243,45 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
             avatarTransform = CATransform3DTranslate(avatarTransform, 0, avatarSizeVariation, 0)
             avatarTransform = CATransform3DScale(avatarTransform, 1.0 - avatarScaleFactor, 1.0 - avatarScaleFactor, 0)
             
-//            let off = CGPoint(x:0, y: 100)
-//            scrollView.contentOffset = off
-//            
             if offset <= offset_HeaderStop {
                 
-                if avatarImage.layer.zPosition < header.layer.zPosition{
-                    header.layer.zPosition = 0
-                   
+                if avatarImage.layer.zPosition < headerView.layer.zPosition{
+                    headerView.layer.zPosition = 0
                 }
                 
+                
             }else {
-                if avatarImage.layer.zPosition >= header.layer.zPosition{
-                    header.layer.zPosition = 0
-                   
+                if avatarImage.layer.zPosition >= headerView.layer.zPosition{
+                    headerView.layer.zPosition = 2
                 }
+                
             }
+            
         }
         
         // Apply Transformations
-        
-        header.layer.transform = headerTransform
+        headerView.layer.transform = headerTransform
         avatarImage.layer.transform = avatarTransform
+        
+        // Segment control
+        
+        let segmentViewOffset = profileView.frame.height - segmentedView.frame.height - offset
+        
+        var segmentTransform = CATransform3DIdentity
+        
+        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
+        segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -offset_HeaderStop), 0)
+        
+        segmentedView.layer.transform = segmentTransform
+        
+        
+        // Set scroll view insets just underneath the segment control
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.frame.maxY, 0, 0, 0)
+        
+        
+        
     }
-
+   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -235,8 +298,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
         // Pass the selected object to the new view controller.
     }
     */
-    @IBAction func editProfileHit(_ sender: Any) {
+    @IBAction func editProfileHit(_ sender: UIBarButtonItem) {
         addPhoto()
     }
-
+   
 }
