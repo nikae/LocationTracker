@@ -260,25 +260,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
        
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        for location in myLocations {
-            if location.speed > 0 && location.speed <= 0.5 {
-                polylineRenderer.strokeColor = polyLineColor_red()
-            } else if location.speed > 0.5 && location.speed <= 1 {
-                polylineRenderer.strokeColor = polyLineColor_red1()
-            } else if location.speed > 1.5 && location.speed <= 2 {
-                polylineRenderer.strokeColor = polyLineColor_orange()
-            } else if location.speed > 2 && location.speed <= 2.5 {
-                polylineRenderer.strokeColor = polyLineColor_orange1()
-            } else if location.speed > 2.5 && location.speed <= 3 {
-                polylineRenderer.strokeColor = polyLineColor_yellow()
-            } else if location.speed > 3 && location.speed <= 3.5{
-                polylineRenderer.strokeColor = polyLineColor_yellow1()
-            } else if location.speed > 3.5 {
-                polylineRenderer.strokeColor = polyLineColor_green()
-            } else {
-               polylineRenderer.strokeColor = polyLineColor_red()
-            }
-        }
+        polylineRenderer.strokeColor = activityColor
+//        for location in myLocations {
+//            if location.speed > 0 && location.speed <= 0.5 {
+//                polylineRenderer.strokeColor = polyLineColor_red()
+//            } else if location.speed > 0.5 && location.speed <= 1 {
+//                polylineRenderer.strokeColor = polyLineColor_red1()
+//            } else if location.speed > 1.5 && location.speed <= 2 {
+//                polylineRenderer.strokeColor = polyLineColor_orange()
+//            } else if location.speed > 2 && location.speed <= 2.5 {
+//                polylineRenderer.strokeColor = polyLineColor_orange1()
+//            } else if location.speed > 2.5 && location.speed <= 3 {
+//                polylineRenderer.strokeColor = polyLineColor_yellow()
+//            } else if location.speed > 3 && location.speed <= 3.5{
+//                polylineRenderer.strokeColor = polyLineColor_yellow1()
+//            } else if location.speed > 3.5 {
+//                polylineRenderer.strokeColor = polyLineColor_green()
+//            } else {
+//               polylineRenderer.strokeColor = polyLineColor_red()
+//            }
+//        }
         polylineRenderer.lineWidth = 8
         return polylineRenderer
        
@@ -320,11 +321,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             
         paceLabel_String = paceSecondsZero
         paceLabel.text = "--'-"
-//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(30), execute: {
-//                self.paceLabel.text = paceSecondsZero
-//            })
 
-           //print(paceLabel_String)
         } else {
             paceLabel_String = "--'-"
             paceLabel.text = "--'-"

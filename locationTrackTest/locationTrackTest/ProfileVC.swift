@@ -7,15 +7,12 @@
 //
 
 import UIKit
-
-enum contentTypes {
-    case tweets, media
+enum slider {
+    case walk, run, hike, bike
 }
 
 
 class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
-    
-     var contentToDisplay : contentTypes = .tweets
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var totalActivitiesScrollView: UIScrollView!
@@ -23,43 +20,35 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     @IBOutlet var headerView : UIView!
     @IBOutlet var profileView : UIView!
     @IBOutlet var segmentedView : UIView!
-    @IBOutlet weak var avatarImage: UIImageView!
-    
     @IBOutlet var handleLabel : UILabel!
     @IBOutlet var headerLabel : UILabel!
-   
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var segmentedController: UISegmentedControl!
     
-    
+    @IBOutlet weak var goalSlider: UISlider!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+       
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
-
-        //scrollView.delegate = self
-        //totalActivitiesScrollView.delegate = self
-        //handleLabel.isHidden = true
+        
+        profileImage.contentMode = .scaleAspectFill
+        profileImage.clipsToBounds = true
+        profileImage.isUserInteractionEnabled = true
+        profileImage.layer.cornerRadius = profileImage.frame.height/2
+        profileImage.layer.borderWidth = 0.5
+        profileImage.clipsToBounds = true
         
         
-        avatarImage.contentMode = .scaleAspectFill
-        avatarImage.clipsToBounds = true
-        avatarImage.isUserInteractionEnabled = true
-
-        avatarImage.layer.cornerRadius = avatarImage.frame.height/2
-        avatarImage.layer.borderWidth = 0.5
-        avatarImage.clipsToBounds = true
         
         if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
         {
             if let image = UIImage(data: savedImgData as Data)
             {
-                avatarImage.image = image
+                profileImage.image = image
             }
         }
     }
-    
-    
-    
+   
     //MARK: -Camera / Add Picture
     func addPhoto() {
         let picker = UIImagePickerController()
@@ -101,17 +90,13 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
              profilePictureDefoults.set(imageData, forKey: "image")
             profilePictureDefoults.synchronize()
             
-            avatarImage.image = image
-            
-         
-            
+            profileImage.image = image
+          
         } else {
             print("Somthing went wrong")
         }
         dismiss(animated: true, completion: nil)
     }
-    
-
 
     //MARK -TabBar controller
     var viewController0: UIViewController?
@@ -151,8 +136,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
             break
             
         }
-        
-        
+      
     }
     
     // MARK: -Table view processing
@@ -163,34 +147,68 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        switch contentToDisplay {
-        case .tweets:
-            return 40
-            
-        case .media:
-            return 20
+        var cnt = 0
+        switch segmentedController.selectedSegmentIndex {
+        case 0:
+            cnt = 20
+        case 1:
+            cnt = 40
+        default :
+            break
         }
+        
+        return cnt
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        
-        switch contentToDisplay {
-        case .tweets:
-            cell.textLabel?.text = "Tweet Tweet!"
-            
-        case .media:
-            cell.textLabel?.text = "Piccies!"
-            cell.imageView?.image = UIImage(named: "header_bg")
+        var str = ""
+        switch segmentedController.selectedSegmentIndex {
+        case 0:
+           str = "test"
+        case 1:
+           str = "TEST"
+            default :
+            break
         }
         
-        
+         cell.textLabel?.text = str
         
         return cell
     }
-
+    //MARK -segmented controller
+    @IBAction func segmentedControllerHit(_ sender: UISegmentedControl) {
+        tableView.reloadData()
+    }
+     
+    
+    //Mark -Slider / Tap Action
+    var value = slider.walk
+    @IBAction func tapChangeSlidersValues(_ sender: UITapGestureRecognizer) {
+   
+        
+        if case .run = value {
+            goalSlider.minimumTrackTintColor = runColor()
+            goalSlider.minimumValueImage = UIImage(named: "Running_000000_25")
+            value = slider.hike
+        } else if case .hike = value {
+            goalSlider.minimumTrackTintColor = hikeColor()
+            goalSlider.minimumValueImage = UIImage(named: "Trekking_000000_25")
+            value = slider.bike
+        } else if case .bike = value {
+            goalSlider.minimumTrackTintColor = bikeColor()
+            goalSlider.minimumValueImage = UIImage(named: "Cycling Mountain Bike_000000_25")
+            value = slider.walk
+        } else {
+            goalSlider.minimumTrackTintColor = walkColor()
+            goalSlider.minimumValueImage = UIImage(named: "Walking_000000_25")
+            value = slider.run
+        }
+        
+    }
+   
     
     //MARK -ScrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -231,27 +249,22 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
             
             headerLabel.frame.origin = CGPoint(x: headerLabel.frame.origin.x, y: max(alignToNameLabel, distance_W_LabelHeader + offset_HeaderStop))
             
+                 // Avatar -----------
             
-            //  ------------ Blur
-            
-            // headerBlurImageView?.alpha = min (1.0, (offset - alignToNameLabel)/distance_W_LabelHeader)
-            
-            // Avatar -----------
-            
-            let avatarScaleFactor = (min(offset_HeaderStop, offset)) / avatarImage.bounds.height / 1.4 // Slow down the animation
-            let avatarSizeVariation = ((avatarImage.bounds.height * (1.0 + avatarScaleFactor)) - avatarImage.bounds.height) / 2.0
+            let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
+            let avatarSizeVariation = ((profileImage.bounds.height * (1.0 + avatarScaleFactor)) - profileImage.bounds.height) / 2.0
             avatarTransform = CATransform3DTranslate(avatarTransform, 0, avatarSizeVariation, 0)
             avatarTransform = CATransform3DScale(avatarTransform, 1.0 - avatarScaleFactor, 1.0 - avatarScaleFactor, 0)
             
             if offset <= offset_HeaderStop {
                 
-                if avatarImage.layer.zPosition < headerView.layer.zPosition{
+                if profileImage.layer.zPosition < headerView.layer.zPosition{
                     headerView.layer.zPosition = 0
                 }
                 
                 
             }else {
-                if avatarImage.layer.zPosition >= headerView.layer.zPosition{
+                if profileImage.layer.zPosition >= headerView.layer.zPosition{
                     headerView.layer.zPosition = 2
                 }
                 
@@ -261,7 +274,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
         
         // Apply Transformations
         headerView.layer.transform = headerTransform
-        avatarImage.layer.transform = avatarTransform
+        profileImage.layer.transform = avatarTransform
         
         // Segment control
         
@@ -277,9 +290,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
         
         // Set scroll view insets just underneath the segment control
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.frame.maxY, 0, 0, 0)
-        
-        
-        
+      
     }
    
 

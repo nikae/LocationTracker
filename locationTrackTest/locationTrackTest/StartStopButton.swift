@@ -19,18 +19,23 @@ struct ActivityPicker {
         case 0:
             self.startButtonView(image: imageWalkString_50, button: button, color: walkColor(), headLineTitle: walkString, navigationBar: navigationBar)
             activity_String = "Walk"
+            activityColor = walkColor()
         case 1:
              self.startButtonView(image: imageRunString_50, button: button, color: runColor(),headLineTitle: runString, navigationBar: navigationBar)
             activity_String = "Run"
+            activityColor = runColor()
         case 2:
              self.startButtonView(image: imageHikeString_50, button: button, color: hikeColor(),headLineTitle: hikeString, navigationBar: navigationBar)
             activity_String = "Hike"
+            activityColor = hikeColor()
         case 3:
              self.startButtonView(image: imageBikeString_50, button: button, color: bikeColor(), headLineTitle: bikeString, navigationBar: navigationBar)
             activity_String = "Bike"
+            activityColor = bikeColor()
         default:
              self.startButtonView(image: imageWalkString_50, button: button, color: walkColor(), headLineTitle: walkString, navigationBar: navigationBar)
             activity_String = "Walk"
+            activityColor = walkColor()
         }
     } else {
     switch (sportsButtonDefoults.integer(forKey: sportsButtonDefoultsKey_End)) {

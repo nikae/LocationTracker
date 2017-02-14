@@ -101,3 +101,10 @@ var paceArray: [Int] = []
 
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
 let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the screen and the top of the White Label
+
+var activityColor = UIColor()
+
+
+
+
+
