@@ -25,6 +25,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var segmentedController: UISegmentedControl!
     
+   
     @IBOutlet weak var goalSlider: UISlider!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,9 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
         profileImage.layer.borderWidth = 0.5
         profileImage.clipsToBounds = true
         
-        
+        goalSlider.minimumTrackTintColor = walkColor()
+        goalSlider.minimumValueImage = UIImage(named: "Walking_000000_25")
+        value = slider.run
         
         if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
         {
@@ -48,6 +51,12 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
             }
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        totalActivitiesScrollView.contentSize = CGSize(width: 600, height: totalActivitiesScrollView.frame.height)
+    }
+
    
     //MARK: -Camera / Add Picture
     func addPhoto() {

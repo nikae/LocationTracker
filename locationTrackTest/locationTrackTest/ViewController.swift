@@ -69,6 +69,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
     }
     
+        
     //MARK -Healt Kit
     func getPermission(){
         healthManager.authorizeHealthKit { (authorized,  error) -> Void in
