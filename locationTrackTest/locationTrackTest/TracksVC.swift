@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TracksVC: UIViewController, UITabBarDelegate {
+class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var a = ViewController()
     
@@ -59,8 +59,35 @@ class TracksVC: UIViewController, UITabBarDelegate {
         
     }
     
+    //MARK -TV
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let cnt = 40
+        
+        return cnt
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TracksTVCell", for: indexPath)
+        
+        let str = "test"
+        cell.textLabel?.text = str
+        
+        return cell
+    }
 
-       
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+
+    //MARK -CV
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TracksCVCell", for: indexPath)
+        cell.contentView.backgroundColor = .blue
+        return cell
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
