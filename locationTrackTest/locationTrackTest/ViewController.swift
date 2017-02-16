@@ -386,12 +386,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         profileTabBarItem.isEnabled = true
         tracksTabBarItem.isEnabled = true
         tabStart.isEnabled = true
-   
-        timeLabel.text = ""
-        paceLabel.text = ""
-        distanceLabel.text = ""
-        altitudeLabel.text = ""
-        
         resultsDisplayView.isHidden = true
         
        
@@ -426,17 +420,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
     }
     
-       var launchBool: Bool = false {
+    var launchTest: Bool = true
+    
+    var launchBool: Bool = false {
         didSet {
             if launchBool == true {
+                
+                if launchTest == true {
                 popUpCountDown()
-             
+                } else {
+                    print("CONTINUE")
+                }
+                
             } else {
                 
                 let alertController = UIAlertController(title: "Are You Done?", message: "If not press cancel to continue", preferredStyle: .actionSheet)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
                     (action: UIAlertAction) in
                     
+                    self.launchTest = false
                     self.launchBool = true
                     print("You've pressed Cancel Button")
                 }
@@ -448,7 +450,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.endUpdatingLocation()
                     self.removeOveraly()
                     
-                   
+                    self.timeLabel.text = ""
+                    self.paceLabel.text = ""
+                    self.distanceLabel.text = ""
+                    self.altitudeLabel.text = ""
+                    
+                    self.launchTest = true
         
                     }
 

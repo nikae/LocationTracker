@@ -139,9 +139,9 @@
                                     <constraint firstAttribute="height" constant="49" identifier="id171" id="NuG-qb-0qi"/>
                                 </constraints>
                                 <items>
-                                    <tabBarItem tag="1" title="Tracks" image="Marker_000000_25" selectedImage="4CBF3838-C523-45D0-B68F-9E4699BA4744" id="BID-Uh-JV8"/>
+                                    <tabBarItem tag="1" title="Tracks" image="Marker_000000_25" selectedImage="48FD8EC2-A047-4152-8304-85B32DE67FBA" id="BID-Uh-JV8"/>
                                     <tabBarItem title="START" id="50C-p6-iEd"/>
-                                    <tabBarItem tag="2" title="Me" image="Full Moon_000000_32" selectedImage="0F903BBF-AE9D-43AE-8167-F516E2821B90" id="wgB-ce-XDj"/>
+                                    <tabBarItem tag="2" title="Me" image="Full Moon_000000_32" selectedImage="CFF3823A-59D7-490E-B292-CAA300993F7A" id="wgB-ce-XDj"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JUZ-mt-BpI"/>
@@ -334,9 +334,9 @@
                                     <constraint firstAttribute="height" constant="49" id="kNX-Xe-nc7"/>
                                 </constraints>
                                 <items>
-                                    <tabBarItem tag="1" title="Tracks" image="Marker_000000_25" selectedImage="6C3A22CE-0A7A-43DA-8946-07811B20FFFA" id="ewu-oj-tto"/>
+                                    <tabBarItem tag="1" title="Tracks" image="Marker_000000_25" selectedImage="7BE6C1B7-EC16-48D6-8350-A9EFF5E47A63" id="ewu-oj-tto"/>
                                     <tabBarItem title="START" id="y4T-rN-Uor"/>
-                                    <tabBarItem tag="2" title="Me" image="Full Moon_000000_32" selectedImage="1DD9D246-9452-4641-B390-5ADBA4529D5B" id="o8Y-Ft-vW0"/>
+                                    <tabBarItem tag="2" title="Me" image="Full Moon_000000_32" selectedImage="193C5D1C-7E39-42D6-91A6-5EB4891A1053" id="o8Y-Ft-vW0"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="ZPl-Bb-LE1" id="L5z-yP-0nr"/>
@@ -1106,8 +1106,8 @@
                                     <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="43s-wk-3IW">
                                         <rect key="frame" x="8" y="8" width="359" height="30"/>
                                         <segments>
-                                            <segment title="Tweets"/>
-                                            <segment title="Media"/>
+                                            <segment title="Test"/>
+                                            <segment title="TEST"/>
                                         </segments>
                                         <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <connections>
@@ -1156,9 +1156,9 @@
                                     <constraint firstAttribute="height" constant="49" id="Sil-Wt-PwD"/>
                                 </constraints>
                                 <items>
-                                    <tabBarItem tag="1" title="Tracks" image="Marker_000000_25" selectedImage="9A49EF50-2DF8-4A2F-9406-04033EC15DC0" id="n0H-yy-oqd"/>
+                                    <tabBarItem tag="1" title="Tracks" image="Marker_000000_25" selectedImage="8B493F51-65DE-4ACF-ABD6-B487B0A9C9AF" id="n0H-yy-oqd"/>
                                     <tabBarItem title="START" id="fGC-AX-Xzh"/>
-                                    <tabBarItem tag="2" title="Me" image="Full Moon_000000_32" selectedImage="EE3F2AA5-3F66-4F6E-BB6E-FE6676CFC339" id="Duq-Gz-w4o"/>
+                                    <tabBarItem tag="2" title="Me" image="Full Moon_000000_32" selectedImage="2147141D-3883-423E-9DAF-F2AED47E0DFD" id="Duq-Gz-w4o"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="9kS-01-VYZ" id="Rry-iz-AOM"/>
@@ -1215,7 +1215,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="0F903BBF-AE9D-43AE-8167-F516E2821B90" width="32" height="32">
+        <image name="193C5D1C-7E39-42D6-91A6-5EB4891A1053" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1353,7 +1353,7 @@ NwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCYAJ0AoACiAKQApgCoAK0AxADGAMgd2h3fHeod
 AAAAAAAAPgAAAAAAAAAAAAAAAAAAHqc
 </mutableData>
         </image>
-        <image name="1DD9D246-9452-4641-B390-5ADBA4529D5B" width="32" height="32">
+        <image name="2147141D-3883-423E-9DAF-F2AED47E0DFD" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1491,7 +1491,7 @@ NwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCYAJ0AoACiAKQApgCoAK0AxADGAMgd2h3fHeod
 AAAAAAAAPgAAAAAAAAAAAAAAAAAAHqc
 </mutableData>
         </image>
-        <image name="4CBF3838-C523-45D0-B68F-9E4699BA4744" width="32" height="32">
+        <image name="48FD8EC2-A047-4152-8304-85B32DE67FBA" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1629,7 +1629,7 @@ NwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCYAJ0AoACiAKQApgCoAK0AxADGAMgd2h3fHeod
 AAAAAAAAPgAAAAAAAAAAAAAAAAAAHqc
 </mutableData>
         </image>
-        <image name="6C3A22CE-0A7A-43DA-8946-07811B20FFFA" width="32" height="32">
+        <image name="7BE6C1B7-EC16-48D6-8350-A9EFF5E47A63" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1767,7 +1767,7 @@ NwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCYAJ0AoACiAKQApgCoAK0AxADGAMgd2h3fHeod
 AAAAAAAAPgAAAAAAAAAAAAAAAAAAHqc
 </mutableData>
         </image>
-        <image name="9A49EF50-2DF8-4A2F-9406-04033EC15DC0" width="32" height="32">
+        <image name="8B493F51-65DE-4ACF-ABD6-B487B0A9C9AF" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1905,7 +1905,7 @@ NwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCYAJ0AoACiAKQApgCoAK0AxADGAMgd2h3fHeod
 AAAAAAAAPgAAAAAAAAAAAAAAAAAAHqc
 </mutableData>
         </image>
-        <image name="EE3F2AA5-3F66-4F6E-BB6E-FE6676CFC339" width="32" height="32">
+        <image name="CFF3823A-59D7-490E-B292-CAA300993F7A" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
