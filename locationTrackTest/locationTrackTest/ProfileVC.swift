@@ -40,7 +40,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
         profileImage.clipsToBounds = true
         
         goalSlider.minimumTrackTintColor = walkColor()
-        goalSlider.minimumValueImage = UIImage(named: "Walking_000000_25")
+        goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
         value = slider.run
         
         if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
@@ -196,23 +196,22 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     //Mark -Slider / Tap Action
     var value = slider.walk
     @IBAction func tapChangeSlidersValues(_ sender: UITapGestureRecognizer) {
-   
         
         if case .run = value {
             goalSlider.minimumTrackTintColor = runColor()
-            goalSlider.minimumValueImage = UIImage(named: "Running_000000_25")
+            goalSlider.minimumValueImage = UIImage(named: imageRunString_25)
             value = slider.hike
         } else if case .hike = value {
             goalSlider.minimumTrackTintColor = hikeColor()
-            goalSlider.minimumValueImage = UIImage(named: "Trekking_000000_25")
+            goalSlider.minimumValueImage = UIImage(named: imageHikeString_25)
             value = slider.bike
         } else if case .bike = value {
             goalSlider.minimumTrackTintColor = bikeColor()
-            goalSlider.minimumValueImage = UIImage(named: "Cycling Mountain Bike_000000_25")
+            goalSlider.minimumValueImage = UIImage(named: imageBikeString_25)
             value = slider.walk
         } else {
             goalSlider.minimumTrackTintColor = walkColor()
-            goalSlider.minimumValueImage = UIImage(named: "Walking_000000_25")
+            goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
             value = slider.run
         }
         
@@ -305,7 +304,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 

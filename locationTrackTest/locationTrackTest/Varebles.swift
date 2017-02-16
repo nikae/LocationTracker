@@ -38,6 +38,11 @@ var imageRunString_32 = "Running_000000_32"
 var imageHikeString_32 = "Trekking_000000_32"
 var imageBikeString_32 = "Cycling Mountain Bike_000000_32"
 
+var imageWalkString_25 = "Walking_000000_25"
+var imageRunString_25 = "Running_000000_25"
+var imageHikeString_25 = "Trekking_000000_25"
+var imageBikeString_25 = "Cycling Mountain Bike_000000_25"
+
 var imageWalkString_50 = "Walking_000000_50"
 var imageRunString_50 = "Running_000000_50"
 var imageHikeString_50 = "Trekking_000000_50"
@@ -58,7 +63,6 @@ let polyLineColor_green = PolyLineColor.color(.grin)
 //MARK: -Varables to save / PopUpAvtivity
 //Text Fileds
 var activityNameTF_String: String = ""
-var desctriptionTF_String: String = ""
 
 //Labels
 var distanceLabel_String: String = ""
@@ -72,37 +76,29 @@ var arrayOfWhatToSee: [String] = []
 //System Sounds
 let systemSoundID: SystemSoundID = 1104
 
- var myLocations: [CLLocation] = []
- 
-//var polyline = MKPolyline()
+var myLocations: [CLLocation] = []
 
+//Activity Name and Collor 
 var activity_String = ""
+var activityColor = UIColor()
 
-//HealtKit
+//Time managinhg for pace
 var zeroTime = TimeInterval()
 var timer : Timer = Timer()
 
-//let locationManager = CLLocationManager()
+
+//Calculate Distance
 var startLocation: CLLocation!
 var lastLocation: CLLocation!
 var distanceTraveled = 0.0
 
-//if Ill need enywhere
-var heightString_Var = ""
-
 var arrayOfAltitude: [Double] = []
 
-var totalTimeSeconds: Double = 0
-var distanceRanInMetres: Double = 0
-
-var paceArray: [Int] = []
-
-
-
+//Profile view animation
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
 let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the screen and the top of the White Label
 
-var activityColor = UIColor()
+
 
 
 

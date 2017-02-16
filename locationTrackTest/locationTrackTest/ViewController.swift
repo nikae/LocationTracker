@@ -42,9 +42,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     var manager: CLLocationManager!
     
-    let healthManager:HealthKitManager = HealthKitManager()
-    var height: HKQuantitySample?
-    
     let activityPicker = ActivityPicker()
     let mapView = MyMapView()
     let viewSlider = ViewSlider()
@@ -66,46 +63,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         activityPicker.activityPickerView(view: sportsView, walk: walkButton, run: runBurron, hike: hikeButton, bike: bikeButton)
         
         resultsDisplayView.isHidden = true
-        
-    }
-    
-        
-    //MARK -Healt Kit
-    func getPermission(){
-        healthManager.authorizeHealthKit { (authorized,  error) -> Void in
-            if authorized {
-                
-                self.setHeight()
-            } else {
-                if error != nil {
-                    print(error ?? "Error HealtKitMethods")
-                }
-                print("Permission denied.")
-            }
-        }
-    }
-
-    func setHeight() {
-        let heightSample = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)
-        self.healthManager.getHeight(sampleType: heightSample!, completion: { (userHeight, error) -> Void in
-            if( error != nil ) {
-                print("Error: \(error?.localizedDescription)")
-                return
-            }
-            
-            var heightString = ""
-            self.height = userHeight as? HKQuantitySample
-            
-            // The height is formatted to the user's locale.
-            if let meters = self.height?.quantity.doubleValue(for: HKUnit.meter()) {
-                let formatHeight = LengthFormatter()
-                formatHeight.isForPersonHeightUse = true
-                heightString = formatHeight.string(fromMeters: meters)
-            }
-                DispatchQueue.main.async(execute: { () -> Void in
-                heightString_Var = heightString
-            })
-        })
         
     }
 
