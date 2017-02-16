@@ -183,9 +183,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let newRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
         theMap.setRegion(newRegion, animated: true)
         
-        if (myLocations.count > 1){
+        if (myLocations.count > 3){
             let sourceIndex = myLocations.count - 1
-            let destinationIndex = myLocations.count - 2
+            let destinationIndex = myLocations.count - 4
             let c1 = myLocations[sourceIndex].coordinate
             let c2 = myLocations[destinationIndex].coordinate
             var a = [c1, c2]
@@ -223,8 +223,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             //1 Meter = 0.000621371192 Miles 
             //1 Mile = 1609.344 Meters
             distanceLabel_String = String(format: "%.2f  mi", distanceTraveled)
-            distanceLabel.text = String(format: "%.2f  mi", distanceTraveled)
-             let altitude = lastLocation.altitude // In Meters
+            distanceLabel.text = distanceLabel_String
+            let altitude = lastLocation.altitude // In Meters
             let altitudeInFeets = altitude / 0.3048 //In Feets
              arrayOfAltitude.append(altitudeInFeets)
             let maxAltitude = arrayOfAltitude.max()
@@ -233,21 +233,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
         
         lastLocation = locations.last as CLLocation!
-
-        
         
     }
     
     func removeOveraly()
     {
-        // Overlays that must be removed from the map
         var overlaysToRemove = [MKOverlay]()
-        
-        // All overlays on the map
         let overlays = self.theMap.overlays
         
-        for overlay in overlays
-        {
+        for overlay in overlays {
             if overlay.title! == "polyline"
             {
                 overlaysToRemove.append(overlay)
@@ -308,11 +302,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //let strMSX10 = String(format: "%02d", millisecsX10)
         
         timeLabel_String = "\(strHours):\(strMinutes):\(strSeconds)"
-        timeLabel.text = "\(strHours):\(strMinutes):\(strSeconds)"
+        timeLabel.text = timeLabel_String
   
         //MARK -Calculate Pace
         if distanceTraveled != 0 {
             
+ //needs correction
         let paceMinutes = paceInSeconds(hours: Double(hours), minutes: Double(minutes), seconds: Double(seconds), distance: distanceTraveled) / 60
         let roundedPaceMinutes = Double(floor(paceMinutes))
         let decimalPaceSeconds = paceMinutes - roundedPaceMinutes
@@ -325,7 +320,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
         } else {
             paceLabel_String = "--'-"
-            paceLabel.text = "--'-"
+            paceLabel.text = paceLabel_String
         }
         
         
@@ -343,18 +338,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true)
         zeroTime = NSDate.timeIntervalSinceReferenceDate
         if (CLLocationManager.locationServicesEnabled()) {
-            
+
             manager.startUpdatingLocation()
-            
-            
-            resultsDisplayView.isHidden = false
+
+             resultsDisplayView.isHidden = false
              viewSlider.moveViewDownOrUp(view: resultsDisplayView, moveUp: false)
-        
             
                     } else {
 
-            
             print("Location services are not enabled")
+            
         }
         
     }
@@ -387,9 +380,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         tracksTabBarItem.isEnabled = true
         tabStart.isEnabled = true
         resultsDisplayView.isHidden = true
-        
-       
+     
     }
+    
     
 //MARK: -PopUpViews
     func popUpCountDown() {
@@ -424,6 +417,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     var launchBool: Bool = false {
         didSet {
+            
             if launchBool == true {
                 
                 if launchTest == true {
@@ -433,28 +427,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 }
                 
             } else {
-                
+   
                 let alertController = UIAlertController(title: "Are You Done?", message: "If not press cancel to continue", preferredStyle: .actionSheet)
+                
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
                     (action: UIAlertAction) in
                     
                     self.launchTest = false
                     self.launchBool = true
-                    print("You've pressed Cancel Button")
-                }
+                    print("You've pressed Cancel Button")                }
+                
                 let oKAction = UIAlertAction(title: "OK", style: .default)
                 {
                     (action: UIAlertAction) in
-                    self.popUpActivityManager()
-                    self.endUpdatingLocation_SetUp()
                     self.endUpdatingLocation()
+                    self.endUpdatingLocation_SetUp()
+                    self.popUpActivityManager()
                     self.removeOveraly()
-                    
-                    self.timeLabel.text = ""
-                    self.paceLabel.text = ""
-                    self.distanceLabel.text = ""
-                    self.altitudeLabel.text = ""
-                    
+    
                     self.launchTest = true
         
                     }
@@ -466,6 +456,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
     }
 
+    
     
   //MARK: -Guestures for sports picker view
     @IBOutlet var tapGesture: UITapGestureRecognizer!

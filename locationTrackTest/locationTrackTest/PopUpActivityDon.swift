@@ -334,13 +334,16 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     
     @IBAction func doneActivityHit(_ sender: UIButton) {
-        myLocations.removeAll()
         self.view.removeFromSuperview()
+        myLocations.removeAll()
+        distanceTraveled = 0
     }
    
     @IBAction func dismissHit(_ sender: UIButton) {
             self.view.removeFromSuperview()
+        
         myLocations.removeAll()
+        distanceTraveled = 0
     }
 
 }
