@@ -108,9 +108,9 @@
 		240DD1051DE531B100F68A28 = {
 			isa = PBXGroup;
 			children = (
-				240DD1101DE531B100F68A28 /* locationTrackTest */,
-				240DD1251DE531B100F68A28 /* locationTrackTestTests */,
-				240DD1301DE531B100F68A28 /* locationTrackTestUITests */,
+				240DD1101DE531B100F68A28 /* Trail Lab */,
+				240DD1251DE531B100F68A28 /* trailLabTests */,
+				240DD1301DE531B100F68A28 /* trailLabUITests */,
 				240DD10F1DE531B100F68A28 /* Products */,
 				240DD13F1DECE1DF00F68A28 /* Frameworks */,
 			);
@@ -126,7 +126,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		240DD1101DE531B100F68A28 /* locationTrackTest */ = {
+		240DD1101DE531B100F68A28 /* Trail Lab */ = {
 			isa = PBXGroup;
 			children = (
 				240DD1111DE531B100F68A28 /* AppDelegate.swift */,
@@ -150,24 +150,27 @@
 				240DD11D1DE531B100F68A28 /* Info.plist */,
 				24FFF3FC1DFDCE5B0088B86C /* sportIcons.xcassets */,
 			);
+			name = "Trail Lab";
 			path = locationTrackTest;
 			sourceTree = "<group>";
 		};
-		240DD1251DE531B100F68A28 /* locationTrackTestTests */ = {
+		240DD1251DE531B100F68A28 /* trailLabTests */ = {
 			isa = PBXGroup;
 			children = (
 				240DD1261DE531B100F68A28 /* locationTrackTestTests.swift */,
 				240DD1281DE531B100F68A28 /* Info.plist */,
 			);
+			name = trailLabTests;
 			path = locationTrackTestTests;
 			sourceTree = "<group>";
 		};
-		240DD1301DE531B100F68A28 /* locationTrackTestUITests */ = {
+		240DD1301DE531B100F68A28 /* trailLabUITests */ = {
 			isa = PBXGroup;
 			children = (
 				240DD1311DE531B100F68A28 /* locationTrackTestUITests.swift */,
 				240DD1331DE531B100F68A28 /* Info.plist */,
 			);
+			name = trailLabUITests;
 			path = locationTrackTestUITests;
 			sourceTree = "<group>";
 		};
