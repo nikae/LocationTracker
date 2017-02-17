@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "240DD10D1DE531B100F68A28"
-               BuildableName = "locationTrackTest.app"
-               BlueprintName = "locationTrackTest"
-               ReferencedContainer = "container:locationTrackTest.xcodeproj">
+               BuildableName = "Trail Lab.app"
+               BlueprintName = "Trail Lab"
+               ReferencedContainer = "container:Trail Lab.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "240DD1211DE531B100F68A28"
-               BuildableName = "locationTrackTestTests.xctest"
-               BlueprintName = "locationTrackTestTests"
-               ReferencedContainer = "container:locationTrackTest.xcodeproj">
+               BuildableName = "Trail LabTests.xctest"
+               BlueprintName = "Trail LabTests"
+               ReferencedContainer = "container:Trail Lab.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "240DD12C1DE531B100F68A28"
-               BuildableName = "locationTrackTestUITests.xctest"
-               BlueprintName = "locationTrackTestUITests"
-               ReferencedContainer = "container:locationTrackTest.xcodeproj">
+               BuildableName = "Trail LabUITests.xctest"
+               BlueprintName = "Trail LabUITests"
+               ReferencedContainer = "container:Trail Lab.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "240DD10D1DE531B100F68A28"
-            BuildableName = "locationTrackTest.app"
-            BlueprintName = "locationTrackTest"
-            ReferencedContainer = "container:locationTrackTest.xcodeproj">
+            BuildableName = "Trail Lab.app"
+            BlueprintName = "Trail Lab"
+            ReferencedContainer = "container:Trail Lab.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "240DD10D1DE531B100F68A28"
-            BuildableName = "locationTrackTest.app"
-            BlueprintName = "locationTrackTest"
-            ReferencedContainer = "container:locationTrackTest.xcodeproj">
+            BuildableName = "Trail Lab.app"
+            BlueprintName = "Trail Lab"
+            ReferencedContainer = "container:Trail Lab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "240DD10D1DE531B100F68A28"
-            BuildableName = "locationTrackTest.app"
-            BlueprintName = "locationTrackTest"
-            ReferencedContainer = "container:locationTrackTest.xcodeproj">
+            BuildableName = "Trail Lab.app"
+            BlueprintName = "Trail Lab"
+            ReferencedContainer = "container:Trail Lab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

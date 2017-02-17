@@ -49,17 +49,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		240DD10E1DE531B100F68A28 /* locationTrackTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locationTrackTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		240DD10E1DE531B100F68A28 /* Trail Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trail Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		240DD1111DE531B100F68A28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		240DD1131DE531B100F68A28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		240DD1161DE531B100F68A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		240DD1181DE531B100F68A28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		240DD11B1DE531B100F68A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		240DD11D1DE531B100F68A28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		240DD1221DE531B100F68A28 /* locationTrackTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locationTrackTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		240DD1221DE531B100F68A28 /* Trail LabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Trail LabTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		240DD1261DE531B100F68A28 /* locationTrackTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationTrackTestTests.swift; sourceTree = "<group>"; };
 		240DD1281DE531B100F68A28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		240DD12D1DE531B100F68A28 /* locationTrackTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locationTrackTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		240DD12D1DE531B100F68A28 /* Trail LabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Trail LabUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		240DD1311DE531B100F68A28 /* locationTrackTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationTrackTestUITests.swift; sourceTree = "<group>"; };
 		240DD1331DE531B100F68A28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		240DD1401DECE1DF00F68A28 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -119,9 +119,9 @@
 		240DD10F1DE531B100F68A28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				240DD10E1DE531B100F68A28 /* locationTrackTest.app */,
-				240DD1221DE531B100F68A28 /* locationTrackTestTests.xctest */,
-				240DD12D1DE531B100F68A28 /* locationTrackTestUITests.xctest */,
+				240DD10E1DE531B100F68A28 /* Trail Lab.app */,
+				240DD1221DE531B100F68A28 /* Trail LabTests.xctest */,
+				240DD12D1DE531B100F68A28 /* Trail LabUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,9 +182,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		240DD10D1DE531B100F68A28 /* locationTrackTest */ = {
+		240DD10D1DE531B100F68A28 /* Trail Lab */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 240DD1361DE531B100F68A28 /* Build configuration list for PBXNativeTarget "locationTrackTest" */;
+			buildConfigurationList = 240DD1361DE531B100F68A28 /* Build configuration list for PBXNativeTarget "Trail Lab" */;
 			buildPhases = (
 				240DD10A1DE531B100F68A28 /* Sources */,
 				240DD10B1DE531B100F68A28 /* Frameworks */,
@@ -194,14 +194,14 @@
 			);
 			dependencies = (
 			);
-			name = locationTrackTest;
+			name = "Trail Lab";
 			productName = locationTrackTest;
-			productReference = 240DD10E1DE531B100F68A28 /* locationTrackTest.app */;
+			productReference = 240DD10E1DE531B100F68A28 /* Trail Lab.app */;
 			productType = "com.apple.product-type.application";
 		};
-		240DD1211DE531B100F68A28 /* locationTrackTestTests */ = {
+		240DD1211DE531B100F68A28 /* Trail LabTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 240DD1391DE531B100F68A28 /* Build configuration list for PBXNativeTarget "locationTrackTestTests" */;
+			buildConfigurationList = 240DD1391DE531B100F68A28 /* Build configuration list for PBXNativeTarget "Trail LabTests" */;
 			buildPhases = (
 				240DD11E1DE531B100F68A28 /* Sources */,
 				240DD11F1DE531B100F68A28 /* Frameworks */,
@@ -212,14 +212,14 @@
 			dependencies = (
 				240DD1241DE531B100F68A28 /* PBXTargetDependency */,
 			);
-			name = locationTrackTestTests;
+			name = "Trail LabTests";
 			productName = locationTrackTestTests;
-			productReference = 240DD1221DE531B100F68A28 /* locationTrackTestTests.xctest */;
+			productReference = 240DD1221DE531B100F68A28 /* Trail LabTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		240DD12C1DE531B100F68A28 /* locationTrackTestUITests */ = {
+		240DD12C1DE531B100F68A28 /* Trail LabUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 240DD13C1DE531B100F68A28 /* Build configuration list for PBXNativeTarget "locationTrackTestUITests" */;
+			buildConfigurationList = 240DD13C1DE531B100F68A28 /* Build configuration list for PBXNativeTarget "Trail LabUITests" */;
 			buildPhases = (
 				240DD1291DE531B100F68A28 /* Sources */,
 				240DD12A1DE531B100F68A28 /* Frameworks */,
@@ -230,9 +230,9 @@
 			dependencies = (
 				240DD12F1DE531B100F68A28 /* PBXTargetDependency */,
 			);
-			name = locationTrackTestUITests;
+			name = "Trail LabUITests";
 			productName = locationTrackTestUITests;
-			productReference = 240DD12D1DE531B100F68A28 /* locationTrackTestUITests.xctest */;
+			productReference = 240DD12D1DE531B100F68A28 /* Trail LabUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -275,7 +275,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 240DD1091DE531B100F68A28 /* Build configuration list for PBXProject "locationTrackTest" */;
+			buildConfigurationList = 240DD1091DE531B100F68A28 /* Build configuration list for PBXProject "Trail Lab" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -288,9 +288,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				240DD10D1DE531B100F68A28 /* locationTrackTest */,
-				240DD1211DE531B100F68A28 /* locationTrackTestTests */,
-				240DD12C1DE531B100F68A28 /* locationTrackTestUITests */,
+				240DD10D1DE531B100F68A28 /* Trail Lab */,
+				240DD1211DE531B100F68A28 /* Trail LabTests */,
+				240DD12C1DE531B100F68A28 /* Trail LabUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -367,12 +367,12 @@
 /* Begin PBXTargetDependency section */
 		240DD1241DE531B100F68A28 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 240DD10D1DE531B100F68A28 /* locationTrackTest */;
+			target = 240DD10D1DE531B100F68A28 /* Trail Lab */;
 			targetProxy = 240DD1231DE531B100F68A28 /* PBXContainerItemProxy */;
 		};
 		240DD12F1DE531B100F68A28 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 240DD10D1DE531B100F68A28 /* locationTrackTest */;
+			target = 240DD10D1DE531B100F68A28 /* Trail Lab */;
 			targetProxy = 240DD12E1DE531B100F68A28 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -497,7 +497,7 @@
 				DEVELOPMENT_TEAM = 2XJ7AA238S;
 				INFOPLIST_FILE = locationTrackTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = room.locationTrackTest;
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -510,7 +510,7 @@
 				DEVELOPMENT_TEAM = 2XJ7AA238S;
 				INFOPLIST_FILE = locationTrackTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = room.locationTrackTest;
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -527,7 +527,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = room.locationTrackTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/locationTrackTest.app/locationTrackTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trail Lab.app/Trail Lab";
 			};
 			name = Debug;
 		};
@@ -542,7 +542,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = room.locationTrackTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/locationTrackTest.app/locationTrackTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trail Lab.app/Trail Lab";
 			};
 			name = Release;
 		};
@@ -577,7 +577,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		240DD1091DE531B100F68A28 /* Build configuration list for PBXProject "locationTrackTest" */ = {
+		240DD1091DE531B100F68A28 /* Build configuration list for PBXProject "Trail Lab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				240DD1341DE531B100F68A28 /* Debug */,
@@ -586,7 +586,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		240DD1361DE531B100F68A28 /* Build configuration list for PBXNativeTarget "locationTrackTest" */ = {
+		240DD1361DE531B100F68A28 /* Build configuration list for PBXNativeTarget "Trail Lab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				240DD1371DE531B100F68A28 /* Debug */,
@@ -595,7 +595,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		240DD1391DE531B100F68A28 /* Build configuration list for PBXNativeTarget "locationTrackTestTests" */ = {
+		240DD1391DE531B100F68A28 /* Build configuration list for PBXNativeTarget "Trail LabTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				240DD13A1DE531B100F68A28 /* Debug */,
@@ -604,7 +604,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		240DD13C1DE531B100F68A28 /* Build configuration list for PBXNativeTarget "locationTrackTestUITests" */ = {
+		240DD13C1DE531B100F68A28 /* Build configuration list for PBXNativeTarget "Trail LabUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				240DD13D1DE531B100F68A28 /* Debug */,

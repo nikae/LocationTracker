@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>magnetometer</string>
-	</array>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.healthcare-fitness</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>In case you want to add pictures</string>
-	<key>NSCameraUsageDescription</key>
-	<string>In case you want to add pictures</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -28,10 +18,16 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.healthcare-fitness</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>In case you want to add pictures</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>WE NEED TO TRACK YOU!!! LOL :)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>In case you want to add pictures</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -42,6 +38,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>magnetometer</string>
+	</array>
 	<key>UIRequiresFullScreen</key>
 	<false/>
 	<key>UIStatusBarHidden</key>
