@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  locationTrackTest
+//  Trail Lab
 //
 //  Created by Nika on 11/22/16.
 //  Copyright © 2016 Nika. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  viewSlider.swift
-//  locationTrackTest
+//  Trail Lab
 //
 //  Created by Nika on 2/9/17.
 //  Copyright © 2017 Nika. All rights reserved.
