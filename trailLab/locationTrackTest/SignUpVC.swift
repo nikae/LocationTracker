@@ -10,13 +10,49 @@ import UIKit
 import Firebase
 //import FirebaseAuth
 
-class SignUpVC: UIViewController {
+class SignUpVC: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
+    override func viewDidLoad() {
+         super.viewDidLoad()
+        
+        emailTF.delegate = self
+        passwordTF.delegate = self
+    }
+    
+    //Mark -Figour out KeyBoard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTF {
+            passwordTF.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+            performAction()
+        }
+        
+        return true
+    }
+    
+    func performAction() {
+        signUp()
+    }
+    
+    func keyboardDismiss() {
+        emailTF.resignFirstResponder()
+        passwordTF.resignFirstResponder()
+    }
+    
+    @IBAction func viewTaped(_ sender: UITapGestureRecognizer) {
+        keyboardDismiss()
+    }
 
     @IBAction func signUpHit(_ sender: UIButton) {
+        signUp()
+    }
+    
+    
+    func signUp() {
         
         if emailTF.text == "" {
             let alertController = UIAlertController(title: "Error", message: "Please enter your email and password", preferredStyle: .alert)
@@ -34,15 +70,13 @@ class SignUpVC: UIViewController {
                     let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(action)
                     self.present(alertController, animated: true, completion: nil)
-
+                    
                 }
             }
         }
-        
+
     }
 }
-
-
 
 
 

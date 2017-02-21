@@ -10,11 +10,43 @@ import UIKit
 import Firebase
 //import FirebaseAuth
 
-class ResetPasswordVC: UIViewController {
+class ResetPasswordVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTF: UITextField!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        emailTF.delegate = self
+    }
+    
+    
+    //Mark -Figour out KeyBoard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+            textField.resignFirstResponder()
+            performAction()
+ 
+        return true
+    }
+    
+    func performAction() {
+        ressetPassword()
+    }
+
+    func keyboardDismiss() {
+        emailTF.resignFirstResponder()
+    }
+    
+    @IBAction func viewTaped(_ sender: UITapGestureRecognizer) {
+        keyboardDismiss()
+    }
+    
     @IBAction func ressetPasswortdHit(_ sender: UIButton) {
+        ressetPassword()
+    }
+    
+    func ressetPassword() {
         if emailTF.text == "" {
             let alertController = UIAlertController(title: "Error", message: "Please enter your email and password", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -32,17 +64,17 @@ class ResetPasswordVC: UIViewController {
                     title = "Success!"
                     message = "Password reset email sent."
                     self.emailTF.text = ""
-
+                    
                 }
-
-                    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(action)
-                    self.present(alertController, animated: true, completion: nil)
-            
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(action)
+                self.present(alertController, animated: true, completion: nil)
+                
             })
         }
-        
+
     }
 }
 

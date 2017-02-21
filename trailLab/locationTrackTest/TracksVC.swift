@@ -21,8 +21,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?
-    
-    
+  
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
         switch item.tag {

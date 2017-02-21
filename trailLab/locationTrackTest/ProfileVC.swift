@@ -99,7 +99,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
 
             let imageData = UIImageJPEGRepresentation(image, 1)
              profilePictureDefoults.set(imageData, forKey: "image")
-            profilePictureDefoults.synchronize()
+             profilePictureDefoults.synchronize()
             
             profileImage.image = image
           
@@ -323,6 +323,10 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     }
     
     @IBAction func logOutHit(_ sender: UIButton) {
+        
+       
+        keepMeLogedInDefoultsDefoults.set(false, forKey: keepMeLogedInDefoults_key)
+        keepMeLogedInDefoultsDefoults.synchronize()
         
         if FIRAuth.auth()?.currentUser != nil {
             do {

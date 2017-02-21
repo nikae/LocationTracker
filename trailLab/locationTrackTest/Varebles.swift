@@ -14,11 +14,16 @@ import AVFoundation
 //MARK: -UsersDefoult
 let sportsButtonDefoults = UserDefaults.standard
 let profilePictureDefoults = UserDefaults.standard
+let keepMeLogedInDefoultsDefoults = UserDefaults.standard
+//let passwordLogInDefoults = UserDefaults.standard
 let sportsButtonDefoultsKey = "sportsButtonDefoultsKey"
 let sportsButtonDefoultsKey_End = "sportsButtonDefoultsKey_End"
+let keepMeLogedInDefoults_key = "keepMeLogedInDefoults_key"
+//let passwordLogInDefoults_Key = "passwordLogInDefoults_Key"
 
 let distanceDefoults = UserDefaults.standard
 let distanceDefoultsKey = "distance"
+
 
 //MARK: -Activity Names
 var walkString = "Walk"
@@ -97,7 +102,6 @@ var arrayOfAltitude: [Double] = []
 //Profile view animation
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
 let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the screen and the top of the White Label
-
 
 
 

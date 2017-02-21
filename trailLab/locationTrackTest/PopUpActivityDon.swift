@@ -163,6 +163,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
             moveTextView(textView: textView, distance: -290, up: true)
         }
     }
+    //////SEE WHATS GOING ON
     func textViewDidEndEditing(_ textView: UITextView) {
         if (textView == textView_ActivityDone) {
             moveTextView(textView: textView, distance: -290, up: false)
