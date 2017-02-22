@@ -14,7 +14,7 @@ enum slider {
 }
 
 
-class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var totalActivitiesScrollView: UIScrollView!

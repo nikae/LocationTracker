@@ -9,15 +9,17 @@
 import UIKit
 import Firebase
 
-class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var profileImageView: UIImageView!
-    
     @IBOutlet weak var nameTF: UITextField!
-
     @IBOutlet weak var lastNameTF: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nameTF.delegate = self
+        lastNameTF.delegate = self
         
         let firstName = firstNameDefoults.object(forKey: firstNameDefoults_Key)
         let lastName = lastNameDefoults.object(forKey: lastNameDefoults_Key)
@@ -46,6 +48,26 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     }
     
     
+    //Mark -Figour out KeyBoard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTF {
+            lastNameTF.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+   
+    func keyboardDismiss() {
+        nameTF.resignFirstResponder()
+        lastNameTF.resignFirstResponder()
+    }
+
+    @IBAction func dismissKeyBoard(_ sender: UITapGestureRecognizer) {
+        keyboardDismiss()
+    }
     
     //MARK: -Camera / Add Picture
     func addPhoto() {
@@ -166,6 +188,8 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    
     
 }
 
