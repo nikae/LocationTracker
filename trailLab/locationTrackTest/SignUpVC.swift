@@ -63,7 +63,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
             FIRAuth.auth()?.createUser(withEmail: emailTF.text!, password: passwordTF.text!) {(user, error) in
                 if error == nil {
                     print("You have Successfully signed up")
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfile")
                     self.present(vc!, animated: true, completion: nil)
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

@@ -26,12 +26,20 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     @IBOutlet var headerLabel : UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var segmentedController: UISegmentedControl!
-    
-   
     @IBOutlet weak var goalSlider: UISlider!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        let firstName = firstNameDefoults.object(forKey: firstNameDefoults_Key)
+        let lastName = lastNameDefoults.object(forKey: lastNameDefoults_Key)
+        if firstName != nil && lastName != nil {
+            handleLabel.text = "\((firstName as! String).capitalized) \((lastName as! String).capitalized)"
+        } else {
+            handleLabel.text = "User"
+        }
+
+        
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
         
         profileImage.contentMode = .scaleAspectFill
@@ -50,6 +58,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
             if let image = UIImage(data: savedImgData as Data)
             {
                 profileImage.image = image
+            } else {
+                profileImage.image = UIImage(named:"img-default")
             }
         }
     }
@@ -60,55 +70,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     }
 
    
-    //MARK: -Camera / Add Picture
-    func addPhoto() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        
-        let alertController = UIAlertController(title: "Edit Photo", message: "", preferredStyle: .actionSheet)
-        let photoLibrary = UIAlertAction(title: "Photo Library", style: .default) {
-            (action: UIAlertAction) in
-            picker.sourceType = .photoLibrary
-            self.present(picker, animated: true, completion: nil)
-        }
-        let camera = UIAlertAction(title: "Camera", style: .default)
-        {
-            (action: UIAlertAction) in
-            picker.sourceType = .camera
-            self.present(picker, animated: true, completion: nil)
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .default) {
-            (action: UIAlertAction) in
-            print("User Action Has Canceld")
-        }
-        
-        alertController.addAction(camera)
-        alertController.addAction(photoLibrary)
-        alertController.addAction(cancel)
-        self.present(alertController, animated: true, completion: nil)
-        
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //print(info.debugDescription)
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-
-            let imageData = UIImageJPEGRepresentation(image, 1)
-             profilePictureDefoults.set(imageData, forKey: "image")
-             profilePictureDefoults.synchronize()
-            
-            profileImage.image = image
-          
-        } else {
-            print("Somthing went wrong")
-        }
-        dismiss(animated: true, completion: nil)
-    }
-
     //MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?
@@ -309,36 +270,13 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UIIma
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func editProfileHit(_ sender: UIBarButtonItem) {
-        addPhoto()
+        let editProfileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditProfile") as! EditProfileVC
+        present(editProfileView, animated: true, completion: nil)
     }
     
     @IBAction func logOutHit(_ sender: UIButton) {
-        
-       
-        keepMeLogedInDefoultsDefoults.set(false, forKey: keepMeLogedInDefoults_key)
-        keepMeLogedInDefoultsDefoults.synchronize()
-        
-        if FIRAuth.auth()?.currentUser != nil {
-            do {
-                try FIRAuth.auth()?.signOut()
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogIn")
-                present(vc, animated: true, completion: nil)
-                
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        }
-
+       print("NEEDS TO BE CHANGED")
     }
     
     

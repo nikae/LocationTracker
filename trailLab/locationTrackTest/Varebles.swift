@@ -15,11 +15,15 @@ import AVFoundation
 let sportsButtonDefoults = UserDefaults.standard
 let profilePictureDefoults = UserDefaults.standard
 let keepMeLogedInDefoultsDefoults = UserDefaults.standard
-//let passwordLogInDefoults = UserDefaults.standard
+
+let firstNameDefoults = UserDefaults.standard
+let lastNameDefoults = UserDefaults.standard
+
 let sportsButtonDefoultsKey = "sportsButtonDefoultsKey"
 let sportsButtonDefoultsKey_End = "sportsButtonDefoultsKey_End"
 let keepMeLogedInDefoults_key = "keepMeLogedInDefoults_key"
-//let passwordLogInDefoults_Key = "passwordLogInDefoults_Key"
+let firstNameDefoults_Key = "firstNameDefoults_Key"
+let lastNameDefoults_Key = "lastNameDefoults_Key"
 
 let distanceDefoults = UserDefaults.standard
 let distanceDefoultsKey = "distance"

@@ -27,6 +27,7 @@
 		24BAB1E51E57B69400E32E74 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1E41E57B69400E32E74 /* SignUpVC.swift */; };
 		24BAB1E71E57B6B100E32E74 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1E61E57B6B100E32E74 /* LogInVC.swift */; };
 		24BAB1E91E57B6CB00E32E74 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1E81E57B6CB00E32E74 /* ResetPasswordVC.swift */; };
+		24BAB1ED1E5D0ACD00E32E74 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */; };
 		24D1BFC91E4A961C007151E8 /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFC81E4A961C007151E8 /* Methods.swift */; };
 		24D1BFCB1E4A9FE0007151E8 /* HealtKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */; };
 		24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCC1E4D4691007151E8 /* viewSlider.swift */; };
@@ -83,6 +84,7 @@
 		24BAB1E41E57B69400E32E74 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		24BAB1E61E57B6B100E32E74 /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		24BAB1E81E57B6CB00E32E74 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		24D1BFC81E4A961C007151E8 /* Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
 		24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealtKitManager.swift; sourceTree = "<group>"; };
 		24D1BFCC1E4D4691007151E8 /* viewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewSlider.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				240DD1111DE531B100F68A28 /* AppDelegate.swift */,
 				240DD1131DE531B100F68A28 /* ViewController.swift */,
 				249666911E42BA4F009335E2 /* ProfileVC.swift */,
+				24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */,
 				2496668F1E41694C009335E2 /* TracksVC.swift */,
 				245038661E31CCBE00CF1707 /* PopUpActivityDon.swift */,
 				245038681E32B3A700CF1707 /* CountDownVC.swift */,
@@ -525,6 +528,7 @@
 				240DD1121DE531B100F68A28 /* AppDelegate.swift in Sources */,
 				24D1BFC91E4A961C007151E8 /* Methods.swift in Sources */,
 				24FFF3FF1DFDD4030088B86C /* StartStopButton.swift in Sources */,
+				24BAB1ED1E5D0ACD00E32E74 /* EditProfileVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
