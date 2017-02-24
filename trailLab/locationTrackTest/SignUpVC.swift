@@ -15,6 +15,8 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
+    
+    
     override func viewDidLoad() {
          super.viewDidLoad()
         
@@ -60,9 +62,20 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
             alertController.addAction(action)
             present(alertController, animated: true, completion: nil)
         } else {
+            
+            
             FIRAuth.auth()?.createUser(withEmail: emailTF.text!, password: passwordTF.text!) {(user, error) in
                 if error == nil {
                     print("You have Successfully signed up")
+                    
+                    
+                    let userID = FIRAuth.auth()?.currentUser?.uid
+                    if userID != nil {
+                   // self.saveUser(fname: "", lname: "", url: "", userId: userID!)
+                        let databaseRef = FIRDatabase.database().reference()
+
+                        databaseRef.child("users/\(userID!)/email").setValue(self.emailTF.text!)
+                    }
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfile")
                     self.present(vc!, animated: true, completion: nil)
                 } else {
@@ -76,6 +89,24 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
         }
 
     }
+    
+    func saveUser(fname: String, lname: String, url: String, userId: String) {
+        let user = userId
+        let firstName = fname
+        let lastname = lname
+        let imageURL = url
+        
+        let users : [String: [String:AnyObject]] = [user : ["firstName" : firstName as AnyObject,
+                                                            "lastName": lastname as AnyObject,
+                                                            "imageURL": imageURL as AnyObject]]
+        
+       
+        let databaseRef = FIRDatabase.database().reference()
+        
+        databaseRef.child("users").childByAutoId().setValue(users)
+        
+    }
+
 }
 
 

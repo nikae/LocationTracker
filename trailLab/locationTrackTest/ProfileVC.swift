@@ -28,17 +28,32 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var segmentedController: UISegmentedControl!
     @IBOutlet weak var goalSlider: UISlider!
     
+    var databaseRef: FIRDatabaseReference!
+    let userID = FIRAuth.auth()?.currentUser?.uid
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        let firstName = firstNameDefoults.object(forKey: firstNameDefoults_Key)
-        let lastName = lastNameDefoults.object(forKey: lastNameDefoults_Key)
-        if firstName != nil && lastName != nil {
-            handleLabel.text = "\((firstName as! String).capitalized) \((lastName as! String).capitalized)"
-        } else {
-            handleLabel.text = "User"
+        
+        databaseRef = FIRDatabase.database().reference()
+        
+        databaseRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let url = value?["imageURL"] as? String ?? ""
+            let firstName = value?["firstName"] as? String ?? ""
+            let lastName = value?["lastName"] as? String ?? ""
+            if url != "" {
+                self.getImage(url, iv: self.profileImage)
+
+            }
+            self.handleLabel.text = "\(firstName.capitalized) \(lastName.capitalized)"
+            
+        }) { (error) in
+            print(error.localizedDescription)
         }
 
+       
         
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
         
@@ -52,23 +67,29 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         goalSlider.minimumTrackTintColor = walkColor()
         goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
         value = slider.run
+ 
         
-        if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
-        {
-            if let image = UIImage(data: savedImgData as Data)
-            {
-                profileImage.image = image
-            } else {
-                profileImage.image = UIImage(named:"img-default")
-            }
-        }
-    }
+   }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         totalActivitiesScrollView.contentSize = CGSize(width: 600, height: totalActivitiesScrollView.frame.height)
     }
+///////////////////////////
+    func getImage(_ url:String, iv:UIImageView) {
+        
+        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
+            //Dispatch the main thread here
+            DispatchQueue.main.async {
+                let image = UIImage(data: data!)
+                iv.image = image
+            }
+            
+        })
+    }
 
+    
    
     //MARK -TabBar controller
     var viewController0: UIViewController?

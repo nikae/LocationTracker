@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Photos
+
 
 class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -15,18 +17,19 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
     
+     var storageRef: FIRStorageReference!
+     var databaseRef: FIRDatabaseReference!
+     fileprivate var _refHandle: FIRDatabaseHandle!
+     var users: [FIRDataSnapshot] = []
+     var picURL = ""
+     let userID = FIRAuth.auth()?.currentUser?.uid
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         nameTF.delegate = self
         lastNameTF.delegate = self
-        
-        let firstName = firstNameDefoults.object(forKey: firstNameDefoults_Key)
-        let lastName = lastNameDefoults.object(forKey: lastNameDefoults_Key)
-        if firstName != nil && lastName != nil {
-            nameTF.text = (firstName as! String).capitalized
-            lastNameTF.text = (lastName as! String).capitalized
-        }
         
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
@@ -34,20 +37,44 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         profileImageView.layer.borderWidth = 0.5
         profileImageView.clipsToBounds = true
-        
-          if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
-        {
-            if let image = UIImage(data: savedImgData as Data)
-            {
-                profileImageView.image = image
-            } else {
-                profileImageView.image = UIImage(named:"img-default")
-            }
-        }
+        databaseRef = FIRDatabase.database().reference()
+        storageRef = FIRStorage.storage().reference(forURL: "gs://trail-lab.appspot.com")
 
+        databaseRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let url = value?["imageURL"] as? String ?? ""
+            let firstname = value?["firstName"] as? String ?? ""
+            let lastname = value?["lastName"] as? String ?? ""
+            if url != "" {
+           self.getImage(url, iv: self.profileImageView)
+            }
+            self.nameTF.text = firstname.capitalized
+            self.lastNameTF.text = lastname.capitalized
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+     
     }
     
+    deinit {
+        databaseRef.child("users").removeObserver(withHandle: _refHandle)
+    }
     
+    //use to get immage
+    func getImage(_ url:String, iv:UIImageView) {
+        
+        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
+            //Dispatch the main thread here
+            DispatchQueue.main.async {
+                let image = UIImage(data: data!)
+                iv.image = image
+            }
+            
+        })
+    }
+
     //Mark -Figour out KeyBoard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTF {
@@ -128,20 +155,37 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         //print(info.debugDescription)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            let imageData = UIImageJPEGRepresentation(image, 1)
-            profilePictureDefoults.set(imageData, forKey: "image")
-            profilePictureDefoults.synchronize()
-            
-            profileImageView.image = image
-            
+                profileImageView.image = image
+                saveImage(image)
+    
         } else {
             print("Somthing went wrong")
         }
         dismiss(animated: true, completion: nil)
     }
     
-
     
+    
+    func saveImage(_ image:UIImage) {
+        let imageData = UIImageJPEGRepresentation(image, 0.8)
+        let imagePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+        let metadata = FIRStorageMetadata()
+        metadata.contentType = "image/jpeg"
+        self.storageRef.child(imagePath)
+            .put(imageData!, metadata: metadata) { (metadata, error) in
+                if let error = error {
+                    print("Error uploading: \(error)")
+                    return
+                }
+                self.picURL = self.storageRef.child((metadata?.path)!).description
+                print(self.picURL)
+                
+                self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
+        }
+        
+        
+    }
+
 
     @IBAction func editProfilePictureHit(_ sender: UIButton) {
         addPhoto()
@@ -165,17 +209,25 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 
     }
     
-    
     @IBAction func doneHit(_ sender: UIButton) {
         if nameTF.text != "" && lastNameTF.text != "" {
             
-            firstNameDefoults.set(nameTF.text, forKey: firstNameDefoults_Key)
+            
+            let firstName = self.nameTF.text
+            let lastName = self.lastNameTF.text
+            
+            firstNameDefoults.set(firstName, forKey: firstNameDefoults_Key)
             firstNameDefoults.synchronize()
-            lastNameDefoults.set(lastNameTF.text, forKey: lastNameDefoults_Key)
+            lastNameDefoults.set(lastName, forKey: lastNameDefoults_Key)
             lastNameDefoults.synchronize()
+            
+            self.databaseRef.child("users/\(userID!)/firstName").setValue(firstName)
+            self.databaseRef.child("users/\(userID!)/lastName").setValue(lastName)
             
         let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
         present(profileView, animated: false, completion: nil)
+            
+            
         } else {
             let alertController = UIAlertController(title: "Please provide Full Name", message: "", preferredStyle: .actionSheet)
             
