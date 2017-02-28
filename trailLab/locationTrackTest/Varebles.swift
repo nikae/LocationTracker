@@ -19,12 +19,14 @@ let keepMeLogedInDefoultsDefoults = UserDefaults.standard
 
 let firstNameDefoults = UserDefaults.standard
 let lastNameDefoults = UserDefaults.standard
+let emailDefoults = UserDefaults.standard
 
 let sportsButtonDefoultsKey = "sportsButtonDefoultsKey"
 let sportsButtonDefoultsKey_End = "sportsButtonDefoultsKey_End"
 let keepMeLogedInDefoults_key = "keepMeLogedInDefoults_key"
 let firstNameDefoults_Key = "firstNameDefoults_Key"
 let lastNameDefoults_Key = "lastNameDefoults_Key"
+let emailDefoults_Key = "emailDefoults_Key"
 
 let distanceDefoults = UserDefaults.standard
 let distanceDefoultsKey = "distance"

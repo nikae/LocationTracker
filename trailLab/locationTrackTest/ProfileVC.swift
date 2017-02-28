@@ -28,32 +28,22 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var segmentedController: UISegmentedControl!
     @IBOutlet weak var goalSlider: UISlider!
     
-    var databaseRef: FIRDatabaseReference!
-    let userID = FIRAuth.auth()?.currentUser?.uid
-    
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        
-        databaseRef = FIRDatabase.database().reference()
-        
-        databaseRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            let url = value?["imageURL"] as? String ?? ""
-            let firstName = value?["firstName"] as? String ?? ""
-            let lastName = value?["lastName"] as? String ?? ""
-            if url != "" {
-                self.getImage(url, iv: self.profileImage)
-
-            }
-            self.handleLabel.text = "\(firstName.capitalized) \(lastName.capitalized)"
-            
-        }) { (error) in
-            print(error.localizedDescription)
+            if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
+            {
+                if let image = UIImage(data: savedImgData as Data)
+                {
+                    profileImage.image = image
+                } else {
+                    profileImage.image = UIImage(named:"img-default")
+        }
         }
 
-       
+        let firstName = firstNameDefoults.value(forKey: firstNameDefoults_Key) as! String
+        let lastName = lastNameDefoults.value(forKey: lastNameDefoults_Key) as! String
+        handleLabel.text = "\(firstName.capitalized) \(lastName.capitalized)"
         
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
         
@@ -76,21 +66,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         super.viewDidLayoutSubviews()
         totalActivitiesScrollView.contentSize = CGSize(width: 600, height: totalActivitiesScrollView.frame.height)
     }
-///////////////////////////
-    func getImage(_ url:String, iv:UIImageView) {
-        
-        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
-            //Dispatch the main thread here
-            DispatchQueue.main.async {
-                let image = UIImage(data: data!)
-                iv.image = image
-            }
-            
-        })
-    }
 
-    
-   
     //MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?

@@ -18,8 +18,17 @@ class LogInVC: UIViewController, UITextFieldDelegate {
  
     @IBOutlet weak var keepMeLoggedIn: UIButton!
     
+    var storageRef: FIRStorageReference!
+    var databaseRef: FIRDatabaseReference!
+    fileprivate var _refHandle: FIRDatabaseHandle!
+    var users: [FIRDataSnapshot] = []
+    var picURL = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        databaseRef = FIRDatabase.database().reference()
         
         self.emailTF.delegate = self
         self.passwordTF.delegate = self
@@ -81,6 +90,29 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController")
                     self.present(vc!, animated: true, completion: nil)
                     
+                    let userID = FIRAuth.auth()?.currentUser?.uid
+                    self.databaseRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        let value = snapshot.value as? NSDictionary
+                        let url = value?["imageURL"] as? String ?? ""
+                        let firstname = value?["firstName"] as? String ?? ""
+                        let lastname = value?["lastName"] as? String ?? ""
+                        let email = value?["email"] as? String ?? ""
+                        if url != "" {
+                            
+                            self.getImage(url)
+                            
+                        }
+                        firstNameDefoults.set(firstname, forKey: firstNameDefoults_Key)
+                        firstNameDefoults.synchronize()
+                        lastNameDefoults.set(lastname, forKey: lastNameDefoults_Key)
+                        lastNameDefoults.synchronize()
+                        emailDefoults.set(email, forKey: emailDefoults_Key)
+                        emailDefoults.synchronize()
+                        
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -92,6 +124,28 @@ class LogInVC: UIViewController, UITextFieldDelegate {
         }
 
     }
+    
+    func getImage(_ url:String) {
+        var image = UIImage()
+        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "ERROR")
+                image = UIImage(named:"img-default")!
+            } else {
+            //Dispatch the main thread here
+            DispatchQueue.main.async {
+                image = UIImage(data: data!)!
+                
+                //**************
+                let imageData = UIImageJPEGRepresentation(image, 1)
+                profilePictureDefoults.set(imageData, forKey: "image")
+                profilePictureDefoults.synchronize()
+                                
+            }
+        }
+        })
+    }
+
     
     var launchBool: Bool = false {
         didSet {

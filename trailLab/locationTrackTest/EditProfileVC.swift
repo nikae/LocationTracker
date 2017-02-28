@@ -16,6 +16,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
+    @IBOutlet weak var emailTF: UITextField!
     
      var storageRef: FIRStorageReference!
      var databaseRef: FIRDatabaseReference!
@@ -30,66 +31,59 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         
         nameTF.delegate = self
         lastNameTF.delegate = self
+        emailTF.delegate = self
         
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.clipsToBounds = true
-        profileImageView.isUserInteractionEnabled = true
-        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
-        profileImageView.layer.borderWidth = 0.5
-        profileImageView.clipsToBounds = true
+        profileImageViewFormat()
+        
         databaseRef = FIRDatabase.database().reference()
         storageRef = FIRStorage.storage().reference(forURL: "gs://trail-lab.appspot.com")
-
-        databaseRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            let url = value?["imageURL"] as? String ?? ""
-            let firstname = value?["firstName"] as? String ?? ""
-            let lastname = value?["lastName"] as? String ?? ""
-            if url != "" {
-           self.getImage(url, iv: self.profileImageView)
-            }
-            self.nameTF.text = firstname.capitalized
-            self.lastNameTF.text = lastname.capitalized
-            
-        }) { (error) in
-            print(error.localizedDescription)
+      
+        if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
+            {
+                if let image = UIImage(data: savedImgData as Data)
+                {
+                    profileImageView.image = image
+                } else {
+                    profileImageView.image = UIImage(named:"img-default")
         }
-     
+        }
+        
+        let firstName = firstNameDefoults.value(forKey: firstNameDefoults_Key) as? String ?? ""
+        let lastName = lastNameDefoults.value(forKey: lastNameDefoults_Key) as? String ?? ""
+        let email = emailDefoults.value(forKey: emailDefoults_Key) as? String ?? ""
+        
+        nameTF.text = firstName.capitalized
+        lastNameTF.text = lastName.capitalized
+        emailTF.placeholder = email.lowercased()
     }
     
     deinit {
         databaseRef.child("users").removeObserver(withHandle: _refHandle)
     }
     
-    //use to get immage
-    func getImage(_ url:String, iv:UIImageView) {
-        
-        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
-            //Dispatch the main thread here
-            DispatchQueue.main.async {
-                let image = UIImage(data: data!)
-                iv.image = image
-            }
-            
-        })
+    func profileImageViewFormat() {
+    profileImageView.contentMode = .scaleAspectFill
+    profileImageView.clipsToBounds = true
+    profileImageView.isUserInteractionEnabled = true
+    profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+    profileImageView.layer.borderWidth = 0.5
+    profileImageView.clipsToBounds = true
     }
-
-    //Mark -Figour out KeyBoard
+    
+    //MARK -Figour out KeyBoard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTF {
             lastNameTF.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
         }
-        
         return true
     }
     
-   
     func keyboardDismiss() {
         nameTF.resignFirstResponder()
         lastNameTF.resignFirstResponder()
+        emailTF.resignFirstResponder()
     }
 
     @IBAction func dismissKeyBoard(_ sender: UITapGestureRecognizer) {
@@ -124,6 +118,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 
             let delete = UIAlertAction(title: "Delete", style: .default) {
                 (action: UIAlertAction) in
+//***need to delete pic from storage***
                 profilePictureDefoults.set(nil, forKey: "image")
                 profilePictureDefoults.synchronize()
                 self.profileImageView.image = UIImage(named:"img-default")
@@ -152,20 +147,20 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //print(info.debugDescription)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-                profileImageView.image = image
-                saveImage(image)
+            profileImageView.image = image
+            let imageData = UIImageJPEGRepresentation(image, 1)
+            profilePictureDefoults.set(imageData, forKey: "image")
+            profilePictureDefoults.synchronize()
+            saveImage(image)
     
         } else {
             print("Somthing went wrong")
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
+   
     func saveImage(_ image:UIImage) {
         let imageData = UIImageJPEGRepresentation(image, 0.8)
         let imagePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
@@ -182,8 +177,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 
                 self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
         }
-        
-        
     }
 
 
@@ -202,46 +195,72 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogIn")
                 present(vc, animated: true, completion: nil)
                 
+                firstNameDefoults.set(nil, forKey: firstNameDefoults_Key)
+                firstNameDefoults.synchronize()
+                lastNameDefoults.set(nil, forKey: lastNameDefoults_Key)
+                lastNameDefoults.synchronize()
+                profilePictureDefoults.set(nil, forKey: "image")
+                profilePictureDefoults.synchronize()
+                emailDefoults.set(nil, forKey: emailDefoults_Key)
+                emailDefoults.synchronize()
+
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
         }
-
+    }
+    
+    func presentProfileView() {
+        let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+        present(profileView, animated: false, completion: nil)
+    }
+    
+    func presentAlert(title: String, message: String ) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func doneHit(_ sender: UIButton) {
         if nameTF.text != "" && lastNameTF.text != "" {
             
-            
             let firstName = self.nameTF.text
             let lastName = self.lastNameTF.text
+            let email = self.emailTF.text
             
             firstNameDefoults.set(firstName, forKey: firstNameDefoults_Key)
             firstNameDefoults.synchronize()
             lastNameDefoults.set(lastName, forKey: lastNameDefoults_Key)
             lastNameDefoults.synchronize()
-            
-            self.databaseRef.child("users/\(userID!)/firstName").setValue(firstName)
-            self.databaseRef.child("users/\(userID!)/lastName").setValue(lastName)
-            
-        let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
-        present(profileView, animated: false, completion: nil)
-            
-            
-        } else {
-            let alertController = UIAlertController(title: "Please provide Full Name", message: "", preferredStyle: .actionSheet)
-            
-            let ok = UIAlertAction(title: "OK", style: .default) {
-                (action: UIAlertAction) in
-                print("User Pressed OK")
+    
+            if email != "" {
+            FIRAuth.auth()?.currentUser?.updateEmail(email!) { (error) in
+                if error == nil {
+                    self.databaseRef.child("users/\(self.userID!)/email").setValue(email)
+                    emailDefoults.set(email, forKey: emailDefoults_Key)
+                    emailDefoults.synchronize()
+                    
+                    self.presentProfileView()
+
+                } else {
+                    self.presentAlert(title: "Error", message: (error?.localizedDescription)!)
+                   
+                }
+            }
+            } else {
+                presentProfileView()
+               
             }
             
-            alertController.addAction(ok)
-            self.present(alertController, animated: true, completion: nil)
+            //MARK -Edit user values at firebase
+            self.databaseRef.child("users/\(userID!)/firstName").setValue(firstName)
+            self.databaseRef.child("users/\(userID!)/lastName").setValue(lastName)
+      
+        } else {
+            presentAlert(title: "Please provide Full Name", message: "")
         }
     }
-    
-    
     
 }
 

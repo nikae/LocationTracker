@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-//import FirebaseAuth
+
 
 class SignUpVC: UIViewController, UITextFieldDelegate{
     
@@ -67,11 +67,15 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
             FIRAuth.auth()?.createUser(withEmail: emailTF.text!, password: passwordTF.text!) {(user, error) in
                 if error == nil {
                     print("You have Successfully signed up")
-                    
+                    firstNameDefoults.set(nil, forKey: firstNameDefoults_Key)
+                    firstNameDefoults.synchronize()
+                    lastNameDefoults.set(nil, forKey: lastNameDefoults_Key)
+                    lastNameDefoults.synchronize()
+                    profilePictureDefoults.set(nil, forKey: "image")
+                    profilePictureDefoults.synchronize()
                     
                     let userID = FIRAuth.auth()?.currentUser?.uid
                     if userID != nil {
-                   // self.saveUser(fname: "", lname: "", url: "", userId: userID!)
                         let databaseRef = FIRDatabase.database().reference()
 
                         databaseRef.child("users/\(userID!)/email").setValue(self.emailTF.text!)
@@ -90,23 +94,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
 
     }
     
-    func saveUser(fname: String, lname: String, url: String, userId: String) {
-        let user = userId
-        let firstName = fname
-        let lastname = lname
-        let imageURL = url
-        
-        let users : [String: [String:AnyObject]] = [user : ["firstName" : firstName as AnyObject,
-                                                            "lastName": lastname as AnyObject,
-                                                            "imageURL": imageURL as AnyObject]]
-        
-       
-        let databaseRef = FIRDatabase.database().reference()
-        
-        databaseRef.child("users").childByAutoId().setValue(users)
-        
-    }
-
 }
 
 
