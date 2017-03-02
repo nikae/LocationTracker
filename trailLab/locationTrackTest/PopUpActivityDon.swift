@@ -10,9 +10,17 @@ import UIKit
 import MapKit
 import AVFoundation
 import CoreLocation
+import Firebase
 
 
 class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    var storageRef: FIRStorageReference!
+    //var databaseRef: FIRDatabaseReference!
+    fileprivate var _refHandle: FIRDatabaseHandle!
+    var users: [FIRDataSnapshot] = []
+    var picURL = ""
+    let userID = FIRAuth.auth()?.currentUser?.uid
 
     //Difficulty
     @IBOutlet weak var easy: UIButton!
@@ -46,13 +54,18 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     @IBOutlet weak var scrollView: UIView!
     
     @IBOutlet weak var imageView: UIImageView!
-   
+    
+    var abc: [[String: AnyObject]] = []
     
     var manager: CLLocationManager!
     let mapView = MyMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+     //   databaseRef = FIRDatabase.database().reference()
+        storageRef = FIRStorage.storage().reference(forURL: "gs://trail-lab.appspot.com")
+
         
         setUpLocationManager()
         mapView.setUpMapView(view: mapView_ActivityDone, delegate: self)
@@ -81,10 +94,26 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         
-        var coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
-        let polyline = MKPolyline(coordinates: &coordinates, count: myLocations.count)
+        for l in myLocations {
+            
+            let dict = ["Latitude": l.coordinate.latitude, "Longitude": l.coordinate.longitude]
+            cordinatesArray.append(dict as AnyObject)
+        }
+    
+//        var ab: [CLLocationCoordinate2D] = []
+//        for cord in cordinatesArray {
+//           let abc = cord as! CLLocationCoordinate2D
+//            ab.append(abc)
+//        }
+        
+     coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
+        
+  
+        let polyline = MKPolyline(coordinates: &coordinates, count: coordinates.count)
         self.mapView_ActivityDone.add(polyline)
-        //print("coordinates: \(coordinates)")
+
+       // print("coordinates: \(coordinates)")
+       
         
     }
     
@@ -149,10 +178,27 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         //print(info.debugDescription)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
+            saveImage(image)
         } else {
             print("Somthing went wrong")
         }
         dismiss(animated: true, completion: nil)
+    }
+
+    func saveImage(_ image:UIImage) {
+        let imageData = UIImageJPEGRepresentation(image, 0.8)
+        let imagePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+        let metadata = FIRStorageMetadata()
+        metadata.contentType = "image/jpeg"
+        self.storageRef.child(imagePath)
+            .put(imageData!, metadata: metadata) { (metadata, error) in
+                if let error = error {
+                    print("Error uploading: \(error)")
+                    return
+                }
+                self.picURL = self.storageRef.child((metadata?.path)!).description
+                print(self.picURL)
+        }
     }
 
     
@@ -208,95 +254,96 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     let green1 = UIColor(red: 81/255.0, green:  81/255.0, blue:  81/255.0, alpha: 1)
     let green2 = UIColor(red: 128/255.0, green:  128/255.0, blue:  128/255.0, alpha: 1)
     
-    func launchBool(sender: UIButton, bool: Bool) {
+    func launchBool(sender: UIButton, bool: Bool, arrayLet: [String]) {
+        var array = arrayLet
         if bool == true {
             let num = sender.title(for: UIControlState())!
-            arrayOfWhatToSee.append(num)
+            array.append(num)
             sender.backgroundColor = green2
-            print(arrayOfWhatToSee)
+            print(array)
             
         } else {
         let num = sender.title(for: UIControlState())!
-        if let index = arrayOfWhatToSee.index(of: num) {
-            arrayOfWhatToSee.remove(at: index)
+        if let index = array.index(of: num) {
+            array.remove(at: index)
         }
         sender.backgroundColor = green1
-        print(arrayOfWhatToSee)
+        print(array)
         }
     }
 
-    func makeBoolForLaunch(bool: Bool, button: UIButton){
+    func makeBoolForLaunch(bool: Bool, button: UIButton, array: [String]){
             if bool == true {
-                launchBool(sender: button, bool: true)
+                launchBool(sender: button, bool: true, arrayLet: array)
                 
             } else {
-                launchBool(sender: button, bool: false)
+                launchBool(sender: button, bool: false, arrayLet: array)
             }
     }
     
     var launchEasy: Bool = false {
         didSet {
-            makeBoolForLaunch(bool: launchEasy, button: easy)
+            makeBoolForLaunch(bool: launchEasy, button: easy, array: arrayOfDifficulty)
         }
     }
     var launchMedium: Bool = false {
         didSet {
-            makeBoolForLaunch(bool: launchMedium, button: medium)
+            makeBoolForLaunch(bool: launchMedium, button: medium, array: arrayOfDifficulty)
         }
     }
     var launchHard: Bool = false {
         didSet {
-          makeBoolForLaunch(bool: launchHard, button: hard)
+          makeBoolForLaunch(bool: launchHard, button: hard, array: arrayOfDifficulty)
         }
     }
     var launchkidFriendly: Bool = false {
         didSet {
-            makeBoolForLaunch(bool: launchkidFriendly, button: kidFriendly)
+            makeBoolForLaunch(bool: launchkidFriendly, button: kidFriendly, array: arrayOfSuitability)
         }
     }
     var launchDogFriendly: Bool = false {
         didSet {
-            makeBoolForLaunch(bool: launchDogFriendly, button: dogFriemdly)
+            makeBoolForLaunch(bool: launchDogFriendly, button: dogFriemdly, array: arrayOfSuitability)
         }
     }
     var launchWeelchairFriendly: Bool = false {
         didSet {
-           makeBoolForLaunch(bool: launchWeelchairFriendly, button: WeelchairFriendly)
+           makeBoolForLaunch(bool: launchWeelchairFriendly, button: WeelchairFriendly, array: arrayOfSuitability)
         }
     }
     var launchViews: Bool = false {
         didSet{
-            makeBoolForLaunch(bool: launchViews, button: ViewsButt)
+            makeBoolForLaunch(bool: launchViews, button: ViewsButt, array: arrayOfWhatToSee)
         }
     }
     var launchBeach: Bool = false {
         didSet{
-        makeBoolForLaunch(bool: launchBeach, button: beachButton)
+        makeBoolForLaunch(bool: launchBeach, button: beachButton, array: arrayOfWhatToSee)
         }
     }
     var launchRiver: Bool = false {
         didSet {
-            makeBoolForLaunch(bool: launchRiver, button: riverButton)
+            makeBoolForLaunch(bool: launchRiver, button: riverButton, array: arrayOfWhatToSee)
         }
     }
     var launchCave: Bool = false {
         didSet {
-            makeBoolForLaunch(bool: launchCave, button: caveButton)
+            makeBoolForLaunch(bool: launchCave, button: caveButton, array: arrayOfWhatToSee)
         }
     }
     var launchLake: Bool = false {
         didSet{
-            makeBoolForLaunch(bool: launchLake, button: lakeButton)
+            makeBoolForLaunch(bool: launchLake, button: lakeButton, array: arrayOfWhatToSee)
         }
     }
     var launchWaterFall: Bool = false {
         didSet {
-            makeBoolForLaunch(bool:launchWaterFall, button: waterFallButton)
+            makeBoolForLaunch(bool:launchWaterFall, button: waterFallButton, array: arrayOfWhatToSee)
         }
     }
     var launchHotSprings: Bool = false {
     didSet {
-    makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton)
+    makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
         }
     }
  
@@ -334,7 +381,47 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
       
     }
     
+    func saveTrail() {
+        
+       
+        let userId = userID
+        let activityType = activity_String 
+        let activityName = activityNameTF_String 
+        let distance = distanceLabel_String
+        let locations = cordinatesArray
+        let time = timeLabel_String
+        let pace = arrayOfPace
+        let altitudes = arrayOfAltitude
+        let difficulty = arrayOfDifficulty
+        let suitability = arrayOfSuitability
+        let watToSee = arrayOfWhatToSee
+        let description = textView_ActivityDone.text ?? ""
+        let pictureURL = picURL
+        
+        let trailInfo: Dictionary<String, Any> = [ "userId" : userId as AnyObject,
+                                                         "activityType" : activityType as AnyObject,
+                                                         "activityName" : activityName as AnyObject,
+                                                         "distance" : distance as AnyObject,
+                                                          "locations" : locations as AnyObject,
+                                                          "time" : time as AnyObject,
+                                                          "pace" : pace as AnyObject,
+                                                          "altitudes" : altitudes as AnyObject,
+                                                          "difficulty" : difficulty as AnyObject,
+                                                          "suitability" : suitability as AnyObject,
+                                                           "swatToSee" : watToSee as AnyObject,
+                                                          "description" : description as AnyObject,
+                                                          "pictureURL" : pictureURL as AnyObject]
+        
+       
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Trails").childByAutoId().setValue(trailInfo)
+        
+    }
+    
+    
+    
     @IBAction func doneActivityHit(_ sender: UIButton) {
+        saveTrail()
         self.view.removeFromSuperview()
         myLocations.removeAll()
         distanceTraveled = 0

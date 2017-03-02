@@ -131,11 +131,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         let spanX = 0.007
         let spanY = 0.007
-        
-        //Testing
+
         var location = CLLocation()
         for L in myLocations {
-           location = L
+           location = L 
         }
         let newRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
         theMap.setRegion(newRegion, animated: true)
@@ -270,8 +269,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let decimalPaceSeconds = paceMinutes - roundedPaceMinutes
         _ = Int(floor(roundedPaceMinutes))
         let paceSeconds = Int(floor(decimalPaceSeconds * 60))
+            arrayOfPace.append(paceSeconds)
         let paceSecondsZero = String(format: "%02d", paceSeconds)
-            
         paceLabel_String = paceSecondsZero
         paceLabel.text = "--'-"
 

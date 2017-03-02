@@ -83,12 +83,16 @@ var paceLabel_String: String = ""
 var altitudeLabel_String: String = ""
 
 //Arrays
+var arrayOfDifficulty : [String] = []
+var arrayOfSuitability: [String] = []
 var arrayOfWhatToSee: [String] = []
 
 //System Sounds
 let systemSoundID: SystemSoundID = 1104
 
 var myLocations: [CLLocation] = []
+var coordinates : [CLLocationCoordinate2D] = []
+ var cordinatesArray: [AnyObject] = []
 
 //Activity Name and Collor 
 var activity_String = ""
@@ -105,6 +109,7 @@ var lastLocation: CLLocation!
 var distanceTraveled = 0.0
 
 var arrayOfAltitude: [Double] = []
+var arrayOfPace: [Int] = []
 
 //Profile view animation
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations

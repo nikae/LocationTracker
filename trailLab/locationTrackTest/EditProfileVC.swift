@@ -46,7 +46,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 } else {
                     profileImageView.image = UIImage(named:"img-default")
         }
-        }
+    }
         
         let firstName = firstNameDefoults.value(forKey: firstNameDefoults_Key) as? String ?? ""
         let lastName = lastNameDefoults.value(forKey: lastNameDefoults_Key) as? String ?? ""
