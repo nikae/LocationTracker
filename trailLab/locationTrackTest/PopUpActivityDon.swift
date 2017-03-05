@@ -63,7 +63,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     //   databaseRef = FIRDatabase.database().reference()
+      //  databaseRef = FIRDatabase.database().reference()
         storageRef = FIRStorage.storage().reference(forURL: "gs://trail-lab.appspot.com")
 
         
@@ -99,13 +99,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
             let dict = ["Latitude": l.coordinate.latitude, "Longitude": l.coordinate.longitude]
             cordinatesArray.append(dict as AnyObject)
         }
-    
-//        var ab: [CLLocationCoordinate2D] = []
-//        for cord in cordinatesArray {
-//           let abc = cord as! CLLocationCoordinate2D
-//            ab.append(abc)
-//        }
-        
+
      coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
         
   
@@ -201,6 +195,11 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         }
     }
 
+
+
+    
+    
+    
     
     //MARK: -Figour Out KeyBoard / TextView - TextFiled
     //key shows
@@ -398,7 +397,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let description = textView_ActivityDone.text ?? ""
         let pictureURL = picURL
         
-        let trailInfo: Dictionary<String, Any> = [ "userId" : userId as AnyObject,
+        let trailInfo: Dictionary<String, AnyObject> = [ "userId" : userId as AnyObject,
                                                          "activityType" : activityType as AnyObject,
                                                          "activityName" : activityName as AnyObject,
                                                          "distance" : distance as AnyObject,

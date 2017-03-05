@@ -16,6 +16,9 @@ enum slider {
 
 class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    var trails = [Trail]()
+    var usersTrails = [Trail]()
+    
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var totalActivitiesScrollView: UIScrollView!
     @IBOutlet var tableView : UITableView!
@@ -56,9 +59,53 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         
         goalSlider.minimumTrackTintColor = walkColor()
         goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
-        value = slider.run
+        valueOfSlider = slider.run
  
         
+        let databaseRef = FIRDatabase.database().reference()
+  
+        databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+     
+            if snapshot.hasChildren() {
+   
+            let value = snapshot.value as! NSDictionary
+                
+            let userId = value["userId"] as? String
+            let activityType = value["activityType"] as? String ?? ""
+            let activityName = value["activityName"] as? String
+            let distance = value["distance"] as? String ?? ""
+            let locations = value["locations"] as AnyObject
+            let time = value["time"] as? String ?? ""
+            let pace = value["pace"] as? [Int] ?? [0]
+            let altitudes = value["altitudes"] as? [Double] ?? [0]
+            let difficulty = value["difficulty"] as? [String] ?? [""]
+            let suitability = value["suitability"] as? [String] ?? [""]
+            let whatToSee = value["watToSee"] as? [String] ?? [""]
+            let description = value["description"]  as? String ?? ""
+            let pictureURL = value["pictureURL"]  as? String
+            
+            print(userId ?? "NOUSERID")
+            print(activityName ?? "NONAME")
+            print(activityType)
+
+            self.trails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                
+                
+                let curUserID = FIRAuth.auth()?.currentUser?.uid
+           if curUserID == userId {
+            self.usersTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                }
+                
+            
+            //print("TRAILS \(self.trails)")
+           self.tableView.reloadData()
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
+        
+    
    }
     
     
@@ -116,37 +163,91 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var cnt = 0
-        switch segmentedController.selectedSegmentIndex {
-        case 0:
-            cnt = 20
-        case 1:
-            cnt = 40
-        default :
-            break
+        if usersTrails.count > 0 {
+            return usersTrails.count
+        } else {
+            return 1
         }
         
-        return cnt
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        var cell = UITableViewCell()
         
-        var str = ""
-        switch segmentedController.selectedSegmentIndex {
-        case 0:
-           str = "test"
-        case 1:
-           str = "TEST"
-            default :
-            break
+        if usersTrails.count > 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let distanceLabel = cell.viewWithTag(1) as! UILabel
+        let timeLabel = cell.viewWithTag(2) as! UILabel
+        let paceLabel = cell.viewWithTag(3) as! UILabel
+        let altitudeLabel = cell.viewWithTag(4) as! UILabel
+        let nameLabel = cell.viewWithTag(5) as! UILabel
+        //       let difficultyLabel = cell.viewWithTag(6) as! UILabel
+        //        let suitabilityLabel = cell.viewWithTag(7) as! UILabel
+        let imageCell = cell.viewWithTag(10) as! UIImageView
+        
+        
+        let maxPace = usersTrails[indexPath.row].pace.max
+        let maxAltitude = usersTrails[indexPath.row].altitudes.max
+        
+        distanceLabel.text = usersTrails[indexPath.row].distance
+        timeLabel.text = usersTrails[indexPath.row].time
+        paceLabel.text = "\(maxPace)"
+        altitudeLabel.text = "\(maxAltitude)"
+        nameLabel.text = usersTrails[indexPath.row].activityName
+        let url = usersTrails[indexPath.row].pictureURL
+        if url != "" {
+        getImage(url!, imageView: imageCell)
+        } else {
+            imageCell.image =  UIImage(named:"img-default")
         }
         
-         cell.textLabel?.text = str
+        imageCell.contentMode = .scaleAspectFill
+        imageCell.clipsToBounds = true
+        imageCell.isUserInteractionEnabled = true
+        imageCell.layer.cornerRadius = imageCell.frame.height/2
+        imageCell.layer.borderWidth = 2
+        imageCell.clipsToBounds = true
         
-        return cell
+        let type = trails[indexPath.row].activityType
+        if type == "Walk" {
+            imageCell.layer.borderColor = walkColor().cgColor
+        } else if type == "Run" {
+            imageCell.layer.borderColor = runColor().cgColor
+        } else if type == "Hike" {
+            imageCell.layer.borderColor = hikeColor().cgColor
+        } else if type == "Bike" {
+            imageCell.layer.borderColor = bikeColor().cgColor
+        } else {
+            imageCell.layer.borderColor = UIColor.white.cgColor
+        }
+  
+        
+       
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        }
+         return cell
     }
+    
+    
+    func getImage(_ url:String, imageView: UIImageView) {
+        var image = UIImage()
+        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "ERROR")
+                image = UIImage(named:"img-default")!
+            } else {
+                //Dispatch the main thread here
+                DispatchQueue.main.async {
+                    image = UIImage(data: data!)!
+                    imageView.image = image
+                }
+            }
+        })
+    }
+
     //MARK -segmented controller
     @IBAction func segmentedControllerHit(_ sender: UISegmentedControl) {
         tableView.reloadData()
@@ -154,25 +255,25 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
      
     
     //Mark -Slider / Tap Action
-    var value = slider.walk
+    var valueOfSlider = slider.walk
     @IBAction func tapChangeSlidersValues(_ sender: UITapGestureRecognizer) {
         
-        if case .run = value {
+        if case .run = valueOfSlider {
             goalSlider.minimumTrackTintColor = runColor()
             goalSlider.minimumValueImage = UIImage(named: imageRunString_25)
-            value = slider.hike
-        } else if case .hike = value {
+            valueOfSlider = slider.hike
+        } else if case .hike = valueOfSlider {
             goalSlider.minimumTrackTintColor = hikeColor()
             goalSlider.minimumValueImage = UIImage(named: imageHikeString_25)
-            value = slider.bike
-        } else if case .bike = value {
+            valueOfSlider = slider.bike
+        } else if case .bike = valueOfSlider {
             goalSlider.minimumTrackTintColor = bikeColor()
             goalSlider.minimumValueImage = UIImage(named: imageBikeString_25)
-            value = slider.walk
+            valueOfSlider = slider.walk
         } else {
             goalSlider.minimumTrackTintColor = walkColor()
             goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
-            value = slider.run
+            valueOfSlider = slider.run
         }
         
     }

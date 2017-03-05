@@ -7,13 +7,52 @@
 //
 
 import UIKit
+import Firebase
 
 class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
-
-    var a = ViewController()
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var trails = [Trail]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+   
+        let databaseRef = FIRDatabase.database().reference()
+        
+        databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+            
+            if snapshot.hasChildren() {
+                
+                let value = snapshot.value as! NSDictionary
+                
+                let userId = value["userId"] as? String
+                let activityType = value["activityType"] as? String ?? ""
+                let activityName = value["activityName"] as? String
+                let distance = value["distance"] as? String ?? ""
+                let locations = value["locations"] as AnyObject
+                let time = value["time"] as? String ?? ""
+                let pace = value["pace"] as? [Int] ?? [0]
+                let altitudes = value["altitudes"] as? [Double] ?? [0]
+                let difficulty = value["difficulty"] as? [String] ?? [""]
+                let suitability = value["suitability"] as? [String] ?? [""]
+                let whatToSee = value["watToSee"] as? [String] ?? [""]
+                let description = value["description"]  as? String ?? ""
+                let pictureURL = value["pictureURL"]  as? String
+                
+                print(userId ?? "NOUSERID")
+                print(activityName ?? "NONAME")
+                print(activityType)
+                
+                self.trails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+
+                self.tableView.reloadData()
+                self.collectionView.reloadData()
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
        
     }
     
@@ -54,36 +93,139 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             break
             
         }
-        
-        
     }
     
-    //MARK -TV
+        //MARK -TV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        let cnt = 40
-        
-        return cnt
+ 
+        return trails.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TracksTVCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TracksVCCellTableViewCell
         
-        let str = "test"
-        cell.textLabel?.text = str
+         cell.nameLabel.text = trails[indexPath.row].activityName
+        let url = trails[indexPath.row].pictureURL
+        if url != "" {
+            self.getImage(url!, imageView: cell.cellImage)
+
+        } else {
+            cell.cellImage.image =  UIImage(named:"img-default")
+        }
         
-        return cell
+        cell.cellImage.contentMode = .scaleAspectFill
+        cell.cellImage.clipsToBounds = true
+        cell.cellImage.isUserInteractionEnabled = true
+        cell.cellImage.layer.cornerRadius = cell.cellImage.frame.height/2
+        cell.cellImage.layer.borderWidth = 2
+        cell.cellImage.clipsToBounds = true
+        
+        let type = trails[indexPath.row].activityType
+        if type == "Walk" {
+            cell.cellImage.layer.borderColor = walkColor().cgColor
+        } else if type == "Run" {
+            cell.cellImage.layer.borderColor = runColor().cgColor
+        } else if type == "Hike" {
+            cell.cellImage.layer.borderColor = hikeColor().cgColor
+        } else if type == "Bike" {
+            cell.cellImage.layer.borderColor = bikeColor().cgColor
+        } else {
+            cell.cellImage.layer.borderColor = UIColor.white.cgColor
+        }
+        
+        cell.starBut.tag = indexPath.row
+        cell.starBut.addTarget(self, action: Selector(("launchStar")), for: .touchUpInside)
+        
+        
+               return cell
+
+    }
+    
+    
+//    var launchBool: Bool = false {
+//        didSet {
+//            if launchBool == true {
+//               print(true)
+//            } else {
+//               print(false)
+//            }
+//            
+//        }
+//    }
+//    
+//   @IBAction func launchStar(sender: UIButton) {
+//        launchBool = !launchBool
+//        
+//        if launchBool == true {
+//            let image =  UIImage(named: "Star_000000_25") as UIImage?
+//            sender.setImage(image, for: .normal)
+//        } else {
+//            let image =  UIImage(named: "Star_Black_000000_25") as UIImage?
+//            sender.setImage(image, for: .normal)
+//        }
+//    }
+    
+
+    
+    func getImage(_ url:String, imageView: UIImageView) {
+        var image = UIImage()
+        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "ERROR")
+                image = UIImage(named:"img-default")!
+            } else {
+                //Dispatch the main thread here
+               DispatchQueue.main.async {
+                    image = UIImage(data: data!)!
+                    imageView.image = image
+                }
+            }
+        })
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return trails.count
     }
 
     //MARK -CV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TracksCVCell", for: indexPath)
-        cell.contentView.backgroundColor = .blue
+        
+        cell.backgroundColor = .red
+        
+        let CVImage = cell.viewWithTag(1) as! UIImageView
+        
+        CVImage.contentMode = .scaleAspectFill
+        CVImage.clipsToBounds = true
+        CVImage.isUserInteractionEnabled = true
+        CVImage.layer.cornerRadius = CVImage.frame.height/2
+        CVImage.layer.borderWidth = 2
+        CVImage.clipsToBounds = true
+        
+        let url = trails[indexPath.row].pictureURL
+        if url != "" {
+             DispatchQueue.main.async {
+            self.getImage(url!, imageView: CVImage)
+            }
+        } else {
+            CVImage.image =  UIImage(named:"img-default")
+        }
+
+        let type = trails[indexPath.row].activityType
+        if type == "Walk" {
+            CVImage.layer.borderColor = walkColor().cgColor
+        } else if type == "Run" {
+            CVImage.layer.borderColor = runColor().cgColor
+        } else if type == "Hike" {
+            CVImage.layer.borderColor = hikeColor().cgColor
+        } else if type == "Bike" {
+            CVImage.layer.borderColor = bikeColor().cgColor
+        } else {
+            CVImage.layer.borderColor = UIColor.white.cgColor
+        }
+
+        
         return cell
         
     }
