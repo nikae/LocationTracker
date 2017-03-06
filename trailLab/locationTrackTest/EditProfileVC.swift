@@ -117,7 +117,8 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 
             let delete = UIAlertAction(title: "Delete", style: .default) {
                 (action: UIAlertAction) in
-//***need to delete pic from storage***
+                self.delataImage()
+                self.picURL = ""
                 profilePictureDefoults.set(nil, forKey: "image")
                 profilePictureDefoults.synchronize()
                 self.profileImageView.image = UIImage(named:"img-default")
@@ -152,8 +153,13 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             let imageData = UIImageJPEGRepresentation(image, 1)
             profilePictureDefoults.set(imageData, forKey: "image")
             profilePictureDefoults.synchronize()
-            saveImage(image)
-    
+            if picURL != "" {
+                delataImage()
+                saveImage(image)
+            } else {
+                saveImage(image)
+            }
+            
         } else {
             print("Somthing went wrong")
         }
@@ -175,6 +181,19 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 print(self.picURL)
                 
                 self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
+        }
+    }
+    
+    func delataImage() {
+        let desertRef = storageRef.storage.reference(forURL: picURL)
+        
+        // Delete the file
+        desertRef.delete { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Image Is delated")
+            }
         }
     }
 

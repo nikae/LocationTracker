@@ -55,6 +55,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var UploadIndicator: UIActivityIndicatorView!
     var abc: [[String: AnyObject]] = []
     
     var manager: CLLocationManager!
@@ -63,7 +64,8 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  databaseRef = FIRDatabase.database().reference()
+        self.UploadIndicator.hidesWhenStopped = true
+        
         storageRef = FIRStorage.storage().reference(forURL: "gs://trail-lab.appspot.com")
 
         
@@ -172,7 +174,13 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         //print(info.debugDescription)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
-            saveImage(image)
+            if picURL != "" {
+                delataImage()
+                saveImage(image)
+            } else {
+                saveImage(image)
+            }
+           
         } else {
             print("Somthing went wrong")
         }
@@ -184,18 +192,29 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let imagePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
-        self.storageRef.child(imagePath)
-            .put(imageData!, metadata: metadata) { (metadata, error) in
+        self.storageRef.child(imagePath).put(imageData!, metadata: metadata) { (metadata, error) in
                 if let error = error {
                     print("Error uploading: \(error)")
                     return
                 }
-                self.picURL = self.storageRef.child((metadata?.path)!).description
-                print(self.picURL)
+            self.picURL = self.storageRef.child((metadata?.path)!).description
+            print(self.picURL)
         }
+        
     }
 
-
+    func delataImage() {
+        let desertRef = storageRef.storage.reference(forURL: picURL)
+        
+        // Delete the file
+        desertRef.delete { error in
+            if let error = error {
+               print(error.localizedDescription)
+            } else {
+                print("Image Is delated")
+            }
+        }
+    }
 
     
     
@@ -429,6 +448,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     @IBAction func dismissHit(_ sender: UIButton) {
             self.view.removeFromSuperview()
         
+        delataImage()
         myLocations.removeAll()
         distanceTraveled = 0
     }

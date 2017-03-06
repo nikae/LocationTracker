@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         if FIRAuth.auth()?.currentUser != nil {
             if keepMeLogedInDefoultsDefoults.bool(forKey: keepMeLogedInDefoults_key) != false {
         self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "ViewController")
