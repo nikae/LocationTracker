@@ -25,7 +25,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
      var picURL = ""
      let userID = FIRAuth.auth()?.currentUser?.uid
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

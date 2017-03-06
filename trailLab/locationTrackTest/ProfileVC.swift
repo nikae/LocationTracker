@@ -60,8 +60,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         goalSlider.minimumTrackTintColor = walkColor()
         goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
         valueOfSlider = slider.run
- 
-        
+   
         let databaseRef = FIRDatabase.database().reference()
   
         databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
@@ -95,19 +94,13 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
            if curUserID == userId {
             self.usersTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 }
-                
             
-            //print("TRAILS \(self.trails)")
-           self.tableView.reloadData()
+                self.tableView.reloadData()
             }
         }) { (error) in
             print(error.localizedDescription)
         }
-
-        
-    
    }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -118,7 +111,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?
-    
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
@@ -150,9 +142,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             
         default:
             break
-            
         }
-      
     }
     
     // MARK: -Table view processing
@@ -168,8 +158,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         } else {
             return 1
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -222,15 +210,11 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         } else {
             imageCell.layer.borderColor = UIColor.white.cgColor
         }
-  
-        
-       
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         }
          return cell
     }
-    
     
     func getImage(_ url:String, imageView: UIImageView) {
         var image = UIImage()
@@ -275,9 +259,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
             valueOfSlider = slider.run
         }
-        
     }
-   
     
     //MARK -ScrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -295,31 +277,22 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             let headerSizevariation = ((headerView.bounds.height * (1.0 + headerScaleFactor)) - headerView.bounds.height)/2
             headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
             headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-            
-            
             // Hide views if scrolled super fast
             headerView.layer.zPosition = 0
-          //  handleLabel.isHidden = true
             
         }
-            
-            // SCROLL UP/DOWN ------------
+            // SCROLL UP/DOWN
             
         else {
             
-            // Header -----------
-            
+            // Header
             headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
             
-            //  ------------ Label
-            
-           // handleLabel.isHidden = false
             let alignToNameLabel = -offset + handleLabel.frame.origin.y + headerView.frame.height + offset_HeaderStop
             
             headerLabel.frame.origin = CGPoint(x: headerLabel.frame.origin.x, y: max(alignToNameLabel, distance_W_LabelHeader + offset_HeaderStop))
             
-                 // Avatar -----------
-            
+            // profile image
             let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
             let avatarSizeVariation = ((profileImage.bounds.height * (1.0 + avatarScaleFactor)) - profileImage.bounds.height) / 2.0
             avatarTransform = CATransform3DTranslate(avatarTransform, 0, avatarSizeVariation, 0)
@@ -330,44 +303,29 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 if profileImage.layer.zPosition < headerView.layer.zPosition{
                     headerView.layer.zPosition = 0
                 }
-                
-                
             }else {
                 if profileImage.layer.zPosition >= headerView.layer.zPosition{
                     headerView.layer.zPosition = 2
                 }
-                
-            }
-            
-        }
+            }        }
         
         // Apply Transformations
         headerView.layer.transform = headerTransform
         profileImage.layer.transform = avatarTransform
         
-        // Segment control
-        
+        // Segment control ******Needs To change
         let segmentViewOffset = profileView.frame.height - segmentedView.frame.height - offset
-        
         var segmentTransform = CATransform3DIdentity
-        
-        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
+  
         segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -offset_HeaderStop), 0)
-        
         segmentedView.layer.transform = segmentTransform
-        
-        
-        // Set scroll view insets just underneath the segment control
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.frame.maxY, 0, 0, 0)
-      
     }
    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-
     @IBAction func editProfileHit(_ sender: UIBarButtonItem) {
         let editProfileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditProfile") as! EditProfileVC
         present(editProfileView, animated: true, completion: nil)
@@ -376,7 +334,5 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBAction func logOutHit(_ sender: UIButton) {
        print("NEEDS TO BE CHANGED")
     }
-    
-    
    
 }

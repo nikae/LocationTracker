@@ -212,25 +212,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
        
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
         polylineRenderer.strokeColor = activityColor
-//        for location in myLocations {
-//            if location.speed > 0 && location.speed <= 0.5 {
-//                polylineRenderer.strokeColor = polyLineColor_red()
-//            } else if location.speed > 0.5 && location.speed <= 1 {
-//                polylineRenderer.strokeColor = polyLineColor_red1()
-//            } else if location.speed > 1.5 && location.speed <= 2 {
-//                polylineRenderer.strokeColor = polyLineColor_orange()
-//            } else if location.speed > 2 && location.speed <= 2.5 {
-//                polylineRenderer.strokeColor = polyLineColor_orange1()
-//            } else if location.speed > 2.5 && location.speed <= 3 {
-//                polylineRenderer.strokeColor = polyLineColor_yellow()
-//            } else if location.speed > 3 && location.speed <= 3.5{
-//                polylineRenderer.strokeColor = polyLineColor_yellow1()
-//            } else if location.speed > 3.5 {
-//                polylineRenderer.strokeColor = polyLineColor_green()
-//            } else {
-//               polylineRenderer.strokeColor = polyLineColor_red()
-//            }
-//        }
         polylineRenderer.lineWidth = 8
         return polylineRenderer
        
@@ -287,8 +268,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
     }
     
-    
-    
     //MARK: -Start/End Updating Locations
     func startUpdatingLocation(){
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true)
@@ -338,7 +317,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         resultsDisplayView.isHidden = true
      
     }
-    
     
 //MARK: -PopUpViews
     func popUpCountDown() {
@@ -410,9 +388,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 self.present(alertController, animated: true, completion: nil)
             }
         }
-    }
-
-    
+    }   
     
   //MARK: -Guestures for sports picker view
     @IBOutlet var tapGesture: UITapGestureRecognizer!

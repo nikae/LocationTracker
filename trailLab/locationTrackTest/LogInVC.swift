@@ -145,7 +145,6 @@ class LogInVC: UIViewController, UITextFieldDelegate {
         }
         })
     }
-
     
     var launchBool: Bool = false {
         didSet {

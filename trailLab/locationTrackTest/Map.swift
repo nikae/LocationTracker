@@ -20,8 +20,7 @@ struct MyMapView {
     view.showsUserLocation = true
     view.isZoomEnabled = true
     view.showsScale = true
-   // view.showsCompass = true
-    
+    view.showsCompass = true
     view.showsBuildings = true
     }
     

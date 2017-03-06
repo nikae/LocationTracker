@@ -142,32 +142,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
 
     }
     
-    
-//    var launchBool: Bool = false {
-//        didSet {
-//            if launchBool == true {
-//               print(true)
-//            } else {
-//               print(false)
-//            }
-//            
-//        }
-//    }
-//    
-//   @IBAction func launchStar(sender: UIButton) {
-//        launchBool = !launchBool
-//        
-//        if launchBool == true {
-//            let image =  UIImage(named: "Star_000000_25") as UIImage?
-//            sender.setImage(image, for: .normal)
-//        } else {
-//            let image =  UIImage(named: "Star_Black_000000_25") as UIImage?
-//            sender.setImage(image, for: .normal)
-//        }
-//    }
-    
-
-    
     func getImage(_ url:String, imageView: UIImageView) {
         var image = UIImage()
         FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
