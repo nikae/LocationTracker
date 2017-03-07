@@ -400,7 +400,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     
     func saveTrail() {
-        
        
         let userId = userID
         let activityType = activity_String 
@@ -435,8 +434,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         databaseRef.child("Trails").childByAutoId().setValue(trailInfo)
         
     }
-    
-    
     
     @IBAction func doneActivityHit(_ sender: UIButton) {
         saveTrail()

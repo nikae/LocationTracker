@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 
 struct Trail {
@@ -68,6 +69,23 @@ func getItemImage(item: UITabBarItem) {
         }
         
     }
+}
+
+
+func getImage(_ url:String, imageView: UIImageView) {
+    var image = UIImage()
+    FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
+        if error != nil {
+            print(error?.localizedDescription ?? "ERROR")
+            image = UIImage(named:"img-default")!
+        } else {
+            //Dispatch the main thread here
+            DispatchQueue.main.async {
+                image = UIImage(data: data!)!
+                imageView.image = image
+            }
+        }
+    })
 }
 
 

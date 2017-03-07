@@ -18,6 +18,10 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     
     var trails = [Trail]()
     var usersTrails = [Trail]()
+    var walkTrails = [Trail]()
+    var runTrails = [Trail]()
+    var hikeTrails = [Trail]()
+    var bikeTrails = [Trail]()
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var totalActivitiesScrollView: UIScrollView!
@@ -32,6 +36,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var goalSlider: UISlider!
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     
+    @IBOutlet weak var giveButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -85,18 +90,25 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             let whatToSee = value["watToSee"] as? [String] ?? [""]
             let description = value["description"]  as? String ?? ""
             let pictureURL = value["pictureURL"]  as? String
-            
-            print(userId ?? "NOUSERID")
-            print(activityName ?? "NONAME")
-            print(activityType)
-
+ 
             self.trails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 
                 
-                let curUserID = FIRAuth.auth()?.currentUser?.uid
-           if curUserID == userId {
+            let curUserID = FIRAuth.auth()?.currentUser?.uid
+            if curUserID == userId {
             self.usersTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+//working on Now
+                if activityType == "Walk" {
+                   self.walkTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                } else if activityType == "Run" {
+                    self.runTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                } else if activityType == "Hike" {
+                    self.hikeTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                } else if activityType == "Bike" {
+                    self.bikeTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 }
+            }
+                
             
                 self.tableView.reloadData()
             }
@@ -160,8 +172,22 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if usersTrails.count > 0 {
-            return usersTrails.count
+        var returnValue = 0
+        
+        switch (segmentedController.selectedSegmentIndex) {
+        case 0: returnValue = walkTrails.count
+            break
+        case 1: returnValue = runTrails.count
+            break
+        case 2: returnValue = hikeTrails.count
+            break
+        case 3: returnValue = bikeTrails.count
+        default :
+            break
+        }
+        
+        if returnValue > 0 {
+            return returnValue
         } else {
             return 1
         }
@@ -170,7 +196,22 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         
-        if usersTrails.count > 0 {
+        var returnValue = 0
+        
+        switch (segmentedController.selectedSegmentIndex) {
+        case 0: returnValue = walkTrails.count
+            break
+        case 1: returnValue = runTrails.count
+            break
+        case 2: returnValue = hikeTrails.count
+            break
+        case 3: returnValue = bikeTrails.count
+            break
+        default :
+            break
+        }
+        
+        if returnValue > 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let distanceLabel = cell.viewWithTag(1) as! UILabel
@@ -178,22 +219,92 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         let paceLabel = cell.viewWithTag(3) as! UILabel
         let altitudeLabel = cell.viewWithTag(4) as! UILabel
         let nameLabel = cell.viewWithTag(5) as! UILabel
-        //       let difficultyLabel = cell.viewWithTag(6) as! UILabel
-        //        let suitabilityLabel = cell.viewWithTag(7) as! UILabel
+        let difficultyLabel = cell.viewWithTag(6) as! UILabel
+        let suitabilityLabel = cell.viewWithTag(7) as! UILabel
         let imageCell = cell.viewWithTag(10) as! UIImageView
+        var url = ""
+        var type = ""
+            switch (segmentedController.selectedSegmentIndex) {
+            case 0:
+                type = walkTrails[indexPath.row].activityType
+                let maxPace = walkTrails[indexPath.row].pace.max
+                let maxAltitude = walkTrails[indexPath.row].altitudes.max
+                distanceLabel.text =  walkTrails[indexPath.row].distance
+                timeLabel.text =  walkTrails[indexPath.row].time
+                paceLabel.text = "\(maxPace)"
+                altitudeLabel.text = "\(maxAltitude)"
+                nameLabel.text =  walkTrails[indexPath.row].activityName
+                url =  walkTrails[indexPath.row].pictureURL
+                difficultyLabel.text = "\(walkTrails[indexPath.row].difficulty)"
+                suitabilityLabel.text = "\(walkTrails[indexPath.row].suitability)"
+                
+                goalSlider.minimumTrackTintColor = walkColor()
+                goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
+                valueOfSlider = slider.run
+                
+                break
+            case 1:
+                type = runTrails[indexPath.row].activityType
+                let maxPace = runTrails[indexPath.row].pace.max
+                let maxAltitude = runTrails[indexPath.row].altitudes.max
+                distanceLabel.text =  runTrails[indexPath.row].distance
+                timeLabel.text =  runTrails[indexPath.row].time
+                paceLabel.text = "\(maxPace)"
+                altitudeLabel.text = "\(maxAltitude)"
+                nameLabel.text =  runTrails[indexPath.row].activityName
+                url = runTrails[indexPath.row].pictureURL
+                difficultyLabel.text = "\(runTrails[indexPath.row].difficulty)"
+                suitabilityLabel.text = "\(runTrails[indexPath.row].suitability)"
+                
+                goalSlider.minimumTrackTintColor = runColor()
+                goalSlider.minimumValueImage = UIImage(named: imageRunString_25)
+                valueOfSlider = slider.hike
+                
+                
+                break
+            case 2:
+                type = hikeTrails[indexPath.row].activityType
+                let maxPace = hikeTrails[indexPath.row].pace.max
+                let maxAltitude = hikeTrails[indexPath.row].altitudes.max
+                distanceLabel.text =  hikeTrails[indexPath.row].distance
+                timeLabel.text =  hikeTrails[indexPath.row].time
+                paceLabel.text = "\(maxPace)"
+                altitudeLabel.text = "\(maxAltitude)"
+                nameLabel.text =  hikeTrails[indexPath.row].activityName
+                url = hikeTrails[indexPath.row].pictureURL
+                difficultyLabel.text = "\(hikeTrails[indexPath.row].difficulty)"
+                suitabilityLabel.text = "\(hikeTrails[indexPath.row].suitability)"
+                
+                goalSlider.minimumTrackTintColor = hikeColor()
+                goalSlider.minimumValueImage = UIImage(named: imageHikeString_25)
+                valueOfSlider = slider.bike
+                
+                break
+            case 3:
+                type = bikeTrails[indexPath.row].activityType
+                let maxPace = bikeTrails[indexPath.row].pace.max
+                let maxAltitude = bikeTrails[indexPath.row].altitudes.max
+                distanceLabel.text =  bikeTrails[indexPath.row].distance
+                timeLabel.text =  bikeTrails[indexPath.row].time
+                paceLabel.text = "\(maxPace)"
+                altitudeLabel.text = "\(maxAltitude)"
+                nameLabel.text =  bikeTrails[indexPath.row].activityName
+                url = bikeTrails[indexPath.row].pictureURL
+                difficultyLabel.text = "\(bikeTrails[indexPath.row].difficulty)"
+                suitabilityLabel.text = "\(bikeTrails[indexPath.row].suitability)"
+                
+                goalSlider.minimumTrackTintColor = bikeColor()
+                goalSlider.minimumValueImage = UIImage(named: imageBikeString_25)
+                valueOfSlider = slider.walk
+                
+                break
+            default :
+                break
+            }
         
-        
-        let maxPace = usersTrails[indexPath.row].pace.max
-        let maxAltitude = usersTrails[indexPath.row].altitudes.max
-        
-        distanceLabel.text = usersTrails[indexPath.row].distance
-        timeLabel.text = usersTrails[indexPath.row].time
-        paceLabel.text = "\(maxPace)"
-        altitudeLabel.text = "\(maxAltitude)"
-        nameLabel.text = usersTrails[indexPath.row].activityName
-        let url = usersTrails[indexPath.row].pictureURL
+            
         if url != "" {
-        getImage(url!, imageView: imageCell)
+        getImage(url, imageView: imageCell)
         } else {
             imageCell.image =  UIImage(named:"img-default")
         }
@@ -205,7 +316,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         imageCell.layer.borderWidth = 2
         imageCell.clipsToBounds = true
         
-        let type = trails[indexPath.row].activityType
+        
         if type == "Walk" {
             imageCell.layer.borderColor = walkColor().cgColor
         } else if type == "Run" {
@@ -222,28 +333,11 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         }
          return cell
     }
-    
-    func getImage(_ url:String, imageView: UIImageView) {
-        var image = UIImage()
-        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "ERROR")
-                image = UIImage(named:"img-default")!
-            } else {
-                //Dispatch the main thread here
-                DispatchQueue.main.async {
-                    image = UIImage(data: data!)!
-                    imageView.image = image
-                }
-            }
-        })
-    }
 
     //MARK -segmented controller
     @IBAction func segmentedControllerHit(_ sender: UISegmentedControl) {
         tableView.reloadData()
     }
-     
     
     //Mark -Slider / Tap Action
     var valueOfSlider = slider.walk
@@ -276,8 +370,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         var avatarTransform = CATransform3DIdentity
         var headerTransform = CATransform3DIdentity
         
-        // PULL DOWN -----------------
-        
+        // PULL DOWN
         if offset < 0 {
             
             let headerScaleFactor:CGFloat = -(offset) / headerView.bounds.height
@@ -309,10 +402,13 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 
                 if profileImage.layer.zPosition < headerView.layer.zPosition{
                     headerView.layer.zPosition = 0
+                    
                 }
             }else {
+               
                 if profileImage.layer.zPosition >= headerView.layer.zPosition{
                     headerView.layer.zPosition = 2
+                    giveButton.layer.zPosition = 3
                 }
             }        }
         

@@ -41,11 +41,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 let whatToSee = value["watToSee"] as? [String] ?? [""]
                 let description = value["description"]  as? String ?? ""
                 let pictureURL = value["pictureURL"]  as? String
-                
-                print(userId ?? "NOUSERID")
-                print(activityName ?? "NONAME")
-                print(activityType)
-                
+
                 self.trails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
 
                 self.tableView.reloadData()
@@ -113,7 +109,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
          cell.nameLabel.text = trails[indexPath.row].activityName
         let url = trails[indexPath.row].pictureURL
         if url != "" {
-            self.getImage(url!, imageView: cell.cellImage)
+        getImage(url!, imageView: cell.cellImage)
 
         } else {
             cell.cellImage.image =  UIImage(named:"img-default")
@@ -146,22 +142,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                return cell
 
     }
-    
-    func getImage(_ url:String, imageView: UIImageView) {
-        var image = UIImage()
-        FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "ERROR")
-                image = UIImage(named:"img-default")!
-            } else {
-                //Dispatch the main thread here
-               DispatchQueue.main.async {
-                    image = UIImage(data: data!)!
-                    imageView.image = image
-                }
-            }
-        })
-    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trails.count
@@ -184,7 +164,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         let url = trails[indexPath.row].pictureURL
         if url != "" {
              DispatchQueue.main.async {
-            self.getImage(url!, imageView: CVImage)
+            getImage(url!, imageView: CVImage)
             }
         } else {
             CVImage.image =  UIImage(named:"img-default")
@@ -202,7 +182,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         } else {
             CVImage.layer.borderColor = UIColor.white.cgColor
         }
-
         
         return cell
         
@@ -212,15 +191,4 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
