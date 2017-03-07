@@ -13,6 +13,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var profileTabBarItem: UITabBarItem!
     
     var trails = [Trail]()
     
@@ -54,6 +55,10 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             print(error.localizedDescription)
         }
        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getItemImage(item: profileTabBarItem)
     }
     
     //MARK -TabBar controller
@@ -171,7 +176,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         let CVImage = cell.viewWithTag(1) as! UIImageView
         
         CVImage.contentMode = .scaleAspectFill
-        CVImage.clipsToBounds = true
         CVImage.isUserInteractionEnabled = true
         CVImage.layer.cornerRadius = CVImage.frame.height/2
         CVImage.layer.borderWidth = 2

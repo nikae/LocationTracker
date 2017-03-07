@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import HealthKit
+import UIKit
+
 
 struct Trail {
     let userId : String!
@@ -24,3 +25,49 @@ struct Trail {
     let description : String!
     let pictureURL : String!
 }
+
+
+func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+    
+    let newHeight = newWidth
+    UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+    image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    let imageView: UIImageView = UIImageView(image: newImage)
+    // imageView.contentMode = .scaleAspectFill
+    var layer: CALayer = CALayer()
+    layer = imageView.layer
+    layer.borderWidth = 0.9
+    layer.borderColor = UIColor.gray.cgColor
+    layer.masksToBounds = true
+    layer.cornerRadius = CGFloat(newHeight/2)
+    
+    UIGraphicsBeginImageContext(imageView.bounds.size)
+    layer.render(in: UIGraphicsGetCurrentContext()!)
+    let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return roundedImage!
+}
+
+
+func getItemImage(item: UITabBarItem) {
+    if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
+    {
+        if let image = UIImage(data: savedImgData as Data)
+        {
+            item.selectedImage  = resizeImage(image: image, newWidth: 30).withRenderingMode(.alwaysOriginal)
+            item.image  = resizeImage(image: image, newWidth: 30).withRenderingMode(.alwaysOriginal)
+            
+            
+        } else {
+            item.selectedImage = resizeImage(image: (UIImage(named:"img-default"))!, newWidth: 30).withRenderingMode(.alwaysOriginal)
+            item.image  = resizeImage(image: (UIImage(named:"img-default"))!, newWidth: 30).withRenderingMode(.alwaysOriginal)
+        }
+        
+    }
+}
+
+

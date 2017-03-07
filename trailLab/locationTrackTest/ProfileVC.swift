@@ -30,6 +30,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var segmentedController: UISegmentedControl!
     @IBOutlet weak var goalSlider: UISlider!
+    @IBOutlet weak var profileTabBarItem: UITabBarItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                     profileImage.image = UIImage(named:"img-default")
         }
         }
+        
+        
 
         let firstName = firstNameDefoults.value(forKey: firstNameDefoults_Key) as! String
         let lastName = lastNameDefoults.value(forKey: lastNameDefoults_Key) as! String
@@ -101,6 +104,10 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             print(error.localizedDescription)
         }
    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getItemImage(item: profileTabBarItem)
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

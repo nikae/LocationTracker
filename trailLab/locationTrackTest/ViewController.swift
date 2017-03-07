@@ -64,6 +64,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         resultsDisplayView.isHidden = true
         
+        getItemImage(item: profileTabBarItem)
+
     }
 
     
