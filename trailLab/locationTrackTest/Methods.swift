@@ -89,3 +89,9 @@ func getImage(_ url:String, imageView: UIImageView) {
 }
 
 
+func sliderFunc(slider: UISlider, color: UIColor, image: UIImage) {
+    slider.minimumTrackTintColor = color
+    slider.minimumValueImage = image
+}
+
+

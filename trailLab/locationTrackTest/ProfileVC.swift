@@ -37,6 +37,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     
     @IBOutlet weak var giveButton: UIButton!
+    @IBOutlet weak var indicatorPV: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -238,8 +239,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 difficultyLabel.text = "\(walkTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(walkTrails[indexPath.row].suitability)"
                 
-                goalSlider.minimumTrackTintColor = walkColor()
-                goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
+                sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!)
                 valueOfSlider = slider.run
                 
                 break
@@ -255,9 +255,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 url = runTrails[indexPath.row].pictureURL
                 difficultyLabel.text = "\(runTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(runTrails[indexPath.row].suitability)"
-                
-                goalSlider.minimumTrackTintColor = runColor()
-                goalSlider.minimumValueImage = UIImage(named: imageRunString_25)
+             
+                sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!)
                 valueOfSlider = slider.hike
                 
                 
@@ -275,8 +274,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 difficultyLabel.text = "\(hikeTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(hikeTrails[indexPath.row].suitability)"
                 
-                goalSlider.minimumTrackTintColor = hikeColor()
-                goalSlider.minimumValueImage = UIImage(named: imageHikeString_25)
+                sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!)
                 valueOfSlider = slider.bike
                 
                 break
@@ -292,9 +290,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 url = bikeTrails[indexPath.row].pictureURL
                 difficultyLabel.text = "\(bikeTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(bikeTrails[indexPath.row].suitability)"
-                
-                goalSlider.minimumTrackTintColor = bikeColor()
-                goalSlider.minimumValueImage = UIImage(named: imageBikeString_25)
+             
+                sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!)
                 valueOfSlider = slider.walk
                 
                 break
@@ -334,7 +331,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
          return cell
     }
 
-    //MARK -segmented controller
+       //MARK -segmented controller
     @IBAction func segmentedControllerHit(_ sender: UISegmentedControl) {
         tableView.reloadData()
     }
@@ -344,20 +341,16 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBAction func tapChangeSlidersValues(_ sender: UITapGestureRecognizer) {
         
         if case .run = valueOfSlider {
-            goalSlider.minimumTrackTintColor = runColor()
-            goalSlider.minimumValueImage = UIImage(named: imageRunString_25)
+            sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!)
             valueOfSlider = slider.hike
         } else if case .hike = valueOfSlider {
-            goalSlider.minimumTrackTintColor = hikeColor()
-            goalSlider.minimumValueImage = UIImage(named: imageHikeString_25)
+            sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!)
             valueOfSlider = slider.bike
         } else if case .bike = valueOfSlider {
-            goalSlider.minimumTrackTintColor = bikeColor()
-            goalSlider.minimumValueImage = UIImage(named: imageBikeString_25)
+            sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!)
             valueOfSlider = slider.walk
         } else {
-            goalSlider.minimumTrackTintColor = walkColor()
-            goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
+            sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!)
             valueOfSlider = slider.run
         }
     }
@@ -366,31 +359,35 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.y + headerView.bounds.height
-        
         var avatarTransform = CATransform3DIdentity
         var headerTransform = CATransform3DIdentity
         
         // PULL DOWN
-        if offset < 0 {
+        if offset < 0  {
             
-            let headerScaleFactor:CGFloat = -(offset) / headerView.bounds.height
-            let headerSizevariation = ((headerView.bounds.height * (1.0 + headerScaleFactor)) - headerView.bounds.height)/2
-            headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-            // Hide views if scrolled super fast
-            headerView.layer.zPosition = 0
+//            let headerScaleFactor:CGFloat = -(offset) / headerView.bounds.height
+//            let headerSizevariation = ((headerView.bounds.height * (1.0 + headerScaleFactor)) - headerView.bounds.height)/2
+//            headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
+//            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+//            headerView.layer.zPosition = 0
             
+            if offset < -50 {
+            indicatorPV.startAnimating()
+            indicatorPV.isHidden = false
+            } else {
+            indicatorPV.stopAnimating()
+            indicatorPV.isHidden = true
+            }
         }
             // SCROLL UP/DOWN
-            
         else {
-            
+           
             // Header
             headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
             
-            let alignToNameLabel = -offset + handleLabel.frame.origin.y + headerView.frame.height + offset_HeaderStop
+//            let alignToNameLabel = -offset + handleLabel.frame.origin.y + headerView.frame.height + offset_HeaderStop
             
-            headerLabel.frame.origin = CGPoint(x: headerLabel.frame.origin.x, y: max(alignToNameLabel, distance_W_LabelHeader + offset_HeaderStop))
+//            headerLabel.frame.origin = CGPoint(x: headerLabel.frame.origin.x, y: max(alignToNameLabel, distance_W_LabelHeader + offset_HeaderStop))
             
             // profile image
             let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
@@ -410,13 +407,14 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                     headerView.layer.zPosition = 2
                     giveButton.layer.zPosition = 3
                 }
-            }        }
+            }
+        }
         
         // Apply Transformations
         headerView.layer.transform = headerTransform
         profileImage.layer.transform = avatarTransform
         
-        // Segment control ******Needs To change
+        // Segment control
         let segmentViewOffset = profileView.frame.height - segmentedView.frame.height - offset
         var segmentTransform = CATransform3DIdentity
   
