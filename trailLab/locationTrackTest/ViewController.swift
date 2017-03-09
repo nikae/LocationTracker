@@ -11,6 +11,7 @@ import CoreData
 import HealthKit
 import CoreLocation
 import MapKit
+import Firebase
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITabBarDelegate {
@@ -48,7 +49,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-               
+//      let dt = FIRDatabase.database().reference()
+//        dt.child("Trails").removeValue { (error, ref) in
+//            if error != nil {
+//                print("error \(error)")
+//            }
+//        }
            }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -245,6 +251,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
   
         //MARK -Calculate Pace
         if distanceTraveled != 0 {
+            
+//            timeActived = (Double((hours*60) + (minutes*60) + seconds)) / 60
+//            print(timeActived)
             
  //needs correction
         let paceMinutes = paceInSeconds(hours: Double(hours), minutes: Double(minutes), seconds: Double(seconds), distance: distanceTraveled) / 60

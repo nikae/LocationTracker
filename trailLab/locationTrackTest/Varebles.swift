@@ -108,6 +108,8 @@ var startLocation: CLLocation!
 var lastLocation: CLLocation!
 var distanceTraveled = 0.0
 
+var timeActived = 0.0
+
 var arrayOfAltitude: [Double] = []
 var arrayOfPace: [Int] = []
 
@@ -129,16 +131,27 @@ let walkGoalDefoults = UserDefaults.standard
 let runGoalDefoults = UserDefaults.standard
 let hikeGoalDefoults = UserDefaults.standard
 let bikeGoalDefoults = UserDefaults.standard
+let lifeTime_DistanceDefoults = UserDefaults.standard
+let lifeTime_TimeDefoults = UserDefaults.standard
+let lifeTime_PaceDefoults = UserDefaults.standard
+let lifeTime_MaxAltitudeDefoults = UserDefaults.standard
+let lifeTime_ActivitiesDefoults = UserDefaults.standard
 
 let walkGoalDefoults_Key = "walkGoalDefoults_Key"
 let runGoalDefoults_Key = "runGoalDefoults_Key"
 let hikeGoalDefoults_Key = "hikeGoalDefoults_Key"
 let bikeGoalDefoults_Key = "bikeGoalDefoults_Key"
-
+let lifeTime_DistanceDefoults_key = "lifeTime_DistanceDefoults_key"
+let lifeTime_TimeDefoults_key = "lifeTime_TimeDefoults_key"
+let lifeTime_PaceDefoults_Key = "lifeTime_PaceDefoults_Key"
+let lifeTime_MaxAltitudeDefoults_key = "lifeTime_MaxAltitudeDefoults_key"
+let lifeTime_ActivitiesDefoults_Key = "lifeTime_ActivitiesDefoults_Key"
 
 let goal = arrayOfGoals[0]
 
-let lifeTime_Distance = walkGoal + runGoal + hikeGoal + bikeGoal
-let lifeTime_Time = 0
-let lifeTime_Pace = 0
-let lifeTime_MaxAltitude = 0
+var lifeTime_Distance: Double = 0
+
+var lifeTime_Time = 0
+var lifeTime_Pace = 0
+var lifeTime_MaxAltitude = 0
+var lifeTime_Activities = 0

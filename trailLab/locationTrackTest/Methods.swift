@@ -122,10 +122,11 @@ func saveTotalResults() {
     databaseRef.child("Results/\(userID!)/hikeGoal").setValue(hikeGoal)
     databaseRef.child("Results/\(userID!)/bikeGoal").setValue(bikeGoal)
     
-    databaseRef.child("Results/\(userID!)/lifeTime_Distance").setValue(lifeTime_Distance)
+    //databaseRef.child("Results/\(userID!)/lifeTime_Distance").setValue(lifeTime_Distance)
     databaseRef.child("Results/\(userID!)/lifeTime_Time").setValue(lifeTime_Time)
     databaseRef.child("Results/\(userID!)/lifeTime_Pace").setValue(lifeTime_Pace)
     databaseRef.child("Results/\(userID!)/lifeTime_MaxAltitude").setValue(lifeTime_MaxAltitude)
+    databaseRef.child("Results/\(userID!)/totalActivities").setValue(lifeTime_Activities)
     
     goalsDefoultsFunc()
     
@@ -142,7 +143,56 @@ func goalsDefoultsFunc(){
     hikeGoalDefoults.synchronize()
     bikeGoalDefoults.set(bikeGoal, forKey: bikeGoalDefoults_Key)
     bikeGoalDefoults.synchronize()
+    
+    lifeTime_TimeDefoults.set(lifeTime_Time, forKey: lifeTime_TimeDefoults_key)
+    lifeTime_TimeDefoults.synchronize()
+    lifeTime_PaceDefoults.set(lifeTime_Pace, forKey: lifeTime_PaceDefoults_Key)
+    lifeTime_PaceDefoults.synchronize()
+    lifeTime_MaxAltitudeDefoults.set(lifeTime_MaxAltitude, forKey: lifeTime_MaxAltitudeDefoults_key)
+    lifeTime_MaxAltitudeDefoults.synchronize()
+    lifeTime_ActivitiesDefoults.set(lifeTime_Activities, forKey: lifeTime_ActivitiesDefoults_Key)
+    lifeTime_ActivitiesDefoults.synchronize()
 }
+
+func getgoalsDefoultsFunc() {
+    walkGoal = walkGoalDefoults.value(forKey: walkGoalDefoults_Key) as? Double ?? 0
+    runGoal = runGoalDefoults.value(forKey: runGoalDefoults_Key) as? Double ?? 0
+    hikeGoal = hikeGoalDefoults.value(forKey: hikeGoalDefoults_Key) as? Double ?? 0
+    bikeGoal = bikeGoalDefoults.value(forKey: bikeGoalDefoults_Key) as? Double ?? 0
+  
+    lifeTime_Time = lifeTime_TimeDefoults.value(forKey: lifeTime_TimeDefoults_key) as? Int ?? 0
+    lifeTime_Pace =  lifeTime_PaceDefoults.value(forKey:  lifeTime_PaceDefoults_Key) as? Int ?? 0
+    lifeTime_MaxAltitude = lifeTime_MaxAltitudeDefoults.value(forKey: lifeTime_MaxAltitudeDefoults_key) as? Int ?? 0
+    lifeTime_Activities = lifeTime_ActivitiesDefoults.value(forKey: lifeTime_ActivitiesDefoults_Key) as? Int ?? 0
+}
+
+
+
+
+func clearGoalsDefoultsFunc(){
+    walkGoalDefoults.set(nil, forKey: walkGoalDefoults_Key)
+    walkGoalDefoults.synchronize()
+    runGoalDefoults.set(nil, forKey: runGoalDefoults_Key)
+    runGoalDefoults.synchronize()
+    hikeGoalDefoults.set(nil, forKey: hikeGoalDefoults_Key)
+    hikeGoalDefoults.synchronize()
+    bikeGoalDefoults.set(nil, forKey: bikeGoalDefoults_Key)
+    bikeGoalDefoults.synchronize()
+    lifeTime_TimeDefoults.set(nil, forKey: lifeTime_TimeDefoults_key)
+    lifeTime_TimeDefoults.synchronize()
+    lifeTime_PaceDefoults.set(nil, forKey: lifeTime_PaceDefoults_Key)
+    lifeTime_PaceDefoults.synchronize()
+    lifeTime_MaxAltitudeDefoults.set(nil, forKey: lifeTime_MaxAltitudeDefoults_key)
+    lifeTime_MaxAltitudeDefoults.synchronize()
+    lifeTime_ActivitiesDefoults.set(nil, forKey: lifeTime_ActivitiesDefoults_Key)
+    lifeTime_ActivitiesDefoults.synchronize()
+}
+
+
+
+
+
+
 
 
 

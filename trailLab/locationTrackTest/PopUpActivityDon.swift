@@ -65,10 +65,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        walkGoal = walkGoalDefoults.value(forKey: walkGoalDefoults_Key) as? Double ?? 0
-        runGoal = runGoalDefoults.value(forKey: runGoalDefoults_Key) as? Double ?? 0
-        hikeGoal = hikeGoalDefoults.value(forKey: hikeGoalDefoults_Key) as? Double ?? 0
-        bikeGoal = bikeGoalDefoults.value(forKey: bikeGoalDefoults_Key) as? Double ?? 0
+        getgoalsDefoultsFunc()
         
         setGoals()
         
@@ -451,6 +448,8 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
 
     
     @IBAction func doneActivityHit(_ sender: UIButton) {
+        lifeTime_Activities += 1
+        
         saveTrail()
         saveTotalResults()
         
@@ -458,12 +457,14 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         myLocations.removeAll()
         distanceTraveled = 0
         
+        
     }
    
     @IBAction func dismissHit(_ sender: UIButton) {
-            self.view.removeFromSuperview()
-        
+        self.view.removeFromSuperview()
+        if picURL != "" {
         delataImage()
+        }
         myLocations.removeAll()
         distanceTraveled = 0
     }

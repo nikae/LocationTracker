@@ -221,6 +221,9 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 profilePictureDefoults.synchronize()
                 emailDefoults.set(nil, forKey: emailDefoults_Key)
                 emailDefoults.synchronize()
+                
+                clearGoalsDefoultsFunc()
+                
 
             } catch let error as NSError {
                 print(error.localizedDescription)

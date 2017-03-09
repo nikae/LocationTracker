@@ -38,13 +38,31 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     
     @IBOutlet weak var giveButton: UIButton!
     @IBOutlet weak var indicatorPV: UIActivityIndicatorView!
+    
+    @IBOutlet weak var totalActivities: UILabel!
+    @IBOutlet weak var totalMilsLabel: UILabel!
+    @IBOutlet weak var totalTimeLabel: UILabel!
+    @IBOutlet weak var TotalavaragePaceLabel: UILabel!
+    @IBOutlet weak var totalMaxAltitudeLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        walkGoal = walkGoalDefoults.value(forKey: walkGoalDefoults_Key) as? Double ?? 0
-        runGoal = runGoalDefoults.value(forKey: runGoalDefoults_Key) as? Double ?? 0
-        hikeGoal = hikeGoalDefoults.value(forKey: hikeGoalDefoults_Key) as? Double ?? 0
-        bikeGoal = bikeGoalDefoults.value(forKey: bikeGoalDefoults_Key) as? Double ?? 0
+        
+        
+        getgoalsDefoultsFunc()
+        lifeTime_Distance = (walkGoal + runGoal + hikeGoal + bikeGoal)
+        
+       
+        
+        
+        totalActivities.text = "\(lifeTime_Activities)"
+        totalMilsLabel.text = String(format: "%.2f mi", lifeTime_Distance)
+        totalTimeLabel.text = String(format: "%.2d", lifeTime_Time)
+        TotalavaragePaceLabel.text = "\(lifeTime_Pace)"
+        totalMaxAltitudeLabel.text = "\(lifeTime_MaxAltitude)"
        
         goalSlider.isUserInteractionEnabled = false
         
