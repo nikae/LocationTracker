@@ -232,7 +232,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
    //MARK -Updare Activity Time
     func updateTime() {
         let currentTime = NSDate.timeIntervalSinceReferenceDate
-        var timePassed: TimeInterval = currentTime - zeroTime
+        var timePassed = currentTime - zeroTime
+        timePassedToSave = currentTime - zeroTime
         let hours = UInt8(timePassed / 3600.0)
         timePassed -= (TimeInterval(hours) * 3600)
         let minutes = UInt8(timePassed / 60.0)

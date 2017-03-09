@@ -66,7 +66,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         super.viewDidLoad()
        
         getgoalsDefoultsFunc()
-        
         setGoals()
         
         
@@ -110,8 +109,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         }
 
      coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
-        
-  
+
         let polyline = MKPolyline(coordinates: &coordinates, count: coordinates.count)
         self.mapView_ActivityDone.add(polyline)
 
@@ -143,8 +141,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         
     }
 
-
-    
     //MARK: -Camera / Add Picture
     func addPhoto(_ recognizer: UITapGestureRecognizer) {
         let picker = UIImagePickerController()
@@ -449,14 +445,15 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     
     @IBAction func doneActivityHit(_ sender: UIButton) {
         lifeTime_Activities += 1
-        
+        lifeTime_Time += timePassedToSave
         saveTrail()
         saveTotalResults()
         
-        self.view.removeFromSuperview()
-        myLocations.removeAll()
         distanceTraveled = 0
-        
+        timePassedToSave = 0
+        myLocations.removeAll()
+        self.view.removeFromSuperview()
+
         
     }
    
@@ -467,6 +464,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         }
         myLocations.removeAll()
         distanceTraveled = 0
+        timePassedToSave = 0
     }
 
 }

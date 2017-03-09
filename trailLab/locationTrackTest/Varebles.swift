@@ -108,8 +108,6 @@ var startLocation: CLLocation!
 var lastLocation: CLLocation!
 var distanceTraveled = 0.0
 
-var timeActived = 0.0
-
 var arrayOfAltitude: [Double] = []
 var arrayOfPace: [Int] = []
 
@@ -121,6 +119,8 @@ let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the
 
 // Goales - totall results
 let arrayOfGoals: [Double] = [50, 75, 100, 150, 200, 300, 500, 1000, 5000]
+
+var timePassedToSave = TimeInterval()
 
 var walkGoal: Double = 0
 var runGoal: Double = 0
@@ -151,7 +151,7 @@ let goal = arrayOfGoals[0]
 
 var lifeTime_Distance: Double = 0
 
-var lifeTime_Time = 0
+var lifeTime_Time: Double = 0
 var lifeTime_Pace = 0
 var lifeTime_MaxAltitude = 0
 var lifeTime_Activities = 0

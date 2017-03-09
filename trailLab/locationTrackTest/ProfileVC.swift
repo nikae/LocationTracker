@@ -60,7 +60,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         
         totalActivities.text = "\(lifeTime_Activities)"
         totalMilsLabel.text = String(format: "%.2f mi", lifeTime_Distance)
-        totalTimeLabel.text = String(format: "%.2d", lifeTime_Time)
+        totalTimeLabel.text = calculateTotalTime(time: lifeTime_Time)
         TotalavaragePaceLabel.text = "\(lifeTime_Pace)"
         totalMaxAltitudeLabel.text = "\(lifeTime_MaxAltitude)"
        
