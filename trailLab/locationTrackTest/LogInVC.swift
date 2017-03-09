@@ -103,6 +103,7 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                             self.getImage(url)
                             
                         }
+                        
                         firstNameDefoults.set(firstname, forKey: firstNameDefoults_Key)
                         firstNameDefoults.synchronize()
                         lastNameDefoults.set(lastname, forKey: lastNameDefoults_Key)
@@ -113,6 +114,22 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                     }) { (error) in
                         print(error.localizedDescription)
                     }
+                    self.databaseRef.child("Results").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        
+                        let value = snapshot.value as? NSDictionary
+                        
+                        walkGoal = value?["walkGoal"] as? Double ?? 0
+                        runGoal = value?["runkGoal"] as? Double ?? 0
+                        hikeGoal = value?["hikekGoal"] as? Double ?? 0
+                        bikeGoal = value?["bikeGoal"] as? Double ?? 0
+                        
+                        goalsDefoultsFunc()
+                        
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

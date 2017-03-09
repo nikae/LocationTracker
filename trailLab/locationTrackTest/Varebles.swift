@@ -117,9 +117,28 @@ let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the
 
 
 
+// Goales - totall results
+let arrayOfGoals: [Double] = [50, 75, 100, 150, 200, 300, 500, 1000, 5000]
+
+var walkGoal: Double = 0
+var runGoal: Double = 0
+var hikeGoal: Double = 0
+var bikeGoal: Double = 0
+
+let walkGoalDefoults = UserDefaults.standard
+let runGoalDefoults = UserDefaults.standard
+let hikeGoalDefoults = UserDefaults.standard
+let bikeGoalDefoults = UserDefaults.standard
+
+let walkGoalDefoults_Key = "walkGoalDefoults_Key"
+let runGoalDefoults_Key = "runGoalDefoults_Key"
+let hikeGoalDefoults_Key = "hikeGoalDefoults_Key"
+let bikeGoalDefoults_Key = "bikeGoalDefoults_Key"
 
 
+let goal = arrayOfGoals[0]
 
-
-
-
+let lifeTime_Distance = walkGoal + runGoal + hikeGoal + bikeGoal
+let lifeTime_Time = 0
+let lifeTime_Pace = 0
+let lifeTime_MaxAltitude = 0

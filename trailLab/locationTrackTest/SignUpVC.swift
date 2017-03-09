@@ -76,9 +76,12 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
                     
                     let userID = FIRAuth.auth()?.currentUser?.uid
                     if userID != nil {
-                        let databaseRef = FIRDatabase.database().reference()
-
-                        databaseRef.child("users/\(userID!)/email").setValue(self.emailTF.text!)
+                    let databaseRef = FIRDatabase.database().reference()
+                    databaseRef.child("users/\(userID!)/email").setValue(self.emailTF.text!)
+                        
+                    saveTotalResults()
+                    goalsDefoultsFunc()
+                        
                     }
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfile")
                     self.present(vc!, animated: true, completion: nil)

@@ -40,7 +40,14 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var indicatorPV: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        walkGoal = walkGoalDefoults.value(forKey: walkGoalDefoults_Key) as? Double ?? 0
+        runGoal = runGoalDefoults.value(forKey: runGoalDefoults_Key) as? Double ?? 0
+        hikeGoal = hikeGoalDefoults.value(forKey: hikeGoalDefoults_Key) as? Double ?? 0
+        bikeGoal = bikeGoalDefoults.value(forKey: bikeGoalDefoults_Key) as? Double ?? 0
        
+        goalSlider.isUserInteractionEnabled = false
+        
             if let savedImgData = profilePictureDefoults.object(forKey: "image") as? NSData
             {
                 if let image = UIImage(data: savedImgData as Data)
@@ -239,7 +246,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 difficultyLabel.text = "\(walkTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(walkTrails[indexPath.row].suitability)"
                 
-                sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!)
+                sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: goal)
                 valueOfSlider = slider.run
                 
                 break
@@ -256,7 +263,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 difficultyLabel.text = "\(runTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(runTrails[indexPath.row].suitability)"
              
-                sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!)
+                sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: goal)
                 valueOfSlider = slider.hike
                 
                 
@@ -274,7 +281,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 difficultyLabel.text = "\(hikeTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(hikeTrails[indexPath.row].suitability)"
                 
-                sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!)
+                sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: goal)
                 valueOfSlider = slider.bike
                 
                 break
@@ -291,7 +298,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 difficultyLabel.text = "\(bikeTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(bikeTrails[indexPath.row].suitability)"
              
-                sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!)
+                sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: goal)
                 valueOfSlider = slider.walk
                 
                 break
@@ -341,16 +348,16 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBAction func tapChangeSlidersValues(_ sender: UITapGestureRecognizer) {
         
         if case .run = valueOfSlider {
-            sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!)
+            sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: goal )
             valueOfSlider = slider.hike
         } else if case .hike = valueOfSlider {
-            sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!)
+            sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: goal)
             valueOfSlider = slider.bike
         } else if case .bike = valueOfSlider {
-            sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!)
+            sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: goal)
             valueOfSlider = slider.walk
         } else {
-            sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!)
+            sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: goal)
             valueOfSlider = slider.run
         }
     }
@@ -371,7 +378,9 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
 //            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
 //            headerView.layer.zPosition = 0
             
+            
             if offset < -50 {
+            tableView.reloadData()
             indicatorPV.startAnimating()
             indicatorPV.isHidden = false
             } else {

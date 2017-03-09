@@ -16,7 +16,7 @@ import Firebase
 class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var storageRef: FIRStorageReference!
-    //var databaseRef: FIRDatabaseReference!
+    var databaseRef: FIRDatabaseReference!
     fileprivate var _refHandle: FIRDatabaseHandle!
     var users: [FIRDataSnapshot] = []
     var picURL = ""
@@ -61,13 +61,23 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     var manager: CLLocationManager!
     let mapView = MyMapView()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        walkGoal = walkGoalDefoults.value(forKey: walkGoalDefoults_Key) as? Double ?? 0
+        runGoal = runGoalDefoults.value(forKey: runGoalDefoults_Key) as? Double ?? 0
+        hikeGoal = hikeGoalDefoults.value(forKey: hikeGoalDefoults_Key) as? Double ?? 0
+        bikeGoal = bikeGoalDefoults.value(forKey: bikeGoalDefoults_Key) as? Double ?? 0
+        
+        setGoals()
+        
+        
         
         self.UploadIndicator.hidesWhenStopped = true
         
         storageRef = FIRStorage.storage().reference(forURL: "gs://trail-lab.appspot.com")
-
+        databaseRef = FIRDatabase.database().reference()
         
         setUpLocationManager()
         mapView.setUpMapView(view: mapView_ActivityDone, delegate: self)
@@ -113,6 +123,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         
     }
     
+ 
     //MARK: -setUp Location Manager
     func setUpLocationManager() {
         if (CLLocationManager.locationServicesEnabled()) {
@@ -430,16 +441,23 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
                                                           "pictureURL" : pictureURL as AnyObject]
         
        
-        let databaseRef = FIRDatabase.database().reference()
+        
         databaseRef.child("Trails").childByAutoId().setValue(trailInfo)
         
     }
     
+    
+       
+
+    
     @IBAction func doneActivityHit(_ sender: UIButton) {
         saveTrail()
+        saveTotalResults()
+        
         self.view.removeFromSuperview()
         myLocations.removeAll()
         distanceTraveled = 0
+        
     }
    
     @IBAction func dismissHit(_ sender: UIButton) {
