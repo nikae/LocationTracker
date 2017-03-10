@@ -159,9 +159,9 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                 profilePictureDefoults.synchronize()
                                 
             }
-        }
-        })
-    }
+        }   
+    })
+}
     
     var launchBool: Bool = false {
         didSet {

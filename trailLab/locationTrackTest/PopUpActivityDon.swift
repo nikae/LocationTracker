@@ -113,9 +113,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let polyline = MKPolyline(coordinates: &coordinates, count: coordinates.count)
         self.mapView_ActivityDone.add(polyline)
 
-       // print("coordinates: \(coordinates)")
-       
-        
     }
     
  
@@ -419,33 +416,37 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let description = textView_ActivityDone.text ?? ""
         let pictureURL = picURL
         
-        let trailInfo: Dictionary<String, AnyObject> = [ "userId" : userId as AnyObject,
+        let key = databaseRef.child("Trails").childByAutoId().key
+        
+        let trailInfo: Dictionary<String, AnyObject> = ["unicueID" : key as AnyObject,
+                                                        "userId" : userId as AnyObject,
                                                          "activityType" : activityType as AnyObject,
                                                          "activityName" : activityName as AnyObject,
                                                          "distance" : distance as AnyObject,
-                                                          "locations" : locations as AnyObject,
-                                                          "time" : time as AnyObject,
-                                                          "pace" : pace as AnyObject,
-                                                          "altitudes" : altitudes as AnyObject,
-                                                          "difficulty" : difficulty as AnyObject,
-                                                          "suitability" : suitability as AnyObject,
-                                                           "swatToSee" : watToSee as AnyObject,
-                                                          "description" : description as AnyObject,
-                                                          "pictureURL" : pictureURL as AnyObject]
+                                                         "locations" : locations as AnyObject,
+                                                         "time" : time as AnyObject,
+                                                         "pace" : pace as AnyObject,
+                                                         "altitudes" : altitudes as AnyObject,
+                                                         "difficulty" : difficulty as AnyObject,
+                                                         "suitability" : suitability as AnyObject,
+                                                         "swatToSee" : watToSee as AnyObject,
+                                                         "description" : description as AnyObject,
+                                                         "pictureURL" : pictureURL as AnyObject]
         
        
+       // let childUpdates = ["Trails/\(key)/\(trailInfo)"]
         
-        databaseRef.child("Trails").childByAutoId().setValue(trailInfo)
+        databaseRef.child("Trails").child("\(key)").setValue(trailInfo)
         
     }
-    
-    
-       
 
     
     @IBAction func doneActivityHit(_ sender: UIButton) {
         lifeTime_Activities += 1
         lifeTime_Time += timePassedToSave
+        if maxAltitude > lifeTime_MaxAltitude {
+        lifeTime_MaxAltitude = maxAltitude
+        }
         saveTrail()
         saveTotalResults()
         
@@ -454,7 +455,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         myLocations.removeAll()
         self.view.removeFromSuperview()
 
-        
     }
    
     @IBAction func dismissHit(_ sender: UIButton) {

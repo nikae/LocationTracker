@@ -80,7 +80,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
                     databaseRef.child("users/\(userID!)/email").setValue(self.emailTF.text!)
                         
                     saveTotalResults()
-                    goalsDefoultsFunc()
+                    //goalsDefoultsFunc()
                         
                     }
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfile")

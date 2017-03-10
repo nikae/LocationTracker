@@ -190,9 +190,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             distanceLabel.text = distanceLabel_String
             let altitude = lastLocation.altitude // In Meters
             let altitudeInFeets = altitude / 0.3048 //In Feets
-             arrayOfAltitude.append(altitudeInFeets)
-            let maxAltitude = arrayOfAltitude.max()
-            altitudeLabel_String = String(format: "%.2f ft", maxAltitude!)
+            arrayOfAltitude.append(altitudeInFeets)
+            maxAltitude = arrayOfAltitude.max()!
+            altitudeLabel_String = String(format: "%.2f ft", maxAltitude)
             altitudeLabel.text = String(format: "%.2f ft", altitudeInFeets)
         }
         

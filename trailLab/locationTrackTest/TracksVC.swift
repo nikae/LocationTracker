@@ -28,6 +28,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 
                 let value = snapshot.value as! NSDictionary
                 
+
+                let unicueID = value["unicueID"] as? String
                 let userId = value["userId"] as? String
                 let activityType = value["activityType"] as? String ?? ""
                 let activityName = value["activityName"] as? String
@@ -42,7 +44,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 let description = value["description"]  as? String ?? ""
                 let pictureURL = value["pictureURL"]  as? String
 
-                self.trails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                self.trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
 
                 self.tableView.reloadData()
                 self.collectionView.reloadData()

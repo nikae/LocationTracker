@@ -46,23 +46,17 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var totalMaxAltitudeLabel: UILabel!
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         getgoalsDefoultsFunc()
         lifeTime_Distance = (walkGoal + runGoal + hikeGoal + bikeGoal)
-        
-       
-        
         
         totalActivities.text = "\(lifeTime_Activities)"
         totalMilsLabel.text = String(format: "%.2f mi", lifeTime_Distance)
         totalTimeLabel.text = calculateTotalTime(time: lifeTime_Time)
         TotalavaragePaceLabel.text = "\(lifeTime_Pace)"
-        totalMaxAltitudeLabel.text = "\(lifeTime_MaxAltitude)"
+        totalMaxAltitudeLabel.text = String(format: "%.2f ft", lifeTime_MaxAltitude)
        
         goalSlider.isUserInteractionEnabled = false
         
@@ -74,10 +68,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 } else {
                     profileImage.image = UIImage(named:"img-default")
         }
-        }
-        
-        
-
+    }
         let firstName = firstNameDefoults.value(forKey: firstNameDefoults_Key) as! String
         let lastName = lastNameDefoults.value(forKey: lastNameDefoults_Key) as! String
         handleLabel.text = "\(firstName.capitalized) \(lastName.capitalized)"
@@ -101,8 +92,11 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
      
             if snapshot.hasChildren() {
    
-            let value = snapshot.value as! NSDictionary
                 
+            let value = snapshot.value as! NSDictionary
+              
+            let unicueID = value["unicueID"] as? String
+                print(unicueID ?? "NOID")
             let userId = value["userId"] as? String
             let activityType = value["activityType"] as? String ?? ""
             let activityName = value["activityName"] as? String
@@ -117,21 +111,21 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             let description = value["description"]  as? String ?? ""
             let pictureURL = value["pictureURL"]  as? String
  
-            self.trails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                self.trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 
                 
             let curUserID = FIRAuth.auth()?.currentUser?.uid
             if curUserID == userId {
-            self.usersTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+            self.usersTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
 //working on Now
                 if activityType == "Walk" {
-                   self.walkTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                   self.walkTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 } else if activityType == "Run" {
-                    self.runTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                    self.runTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 } else if activityType == "Hike" {
-                    self.hikeTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                    self.hikeTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 } else if activityType == "Bike" {
-                    self.bikeTrails.insert(Trail(userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                    self.bikeTrails.insert(Trail(unicueID: unicueID,  userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 }
             }
                 
@@ -323,7 +317,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             default :
                 break
             }
-        
             
         if url != "" {
         getImage(url, imageView: imageCell)
@@ -337,8 +330,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         imageCell.layer.cornerRadius = imageCell.frame.height/2
         imageCell.layer.borderWidth = 2
         imageCell.clipsToBounds = true
-        
-        
+            
         if type == "Walk" {
             imageCell.layer.borderColor = walkColor().cgColor
         } else if type == "Run" {
@@ -355,8 +347,106 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         }
          return cell
     }
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func removeChild(string: String) {
+        let dt = FIRDatabase.database().reference()
+        
+        dt.child("Trails").child(string).removeValue() { (error, ref) in
+            if error != nil {
+                print("error \(error)")
+            }
+        }
+    }
+    
+    func returnAlert(action: UIAlertAction) {
+        let alertController = UIAlertController(title: "Delete Trail", message: "Delated Trails Can Not Be Retrived", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .default) {
+            (action: UIAlertAction) in
+            print("User Action Has Canceld")
+        }
+        
+        alertController.addAction(action)
+        alertController.addAction(cancel)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
 
-       //MARK -segmented controller
+            switch (segmentedController.selectedSegmentIndex) {
+            case 0:
+                let key_walk = self.walkTrails[indexPath.row].unicueID
+                
+                let delete = UIAlertAction(title: "Delete", style: .default)
+                { (action: UIAlertAction) in
+                    
+                    self.removeChild(string: key_walk!)
+                    self.walkTrails.remove(at: indexPath.row)
+                    tableView.reloadData()
+                    
+                }
+                
+                returnAlert(action: delete)
+                
+                break
+            case 1:
+                
+                let key_run = runTrails[indexPath.row].unicueID
+
+                
+                let delete = UIAlertAction(title: "Delete", style: .default)
+                {
+                    (action: UIAlertAction) in
+                    self.removeChild(string: key_run!)
+                    self.runTrails.remove(at: indexPath.row)
+                    tableView.reloadData()
+                }
+              
+                returnAlert(action: delete)
+                
+                break
+            case 2:
+                
+                let key_hike = hikeTrails[indexPath.row].unicueID
+               
+                let delete = UIAlertAction(title: "Delete", style: .default)
+                {
+                    (action: UIAlertAction) in
+                    self.removeChild(string: key_hike!)
+                    self.hikeTrails.remove(at: indexPath.row)
+                    tableView.reloadData()
+                }
+                
+                returnAlert(action: delete)
+                
+                break
+            case 3:
+                
+                let key_bike = bikeTrails[indexPath.row].unicueID
+                
+                let delete = UIAlertAction(title: "Delete", style: .default)
+                {
+                    (action: UIAlertAction) in
+                    self.removeChild(string: key_bike!)
+                    self.bikeTrails.remove(at: indexPath.row)
+                    tableView.reloadData()
+                }
+                
+                returnAlert(action: delete)
+                break
+            default :
+                break
+            }
+        }
+    }
+    
+    
+    //MARK -segmented controller
     @IBAction func segmentedControllerHit(_ sender: UISegmentedControl) {
         tableView.reloadData()
     }
@@ -412,10 +502,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             // Header
             headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
             
-//            let alignToNameLabel = -offset + handleLabel.frame.origin.y + headerView.frame.height + offset_HeaderStop
-            
-//            headerLabel.frame.origin = CGPoint(x: headerLabel.frame.origin.x, y: max(alignToNameLabel, distance_W_LabelHeader + offset_HeaderStop))
-            
             // profile image
             let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
             let avatarSizeVariation = ((profileImage.bounds.height * (1.0 + avatarScaleFactor)) - profileImage.bounds.height) / 2.0
@@ -426,7 +512,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 
                 if profileImage.layer.zPosition < headerView.layer.zPosition{
                     headerView.layer.zPosition = 0
-                    
                 }
             }else {
                
@@ -450,9 +535,11 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.frame.maxY, 0, 0, 0)
     }
    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     @IBAction func editProfileHit(_ sender: UIBarButtonItem) {
         let editProfileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditProfile") as! EditProfileVC

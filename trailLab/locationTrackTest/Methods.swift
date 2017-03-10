@@ -12,6 +12,8 @@ import Firebase
 
 
 struct Trail {
+    
+    let unicueID : String!
     let userId : String!
     let activityType : String!
     let activityName : String!
@@ -127,9 +129,7 @@ func saveTotalResults() {
     databaseRef.child("Results/\(userID!)/lifeTime_Pace").setValue(lifeTime_Pace)
     databaseRef.child("Results/\(userID!)/lifeTime_MaxAltitude").setValue(lifeTime_MaxAltitude)
     databaseRef.child("Results/\(userID!)/totalActivities").setValue(lifeTime_Activities)
-    
-    goalsDefoultsFunc()
-    
+
 }
 
 
@@ -162,7 +162,7 @@ func getgoalsDefoultsFunc() {
   
     lifeTime_Time = lifeTime_TimeDefoults.value(forKey: lifeTime_TimeDefoults_key) as? Double ?? 0
     lifeTime_Pace =  lifeTime_PaceDefoults.value(forKey:  lifeTime_PaceDefoults_Key) as? Int ?? 0
-    lifeTime_MaxAltitude = lifeTime_MaxAltitudeDefoults.value(forKey: lifeTime_MaxAltitudeDefoults_key) as? Int ?? 0
+    lifeTime_MaxAltitude = lifeTime_MaxAltitudeDefoults.value(forKey: lifeTime_MaxAltitudeDefoults_key) as? Double ?? 0
     lifeTime_Activities = lifeTime_ActivitiesDefoults.value(forKey: lifeTime_ActivitiesDefoults_Key) as? Int ?? 0
 }
 
@@ -208,23 +208,6 @@ func calculateTotalTime(time: TimeInterval) -> String {
     
     return "\(strHours):\(strMinutes):\(strSeconds)"
     
-    
-//    let currentTime = NSDate.timeIntervalSinceReferenceDate
-//    timePassed = currentTime - zeroTime
-//    let hours = UInt8(timePassed / 3600.0)
-//    timePassed -= (TimeInterval(hours) * 3600)
-//    let minutes = UInt8(timePassed / 60.0)
-//    timePassed -= (TimeInterval(minutes) * 60)
-//    let seconds = UInt8(timePassed)
-//    timePassed -= TimeInterval(seconds)
-//    //let millisecsX10 = UInt8(timePassed * 100)
-//    
-//    let strHours = String(format: "%02d", hours)
-//    let strMinutes = String(format: "%02d", minutes)
-//    let strSeconds = String(format: "%02d", seconds)
-//    //let strMSX10 = String(format: "%02d", millisecsX10)
-//    
-//    timeLabel_String = "\(strHours):\(strMinutes):\(strSeconds)"
 }
 
 

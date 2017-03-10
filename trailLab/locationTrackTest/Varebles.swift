@@ -111,6 +111,9 @@ var distanceTraveled = 0.0
 var arrayOfAltitude: [Double] = []
 var arrayOfPace: [Int] = []
 
+
+var maxAltitude: Double = 0
+
 //Profile view animation
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
 let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the screen and the top of the White Label
@@ -153,5 +156,5 @@ var lifeTime_Distance: Double = 0
 
 var lifeTime_Time: Double = 0
 var lifeTime_Pace = 0
-var lifeTime_MaxAltitude = 0
+var lifeTime_MaxAltitude: Double = 0
 var lifeTime_Activities = 0
