@@ -172,15 +172,14 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //print(info.debugDescription)
+    
+    if picURL != "" {
+        delataImage(url: picURL)
+        self.picURL = ""
+    }
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.image = image
-            if picURL != "" {
-                delataImage()
-                saveImage(image)
-            } else {
-                saveImage(image)
-            }
+            saveImage(image)
            
         } else {
             print("Somthing went wrong")
@@ -199,23 +198,24 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
                     return
                 }
             self.picURL = self.storageRef.child((metadata?.path)!).description
-            print(self.picURL)
+            //print(self.picURL)
         }
         
     }
 
-    func delataImage() {
-        let desertRef = storageRef.storage.reference(forURL: picURL)
-        
-        // Delete the file
-        desertRef.delete { error in
-            if let error = error {
-               print(error.localizedDescription)
-            } else {
-                print("Image Is delated")
-            }
-        }
-    }
+    
+//    func delataImage() {
+//        let desertRef = storageRef.storage.reference(forURL: picURL)
+//        
+//        // Delete the file
+//        desertRef.delete { error in
+//            if let error = error {
+//               print(error.localizedDescription)
+//            } else {
+//                print("Image Is delated")
+//            }
+//        }
+//    }
 
     
     
@@ -449,6 +449,9 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         }
         saveTrail()
         saveTotalResults()
+        goalsDefoultsFunc()
+        
+        
         
         distanceTraveled = 0
         timePassedToSave = 0
@@ -460,7 +463,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     @IBAction func dismissHit(_ sender: UIButton) {
         self.view.removeFromSuperview()
         if picURL != "" {
-        delataImage()
+            delataImage(url: picURL)
         }
         myLocations.removeAll()
         distanceTraveled = 0

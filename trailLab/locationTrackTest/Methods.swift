@@ -129,6 +129,8 @@ func saveTotalResults() {
     databaseRef.child("Results/\(userID!)/lifeTime_Pace").setValue(lifeTime_Pace)
     databaseRef.child("Results/\(userID!)/lifeTime_MaxAltitude").setValue(lifeTime_MaxAltitude)
     databaseRef.child("Results/\(userID!)/totalActivities").setValue(lifeTime_Activities)
+    
+   // goalsDefoultsFunc()
 
 }
 
@@ -187,6 +189,18 @@ func clearGoalsDefoultsFunc(){
     lifeTime_MaxAltitudeDefoults.synchronize()
     lifeTime_ActivitiesDefoults.set(nil, forKey: lifeTime_ActivitiesDefoults_Key)
     lifeTime_ActivitiesDefoults.synchronize()
+    
+    walkGoal = 0
+    runGoal = 0
+    hikeGoal = 0
+    bikeGoal = 0
+    
+    lifeTime_Distance = 0
+    lifeTime_Time = 0
+    lifeTime_Pace = 0
+    lifeTime_MaxAltitude = 0
+    lifeTime_Activities = 0
+
 }
 
 
@@ -210,6 +224,21 @@ func calculateTotalTime(time: TimeInterval) -> String {
     
 }
 
+
+//MARK
+func delataImage(url: String) {
+    let storageRef = FIRStorage.storage().reference()
+    let desertRef = storageRef.storage.reference(forURL: url)
+    
+    // Delete the file
+    desertRef.delete { error in
+        if let error = error {
+            print(error.localizedDescription)
+        } else {
+            print("Image Is delated")
+        }
+    }
+}
 
 
 

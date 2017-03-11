@@ -96,7 +96,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             let value = snapshot.value as! NSDictionary
               
             let unicueID = value["unicueID"] as? String
-                print(unicueID ?? "NOID")
             let userId = value["userId"] as? String
             let activityType = value["activityType"] as? String ?? ""
             let activityName = value["activityName"] as? String
@@ -220,19 +219,28 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         
         switch (segmentedController.selectedSegmentIndex) {
         case 0: returnValue = walkTrails.count
+        sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: goal)
+        valueOfSlider = slider.run
             break
         case 1: returnValue = runTrails.count
+        sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: goal)
+        valueOfSlider = slider.hike
             break
         case 2: returnValue = hikeTrails.count
+        sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: goal)
+        valueOfSlider = slider.bike
             break
         case 3: returnValue = bikeTrails.count
+        sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: goal)
+        valueOfSlider = slider.walk
             break
         default :
             break
         }
         
         if returnValue > 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.isUserInteractionEnabled = true
         
         let distanceLabel = cell.viewWithTag(1) as! UILabel
         let timeLabel = cell.viewWithTag(2) as! UILabel
@@ -344,6 +352,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         }
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.isUserInteractionEnabled = false
         }
          return cell
     }
@@ -381,10 +390,15 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             switch (segmentedController.selectedSegmentIndex) {
             case 0:
                 let key_walk = self.walkTrails[indexPath.row].unicueID
+                let picURL = self.walkTrails[indexPath.row].pictureURL ?? ""
+                
                 
                 let delete = UIAlertAction(title: "Delete", style: .default)
                 { (action: UIAlertAction) in
                     
+                    if picURL != "" {
+                        delataImage(url: picURL)
+                    }
                     self.removeChild(string: key_walk!)
                     self.walkTrails.remove(at: indexPath.row)
                     tableView.reloadData()
@@ -397,11 +411,16 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             case 1:
                 
                 let key_run = runTrails[indexPath.row].unicueID
-
+                let picURL =  runTrails[indexPath.row].pictureURL ?? ""
                 
                 let delete = UIAlertAction(title: "Delete", style: .default)
                 {
                     (action: UIAlertAction) in
+                    
+                    if picURL != "" {
+                        delataImage(url: picURL)
+                    }
+
                     self.removeChild(string: key_run!)
                     self.runTrails.remove(at: indexPath.row)
                     tableView.reloadData()
@@ -413,10 +432,14 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             case 2:
                 
                 let key_hike = hikeTrails[indexPath.row].unicueID
+                let picURL =  hikeTrails[indexPath.row].pictureURL ?? ""
                
                 let delete = UIAlertAction(title: "Delete", style: .default)
-                {
-                    (action: UIAlertAction) in
+                { (action: UIAlertAction) in
+                    
+                    if picURL != "" {
+                        delataImage(url: picURL)
+                    }
                     self.removeChild(string: key_hike!)
                     self.hikeTrails.remove(at: indexPath.row)
                     tableView.reloadData()
@@ -428,10 +451,14 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             case 3:
                 
                 let key_bike = bikeTrails[indexPath.row].unicueID
+                let picURL =  bikeTrails[indexPath.row].pictureURL ?? ""
                 
                 let delete = UIAlertAction(title: "Delete", style: .default)
-                {
-                    (action: UIAlertAction) in
+                { (action: UIAlertAction) in
+                    if picURL != "" {
+                        delataImage(url: picURL)
+                    }
+                    
                     self.removeChild(string: key_bike!)
                     self.bikeTrails.remove(at: indexPath.row)
                     tableView.reloadData()
@@ -445,6 +472,46 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         }
     }
     
+    var testArr: [Trail] = []
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+            switch (segmentedController.selectedSegmentIndex) {
+        case 0:
+            testArr.append(walkTrails[indexPath.row])
+            self.performSegue(withIdentifier: "Segue", sender: self)
+            break
+        case 1:
+            testArr.append(runTrails[indexPath.row])
+            self.performSegue(withIdentifier: "Segue", sender: self)
+            break
+        case 2:
+            testArr.append(hikeTrails[indexPath.row])
+            self.performSegue(withIdentifier: "Segue", sender: self)
+            
+            break
+        case 3:
+            testArr.append(bikeTrails[indexPath.row])
+            self.performSegue(withIdentifier: "Segue", sender: self)
+            break
+        default :
+            break
+        }
+
+        
+       
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // get a reference to the second view controller
+        let dest = segue.destination as! CellOutletFromProfileVC
+        
+//        // set a variable in the second view controller with the data to pass
+        dest.arr = testArr
+    }
     
     //MARK -segmented controller
     @IBAction func segmentedControllerHit(_ sender: UISegmentedControl) {
@@ -518,6 +585,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 if profileImage.layer.zPosition >= headerView.layer.zPosition{
                     headerView.layer.zPosition = 2
                     giveButton.layer.zPosition = 3
+                    
                 }
             }
         }

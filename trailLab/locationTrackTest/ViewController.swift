@@ -49,12 +49,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//***************DANGER DANGER DANGER *********************
+//*************REMOVES ALL EXISTED DATA********************
 //      let dt = FIRDatabase.database().reference()
 //        dt.child("Trails").removeValue { (error, ref) in
 //            if error != nil {
 //                print("error \(error)")
 //            }
 //        }
+//*********************SAFETY ZONE*************************
+        
+        
            }
     
     override func viewWillAppear(_ animated: Bool) {

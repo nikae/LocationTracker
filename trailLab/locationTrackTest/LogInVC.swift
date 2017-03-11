@@ -37,12 +37,12 @@ class LogInVC: UIViewController, UITextFieldDelegate {
         case true:
             let image = UIImage(named: "Checked Checkbox 2_000000_25") as UIImage?
             keepMeLoggedIn.setImage(image, for: .normal)
-            print("true")
+           // print("true")
             
         case false:
             let image = UIImage(named: "Unchecked Checkbox_000000_25") as UIImage?
             keepMeLoggedIn.setImage(image, for: .normal)
-            print("False")
+            //print("False")
         }
        
     }
@@ -86,7 +86,7 @@ class LogInVC: UIViewController, UITextFieldDelegate {
         } else {
             FIRAuth.auth()?.signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!) { (user, error) in
                 if error == nil {
-                    print("You have successfully logged in")
+                   // print("You have successfully logged in")
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController")
                     self.present(vc!, animated: true, completion: nil)
                     
@@ -123,6 +123,12 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                         runGoal = value?["runkGoal"] as? Double ?? 0
                         hikeGoal = value?["hikekGoal"] as? Double ?? 0
                         bikeGoal = value?["bikeGoal"] as? Double ?? 0
+                        lifeTime_Distance = value?["lifeTime_Distance"] as? Double ?? 0
+                        lifeTime_Time = value?["lifeTime_Time"] as? Double ?? 0
+                        lifeTime_Pace = value?["lifeTime_Pace"] as? Int ?? 0
+                        lifeTime_MaxAltitude = value?["lifeTime_MaxAltitude"] as? Double ?? 0
+                        lifeTime_Activities = value?["totalActivities"] as? Int ?? 0
+                        
                         
                         goalsDefoultsFunc()
                         
@@ -170,15 +176,15 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                 keepMeLoggedIn.setImage(image, for: .normal)
                 keepMeLogedInDefoultsDefoults.set(true, forKey: keepMeLogedInDefoults_key)
                 keepMeLogedInDefoultsDefoults.synchronize()
-                let a = keepMeLogedInDefoultsDefoults.bool(forKey: keepMeLogedInDefoults_key)
-                print(a)
+//                let a = keepMeLogedInDefoultsDefoults.bool(forKey: keepMeLogedInDefoults_key)
+//                print(a)
             } else {
                 let image = UIImage(named: "Unchecked Checkbox_000000_25") as UIImage?
                 keepMeLoggedIn.setImage(image, for: .normal)
                 keepMeLogedInDefoultsDefoults.set(false, forKey: keepMeLogedInDefoults_key)
                 keepMeLogedInDefoultsDefoults.synchronize()
-                let a = keepMeLogedInDefoultsDefoults.bool(forKey: keepMeLogedInDefoults_key)
-                print(a)
+               // let a = keepMeLogedInDefoultsDefoults.bool(forKey: keepMeLogedInDefoults_key)
+                //print(a)
             }
 
     }

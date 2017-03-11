@@ -117,7 +117,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 
             let delete = UIAlertAction(title: "Delete", style: .default) {
                 (action: UIAlertAction) in
-                self.delataImage()
+                delataImage(url: self.picURL)
                 self.picURL = ""
                 profilePictureDefoults.set(nil, forKey: "image")
                 profilePictureDefoults.synchronize()
@@ -149,17 +149,21 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
+            if picURL != "" {
+                delataImage(url: picURL)
+                self.picURL = ""
+                profilePictureDefoults.set(nil, forKey: "image")
+                profilePictureDefoults.synchronize()
+            }
+            
             profileImageView.image = image
             let imageData = UIImageJPEGRepresentation(image, 1)
             profilePictureDefoults.set(imageData, forKey: "image")
             profilePictureDefoults.synchronize()
-            if picURL != "" {
-                delataImage()
-                saveImage(image)
-            } else {
-                saveImage(image)
-            }
             
+            saveImage(image)
+                
+        
         } else {
             print("Somthing went wrong")
         }
@@ -178,25 +182,13 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                     return
                 }
                 self.picURL = self.storageRef.child((metadata?.path)!).description
-                print(self.picURL)
+                //print(self.picURL)
                 
                 self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
         }
     }
     
-    func delataImage() {
-        let desertRef = storageRef.storage.reference(forURL: picURL)
-        
-        // Delete the file
-        desertRef.delete { error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("Image Is delated")
-            }
-        }
-    }
-
+   
 
     @IBAction func editProfilePictureHit(_ sender: UIButton) {
         addPhoto()

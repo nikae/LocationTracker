@@ -29,6 +29,7 @@
 		24BAB1E71E57B6B100E32E74 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1E61E57B6B100E32E74 /* LogInVC.swift */; };
 		24BAB1E91E57B6CB00E32E74 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1E81E57B6CB00E32E74 /* ResetPasswordVC.swift */; };
 		24BAB1ED1E5D0ACD00E32E74 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */; };
+		24C9345E1E7376DB0022E40E /* CellOutletFromProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C9345D1E7376DB0022E40E /* CellOutletFromProfileVC.swift */; };
 		24D1BFC91E4A961C007151E8 /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFC81E4A961C007151E8 /* Methods.swift */; };
 		24D1BFCB1E4A9FE0007151E8 /* HealtKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */; };
 		24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCC1E4D4691007151E8 /* viewSlider.swift */; };
@@ -87,6 +88,7 @@
 		24BAB1E61E57B6B100E32E74 /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		24BAB1E81E57B6CB00E32E74 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		24C9345D1E7376DB0022E40E /* CellOutletFromProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellOutletFromProfileVC.swift; sourceTree = "<group>"; };
 		24D1BFC81E4A961C007151E8 /* Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
 		24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealtKitManager.swift; sourceTree = "<group>"; };
 		24D1BFCC1E4D4691007151E8 /* viewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewSlider.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				240DD1131DE531B100F68A28 /* ViewController.swift */,
 				249666911E42BA4F009335E2 /* ProfileVC.swift */,
 				24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */,
+				24C9345D1E7376DB0022E40E /* CellOutletFromProfileVC.swift */,
 				2496668F1E41694C009335E2 /* TracksVC.swift */,
 				24B0C4551E6A452E00166FB8 /* TracksVCCellTableViewCell.swift */,
 				245038661E31CCBE00CF1707 /* PopUpActivityDon.swift */,
@@ -520,6 +523,7 @@
 				240DD1451DED025A00F68A28 /* ObjectColors.swift in Sources */,
 				24BAB1E91E57B6CB00E32E74 /* ResetPasswordVC.swift in Sources */,
 				245038671E31CCBE00CF1707 /* PopUpActivityDon.swift in Sources */,
+				24C9345E1E7376DB0022E40E /* CellOutletFromProfileVC.swift in Sources */,
 				24BAB1E71E57B6B100E32E74 /* LogInVC.swift in Sources */,
 				24FFF4011DFDE4420088B86C /* Varebles.swift in Sources */,
 				24D1BFCB1E4A9FE0007151E8 /* HealtKitManager.swift in Sources */,
