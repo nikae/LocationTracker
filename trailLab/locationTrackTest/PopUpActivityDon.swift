@@ -130,13 +130,13 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
 
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = blueColor
-        polylineRenderer.lineWidth = 5
-        return polylineRenderer
-        
-    }
+//    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+//        polylineRenderer.strokeColor = blueColor
+//        polylineRenderer.lineWidth = 5
+//        return polylineRenderer
+//        
+//    }
 
     //MARK: -Camera / Add Picture
     func addPhoto(_ recognizer: UITapGestureRecognizer) {

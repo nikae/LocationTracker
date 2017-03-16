@@ -92,7 +92,7 @@ let systemSoundID: SystemSoundID = 1104
 
 var myLocations: [CLLocation] = []
 var coordinates : [CLLocationCoordinate2D] = []
- var cordinatesArray: [AnyObject] = []
+var cordinatesArray: [AnyObject] = []
 
 //Activity Name and Collor 
 var activity_String = ""

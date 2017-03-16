@@ -100,7 +100,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             let activityType = value["activityType"] as? String ?? ""
             let activityName = value["activityName"] as? String
             let distance = value["distance"] as? String ?? ""
-            let locations = value["locations"] as AnyObject
+            let locations = value["locations"] as! [AnyObject]
             let time = value["time"] as? String ?? ""
             let pace = value["pace"] as? [Int] ?? [0]
             let altitudes = value["altitudes"] as? [Double] ?? [0]

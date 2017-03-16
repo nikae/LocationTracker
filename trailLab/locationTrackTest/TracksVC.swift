@@ -34,7 +34,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 let activityType = value["activityType"] as? String ?? ""
                 let activityName = value["activityName"] as? String
                 let distance = value["distance"] as? String ?? ""
-                let locations = value["locations"] as AnyObject
+                let locations = value["locations"] as! [AnyObject]
                 let time = value["time"] as? String ?? ""
                 let pace = value["pace"] as? [Int] ?? [0]
                 let altitudes = value["altitudes"] as? [Double] ?? [0]
@@ -144,6 +144,37 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                return cell
 
     }
+    
+    
+    var testArr: [Trail] = []
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        testArr.append(trails[indexPath.row])
+        self.performSegue(withIdentifier: "Segue5", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // get a reference to the second view controller
+        let dest = segue.destination as! CellTrailsVC
+        
+       // set a variable in the second view controller with the data to pass
+        dest.arr = testArr
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trails.count
