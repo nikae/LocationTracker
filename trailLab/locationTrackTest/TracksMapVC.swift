@@ -20,6 +20,7 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     let mapView = MyMapView()
     var manager: CLLocationManager!
     var coordinatesTracksMap: [CLLocationCoordinate2D] = []
+    var testArr = [Trail]()
     
     override func viewWillAppear(_ animated: Bool) {
         getItemImage(item: profileTabBarItem)
@@ -57,76 +58,45 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                 self.trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 
                 for loc in self.trails {
-                   // print("*********\(loc.activityName)")
-                   // var testarr: [Int] = []
-                    let loce = loc.locations
+                    self.testArr.append(loc)
+                    let name = loc.activityName
+                    let desc = loc.description
                     
-//                    let index = (1...loce.count - 1)
-//                    for a in index {
-//                    testarr.append(a)
-//                    }
-//                    
-//                    for b in testarr {
-//                    loce.remove(at: b)
-//                    }
-//                    
+                    let loce = [loc.locations]
+                    
                     for a in loce {
-                        let latitude = a["Latitude"] as! CLLocationDegrees
-                        let longitude = a["Longitude"] as! CLLocationDegrees
+                        
+                        let latitude = a[0]["Latitude"] as! CLLocationDegrees
+                        let longitude = a[0]["Longitude"] as! CLLocationDegrees
                         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                         
                         self.coordinatesTracksMap.append(coordinate)
                         
                         let annotation = MKPointAnnotation()
-                        annotation.title = "TEST"
-                        
+                        annotation.title = name
+                        annotation.subtitle = desc
                         annotation.coordinate = CLLocationCoordinate2D(latitude:latitude, longitude: longitude)
                         self.theMap.addAnnotation(annotation)
                     }
-                        
-                        //let polyline = MKPolyline(coordinates: &self.coordinatesTracksMap, count: self.coordinatesTracksMap.count)
-                        
-//                        self.theMap.addAnnotations(<#T##annotations: [MKAnnotation]##[MKAnnotation]#>)
-                    
-                       // print(self.coordinatesTracksMap.first ?? "")
-                        
-                    }
+                }
                 
             }
         }) { (error) in
             print(error.localizedDescription)
         }
         
-
-        
-
         segmentedControl.selectedSegmentIndex = 1
-        // Do any additional setup after loading the view.
-        
-//
-//        print("AAAAAAAAAAAAAAAAAAAA")
-        
-        
         
         setUpLocationManager()
         
         mapView.setUpMapView(view: theMap, delegate: self)
-//        let lat = coordinates1[0].latitude
-//        let long = coordinates1[0].longitude
-//        let span = MKCoordinateSpanMake(0.04, 0.04)
-//        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
-//        theMap.setRegion(region, animated: true)
-      //  theMap.showsUserLocation = tr
         mapView.zoomMap(val: 0.04, superVisor: manager, view: theMap)
-        theMap.showsScale = false
-        theMap.layoutMargins = UIEdgeInsets(top: 120, left: 0, bottom: 20, right: 10)
+        theMap.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 10)
         
     }
-
-    
     
 
-
+    
 //MARK: -setUp Location Manager
 func setUpLocationManager() {
     if (CLLocationManager.locationServicesEnabled()) {
