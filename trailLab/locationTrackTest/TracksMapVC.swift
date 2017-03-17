@@ -61,6 +61,8 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                     self.testArr.append(loc)
                     let name = loc.activityName
                     let desc = loc.description
+                    let url = loc.pictureURL
+                    let type = loc.activityType
                     
                     let loce = [loc.locations]
                     
@@ -72,11 +74,12 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                         
                         self.coordinatesTracksMap.append(coordinate)
                         
-                        let annotation = MKPointAnnotation()
-                        annotation.title = name
-                        annotation.subtitle = desc
-                        annotation.coordinate = CLLocationCoordinate2D(latitude:latitude, longitude: longitude)
-                        self.theMap.addAnnotation(annotation)
+                        let point = TrailsAnnotation(coordinate: CLLocationCoordinate2D(latitude:latitude, longitude: longitude))
+                        point.title = name
+                        point.eta = desc
+                        point.imageUrl = url!
+                        point.actType = type
+                        self.theMap.addAnnotation(point)
                     }
                 }
                 
@@ -94,6 +97,70 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         theMap.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 10)
         
     }
+    
+    ///////////
+    
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // If annotation is not of type RestaurantAnnotation (MKUserLocation types for instance), return nil
+        if !(annotation is TrailsAnnotation){
+            return nil
+        }
+        
+        var annotationView = self.theMap.dequeueReusableAnnotationView(withIdentifier: "Pin")
+        
+        if annotationView == nil{
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+            annotationView?.canShowCallout = true
+            annotationView?.tintColor = .blue
+        }else{
+            annotationView?.annotation = annotation
+        }
+        
+        let trailsAnnotation = annotation as! TrailsAnnotation
+        let imView = UIImageView()
+        getImage(trailsAnnotation.imageUrl!, imageView: imView)
+        imView.frame = CGRect(x: 0,y:0,width: 50,height: 50)
+        annotationView?.leftCalloutAccessoryView = imView
+        
+//        // Left Accessory
+//        let leftAccessory = UILabel(frame: CGRect(x: 0,y:0,width: 50,height: 30))
+//        leftAccessory.text = trailsAnnotation.eta
+//        leftAccessory.font = UIFont(name: "Verdana", size: 10)
+//        annotationView?.leftCalloutAccessoryView = leftAccessory
+        
+        // Right accessory view
+        let image = UIImage(named: "Forward_000000_25")
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(image, for: UIControlState())
+        annotationView?.rightCalloutAccessoryView = button
+        
+        
+        let actName = trailsAnnotation.actType
+        if actName == "Walk" {
+            annotationView?.rightCalloutAccessoryView?.backgroundColor = walkColor()
+        } else if actName == "Run" {
+             annotationView?.rightCalloutAccessoryView?.backgroundColor = runColor()
+        } else if actName == "Bike" {
+             annotationView?.rightCalloutAccessoryView?.backgroundColor = bikeColor()
+        } else if actName == "Hike" {
+             annotationView?.rightCalloutAccessoryView?.backgroundColor = hikeColor()
+        }
+
+       
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let a = CellTrailsVC()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "CellTrailsVC") as! CellTrailsVC
+        self.present(controller, animated: false, completion: nil)
+        a.arr1 = testArr
+    }
+
     
 
     
