@@ -32,6 +32,7 @@
 		24D1BFC91E4A961C007151E8 /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFC81E4A961C007151E8 /* Methods.swift */; };
 		24D1BFCB1E4A9FE0007151E8 /* HealtKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */; };
 		24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCC1E4D4691007151E8 /* viewSlider.swift */; };
+		24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F114D81E7B47F200269D69 /* TracksMapVC.swift */; };
 		24F9D0351E79F091008BE044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24F9D0341E79F091008BE044 /* Main.storyboard */; };
 		24F9D0371E79FE89008BE044 /* activDetiledVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9D0361E79FE89008BE044 /* activDetiledVC.swift */; };
 		24F9D0391E7A1D18008BE044 /* CellTrailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9D0381E7A1D18008BE044 /* CellTrailsVC.swift */; };
@@ -93,6 +94,7 @@
 		24D1BFC81E4A961C007151E8 /* Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
 		24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealtKitManager.swift; sourceTree = "<group>"; };
 		24D1BFCC1E4D4691007151E8 /* viewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewSlider.swift; sourceTree = "<group>"; };
+		24F114D81E7B47F200269D69 /* TracksMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksMapVC.swift; sourceTree = "<group>"; };
 		24F9D0341E79F091008BE044 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		24F9D0361E79FE89008BE044 /* activDetiledVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activDetiledVC.swift; sourceTree = "<group>"; };
 		24F9D0381E7A1D18008BE044 /* CellTrailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTrailsVC.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				24C9345D1E7376DB0022E40E /* CellOutletFromProfileVC.swift */,
 				24F9D0361E79FE89008BE044 /* activDetiledVC.swift */,
 				2496668F1E41694C009335E2 /* TracksVC.swift */,
+				24F114D81E7B47F200269D69 /* TracksMapVC.swift */,
 				24F9D0381E7A1D18008BE044 /* CellTrailsVC.swift */,
 				24B0C4551E6A452E00166FB8 /* TracksVCCellTableViewCell.swift */,
 				245038661E31CCBE00CF1707 /* PopUpActivityDon.swift */,
@@ -525,6 +528,7 @@
 				249666921E42BA4F009335E2 /* ProfileVC.swift in Sources */,
 				249666901E41694C009335E2 /* TracksVC.swift in Sources */,
 				2466ACA21DFE1300001331DD /* DataBaseModel.xcdatamodeld in Sources */,
+				24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */,
 				2466AC9F1DFE1010001331DD /* CoreDataStack.swift in Sources */,
 				240DD1451DED025A00F68A28 /* ObjectColors.swift in Sources */,
 				24BAB1E91E57B6CB00E32E74 /* ResetPasswordVC.swift in Sources */,

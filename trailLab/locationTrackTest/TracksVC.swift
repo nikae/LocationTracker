@@ -15,6 +15,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     
+    @IBOutlet weak var segmentControler: UISegmentedControl!
+    
     var trails = [Trail]()
     
     override func viewDidLoad() {
@@ -162,17 +164,19 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         let dest = segue.destination as! CellTrailsVC
         
        // set a variable in the second view controller with the data to pass
-        dest.arr = testArr
+        dest.arr1 = testArr
+        
     }
 
+
     
-    
-    
-    
-    
-    
-    
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        testArr.append(trails[indexPath.row])
+        self.performSegue(withIdentifier: "Segue5", sender: self)
+        
+    }
     
     
 
@@ -224,4 +228,17 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func segmentHit(_ sender: UISegmentedControl) {
+        switch (segmentControler.selectedSegmentIndex) {
+        case 0:
+            break
+        case 1:
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "TracksMapVC") as! TracksMapVC
+            self.present(controller, animated: false, completion: nil)
+            break
+        default : break
+         
+        }
+    }
 }

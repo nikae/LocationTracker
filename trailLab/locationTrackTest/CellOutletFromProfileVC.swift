@@ -16,7 +16,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
     var arr: [Trail] = []
   
-    @IBOutlet weak var viewForDes: UIView!
+    
     @IBOutlet weak var theMap: MKMapView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var infoView: UIView!
@@ -47,6 +47,8 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         if (arr.count > 0) {
         
         print(arr[0].activityType)
         
@@ -91,6 +93,8 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         theMap.showsUserLocation = false
         theMap.showsScale = false
         theMap.layoutMargins = UIEdgeInsets(top: 120, left: 0, bottom: 20, right: 10)
+            
+        }
     }
     
     
@@ -105,9 +109,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         
         getDirectionsBtn.clipsToBounds = true
         getDirectionsBtn.layer.cornerRadius = getDirectionsBtn.frame.height/2
-        
-        
-        
+
 
     }
     
@@ -115,10 +117,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
   //MARK -Get Directions
     func openMapForPlace() {
-        
-//        let latitude: CLLocationDegrees = coordinates1[0].latitude
-//        let longitude: CLLocationDegrees = coordinates1[0].longitude
-        
+   
         let regionDistance:CLLocationDistance = 10000
         let coordinatesGD = coordinates1[0]
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinatesGD, regionDistance, regionDistance)
@@ -155,9 +154,6 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         }
     }
     
-    
-    
-
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
      //   var colorforPolyline = UIColor()
