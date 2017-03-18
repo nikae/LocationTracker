@@ -161,14 +161,13 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // get a reference to the second view controller
-        let dest = segue.destination as! CellTrailsVC
+        let dest = segue.destination as! CellOutletFromProfileVC
         
        // set a variable in the second view controller with the data to pass
-        dest.arr1 = testArr
+        dest.arr = testArr
+        dest.vcId = "TracksVC"
         
     }
-
-
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)

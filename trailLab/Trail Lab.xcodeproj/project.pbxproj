@@ -36,7 +36,6 @@
 		24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F114D81E7B47F200269D69 /* TracksMapVC.swift */; };
 		24F9D0351E79F091008BE044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24F9D0341E79F091008BE044 /* Main.storyboard */; };
 		24F9D0371E79FE89008BE044 /* activDetiledVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9D0361E79FE89008BE044 /* activDetiledVC.swift */; };
-		24F9D0391E7A1D18008BE044 /* CellTrailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9D0381E7A1D18008BE044 /* CellTrailsVC.swift */; };
 		24FFF3FD1DFDCE5B0088B86C /* sportIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24FFF3FC1DFDCE5B0088B86C /* sportIcons.xcassets */; };
 		24FFF3FF1DFDD4030088B86C /* StartStopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FFF3FE1DFDD4030088B86C /* StartStopButton.swift */; };
 		24FFF4011DFDE4420088B86C /* Varebles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FFF4001DFDE4420088B86C /* Varebles.swift */; };
@@ -99,7 +98,6 @@
 		24F114D81E7B47F200269D69 /* TracksMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksMapVC.swift; sourceTree = "<group>"; };
 		24F9D0341E79F091008BE044 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		24F9D0361E79FE89008BE044 /* activDetiledVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activDetiledVC.swift; sourceTree = "<group>"; };
-		24F9D0381E7A1D18008BE044 /* CellTrailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTrailsVC.swift; sourceTree = "<group>"; };
 		24FFF3FC1DFDCE5B0088B86C /* sportIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = sportIcons.xcassets; path = ../sportIcons.xcassets; sourceTree = "<group>"; };
 		24FFF3FE1DFDD4030088B86C /* StartStopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartStopButton.swift; sourceTree = "<group>"; };
 		24FFF4001DFDE4420088B86C /* Varebles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Varebles.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				2496668F1E41694C009335E2 /* TracksVC.swift */,
 				24F114D81E7B47F200269D69 /* TracksMapVC.swift */,
 				249C0BA61E7C7B810088329D /* TrailsAnnotation.swift */,
-				24F9D0381E7A1D18008BE044 /* CellTrailsVC.swift */,
 				24B0C4551E6A452E00166FB8 /* TracksVCCellTableViewCell.swift */,
 				245038661E31CCBE00CF1707 /* PopUpActivityDon.swift */,
 				245038681E32B3A700CF1707 /* CountDownVC.swift */,
@@ -546,7 +543,6 @@
 				24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */,
 				245038691E32B3A700CF1707 /* CountDownVC.swift in Sources */,
 				240DD1471DED193100F68A28 /* Map.swift in Sources */,
-				24F9D0391E7A1D18008BE044 /* CellTrailsVC.swift in Sources */,
 				240DD1121DE531B100F68A28 /* AppDelegate.swift in Sources */,
 				24D1BFC91E4A961C007151E8 /* Methods.swift in Sources */,
 				24F9D0371E79FE89008BE044 /* activDetiledVC.swift in Sources */,

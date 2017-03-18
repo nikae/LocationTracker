@@ -511,6 +511,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         
 //        // set a variable in the second view controller with the data to pass
         dest.arr = testArr
+         dest.vcId = "ProfileVC"
     }
     
     //MARK -segmented controller

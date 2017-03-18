@@ -15,6 +15,8 @@ class TrailsAnnotation: NSObject, MKAnnotation {
     var imageUrl: String?
     var eta: String?
     var actType: String?
+    var unicueId: String?
+    var tr: Trail?
     
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate

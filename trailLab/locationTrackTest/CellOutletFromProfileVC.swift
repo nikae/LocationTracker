@@ -15,7 +15,7 @@ import Firebase
 class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
     var arr: [Trail] = []
-  
+    var vcId: String!
     
     @IBOutlet weak var theMap: MKMapView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -189,6 +189,18 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
     @IBAction func removeNoNeedData(_ sender: UIButton) {
         arr.removeAll()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if vcId == "TracksVC"  {
+            let controller = storyboard.instantiateViewController(withIdentifier: vcId) as! TracksVC
+            self.present(controller, animated: false, completion: nil)
+        } else if vcId == "TracksMapVC" {
+                let controller = storyboard.instantiateViewController(withIdentifier: vcId) as! TracksMapVC
+                self.present(controller, animated: false, completion: nil)
+            } else if vcId == "ProfileVC" {
+                let controller = storyboard.instantiateViewController(withIdentifier: vcId) as! ProfileVC
+                self.present(controller, animated: false, completion: nil)
+            }
     }
 
     var launchBool: Bool = false {

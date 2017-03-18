@@ -19,8 +19,9 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     var trails = [Trail]()
     let mapView = MyMapView()
     var manager: CLLocationManager!
-    var coordinatesTracksMap: [CLLocationCoordinate2D] = []
+    //var coordinatesTracksMap: [CLLocationCoordinate2D] = []
     var testArr = [Trail]()
+    var coordinate: CLLocationCoordinate2D! = nil
     
     override func viewWillAppear(_ animated: Bool) {
         getItemImage(item: profileTabBarItem)
@@ -58,31 +59,35 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                 self.trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 
                 for loc in self.trails {
-                    self.testArr.append(loc)
                     let name = loc.activityName
                     let desc = loc.description
                     let url = loc.pictureURL
                     let type = loc.activityType
-                    
+                    let unID = loc.unicueID
+                    let tl = loc
                     let loce = [loc.locations]
                     
                     for a in loce {
                         
                         let latitude = a[0]["Latitude"] as! CLLocationDegrees
                         let longitude = a[0]["Longitude"] as! CLLocationDegrees
-                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                        self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                         
-                        self.coordinatesTracksMap.append(coordinate)
+                      //  self.coordinatesTracksMap.append(coordinate)
                         
                         let point = TrailsAnnotation(coordinate: CLLocationCoordinate2D(latitude:latitude, longitude: longitude))
                         point.title = name
                         point.eta = desc
                         point.imageUrl = url!
                         point.actType = type
-                        self.theMap.addAnnotation(point)
+                        point.unicueId = unID
+                        point.tr = tl
+                       
+                        
+                        
+                  self.theMap.addAnnotation(point)
                     }
                 }
-                
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -98,10 +103,8 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         
     }
     
-    ///////////
     
-    
-    
+   // MARK -MKAnnotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         // If annotation is not of type RestaurantAnnotation (MKUserLocation types for instance), return nil
         if !(annotation is TrailsAnnotation){
@@ -118,17 +121,18 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
             annotationView?.annotation = annotation
         }
         
+       
+        
+        // Left Accessory
         let trailsAnnotation = annotation as! TrailsAnnotation
+
+//        print("title: \(trailsAnnotation.title)")
+//        print(trailsAnnotation.tr?.activityName ?? "NO TITLE")
+//        
         let imView = UIImageView()
         getImage(trailsAnnotation.imageUrl!, imageView: imView)
         imView.frame = CGRect(x: 0,y:0,width: 50,height: 50)
         annotationView?.leftCalloutAccessoryView = imView
-        
-//        // Left Accessory
-//        let leftAccessory = UILabel(frame: CGRect(x: 0,y:0,width: 50,height: 30))
-//        leftAccessory.text = trailsAnnotation.eta
-//        leftAccessory.font = UIFont(name: "Verdana", size: 10)
-//        annotationView?.leftCalloutAccessoryView = leftAccessory
         
         // Right accessory view
         let image = UIImage(named: "Forward_000000_25")
@@ -148,21 +152,30 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         } else if actName == "Hike" {
              annotationView?.rightCalloutAccessoryView?.backgroundColor = hikeColor()
         }
-
-       
+        
         return annotationView
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let a = CellTrailsVC()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "CellTrailsVC") as! CellTrailsVC
-        self.present(controller, animated: false, completion: nil)
-        a.arr1 = testArr
-    }
-
+        
+        let a = view.annotation as! TrailsAnnotation
+        
+        testArr = [a.tr!]
+       
+        self.performSegue(withIdentifier: "SegMapToInfo", sender: self)
+        
+       }
     
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // get a reference to the second view controller
+        let dest = segue.destination as! CellOutletFromProfileVC
+       
+        dest.arr = testArr
+        dest.vcId = "TracksMapVC"
+        
+    }
     
 //MARK: -setUp Location Manager
 func setUpLocationManager() {
@@ -187,8 +200,6 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
     return polylineRenderer
     
 }
-
-
     //MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?
@@ -228,25 +239,12 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
         }
     }
     
-
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func segmentedControlHit(_ sender: UISegmentedControl) {
         switch (segmentedControl.selectedSegmentIndex) {
         case 0:
