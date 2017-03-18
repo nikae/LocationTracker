@@ -91,7 +91,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
      
             if snapshot.hasChildren() {
-   
                 
             let value = snapshot.value as! NSDictionary
               
@@ -116,7 +115,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             let curUserID = FIRAuth.auth()?.currentUser?.uid
             if curUserID == userId {
             self.usersTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-//working on Now
+                
                 if activityType == "Walk" {
                    self.walkTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 } else if activityType == "Run" {
@@ -127,8 +126,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                     self.bikeTrails.insert(Trail(unicueID: unicueID,  userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
                 }
             }
-                
-            
                 self.tableView.reloadData()
             }
         }) { (error) in
@@ -157,7 +154,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             if viewController0 == nil {
                 
                 viewController0 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as!  ViewController
-                
             }
             present(viewController0!, animated: false, completion: nil)
             break
@@ -184,7 +180,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     }
     
     // MARK: -Table view processing
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -268,7 +263,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 
                 sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: goal)
                 valueOfSlider = slider.run
-                
                 break
             case 1:
                 type = runTrails[indexPath.row].activityType
@@ -285,8 +279,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
              
                 sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: goal)
                 valueOfSlider = slider.hike
-                
-                
                 break
             case 2:
                 type = hikeTrails[indexPath.row].activityType
@@ -303,7 +295,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 
                 sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: goal)
                 valueOfSlider = slider.bike
-                
                 break
             case 3:
                 type = bikeTrails[indexPath.row].activityType
@@ -317,10 +308,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 url = bikeTrails[indexPath.row].pictureURL
                 difficultyLabel.text = "\(bikeTrails[indexPath.row].difficulty)"
                 suitabilityLabel.text = "\(bikeTrails[indexPath.row].suitability)"
-             
                 sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: goal)
                 valueOfSlider = slider.walk
-                
                 break
             default :
                 break
@@ -356,7 +345,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         }
          return cell
     }
-    
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -402,7 +390,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                     self.removeChild(string: key_walk!)
                     self.walkTrails.remove(at: indexPath.row)
                     tableView.reloadData()
-                    
                 }
                 
                 returnAlert(action: delete)
@@ -498,20 +485,14 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         default :
             break
         }
-
-        
-       
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // get a reference to the second view controller
         let dest = segue.destination as! CellOutletFromProfileVC
-        
-//        // set a variable in the second view controller with the data to pass
         dest.arr = testArr
-         dest.vcId = "ProfileVC"
+        dest.vcId = "ProfileVC"
     }
     
     //MARK -segmented controller
@@ -553,7 +534,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
 //            headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
 //            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
 //            headerView.layer.zPosition = 0
-            
             
             if offset < -50 {
             tableView.reloadData()
@@ -604,11 +584,9 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.frame.maxY, 0, 0, 0)
     }
    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
     
     @IBAction func editProfileHit(_ sender: UIBarButtonItem) {
         let editProfileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditProfile") as! EditProfileVC

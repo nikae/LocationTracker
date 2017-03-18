@@ -224,8 +224,7 @@ func calculateTotalTime(time: TimeInterval) -> String {
     
 }
 
-
-//MARK
+//MARK -delateImage
 func delataImage(url: String) {
     let storageRef = FIRStorage.storage().reference()
     let desertRef = storageRef.storage.reference(forURL: url)

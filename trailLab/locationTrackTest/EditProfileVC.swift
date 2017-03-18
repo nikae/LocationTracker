@@ -162,7 +162,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             profilePictureDefoults.synchronize()
             
             saveImage(image)
-                
         
         } else {
             print("Somthing went wrong")
@@ -187,8 +186,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
         }
     }
-    
-   
 
     @IBAction func editProfilePictureHit(_ sender: UIButton) {
         addPhoto()
@@ -216,7 +213,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 
                 clearGoalsDefoultsFunc()
                 
-
             } catch let error as NSError {
                 print(error.localizedDescription)
             }

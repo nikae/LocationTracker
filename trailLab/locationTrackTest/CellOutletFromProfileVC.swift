@@ -76,11 +76,8 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
                 let polyline = MKPolyline(coordinates: &coordinates1, count: coordinates1.count)
                 
                 self.theMap.add(polyline)
-
             }
-            
-        }
-        
+            }
   
         setUpLocationManager()
        
@@ -97,11 +94,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         }
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
-        
-        //does not work
-        UIApplication.shared.isStatusBarHidden = true
         
         decView1.clipsToBounds = true
         decView1.isUserInteractionEnabled = true
@@ -109,11 +102,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         
         getDirectionsBtn.clipsToBounds = true
         getDirectionsBtn.layer.cornerRadius = getDirectionsBtn.frame.height/2
-
-
     }
-    
-
     
   //MARK -Get Directions
     func openMapForPlace() {
@@ -172,7 +161,6 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
        // polylineRenderer.strokeColor = .black
         polylineRenderer.lineWidth = 5
         return polylineRenderer
-        
     }
 
     

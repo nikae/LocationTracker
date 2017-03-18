@@ -59,9 +59,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 //            }
 //        }
 //*********************SAFETY ZONE*************************
-        
-        
-           }
+  }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -79,7 +77,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         getItemImage(item: profileTabBarItem)
 
     }
-
     
     //MARK -TabBar controller
     var viewController0: UIViewController?
@@ -135,9 +132,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     } else {
     print("Location services are not enabled")
     }
-        
  }
-   
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
        
@@ -184,7 +179,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             }
         })
         
-        
         if startLocation == nil {
             startLocation = locations.first as CLLocation!
         } else {
@@ -203,7 +197,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
         
         lastLocation = locations.last as CLLocation!
-        
     }
     
     func removeOveraly()
@@ -259,9 +252,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //MARK -Calculate Pace
         if distanceTraveled != 0 {
             
-//            timeActived = (Double((hours*60) + (minutes*60) + seconds)) / 60
-//            print(timeActived)
-            
  //needs correction
         let paceMinutes = paceInSeconds(hours: Double(hours), minutes: Double(minutes), seconds: Double(seconds), distance: distanceTraveled) / 60
         let roundedPaceMinutes = Double(floor(paceMinutes))
@@ -277,7 +267,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             paceLabel_String = "--'-"
             paceLabel.text = paceLabel_String
         }
-        
         
         if timeLabel_String == "24:00:00" {
             timer.invalidate()
@@ -302,7 +291,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             print("Location services are not enabled")
             
         }
-        
     }
     
     func startUpdatingLocation_SetUp(){
@@ -314,7 +302,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         profileTabBarItem.isEnabled = false
         tracksTabBarItem.isEnabled = false
         tabStart.isEnabled = false
-        
     }
     
     func endUpdatingLocation(){
@@ -351,9 +338,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             popUp.view.removeFromSuperview()
             //Do Map
             self.startUpdatingLocation()
-    
         })
     }
+    
     
     func popUpActivityManager() {
         // PopUp to Save
@@ -362,7 +349,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         popUp.view.frame = self.view.frame
         self.view.addSubview(popUp.view)
         popUp.didMove(toParentViewController: self)
-        
     }
     
     var launchTest: Bool = true
@@ -406,7 +392,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 self.present(alertController, animated: true, completion: nil)
             }
         }
-    }   
+    }
+    
     
   //MARK: -Guestures for sports picker view
     @IBOutlet var tapGesture: UITapGestureRecognizer!

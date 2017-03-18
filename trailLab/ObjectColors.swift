@@ -31,10 +31,8 @@ enum PolyLineColor {
             case .grin :
                 return UIColor(red: 61/255.0, green: 229/255.0, blue: 0/255.0, alpha: 0.9)
             }
-            
-        }
-
     }
+}
     
 enum SportColors {
     case run, walk, hike, bike

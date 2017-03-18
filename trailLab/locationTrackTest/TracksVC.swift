@@ -17,7 +17,13 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
     @IBOutlet weak var segmentControler: UISegmentedControl!
     
-    var trails = [Trail]()
+    var trails: [Trail] = []
+    var testArr: [Trail] = []
+    
+ //********* calculate distance beetwin userLocation and trails first cordinate if its > 100 do not desplay********
+//    let coordinate₀ = CLLocation(latitude: 5.0, longitude: 5.0)
+//    let coordinate₁ = CLLocation(latitude: 5.0, longitude: 3.0)
+//    let distanceInMeters = coordinate₀.distance(from: coordinate₁) // result is in meters
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +35,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             if snapshot.hasChildren() {
                 
                 let value = snapshot.value as! NSDictionary
-                
 
                 let unicueID = value["unicueID"] as? String
                 let userId = value["userId"] as? String
@@ -54,7 +59,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }) { (error) in
             print(error.localizedDescription)
         }
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +75,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         switch item.tag {
         case 0:
             if viewController0 == nil {
-                
                 viewController0 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as!  ViewController
                 
             }
@@ -79,7 +82,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             break
         case 1:
             if viewController1 == nil {
-                
                 viewController1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TracksVC") as! TracksVC
             }
             present(viewController1!, animated: false, completion: nil)
@@ -87,7 +89,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             
         case 2:
             if viewController2 == nil {
-                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 viewController2 = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
             }
@@ -102,9 +103,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
         //MARK -TV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
- 
         return trails.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,13 +141,9 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         cell.starBut.tag = indexPath.row
         cell.starBut.addTarget(self, action: Selector(("launchStar")), for: .touchUpInside)
         
-        
-               return cell
-
+        return cell
     }
-    
-    
-    var testArr: [Trail] = []
+  
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -160,10 +155,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // get a reference to the second view controller
         let dest = segue.destination as! CellOutletFromProfileVC
         
-       // set a variable in the second view controller with the data to pass
         dest.arr = testArr
         dest.vcId = "TracksVC"
         
@@ -174,7 +167,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         
         testArr.append(trails[indexPath.row])
         self.performSegue(withIdentifier: "Segue5", sender: self)
-        
     }
     
     
@@ -220,7 +212,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
         
         return cell
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

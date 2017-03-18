@@ -25,12 +25,10 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     
     override func viewWillAppear(_ animated: Bool) {
         getItemImage(item: profileTabBarItem)
-       
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         let databaseRef = FIRDatabase.database().reference()
         
@@ -39,7 +37,6 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
             if snapshot.hasChildren() {
                 
                 let value = snapshot.value as! NSDictionary
-                
                 
                 let unicueID = value["unicueID"] as? String
                 let userId = value["userId"] as? String
@@ -73,17 +70,13 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                         let longitude = a[0]["Longitude"] as! CLLocationDegrees
                         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                         
-                      //  self.coordinatesTracksMap.append(coordinate)
-                        
-                        let point = TrailsAnnotation(coordinate: CLLocationCoordinate2D(latitude:latitude, longitude: longitude))
+                        let point = TrailsAnnotation(coordinate: self.coordinate) //
                         point.title = name
                         point.eta = desc
                         point.imageUrl = url!
                         point.actType = type
                         point.unicueId = unID
                         point.tr = tl
-                       
-                        
                         
                   self.theMap.addAnnotation(point)
                     }
@@ -121,14 +114,9 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
             annotationView?.annotation = annotation
         }
         
-       
-        
         // Left Accessory
         let trailsAnnotation = annotation as! TrailsAnnotation
 
-//        print("title: \(trailsAnnotation.title)")
-//        print(trailsAnnotation.tr?.activityName ?? "NO TITLE")
-//        
         let imView = UIImageView()
         getImage(trailsAnnotation.imageUrl!, imageView: imView)
         imView.frame = CGRect(x: 0,y:0,width: 50,height: 50)
@@ -159,13 +147,11 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         let a = view.annotation as! TrailsAnnotation
-        
         testArr = [a.tr!]
        
         self.performSegue(withIdentifier: "SegMapToInfo", sender: self)
         
        }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

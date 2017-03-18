@@ -20,7 +20,6 @@ class ResetPasswordVC: UIViewController, UITextFieldDelegate {
         emailTF.delegate = self
     }
     
-    
     //Mark -Figour out KeyBoard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         

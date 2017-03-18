@@ -53,7 +53,6 @@ struct ActivityPicker {
 
  }
 }
-
     
     //MARK: -Start Button View
     func startButtonView(image: String, button: UIButton, color: UIColor, headLineTitle: String, navigationBar: UINavigationBar) {
@@ -85,8 +84,6 @@ struct ActivityPicker {
         button.backgroundColor = color
        
     }
-    
-    
     
     //MARK: -First View of Buttons
     func activityPickerView(view: UIView, walk: UIButton, run: UIButton, hike: UIButton, bike: UIButton) {
@@ -158,11 +155,5 @@ struct ActivityPicker {
             swipeUpGesture.isEnabled = false
             swipeDownGesture.isEnabled = true
         }
-
-    
-        
     }
-
-    
-
 }
