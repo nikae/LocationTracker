@@ -205,19 +205,27 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         launchBool = !launchBool
     }
 
-    func popUpActivityManager() {
-        // PopUp to Save
-        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "activDetiledVC") as! activDetiledVC
-        self.addChildViewController(popUp)
-        popUp.view.frame = self.view.frame
-        self.view.addSubview(popUp.view)
-        popUp.didMove(toParentViewController: self)
+//    func popUpActivityManager() {
+//        // PopUp to Save
+//        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "activDetiledVC") as! activDetiledVC
+//        self.addChildViewController(popUp)
+//        popUp.view.frame = self.view.frame
+//        self.view.addSubview(popUp.view)
+//        popUp.didMove(toParentViewController: self)
+//        
+//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        // get a reference to the second view controller
+        let dest = segue.destination as! activDetiledVC
+        dest.arrADVC = arr
+        dest.vcId = vcId
     }
 
     @IBAction func detailsHit(_ sender: UIButton) {
-      popUpActivityManager()
-        print("yasss!!")
+     // popUpActivityManager()
+        self.performSegue(withIdentifier: "SegueactivDetiledVC", sender: self) //SegueactivDetiledVC
+     //   print("yasss!!")
     }
     
     @IBAction func getDirectionsHit(_ sender: UIButton) {

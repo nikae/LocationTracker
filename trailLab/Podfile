@@ -22,4 +22,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Firebase/Database'
 
+  # Pods for chart
+ pod 'Charts', '~> 3.0'
+
 end
