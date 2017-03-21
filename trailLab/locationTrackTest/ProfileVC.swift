@@ -80,7 +80,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         profileImage.isUserInteractionEnabled = true
         profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.layer.borderWidth = 0.5
-        profileImage.clipsToBounds = true
         
         goalSlider.minimumTrackTintColor = walkColor()
         goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
@@ -135,6 +134,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         getItemImage(item: profileTabBarItem)
+        buttShape(but: giveButton, color: runColor())
     }
     
     override func viewDidLayoutSubviews() {

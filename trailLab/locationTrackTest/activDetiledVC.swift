@@ -30,6 +30,8 @@ class activDetiledVC: UIViewController {
         if arrADVC.count > 0 {
         let url = arrADVC[0].pictureURL
         getImage(url!, imageView: imageView)
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         headerLabel.text = arrADVC[0].activityName
         scrollView.delaysContentTouches = false
             
@@ -51,8 +53,9 @@ class activDetiledVC: UIViewController {
         decView.isUserInteractionEnabled = true
         decView.layer.cornerRadius = decView.frame.height/2
         
-        doneButton.clipsToBounds = true
-        doneButton.layer.cornerRadius = doneButton.frame.height/2
+//        doneButton.clipsToBounds = true
+//        doneButton.layer.cornerRadius = doneButton.frame.height/2
+        buttShape(but: doneButton, color: bikeColor())
     }
 
     //MARK -Chart Method
@@ -111,6 +114,7 @@ class activDetiledVC: UIViewController {
     
     
     @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
+        print("view Tapped")
     }
 
     @IBAction func doneHit(_ sender: UIButton) {

@@ -240,5 +240,13 @@ func delataImage(url: String) {
 }
 
 
+//MARK -Button Shape
+
+func buttShape(but: UIButton, color: UIColor) {
+    but.backgroundColor = color
+    but.clipsToBounds = true
+    but.layer.cornerRadius = but.frame.height/2
+}
+
 
 

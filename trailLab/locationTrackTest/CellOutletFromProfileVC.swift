@@ -41,6 +41,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
     @IBOutlet weak var getDirectionsBtn: UIButton!
     
+    @IBOutlet weak var doneBtn: UIButton!
     
     let mapView = MyMapView()
     var coordinates1: [CLLocationCoordinate2D] = []
@@ -100,8 +101,14 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         decView1.isUserInteractionEnabled = true
         decView1.layer.cornerRadius = decView1.frame.height/2
         
-        getDirectionsBtn.clipsToBounds = true
-        getDirectionsBtn.layer.cornerRadius = getDirectionsBtn.frame.height/2
+//        getDirectionsBtn.clipsToBounds = true
+//        getDirectionsBtn.layer.cornerRadius = getDirectionsBtn.frame.height/2
+//        
+//        doneBtn.clipsToBounds = true
+//        doneBtn.layer.cornerRadius = getDirectionsBtn.frame.height/2
+        
+        buttShape(but: getDirectionsBtn, color: hikeColor())
+        buttShape(but: doneBtn, color: bikeColor())
     }
     
   //MARK -Get Directions
@@ -194,9 +201,9 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     var launchBool: Bool = false {
         didSet {
             if launchBool == true {
-                self.scrollView.isUserInteractionEnabled = true
-            } else {
                 self.scrollView.isUserInteractionEnabled = false
+            } else {
+                self.scrollView.isUserInteractionEnabled = true
             }
         }
     }
@@ -217,9 +224,15 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // get a reference to the second view controller
+        if segue.identifier == "SegueactivDetiledVC" {
         let dest = segue.destination as! activDetiledVC
         dest.arrADVC = arr
         dest.vcId = vcId
+        } else {
+        let imagedest = segue.destination as! FullImageVC
+        imagedest.arrADVC = arr
+        imagedest.vcId = vcId
+        }
     }
 
     @IBAction func detailsHit(_ sender: UIButton) {
@@ -232,5 +245,8 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         openMapForPlace()
     }
   
+    @IBAction func openImageHit(_ sender: UIButton) {
+       self.performSegue(withIdentifier: "openImage", sender: self)
+    }
   
 }
