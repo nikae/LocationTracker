@@ -54,6 +54,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         print(arr[0].activityType)
         
         scrollView.delaysContentTouches = false
+        scrollView.isUserInteractionEnabled = false
         
         activeNameTF.text = arr[0].activityName
         distanceLabel.text = arr[0].distance

@@ -9,25 +9,48 @@
 import UIKit
 import CoreData
 import Firebase
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+   // let getData = GetData()
+     let locationManager = CLLocationManager()
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+       let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+       print(locValue)
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
         if FIRAuth.auth()?.currentUser != nil {
             if keepMeLogedInDefoultsDefoults.bool(forKey: keepMeLogedInDefoults_key) != false {
-        self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "ViewController")
+                self.window?.rootViewController = self.storyboard.instantiateViewController(withIdentifier: "ViewController")
             }
         }
-
+        
+        if CLLocationManager.locationServicesEnabled() {
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager.startUpdatingLocation()
+        }
+        
+         let coordinate₁ = locationManager.location
+       // print("COoOOOOOOoOoooOooooOOOOOOO RDINATE \(coordinate₁)")
+        
+        if coordinate₁ != nil {
+            preloadTrails(loc: coordinate₁!, radius: 300)
+        }
+        
+        // getData.preloadTrails()
         return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

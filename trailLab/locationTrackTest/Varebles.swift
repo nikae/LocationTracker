@@ -157,3 +157,12 @@ var lifeTime_Time: Double = 0
 var lifeTime_Pace = 0
 var lifeTime_MaxAltitude: Double = 0
 var lifeTime_Activities = 0
+
+//testing
+var trails: [Trail] = []
+var usersTrails = [Trail]()
+var walkTrails = [Trail]()
+var runTrails = [Trail]()
+var hikeTrails = [Trail]()
+var bikeTrails = [Trail]()
+

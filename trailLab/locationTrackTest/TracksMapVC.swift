@@ -16,7 +16,7 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     @IBOutlet weak var theMap: MKMapView!
     
-    var trails = [Trail]()
+    //var trails = [Trail]()
     let mapView = MyMapView()
     var manager: CLLocationManager!
     //var coordinatesTracksMap: [CLLocationCoordinate2D] = []
@@ -30,32 +30,32 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let databaseRef = FIRDatabase.database().reference()
-        
-        databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
-            
-            if snapshot.hasChildren() {
-                
-                let value = snapshot.value as! NSDictionary
-                
-                let unicueID = value["unicueID"] as? String
-                let userId = value["userId"] as? String
-                let activityType = value["activityType"] as? String ?? ""
-                let activityName = value["activityName"] as? String
-                let distance = value["distance"] as? String ?? ""
-                let locations = value["locations"] as! [AnyObject]
-                let time = value["time"] as? String ?? ""
-                let pace = value["pace"] as? [Int] ?? [0]
-                let altitudes = value["altitudes"] as? [Double] ?? [0]
-                let difficulty = value["difficulty"] as? [String] ?? [""]
-                let suitability = value["suitability"] as? [String] ?? [""]
-                let whatToSee = value["watToSee"] as? [String] ?? [""]
-                let description = value["description"]  as? String ?? ""
-                let pictureURL = value["pictureURL"]  as? String
-                
-                self.trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-                
-                for loc in self.trails {
+//        let databaseRef = FIRDatabase.database().reference()
+//        
+//        databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+//            
+//            if snapshot.hasChildren() {
+//                
+//                let value = snapshot.value as! NSDictionary
+//                
+//                let unicueID = value["unicueID"] as? String
+//                let userId = value["userId"] as? String
+//                let activityType = value["activityType"] as? String ?? ""
+//                let activityName = value["activityName"] as? String
+//                let distance = value["distance"] as? String ?? ""
+//                let locations = value["locations"] as! [AnyObject]
+//                let time = value["time"] as? String ?? ""
+//                let pace = value["pace"] as? [Int] ?? [0]
+//                let altitudes = value["altitudes"] as? [Double] ?? [0]
+//                let difficulty = value["difficulty"] as? [String] ?? [""]
+//                let suitability = value["suitability"] as? [String] ?? [""]
+//                let whatToSee = value["watToSee"] as? [String] ?? [""]
+//                let description = value["description"]  as? String ?? ""
+//                let pictureURL = value["pictureURL"]  as? String
+//                
+//                self.trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+//                
+                for loc in trails {
                     let name = loc.activityName
                     let desc = loc.description
                     let url = loc.pictureURL
@@ -81,10 +81,10 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                   self.theMap.addAnnotation(point)
                     }
                 }
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+//            }
+//        }) { (error) in
+//            print(error.localizedDescription)
+//        }
         
         segmentedControl.selectedSegmentIndex = 1
         

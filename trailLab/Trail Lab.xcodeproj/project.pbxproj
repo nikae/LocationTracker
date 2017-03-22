@@ -34,6 +34,7 @@
 		24D1BFCB1E4A9FE0007151E8 /* HealtKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */; };
 		24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCC1E4D4691007151E8 /* viewSlider.swift */; };
 		24EB64AD1E81DD6800017A9C /* FullImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EB64AC1E81DD6800017A9C /* FullImageVC.swift */; };
+		24EB64AF1E8200B200017A9C /* PreloadTrailsMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EB64AE1E8200B200017A9C /* PreloadTrailsMethods.swift */; };
 		24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F114D81E7B47F200269D69 /* TracksMapVC.swift */; };
 		24F9D0351E79F091008BE044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24F9D0341E79F091008BE044 /* Main.storyboard */; };
 		24F9D0371E79FE89008BE044 /* activDetiledVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9D0361E79FE89008BE044 /* activDetiledVC.swift */; };
@@ -97,6 +98,7 @@
 		24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealtKitManager.swift; sourceTree = "<group>"; };
 		24D1BFCC1E4D4691007151E8 /* viewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewSlider.swift; sourceTree = "<group>"; };
 		24EB64AC1E81DD6800017A9C /* FullImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageVC.swift; sourceTree = "<group>"; };
+		24EB64AE1E8200B200017A9C /* PreloadTrailsMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreloadTrailsMethods.swift; sourceTree = "<group>"; };
 		24F114D81E7B47F200269D69 /* TracksMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksMapVC.swift; sourceTree = "<group>"; };
 		24F9D0341E79F091008BE044 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		24F9D0361E79FE89008BE044 /* activDetiledVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activDetiledVC.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				240DD1111DE531B100F68A28 /* AppDelegate.swift */,
+				24EB64AE1E8200B200017A9C /* PreloadTrailsMethods.swift */,
 				240DD1131DE531B100F68A28 /* ViewController.swift */,
 				249666911E42BA4F009335E2 /* ProfileVC.swift */,
 				24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */,
@@ -529,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				249666921E42BA4F009335E2 /* ProfileVC.swift in Sources */,
+				24EB64AF1E8200B200017A9C /* PreloadTrailsMethods.swift in Sources */,
 				249666901E41694C009335E2 /* TracksVC.swift in Sources */,
 				2466ACA21DFE1300001331DD /* DataBaseModel.xcdatamodeld in Sources */,
 				24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */,

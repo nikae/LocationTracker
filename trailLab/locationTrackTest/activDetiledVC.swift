@@ -34,6 +34,7 @@ class activDetiledVC: UIViewController {
         imageView.contentMode = .scaleAspectFill
         headerLabel.text = arrADVC[0].activityName
         scrollView.delaysContentTouches = false
+        
             
         var dPace:[Double] = []
         let maxAlt = String(format: "%.2f ft", arrADVC[0].altitudes.max()!)
