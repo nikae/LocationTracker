@@ -54,7 +54,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         print(arr[0].activityType)
         
         scrollView.delaysContentTouches = false
-        scrollView.isUserInteractionEnabled = false
+        //scrollView.isUserInteractionEnabled = false
         
         activeNameTF.text = arr[0].activityName
         distanceLabel.text = arr[0].distance
@@ -69,7 +69,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
             let loce = loc.locations
             
             for a in loce {
-               let latitude = a["Latitude"] as! CLLocationDegrees
+                let latitude = a["Latitude"] as! CLLocationDegrees
                 let longitude = a["Longitude"] as! CLLocationDegrees
                 let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 
@@ -178,10 +178,6 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     }
     
 
-    @IBAction func swipeUpHit(_ sender: UISwipeGestureRecognizer) {
-        //NEED TO CANCEL
-    }
-
     
     @IBAction func removeNoNeedData(_ sender: UIButton) {
         arr.removeAll()
@@ -199,20 +195,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
             }
     }
 
-    var launchBool: Bool = false {
-        didSet {
-            if launchBool == true {
-                self.scrollView.isUserInteractionEnabled = false
-            } else {
-                self.scrollView.isUserInteractionEnabled = true
-            }
-        }
-    }
-    
-    @IBAction func ViewTapped(_ sender: UITapGestureRecognizer) {
-        launchBool = !launchBool
-    }
-
+  
 //    func popUpActivityManager() {
 //        // PopUp to Save
 //        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "activDetiledVC") as! activDetiledVC

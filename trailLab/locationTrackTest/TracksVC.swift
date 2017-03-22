@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreLocation
 
 class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -28,6 +29,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         self.tableView.reloadData()
         self.collectionView.reloadData()
     }
@@ -126,11 +128,17 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == "Segue5" {
         let dest = segue.destination as! CellOutletFromProfileVC
         
         dest.arr = testArr
         dest.vcId = "TracksVC"
-        
+            
+        } else if segue.identifier == "filterTrails" {
+        let dest = segue.destination as! FilterVC
+
+            dest.viewID = "TracksVC"
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -202,4 +210,27 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
          
         }
     }
+//    @IBAction func testingDataLoadHit(_ sender: UIBarButtonItem) {
+//        if coordinate₁ != nil {
+//            if trails.count > 0 {
+//                trails.removeAll()
+//                walkTrails.removeAll()
+//                runTrails.removeAll()
+//                hikeTrails.removeAll()
+//                bikeTrails.removeAll()
+//            }
+//            preloadTrails(loc: coordinate₁!, radius: 50)
+//            tableView.reloadData()
+//            collectionView.reloadData()
+//        }
+//
+//        
+//    }
+ 
+
+    @IBAction func filterHit(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "filterTrails", sender: self)
+        
+    }
+    
 }

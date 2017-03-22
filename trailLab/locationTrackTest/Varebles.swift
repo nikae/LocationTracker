@@ -11,6 +11,7 @@ import UIKit
 import MapKit
 import AVFoundation
 import Firebase
+import CoreLocation
 
 //MARK: -UsersDefoult
 let sportsButtonDefoults = UserDefaults.standard
@@ -165,4 +166,9 @@ var walkTrails = [Trail]()
 var runTrails = [Trail]()
 var hikeTrails = [Trail]()
 var bikeTrails = [Trail]()
+
+
+var radiusOfLoadingTrails: Double = 0.5
+
+var coordinate₁: CLLocation!
 

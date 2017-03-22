@@ -40,11 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             self.locationManager.startUpdatingLocation()
         }
         
-         let coordinate₁ = locationManager.location
+        coordinate₁ = locationManager.location
        // print("COoOOOOOOoOoooOooooOOOOOOO RDINATE \(coordinate₁)")
         
         if coordinate₁ != nil {
-            preloadTrails(loc: coordinate₁!, radius: 300)
+            preloadTrails(loc: coordinate₁!, radius: radiusOfLoadingTrails)
         }
         
         // getData.preloadTrails()

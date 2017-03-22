@@ -55,9 +55,8 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
             
            if distanceInMiles <= radius {
-            
             trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-            }
+        }
             
             let curUserID = FIRAuth.auth()?.currentUser?.uid
             if curUserID == userId {

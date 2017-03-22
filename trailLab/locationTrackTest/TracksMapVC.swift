@@ -156,11 +156,17 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // get a reference to the second view controller
+        if segue.identifier == "SegMapToInfo" {
         let dest = segue.destination as! CellOutletFromProfileVC
        
         dest.arr = testArr
         dest.vcId = "TracksMapVC"
-        
+        } else if segue.identifier == "filterMap" {
+            let dest = segue.destination as! FilterVC
+            dest.viewID = "TracksMapVC"
+            
+        }
+    
     }
     
 //MARK: -setUp Location Manager
@@ -242,6 +248,12 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
             break
         default : break
         }
+    }
+    
+    
+    @IBAction func filterHitMap(_ sender: UIBarButtonItem) {
+        
+        self.performSegue(withIdentifier: "filterMap", sender: self)
     }
 
 }

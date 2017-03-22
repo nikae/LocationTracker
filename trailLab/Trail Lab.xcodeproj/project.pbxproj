@@ -35,6 +35,7 @@
 		24D1BFCD1E4D4692007151E8 /* viewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1BFCC1E4D4691007151E8 /* viewSlider.swift */; };
 		24EB64AD1E81DD6800017A9C /* FullImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EB64AC1E81DD6800017A9C /* FullImageVC.swift */; };
 		24EB64AF1E8200B200017A9C /* PreloadTrailsMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EB64AE1E8200B200017A9C /* PreloadTrailsMethods.swift */; };
+		24EB64B11E831FDA00017A9C /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EB64B01E831FDA00017A9C /* FilterVC.swift */; };
 		24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F114D81E7B47F200269D69 /* TracksMapVC.swift */; };
 		24F9D0351E79F091008BE044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24F9D0341E79F091008BE044 /* Main.storyboard */; };
 		24F9D0371E79FE89008BE044 /* activDetiledVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F9D0361E79FE89008BE044 /* activDetiledVC.swift */; };
@@ -99,6 +100,7 @@
 		24D1BFCC1E4D4691007151E8 /* viewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewSlider.swift; sourceTree = "<group>"; };
 		24EB64AC1E81DD6800017A9C /* FullImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageVC.swift; sourceTree = "<group>"; };
 		24EB64AE1E8200B200017A9C /* PreloadTrailsMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreloadTrailsMethods.swift; sourceTree = "<group>"; };
+		24EB64B01E831FDA00017A9C /* FilterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
 		24F114D81E7B47F200269D69 /* TracksMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksMapVC.swift; sourceTree = "<group>"; };
 		24F9D0341E79F091008BE044 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		24F9D0361E79FE89008BE044 /* activDetiledVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activDetiledVC.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				24F114D81E7B47F200269D69 /* TracksMapVC.swift */,
 				249C0BA61E7C7B810088329D /* TrailsAnnotation.swift */,
 				24B0C4551E6A452E00166FB8 /* TracksVCCellTableViewCell.swift */,
+				24EB64B01E831FDA00017A9C /* FilterVC.swift */,
 				245038661E31CCBE00CF1707 /* PopUpActivityDon.swift */,
 				245038681E32B3A700CF1707 /* CountDownVC.swift */,
 				24BAB1E61E57B6B100E32E74 /* LogInVC.swift */,
@@ -534,6 +537,7 @@
 				249666921E42BA4F009335E2 /* ProfileVC.swift in Sources */,
 				24EB64AF1E8200B200017A9C /* PreloadTrailsMethods.swift in Sources */,
 				249666901E41694C009335E2 /* TracksVC.swift in Sources */,
+				24EB64B11E831FDA00017A9C /* FilterVC.swift in Sources */,
 				2466ACA21DFE1300001331DD /* DataBaseModel.xcdatamodeld in Sources */,
 				24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */,
 				2466AC9F1DFE1010001331DD /* CoreDataStack.swift in Sources */,

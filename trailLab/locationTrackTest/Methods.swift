@@ -246,6 +246,7 @@ func buttShape(but: UIButton, color: UIColor) {
     but.backgroundColor = color
     but.clipsToBounds = true
     but.layer.cornerRadius = but.frame.height/2
+   // but.layer.shadowRadius
 }
 
 
