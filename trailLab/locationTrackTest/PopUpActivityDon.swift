@@ -38,6 +38,10 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     @IBOutlet weak var lakeButton: UIButton!
     @IBOutlet weak var waterFallButton: UIButton!
     @IBOutlet weak var hotSpringsButton: UIButton!
+    
+    @IBOutlet weak var deleteBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIButton!
+    
    
     @IBOutlet weak var activityNameTF: UITextField!
  
@@ -112,7 +116,29 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
 
         let polyline = MKPolyline(coordinates: &coordinates, count: coordinates.count)
         self.mapView_ActivityDone.add(polyline)
-
+        
+//        var colors: [UIColor] = [walkColor(), runColor(), hikeColor(), bikeColor()]
+//        let randomIndex = Int(arc4random_uniform(UInt32(colors.count)))
+//        let color = colors[randomIndex]
+        
+        buttShape(but: deleteBtn, color: walkColor())
+        buttShape(but: saveBtn, color: hikeColor())
+        
+        buttShape(but: easy, color: hikeColor())
+        buttShape(but: medium, color: runColor())
+        buttShape(but: hard, color: walkColor())
+        
+        buttShape(but: kidFriendly, color: bikeColor())
+        buttShape(but: dogFriemdly, color: bikeColor())
+        buttShape(but: WeelchairFriendly, color: bikeColor())
+        
+        buttShape(but: ViewsButt, color: walkColor())
+        buttShape(but: beachButton, color: bikeColor())
+        buttShape(but: riverButton, color: bikeColor())
+        buttShape(but: caveButton, color: runColor())
+        buttShape(but: lakeButton, color: hikeColor())
+        buttShape(but: waterFallButton, color: runColor())
+        buttShape(but: hotSpringsButton, color: walkColor())
     }
     
  
@@ -270,15 +296,15 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
 
     //MARK: -Figour Out options
-    let green1 = UIColor(red: 81/255.0, green:  81/255.0, blue:  81/255.0, alpha: 1)
-    let green2 = UIColor(red: 128/255.0, green:  128/255.0, blue:  128/255.0, alpha: 1)
+    //let green1 = UIColor(red: 81/255.0, green:  81/255.0, blue:  81/255.0, alpha: 1)
+   // let green2 = UIColor(red: 128/255.0, green:  128/255.0, blue:  128/255.0, alpha: 1)
     
     func launchBool(sender: UIButton, bool: Bool, arrayLet: [String]) {
         var array = arrayLet
         if bool == true {
             let num = sender.title(for: UIControlState())!
             array.append(num)
-            sender.backgroundColor = green2
+            sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(0.5)
             print(array)
             
         } else {
@@ -286,7 +312,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         if let index = array.index(of: num) {
             array.remove(at: index)
         }
-        sender.backgroundColor = green1
+        sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1)
         print(array)
         }
     }
