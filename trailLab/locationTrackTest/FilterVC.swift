@@ -76,6 +76,16 @@ buttShape(but: allActivityTypeBtn, color: .gray)
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func NEEDSTOBECHANGED(_ sender: UIButton) {
+        if coordinate₁ != nil {
+            if trails.count > 0 {
+                trails.removeAll()
+            }
+            preloadTrails(loc: coordinate₁!, radius: 1000)
+               }
+
+    }
+    
     
     @IBAction func doneHit(_ sender: UIButton) {
         if viewID == "TracksMapVC" {

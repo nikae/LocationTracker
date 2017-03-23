@@ -168,7 +168,7 @@ var hikeTrails = [Trail]()
 var bikeTrails = [Trail]()
 
 
-var radiusOfLoadingTrails: Double = 0.5
+var radiusOfLoadingTrails: Double = 0.1
 
 var coordinate₁: CLLocation!
 

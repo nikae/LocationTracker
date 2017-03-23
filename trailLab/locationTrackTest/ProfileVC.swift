@@ -49,6 +49,8 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         getgoalsDefoultsFunc()
         lifeTime_Distance = (walkGoal + runGoal + hikeGoal + bikeGoal)
         

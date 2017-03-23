@@ -19,6 +19,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     var databaseRef: FIRDatabaseReference!
     fileprivate var _refHandle: FIRDatabaseHandle!
     var users: [FIRDataSnapshot] = []
+    //possible Error
     var picURL = ""
     let userID = FIRAuth.auth()?.currentUser?.uid
 
@@ -72,8 +73,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         getgoalsDefoultsFunc()
         setGoals()
         
-        
-        
         self.UploadIndicator.hidesWhenStopped = true
         
         storageRef = FIRStorage.storage().reference(forURL: "gs://trail-lab.appspot.com")
@@ -112,14 +111,10 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
             cordinatesArray.append(dict as AnyObject)
         }
 
-     coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
+        coordinates = myLocations.map({(location: CLLocation!) -> CLLocationCoordinate2D in return location.coordinate})
 
         let polyline = MKPolyline(coordinates: &coordinates, count: coordinates.count)
         self.mapView_ActivityDone.add(polyline)
-        
-//        var colors: [UIColor] = [walkColor(), runColor(), hikeColor(), bikeColor()]
-//        let randomIndex = Int(arc4random_uniform(UInt32(colors.count)))
-//        let color = colors[randomIndex]
         
         buttShape(but: deleteBtn, color: walkColor())
         buttShape(but: saveBtn, color: hikeColor())
@@ -129,8 +124,8 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         buttShape(but: hard, color: walkColor())
         
         buttShape(but: kidFriendly, color: bikeColor())
-        buttShape(but: dogFriemdly, color: bikeColor())
-        buttShape(but: WeelchairFriendly, color: bikeColor())
+        buttShape(but: dogFriemdly, color: runColor())
+        buttShape(but: WeelchairFriendly, color: hikeColor())
         
         buttShape(but: ViewsButt, color: walkColor())
         buttShape(but: beachButton, color: bikeColor())
@@ -156,13 +151,13 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
 
     
-//    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-//        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-//        polylineRenderer.strokeColor = blueColor
-//        polylineRenderer.lineWidth = 5
-//        return polylineRenderer
-//        
-//    }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = blueColor
+        polylineRenderer.lineWidth = 5
+        return polylineRenderer
+        
+    }
 
     //MARK: -Camera / Add Picture
     func addPhoto(_ recognizer: UITapGestureRecognizer) {
@@ -224,27 +219,10 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
                     return
                 }
             self.picURL = self.storageRef.child((metadata?.path)!).description
-            //print(self.picURL)
         }
         
     }
 
-    
-//    func delataImage() {
-//        let desertRef = storageRef.storage.reference(forURL: picURL)
-//        
-//        // Delete the file
-//        desertRef.delete { error in
-//            if let error = error {
-//               print(error.localizedDescription)
-//            } else {
-//                print("Image Is delated")
-//            }
-//        }
-//    }
-
-    
-    
     
     
     //MARK: -Figour Out KeyBoard / TextView - TextFiled
@@ -254,7 +232,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
             moveTextView(textView: textView, distance: -290, up: true)
         }
     }
-    //////SEE WHATS GOING ON
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if (textView == textView_ActivityDone) {
             moveTextView(textView: textView, distance: -290, up: false)
@@ -295,10 +273,9 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         keyboardDismiss()
     }
 
-    //MARK: -Figour Out options
-    //let green1 = UIColor(red: 81/255.0, green:  81/255.0, blue:  81/255.0, alpha: 1)
-   // let green2 = UIColor(red: 128/255.0, green:  128/255.0, blue:  128/255.0, alpha: 1)
     
+    
+    //MARK: -Figour Out options
     func launchBool(sender: UIButton, bool: Bool, arrayLet: [String]) {
         var array = arrayLet
         if bool == true {
@@ -306,8 +283,8 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
             array.append(num)
             sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(0.5)
             print(array)
-            
-        } else {
+        
+        } else if bool == false {
         let num = sender.title(for: UIControlState())!
         if let index = array.index(of: num) {
             array.remove(at: index)

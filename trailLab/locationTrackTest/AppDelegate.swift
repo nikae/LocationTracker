@@ -16,13 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-   // let getData = GetData()
-     let locationManager = CLLocationManager()
+        let locationManager = CLLocationManager()
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-       let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-       print(locValue)
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -41,13 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         
         coordinate₁ = locationManager.location
-       // print("COoOOOOOOoOoooOooooOOOOOOO RDINATE \(coordinate₁)")
         
         if coordinate₁ != nil {
             preloadTrails(loc: coordinate₁!, radius: radiusOfLoadingTrails)
         }
-        
-        // getData.preloadTrails()
+        preloadTrailsforProfile()
         return true
     }
     

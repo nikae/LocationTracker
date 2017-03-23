@@ -15,20 +15,14 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
-    
     @IBOutlet weak var segmentControler: UISegmentedControl!
     
    
     var testArr: [Trail] = []
-    
- //********* calculate distance beetwin userLocation and trails first cordinate if its > 100 do not desplay********
-//    let coordinate₀ = CLLocation(latitude: 5.0, longitude: 5.0)
-//    let coordinate₁ = CLLocation(latitude: 5.0, longitude: 3.0)
-//    let distanceInMeters = coordinate₀.distance(from: coordinate₁) // result is in meters
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         self.tableView.reloadData()
         self.collectionView.reloadData()

@@ -18,10 +18,10 @@ struct Trail {
     let activityType : String!
     let activityName : String!
     let distance : String
-    let locations : [AnyObject]
+    var locations : [AnyObject]
     let time : String!
-    let pace : [Int]
-    let altitudes : [Double]
+    var pace : [Int]
+    var altitudes : [Double]
     let difficulty : [String]
     let suitability : [String]
     let whatToSee : [String]

@@ -21,7 +21,6 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var infoView: UIView!
     
-    @IBOutlet var swipeUp: UISwipeGestureRecognizer!
     @IBOutlet weak var decView1: UIView!
     var manager: CLLocationManager!
     
@@ -42,12 +41,15 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     @IBOutlet weak var getDirectionsBtn: UIButton!
     
     @IBOutlet weak var doneBtn: UIButton!
+    @IBOutlet weak var contentView: UIView!
     
     let mapView = MyMapView()
     var coordinates1: [CLLocationCoordinate2D] = []
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
          if (arr.count > 0) {
         
