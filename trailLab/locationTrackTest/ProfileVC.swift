@@ -86,54 +86,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         goalSlider.minimumTrackTintColor = walkColor()
         goalSlider.minimumValueImage = UIImage(named: imageWalkString_25)
         valueOfSlider = slider.run
-   
-//        let databaseRef = FIRDatabase.database().reference()
-//  
-//        databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
-//     
-//            if snapshot.hasChildren() {
-//                
-//            let value = snapshot.value as! NSDictionary
-//              
-//            let unicueID = value["unicueID"] as? String
-//            let userId = trails //value["userId"] as? String
-//            let activityType = value["activityType"] as? String ?? ""
-//            let activityName = value["activityName"] as? String
-//            let distance = value["distance"] as? String ?? ""
-//            let locations = value["locations"] as! [AnyObject]
-//            let time = value["time"] as? String ?? ""
-//            let pace = value["pace"] as? [Int] ?? [0]
-//            let altitudes = value["altitudes"] as? [Double] ?? [0]
-//            let difficulty = value["difficulty"] as? [String] ?? [""]
-//            let suitability = value["suitability"] as? [String] ?? [""]
-//            let whatToSee = value["watToSee"] as? [String] ?? [""]
-//            let description = value["description"]  as? String ?? ""
-//            let pictureURL = value["pictureURL"]  as? String
-// 
-//                self.trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-        
-                
-//            let curUserID = FIRAuth.auth()?.currentUser?.uid
-//            if curUserID == userId {
-//            self.usersTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-//                
-//                if activityType == "Walk" {
-//                   self.walkTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-//                } else if activityType == "Run" {
-//                    self.runTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-//                } else if activityType == "Hike" {
-//                    self.hikeTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-//                } else if activityType == "Bike" {
-//                    self.bikeTrails.insert(Trail(unicueID: unicueID,  userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
-//                }
-//            }
-        
-        //tableview here
-        
-//            }
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
+
 self.tableView.reloadData()
    }
     
@@ -248,7 +201,9 @@ self.tableView.reloadData()
         let altitudeLabel = cell.viewWithTag(4) as! UILabel
         let nameLabel = cell.viewWithTag(5) as! UILabel
         let difficultyLabel = cell.viewWithTag(6) as! UILabel
+            difficultyLabel.adjustsFontSizeToFitWidth = true
         let suitabilityLabel = cell.viewWithTag(7) as! UILabel
+            suitabilityLabel.adjustsFontSizeToFitWidth = true
         let imageCell = cell.viewWithTag(10) as! UIImageView
         var url = ""
         var type = ""
@@ -263,9 +218,17 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  walkTrails[indexPath.row].activityName
                 url =  walkTrails[indexPath.row].pictureURL
-                difficultyLabel.text = "\(walkTrails[indexPath.row].difficulty)"
-                suitabilityLabel.text = "\(walkTrails[indexPath.row].suitability)"
                 
+                if walkTrails[indexPath.row].difficulty.count > 0 {
+                difficultyLabel.text = "Difficulty: \(walkTrails[indexPath.row].difficulty.joined(separator: ", "))"
+                } else {
+                    difficultyLabel.text = "No difficulty data!"
+                }
+                if walkTrails[indexPath.row].suitability.count > 0 {
+                suitabilityLabel.text = "Suitability: \(walkTrails[indexPath.row].suitability.joined(separator: ", "))"
+                } else {
+                suitabilityLabel.text = "No suitability data!"
+                }
                 sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: goal)
                 valueOfSlider = slider.run
                 break
@@ -279,9 +242,19 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  runTrails[indexPath.row].activityName
                 url = runTrails[indexPath.row].pictureURL
-                difficultyLabel.text = "\(runTrails[indexPath.row].difficulty)"
-                suitabilityLabel.text = "\(runTrails[indexPath.row].suitability)"
-             
+                
+                if runTrails[indexPath.row].difficulty.count > 0 {
+                difficultyLabel.text = "Difficulty: \(runTrails[indexPath.row].difficulty.joined(separator: ", "))"
+                } else {
+                    difficultyLabel.text =  "No difficulty data!"
+                }
+                
+                if runTrails[indexPath.row].suitability.count > 0 {
+                suitabilityLabel.text = "Suitability: \(runTrails[indexPath.row].suitability.joined(separator: ", "))"
+                } else {
+                    suitabilityLabel.text = "No suitability data!"
+                }
+                
                 sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: goal)
                 valueOfSlider = slider.hike
                 break
@@ -295,8 +268,18 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  hikeTrails[indexPath.row].activityName
                 url = hikeTrails[indexPath.row].pictureURL
-                difficultyLabel.text = "\(hikeTrails[indexPath.row].difficulty)"
-                suitabilityLabel.text = "\(hikeTrails[indexPath.row].suitability)"
+                
+                if hikeTrails[indexPath.row].difficulty.count > 0 {
+                difficultyLabel.text =  "Difficulty: \(hikeTrails[indexPath.row].difficulty.joined(separator: ", "))"
+                } else {
+                    difficultyLabel.text =  "No difficulty data!"
+                }
+                
+                if hikeTrails[indexPath.row].suitability.count > 0 {
+                suitabilityLabel.text = "Suitability: \(hikeTrails[indexPath.row].suitability.joined(separator: ", "))"
+                } else {
+                    suitabilityLabel.text = "No suitability data!"
+                }
                 
                 sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: goal)
                 valueOfSlider = slider.bike
@@ -311,8 +294,18 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  bikeTrails[indexPath.row].activityName
                 url = bikeTrails[indexPath.row].pictureURL
-                difficultyLabel.text = "\(bikeTrails[indexPath.row].difficulty)"
-                suitabilityLabel.text = "\(bikeTrails[indexPath.row].suitability)"
+                
+                if bikeTrails[indexPath.row].difficulty.count > 0 {
+                difficultyLabel.text = "Difficulty: \(bikeTrails[indexPath.row].difficulty.joined(separator: ", "))"
+                } else {
+                    difficultyLabel.text =  "No difficulty data!"
+                }
+                
+                if  bikeTrails[indexPath.row].suitability.count > 0 {
+                suitabilityLabel.text = "Suitability: \(bikeTrails[indexPath.row].suitability.joined(separator: ", "))"
+                } else {
+                    suitabilityLabel.text = "No suitability data!"
+                }
                 sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: goal)
                 valueOfSlider = slider.walk
                 break
@@ -320,11 +313,11 @@ self.tableView.reloadData()
                 break
             }
             
-        if url != "" {
+        //if url != "" {
         getImage(url, imageView: imageCell)
-        } else {
-            imageCell.image =  UIImage(named:"img-default")
-        }
+//        } else {
+//            imageCell.image =  UIImage(named:"img-default")
+//        }
         
         imageCell.contentMode = .scaleAspectFill
         imageCell.clipsToBounds = true

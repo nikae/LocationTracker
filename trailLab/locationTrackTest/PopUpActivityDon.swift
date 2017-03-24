@@ -92,6 +92,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         activityNameTF.delegate = self
         
         activityNameTF.text = activityNameTF_String
+        
         distanceLabel.text = distanceLabel_String
         totalTimeLabel.text = timeLabel_String
         paceLabel.text = paceLabel_String
@@ -276,31 +277,153 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     
     
     //MARK: -Figour Out options
-    func launchBool(sender: UIButton, bool: Bool, arrayLet: [String]) {
-        var array = arrayLet
+//    func launchBool(sender: UIButton, bool: Bool, arrayLet: [String]) {
+//        var array = arrayLet
+//        if bool == true {
+//            let num = sender.title(for: UIControlState())!
+//            array.append(num)
+//            sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(0.5)
+//            print(array)
+//        
+//        } else if bool == false {
+//        let num = sender.title(for: UIControlState())!
+//        if let index = array.index(of: num) {
+//            array.remove(at: index)
+//        }
+//        sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1)
+//        print(array)
+//        }
+//    }
+//
+//    func makeBoolForLaunch(bool: Bool, button: UIButton, array: [String]){
+//            if bool == true {
+//                launchBool(sender: button, bool: true, arrayLet: array)
+//                
+//            } else {
+//                launchBool(sender: button, bool: false, arrayLet: array)
+//            }
+//    }
+//    
+//    var launchEasy: Bool = false {
+//        didSet {
+//            makeBoolForLaunch(bool: launchEasy, button: easy, array: arrayOfDifficulty)
+//        }
+//    }
+//    var launchMedium: Bool = false {
+//        didSet {
+//            makeBoolForLaunch(bool: launchMedium, button: medium, array: arrayOfDifficulty)
+//        }
+//    }
+//    var launchHard: Bool = false {
+//        didSet {
+//          makeBoolForLaunch(bool: launchHard, button: hard, array: arrayOfDifficulty)
+//        }
+//    }
+//    var launchkidFriendly: Bool = false {
+//        didSet {
+//            makeBoolForLaunch(bool: launchkidFriendly, button: kidFriendly, array: arrayOfSuitability)
+//        }
+//    }
+//    var launchDogFriendly: Bool = false {
+//        didSet {
+//            makeBoolForLaunch(bool: launchDogFriendly, button: dogFriemdly, array: arrayOfSuitability)
+//        }
+//    }
+//    var launchWeelchairFriendly: Bool = false {
+//        didSet {
+//           makeBoolForLaunch(bool: launchWeelchairFriendly, button: WeelchairFriendly, array: arrayOfSuitability)
+//        }
+//    }
+//    var launchViews: Bool = false {
+//        didSet{
+//            makeBoolForLaunch(bool: launchViews, button: ViewsButt, array: arrayOfWhatToSee)
+//        }
+//    }
+//    var launchBeach: Bool = false {
+//        didSet{
+//        makeBoolForLaunch(bool: launchBeach, button: beachButton, array: arrayOfWhatToSee)
+//        }
+//    }
+//    var launchRiver: Bool = false {
+//        didSet {
+//            makeBoolForLaunch(bool: launchRiver, button: riverButton, array: arrayOfWhatToSee)
+//        }
+//    }
+//    var launchCave: Bool = false {
+//        didSet {
+//            makeBoolForLaunch(bool: launchCave, button: caveButton, array: arrayOfWhatToSee)
+//        }
+//    }
+//    var launchLake: Bool = false {
+//        didSet{
+//            makeBoolForLaunch(bool: launchLake, button: lakeButton, array: arrayOfWhatToSee)
+//        }
+//    }
+//    var launchWaterFall: Bool = false {
+//        didSet {
+//            makeBoolForLaunch(bool:launchWaterFall, button: waterFallButton, array: arrayOfWhatToSee)
+//        }
+//    }
+//    var launchHotSprings: Bool = false {
+//    didSet {
+//    makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
+//        }
+//    }
+ 
+  
+    func launchBool(sender: UIButton, bool: Bool) {
+ 
         if bool == true {
             let num = sender.title(for: UIControlState())!
-            array.append(num)
+            if sender.tag == 1 || sender.tag == 2 || sender.tag == 3 {
+                arrayOfDifficulty.append(num)
+                print(arrayOfDifficulty)
+            } else if sender.tag == 4 || sender.tag == 5 || sender.tag == 6 {
+                arrayOfSuitability.append(num)
+                print(arrayOfSuitability)
+            } else {
+                arrayOfWhatToSee.append(num)
+                print(arrayOfWhatToSee)
+            }
+
             sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(0.5)
-            print(array)
-        
-        } else if bool == false {
-        let num = sender.title(for: UIControlState())!
-        if let index = array.index(of: num) {
-            array.remove(at: index)
-        }
-        sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1)
-        print(array)
+            
+            
+        } else {
+            let num = sender.title(for: UIControlState())!
+           
+            if sender.tag == 1 || sender.tag == 2 || sender.tag == 3 {
+                if let index = arrayOfDifficulty.index(of: num) {
+                    arrayOfDifficulty.remove(at: index)
+                    print(arrayOfDifficulty)
+                }
+                
+            } else if sender.tag == 4 || sender.tag == 5 || sender.tag == 6 {
+                if let index = arrayOfSuitability.index(of: num) {
+                    arrayOfSuitability.remove(at: index)
+                    print(arrayOfSuitability)
+                }
+
+            } else {
+                if let index = arrayOfWhatToSee.index(of: num) {
+                    arrayOfWhatToSee.remove(at: index)
+                    print(arrayOfWhatToSee)
+                }
+            }
+
+  
+            sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1)
+
         }
     }
-
+    
     func makeBoolForLaunch(bool: Bool, button: UIButton, array: [String]){
-            if bool == true {
-                launchBool(sender: button, bool: true, arrayLet: array)
-                
-            } else {
-                launchBool(sender: button, bool: false, arrayLet: array)
-            }
+        if bool == true {
+            launchBool(sender: button, bool: true)
+            
+        } else {
+            launchBool(sender: button, bool: false)
+        }
     }
     
     var launchEasy: Bool = false {
@@ -315,7 +438,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     var launchHard: Bool = false {
         didSet {
-          makeBoolForLaunch(bool: launchHard, button: hard, array: arrayOfDifficulty)
+            makeBoolForLaunch(bool: launchHard, button: hard, array: arrayOfDifficulty)
         }
     }
     var launchkidFriendly: Bool = false {
@@ -330,7 +453,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     var launchWeelchairFriendly: Bool = false {
         didSet {
-           makeBoolForLaunch(bool: launchWeelchairFriendly, button: WeelchairFriendly, array: arrayOfSuitability)
+            makeBoolForLaunch(bool: launchWeelchairFriendly, button: WeelchairFriendly, array: arrayOfSuitability)
         }
     }
     var launchViews: Bool = false {
@@ -340,7 +463,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     var launchBeach: Bool = false {
         didSet{
-        makeBoolForLaunch(bool: launchBeach, button: beachButton, array: arrayOfWhatToSee)
+            makeBoolForLaunch(bool: launchBeach, button: beachButton, array: arrayOfWhatToSee)
         }
     }
     var launchRiver: Bool = false {
@@ -364,12 +487,11 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         }
     }
     var launchHotSprings: Bool = false {
-    didSet {
-    makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
+        didSet {
+            makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
         }
     }
- 
-  
+
     
     @IBAction func whatToSeeHit(_ sender: UIButton) {
         AudioServicesPlaySystemSound (systemSoundID)
@@ -407,7 +529,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
        
         let userId = userID
         let activityType = activity_String 
-        let activityName = activityNameTF_String 
+        let activityName = activityNameTF.text ?? activityNameTF_String
         let distance = distanceLabel_String
         let locations = cordinatesArray
         let time = timeLabel_String

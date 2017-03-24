@@ -30,9 +30,9 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             let time = value["time"] as? String ?? ""
             let pace: [Int]? = value["pace"] as? [Int] ?? [0]
             let altitudes: [Double]? = value["altitudes"] as? [Double] ?? [0]
-            let difficulty = value["difficulty"] as? [String] ?? [""]
-            let suitability = value["suitability"] as? [String] ?? [""]
-            let whatToSee = value["watToSee"] as? [String] ?? [""]
+            let difficulty = value["difficulty"] as? [String] ?? []
+            let suitability = value["suitability"] as? [String] ?? []
+            let whatToSee = value["swatToSee"] as? [String] ?? []
             let description = value["description"]  as? String ?? ""
             let pictureURL = value["pictureURL"]  as? String
             
@@ -77,9 +77,9 @@ func preloadTrailsforProfile() {
             let time = value["time"] as? String ?? ""
             let pace = value["pace"] as? [Int] ?? [0]
             let altitudes = value["altitudes"] as? [Double] ?? [0]
-            let difficulty = value["difficulty"] as? [String] ?? [""]
-            let suitability = value["suitability"] as? [String] ?? [""]
-            let whatToSee = value["watToSee"] as? [String] ?? [""]
+            let difficulty = value["difficulty"] as? [String] ?? []
+            let suitability = value["suitability"] as? [String] ?? []
+            let whatToSee = value["swatToSee"] as? [String] ?? []
             let description = value["description"]  as? String ?? ""
             let pictureURL = value["pictureURL"]  as? String
             

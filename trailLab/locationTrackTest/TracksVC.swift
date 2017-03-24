@@ -76,14 +76,30 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TracksVCCellTableViewCell
         
-         cell.nameLabel.text = trails[indexPath.row].activityName
+        cell.nameLabel.text = trails[indexPath.row].activityName
+        cell.nameLabel.adjustsFontSizeToFitWidth = true
+        cell.difficultyLabel.adjustsFontSizeToFitWidth = true
+        cell.accLabel.adjustsFontSizeToFitWidth = true
+        
+        if trails[indexPath.row].difficulty.count > 0 {
+            cell.difficultyLabel.text = "Difficulty: \(trails[indexPath.row].difficulty.joined(separator: ", "))"
+        } else {
+            cell.difficultyLabel.text = "No difficulty data!"
+        }
+        
+        if trails[indexPath.row].whatToSee.count > 0 {
+            cell.accLabel.text = trails[indexPath.row].whatToSee.joined(separator: ", ")
+        } else {
+            cell.accLabel.text = "No what to see data!"
+        }
+
         let url = trails[indexPath.row].pictureURL
-        if url != "" {
+//        if url != "" {
         getImage(url!, imageView: cell.cellImage)
 
-        } else {
-            cell.cellImage.image =  UIImage(named:"img-default")
-        }
+//        } else {
+//            cell.cellImage.image =  UIImage(named:"img-default")
+//        }
         
         cell.cellImage.contentMode = .scaleAspectFill
         cell.cellImage.clipsToBounds = true
@@ -141,8 +157,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         testArr.append(trails[indexPath.row])
         self.performSegue(withIdentifier: "Segue5", sender: self)
     }
-    
-    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trails.count

@@ -49,9 +49,29 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        difLabel.adjustsFontSizeToFitWidth = true
+        suitLabel.adjustsFontSizeToFitWidth = true
+        whatToSeeLabel.adjustsFontSizeToFitWidth = true
         
          if (arr.count > 0) {
+            
+            if arr[0].difficulty.count > 0 {
+                difLabel.text = "Difficulty: \(arr[0].difficulty.joined(separator: ", "))"
+            } else {
+                difLabel.text = "No difficulty data!"
+            }
+            
+            if arr[0].suitability.count > 0 {
+                suitLabel.text = "Suitability: \(arr[0].suitability.joined(separator: ", "))"
+            } else {
+                suitLabel.text = "No Suitability data!"
+            }
+
+            if arr[0].whatToSee.count > 0 {
+                whatToSeeLabel.text = "What to see: \(arr[0].whatToSee.joined(separator: ", "))"
+            } else {
+                whatToSeeLabel.text = "No what to see data!"
+            }
         
         print(arr[0].activityType)
         
@@ -65,8 +85,9 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         altitudeLabel.text = String(format: "%.2f ft", arr[0].altitudes.max()!)
         infoTV.text = arr[0].description
         
+           // if arr[0].pictureURL != "" {
         getImage(arr[0].pictureURL, imageView: activeImageView)
-        
+           // }
          for loc in arr {
             let loce = loc.locations
             
@@ -218,6 +239,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         let imagedest = segue.destination as! FullImageVC
         imagedest.arrADVC = arr
         imagedest.vcId = vcId
+            
         }
     }
 
