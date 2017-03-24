@@ -576,7 +576,9 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         saveTotalResults()
         goalsDefoultsFunc()
         
-        
+        arrayOfWhatToSee.removeAll()
+        arrayOfDifficulty.removeAll()
+        arrayOfSuitability.removeAll()
         
         distanceTraveled = 0
         timePassedToSave = 0
@@ -593,6 +595,10 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         myLocations.removeAll()
         distanceTraveled = 0
         timePassedToSave = 0
+        
+        arrayOfWhatToSee.removeAll()
+        arrayOfDifficulty.removeAll()
+        arrayOfSuitability.removeAll()
     }
 
 }
