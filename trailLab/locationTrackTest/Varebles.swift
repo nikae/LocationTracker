@@ -110,8 +110,6 @@ var lastLocation: CLLocation!
 var distanceTraveled = 0.0
 
 var arrayOfAltitude: [Double] = []
-var arrayOfPace: [Int] = []
-
 
 var maxAltitude: Double = 0
 
@@ -155,7 +153,7 @@ let goal = arrayOfGoals[0]
 
 var lifeTime_Distance: Double = 0
 var lifeTime_Time: Double = 0
-var lifeTime_Pace = 0
+var lifeTime_Pace: String = ""
 var lifeTime_MaxAltitude: Double = 0
 var lifeTime_Activities = 0
 

@@ -55,10 +55,6 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                   self.theMap.addAnnotation(point)
                     }
                 }
-//            }
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
         
         segmentedControl.selectedSegmentIndex = 1
         
@@ -73,7 +69,6 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     
    // MARK -MKAnnotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // If annotation is not of type RestaurantAnnotation (MKUserLocation types for instance), return nil
         if !(annotation is TrailsAnnotation){
             return nil
         }
@@ -138,9 +133,7 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         } else if segue.identifier == "filterMap" {
             let dest = segue.destination as! FilterVC
             dest.viewID = "TracksMapVC"
-            
         }
-    
     }
     
 //MARK: -setUp Location Manager
@@ -158,11 +151,8 @@ func setUpLocationManager() {
 
 func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-    //   var colorforPolyline = UIColor()
-            polylineRenderer.strokeColor = blueColor
-
-    // polylineRenderer.strokeColor = .black
-    polylineRenderer.lineWidth = 5
+        polylineRenderer.strokeColor = blueColor
+        polylineRenderer.lineWidth = 5
     return polylineRenderer
     
 }
@@ -176,26 +166,25 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
         switch item.tag {
         case 0:
             if viewController0 == nil {
-                
                 viewController0 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as!  ViewController
-                
             }
+            
             present(viewController0!, animated: false, completion: nil)
             break
         case 1:
             if viewController1 == nil {
-                
                 viewController1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TracksMapVC") as! TracksMapVC
             }
+            
             present(viewController1!, animated: false, completion: nil)
             break
             
         case 2:
             if viewController2 == nil {
-                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 viewController2 = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
             }
+            
             present(viewController2!, animated: false, completion: nil)
             break
             

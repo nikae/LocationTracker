@@ -33,6 +33,8 @@ struct MyMapView {
         view.setRegion(region, animated: true)
         
     }
+    
+    
 
 }
 

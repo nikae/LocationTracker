@@ -275,102 +275,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
 
     
-    
-    //MARK: -Figour Out options
-//    func launchBool(sender: UIButton, bool: Bool, arrayLet: [String]) {
-//        var array = arrayLet
-//        if bool == true {
-//            let num = sender.title(for: UIControlState())!
-//            array.append(num)
-//            sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(0.5)
-//            print(array)
-//        
-//        } else if bool == false {
-//        let num = sender.title(for: UIControlState())!
-//        if let index = array.index(of: num) {
-//            array.remove(at: index)
-//        }
-//        sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1)
-//        print(array)
-//        }
-//    }
-//
-//    func makeBoolForLaunch(bool: Bool, button: UIButton, array: [String]){
-//            if bool == true {
-//                launchBool(sender: button, bool: true, arrayLet: array)
-//                
-//            } else {
-//                launchBool(sender: button, bool: false, arrayLet: array)
-//            }
-//    }
-//    
-//    var launchEasy: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchEasy, button: easy, array: arrayOfDifficulty)
-//        }
-//    }
-//    var launchMedium: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchMedium, button: medium, array: arrayOfDifficulty)
-//        }
-//    }
-//    var launchHard: Bool = false {
-//        didSet {
-//          makeBoolForLaunch(bool: launchHard, button: hard, array: arrayOfDifficulty)
-//        }
-//    }
-//    var launchkidFriendly: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchkidFriendly, button: kidFriendly, array: arrayOfSuitability)
-//        }
-//    }
-//    var launchDogFriendly: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchDogFriendly, button: dogFriemdly, array: arrayOfSuitability)
-//        }
-//    }
-//    var launchWeelchairFriendly: Bool = false {
-//        didSet {
-//           makeBoolForLaunch(bool: launchWeelchairFriendly, button: WeelchairFriendly, array: arrayOfSuitability)
-//        }
-//    }
-//    var launchViews: Bool = false {
-//        didSet{
-//            makeBoolForLaunch(bool: launchViews, button: ViewsButt, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchBeach: Bool = false {
-//        didSet{
-//        makeBoolForLaunch(bool: launchBeach, button: beachButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchRiver: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchRiver, button: riverButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchCave: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchCave, button: caveButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchLake: Bool = false {
-//        didSet{
-//            makeBoolForLaunch(bool: launchLake, button: lakeButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchWaterFall: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool:launchWaterFall, button: waterFallButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchHotSprings: Bool = false {
-//    didSet {
-//    makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
-//        }
-//    }
- 
-  
     func launchBool(sender: UIButton, bool: Bool) {
  
         if bool == true {
@@ -533,7 +437,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let distance = distanceLabel_String
         let locations = cordinatesArray
         let time = timeLabel_String
-        let pace = arrayOfPace
+        let pace = paceLabel_String
         let altitudes = arrayOfAltitude
         let difficulty = arrayOfDifficulty
         let suitability = arrayOfSuitability
@@ -572,6 +476,8 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         if maxAltitude > lifeTime_MaxAltitude {
         lifeTime_MaxAltitude = maxAltitude
         }
+        lifeTime_Pace = paceLabel_String
+        
         saveTrail()
         saveTotalResults()
         goalsDefoultsFunc()

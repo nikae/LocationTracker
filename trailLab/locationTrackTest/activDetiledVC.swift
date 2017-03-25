@@ -36,18 +36,18 @@ class activDetiledVC: UIViewController {
         scrollView.delaysContentTouches = false
         
             
-        var dPace:[Double] = []
+      //  var dPace:[Double] = []
         let maxAlt = String(format: "%.2f ft", arrADVC[0].altitudes.max()!)
             
-        for i in arrADVC[0].pace {
-           dPace.append(Double(i))
-        }
+//        for i in arrADVC[0].pace {
+//           dPace.append(Double(i))
+//        }
         
         //MARK -Charts View
         chartView(chView: altChartView)
         chartView(chView: paceChartView)
         setChartData(alt: arrADVC[0].altitudes, cView: altChartView, lineColor: .black, labelText: "Altitudes with max: \(maxAlt)")
-        setChartData(alt: dPace ,cView: paceChartView, lineColor: .black, labelText: "Pace")
+        //setChartData(alt: dPace ,cView: paceChartView, lineColor: .black, labelText: "Pace")
         }
         
         decView.clipsToBounds = true
@@ -111,8 +111,6 @@ class activDetiledVC: UIViewController {
         dest.arr = arrADVC
         dest.vcId = vcId
     }
-    
-    
     
     @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
         print("view Tapped")

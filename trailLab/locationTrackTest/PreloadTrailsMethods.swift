@@ -28,7 +28,7 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             let distance = value["distance"] as? String ?? ""
             let locations = value["locations"] as! [AnyObject]
             let time = value["time"] as? String ?? ""
-            let pace: [Int]? = value["pace"] as? [Int] ?? [0]
+            let pace = value["pace"] as? String ?? ""
             let altitudes: [Double]? = value["altitudes"] as? [Double] ?? [0]
             let difficulty = value["difficulty"] as? [String] ?? []
             let suitability = value["suitability"] as? [String] ?? []
@@ -48,7 +48,7 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             
             
            if distanceInMiles <= radius {
-            trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace!, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL), at: 0)
+            trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL), at: 0)
         }
             
         }
@@ -75,7 +75,7 @@ func preloadTrailsforProfile() {
             let distance = value["distance"] as? String ?? ""
             let locations = value["locations"] as! [AnyObject]
             let time = value["time"] as? String ?? ""
-            let pace = value["pace"] as? [Int] ?? [0]
+            let pace = value["pace"] as? String ?? ""
             let altitudes = value["altitudes"] as? [Double] ?? [0]
             let difficulty = value["difficulty"] as? [String] ?? []
             let suitability = value["suitability"] as? [String] ?? []

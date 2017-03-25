@@ -19,7 +19,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var theMap: MKMapView!
-    //@IBOutlet weak var theLabel: UILabel!
     @IBOutlet weak var startEndButtnHit: UIButton!
   
     @IBOutlet weak var distanceLabel: UILabel!
@@ -47,6 +46,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     let mapView = MyMapView()
     let viewSlider = ViewSlider()
     
+    var passedLocations: [AnyObject] = []
+    var coordinatesPassed: [CLLocationCoordinate2D] = []
+    var passedTrailHeadName: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +62,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 //            }
 //        }
 //*********************SAFETY ZONE*************************
-  }
+        
+         }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -75,6 +79,70 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         resultsDisplayView.isHidden = true
         
         getItemImage(item: profileTabBarItem)
+        
+        
+        
+        if passedLocations.count > 0 {
+            var coordinate: CLLocation!
+            
+            let latitude = passedLocations[0]["Latitude"] as! CLLocationDegrees
+            let longitude = passedLocations[0]["Longitude"] as! CLLocationDegrees
+            coordinate = CLLocation(latitude: latitude, longitude: longitude)
+            let loc = manager.location
+            
+            if loc != nil {
+                
+                let distanceInMeters = coordinate.distance(from: loc!) // result is in meters
+                let distanceInMiles = distanceInMeters * 0.000621371192 //In Miles
+                for a in passedLocations {
+                    let latitude = a["Latitude"] as! CLLocationDegrees
+                    let longitude = a["Longitude"] as! CLLocationDegrees
+                    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    
+                    coordinatesPassed.append(coordinate)
+                }
+
+                if distanceInMiles <= 0.1 {
+                    let polyline = MKPolyline(coordinates: &coordinatesPassed, count: coordinatesPassed.count)
+                    
+                    self.theMap.add(polyline)
+                                   } else {
+                    
+                    let alertController = UIAlertController(title: "You are too far away!", message: "You can get directions to trailhead!", preferredStyle: .alert)
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
+                        (action: UIAlertAction) in
+                        
+                        print("You've pressed Cancel Button")
+                    }
+                    
+                    let oKAction = UIAlertAction(title: "Get Direction", style: .default)
+                    {
+                        (action: UIAlertAction) in
+                        if self.coordinatesPassed.count != 0 {
+                        let regionDistance:CLLocationDistance = 10000
+                        let coordinatesGD = self.coordinatesPassed[0]
+                        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinatesGD, regionDistance, regionDistance)
+                        let options = [
+                            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                        ]
+                        
+                        let placemark = MKPlacemark(coordinate: coordinatesGD, addressDictionary: nil)
+                        let mapItem = MKMapItem(placemark: placemark)
+                        mapItem.name = self.passedTrailHeadName
+                        mapItem.openInMaps(launchOptions: options)
+                        }
+                    }
+                    
+                    alertController.addAction(oKAction)
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+
+        
 
     }
     
@@ -145,8 +213,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         for L in myLocations {
            location = L 
         }
+//if I need this to change I sould zoom map at startUplateLocation Function
         let newRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
         theMap.setRegion(newRegion, animated: true)
+        
         
         if (myLocations.count > 3){
             let sourceIndex = myLocations.count - 1
@@ -199,6 +269,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         lastLocation = locations.last as CLLocation!
     }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error Location Filed: \(error.localizedDescription)")
+    }
+    
+    
     func removeOveraly()
     {
         var overlaysToRemove = [MKOverlay]()
@@ -220,6 +295,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
         polylineRenderer.strokeColor = activityColor
         polylineRenderer.lineWidth = 8
+        
+//        if passedLocations.count > 0 {
+//            let polylineRenderer2 = MKPolylineRenderer(overlay: overlay)
+//            polylineRenderer2.strokeColor = .black
+//            polylineRenderer2.lineWidth = 8
+//            
+//            return polylineRenderer2
+//        }
+        
         return polylineRenderer
        
     }
@@ -254,14 +338,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             
  //needs correction
         let paceMinutes = paceInSeconds(hours: Double(hours), minutes: Double(minutes), seconds: Double(seconds), distance: distanceTraveled) / 60
-        let roundedPaceMinutes = Double(floor(paceMinutes))
-        let decimalPaceSeconds = paceMinutes - roundedPaceMinutes
-        _ = Int(floor(roundedPaceMinutes))
-        let paceSeconds = Int(floor(decimalPaceSeconds * 60))
-            arrayOfPace.append(paceSeconds)
-        let paceSecondsZero = String(format: "%02d", paceSeconds)
-        paceLabel_String = paceSecondsZero
-        paceLabel.text = "--'-"
+            
+            let roundedPaceMinutes = Double(floor(paceMinutes))
+            let decimalPaceSeconds = paceMinutes - roundedPaceMinutes
+            let intPaceMinutes = Int(floor(roundedPaceMinutes))
+            let paceSeconds = Int(floor(decimalPaceSeconds * 60))
+            let paceSecondsZero = String(format: "%02d", paceSeconds)
+
+            paceLabel_String = "\(intPaceMinutes):\(paceSecondsZero) mi"
+            paceLabel.text = "\(intPaceMinutes):\(paceSecondsZero) mi"
 
         } else {
             paceLabel_String = "--'-"
@@ -275,7 +360,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
     }
     
+    
+   
+    
     //MARK: -Start/End Updating Locations
+
+    
+
     func startUpdatingLocation(){
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true)
         zeroTime = NSDate.timeIntervalSinceReferenceDate
@@ -283,8 +374,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
             manager.startUpdatingLocation()
 
-             resultsDisplayView.isHidden = false
-             viewSlider.moveViewDownOrUp(view: resultsDisplayView, moveUp: false)
+            resultsDisplayView.isHidden = false
+            viewSlider.moveViewDownOrUp(view: resultsDisplayView, moveUp: false)
+            
+        
             
                     } else {
 
@@ -292,7 +385,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             
         }
     }
-    
+
     func startUpdatingLocation_SetUp(){
         tabStart.title = "END"
         swipeUpSportsPick.isEnabled = false
@@ -382,6 +475,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.endUpdatingLocation_SetUp()
                     self.popUpActivityManager()
                     self.removeOveraly()
+                    self.passedLocations.removeAll()
     
                     self.launchTest = true
         

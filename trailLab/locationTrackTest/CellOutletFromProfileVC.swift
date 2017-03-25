@@ -16,6 +16,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
     var arr: [Trail] = []
     var vcId: String!
+    var uID: String!
     
     @IBOutlet weak var theMap: MKMapView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -40,6 +41,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
     @IBOutlet weak var getDirectionsBtn: UIButton!
     
+    @IBOutlet weak var getTrailBtn: UIButton!
     @IBOutlet weak var doneBtn: UIButton!
     @IBOutlet weak var contentView: UIView!
     
@@ -48,7 +50,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+  
         difLabel.adjustsFontSizeToFitWidth = true
         suitLabel.adjustsFontSizeToFitWidth = true
         whatToSeeLabel.adjustsFontSizeToFitWidth = true
@@ -81,7 +83,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         activeNameTF.text = arr[0].activityName
         distanceLabel.text = arr[0].distance
         timeLabel.text = arr[0].time
-        paceLabel.text = String(format: "%.2f ft", arr[0].pace.max()!)
+        paceLabel.text = arr[0].pace
         altitudeLabel.text = String(format: "%.2f ft", arr[0].altitudes.max()!)
         infoTV.text = arr[0].description
         
@@ -125,14 +127,23 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         decView1.isUserInteractionEnabled = true
         decView1.layer.cornerRadius = decView1.frame.height/2
         
-//        getDirectionsBtn.clipsToBounds = true
-//        getDirectionsBtn.layer.cornerRadius = getDirectionsBtn.frame.height/2
-//        
-//        doneBtn.clipsToBounds = true
-//        doneBtn.layer.cornerRadius = getDirectionsBtn.frame.height/2
+        let actName = self.arr[0].activityType
+        var col = UIColor()
+        
+        if actName == "Walk" {
+            col = walkColor()
+        } else if actName == "Run" {
+           col = runColor()
+        } else if actName == "Bike" {
+            col = bikeColor()
+        } else if actName == "Hike" {
+           col = hikeColor()
+        }
+
         
         buttShape(but: getDirectionsBtn, color: hikeColor())
         buttShape(but: doneBtn, color: bikeColor())
+        buttShape(but: getTrailBtn, color: col)
     }
     
   //MARK -Get Directions
@@ -218,16 +229,6 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
             }
     }
 
-  
-//    func popUpActivityManager() {
-//        // PopUp to Save
-//        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "activDetiledVC") as! activDetiledVC
-//        self.addChildViewController(popUp)
-//        popUp.view.frame = self.view.frame
-//        self.view.addSubview(popUp.view)
-//        popUp.didMove(toParentViewController: self)
-//        
-//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // get a reference to the second view controller
@@ -235,6 +236,10 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         let dest = segue.destination as! activDetiledVC
         dest.arrADVC = arr
         dest.vcId = vcId
+        } else if segue.identifier == "GetTrailToVC" {
+        let dest = segue.destination as! ViewController
+        dest.passedLocations = arr[0].locations
+        dest.passedTrailHeadName = arr[0].activityName
         } else {
         let imagedest = segue.destination as! FullImageVC
         imagedest.arrADVC = arr
@@ -246,12 +251,16 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     @IBAction func detailsHit(_ sender: UIButton) {
      // popUpActivityManager()
         self.performSegue(withIdentifier: "SegueactivDetiledVC", sender: self) //SegueactivDetiledVC
-     //   print("yasss!!")
     }
     
     @IBAction func getDirectionsHit(_ sender: UIButton) {
         openMapForPlace()
     }
+    
+    @IBAction func getTrailHit(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "GetTrailToVC", sender: self)
+    }
+    
   
     @IBAction func openImageHit(_ sender: UIButton) {
        self.performSegue(withIdentifier: "openImage", sender: self)

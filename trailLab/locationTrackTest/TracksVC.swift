@@ -94,12 +94,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
 
         let url = trails[indexPath.row].pictureURL
-//        if url != "" {
+        
         getImage(url!, imageView: cell.cellImage)
-
-//        } else {
-//            cell.cellImage.image =  UIImage(named:"img-default")
-//        }
         
         cell.cellImage.contentMode = .scaleAspectFill
         cell.cellImage.clipsToBounds = true

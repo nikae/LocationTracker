@@ -20,7 +20,7 @@ struct Trail {
     let distance : String
     var locations : [AnyObject]
     let time : String!
-    var pace : [Int]
+    var pace : String!
     var altitudes : [Double]
     let difficulty : [String]
     let suitability : [String]
@@ -135,11 +135,34 @@ func saveTotalResults() {
     databaseRef.child("Results/\(userID!)/lifeTime_MaxAltitude").setValue(lifeTime_MaxAltitude)
     databaseRef.child("Results/\(userID!)/totalActivities").setValue(lifeTime_Activities)
     
-   // goalsDefoultsFunc()
+    //goalsDefoultsFunc()
 
 }
 
-
+func getResults(UID: String) {
+let databaseRef = FIRDatabase.database().reference()
+databaseRef.child("Results").child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
+    // Get user value
+    
+    let value = snapshot.value as? NSDictionary
+    
+    walkGoal = value?["walkGoal"] as? Double ?? 0
+    runGoal = value?["runkGoal"] as? Double ?? 0
+    hikeGoal = value?["hikekGoal"] as? Double ?? 0
+    bikeGoal = value?["bikeGoal"] as? Double ?? 0
+    lifeTime_Distance = value?["lifeTime_Distance"] as? Double ?? 0
+    lifeTime_Time = value?["lifeTime_Time"] as? Double ?? 0
+    lifeTime_Pace = value?["lifeTime_Pace"] as? String ?? ""
+    lifeTime_MaxAltitude = value?["lifeTime_MaxAltitude"] as? Double ?? 0
+    lifeTime_Activities = value?["totalActivities"] as? Int ?? 0
+    
+    
+    goalsDefoultsFunc()
+    
+}) { (error) in
+    print(error.localizedDescription)
+}
+}
 
 func goalsDefoultsFunc(){
     walkGoalDefoults.set(walkGoal, forKey: walkGoalDefoults_Key)
@@ -168,7 +191,7 @@ func getgoalsDefoultsFunc() {
     bikeGoal = bikeGoalDefoults.value(forKey: bikeGoalDefoults_Key) as? Double ?? 0
   
     lifeTime_Time = lifeTime_TimeDefoults.value(forKey: lifeTime_TimeDefoults_key) as? Double ?? 0
-    lifeTime_Pace =  lifeTime_PaceDefoults.value(forKey:  lifeTime_PaceDefoults_Key) as? Int ?? 0
+    lifeTime_Pace =  lifeTime_PaceDefoults.value(forKey:  lifeTime_PaceDefoults_Key) as? String ?? ""
     lifeTime_MaxAltitude = lifeTime_MaxAltitudeDefoults.value(forKey: lifeTime_MaxAltitudeDefoults_key) as? Double ?? 0
     lifeTime_Activities = lifeTime_ActivitiesDefoults.value(forKey: lifeTime_ActivitiesDefoults_Key) as? Int ?? 0
 }
@@ -202,7 +225,7 @@ func clearGoalsDefoultsFunc(){
     
     lifeTime_Distance = 0
     lifeTime_Time = 0
-    lifeTime_Pace = 0
+    lifeTime_Pace = ""
     lifeTime_MaxAltitude = 0
     lifeTime_Activities = 0
 

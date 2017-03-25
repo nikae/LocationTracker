@@ -15,14 +15,7 @@ enum slider {
 
 
 class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
-    
-   // var trails = [Trail]()
-//    var usersTrails = [Trail]()
-//    var walkTrails = [Trail]()
-//    var runTrails = [Trail]()
-//    var hikeTrails = [Trail]()
-//    var bikeTrails = [Trail]()
-    
+
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var totalActivitiesScrollView: UIScrollView!
     @IBOutlet var tableView : UITableView!
@@ -45,19 +38,21 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var TotalavaragePaceLabel: UILabel!
     @IBOutlet weak var totalMaxAltitudeLabel: UILabel!
     
+    let userID = FIRAuth.auth()?.currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        
+        getResults(UID: userID!)
         getgoalsDefoultsFunc()
-        lifeTime_Distance = (walkGoal + runGoal + hikeGoal + bikeGoal)
         
+        lifeTime_Distance = (walkGoal + runGoal + hikeGoal + bikeGoal)
+ 
         totalActivities.text = "\(lifeTime_Activities)"
         totalMilsLabel.text = String(format: "%.2f mi", lifeTime_Distance)
         totalTimeLabel.text = calculateTotalTime(time: lifeTime_Time)
-        TotalavaragePaceLabel.text = "\(lifeTime_Pace)"
+        TotalavaragePaceLabel.text = lifeTime_Pace
         totalMaxAltitudeLabel.text = String(format: "%.2f ft", lifeTime_MaxAltitude)
        
         goalSlider.isUserInteractionEnabled = false
@@ -71,6 +66,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                     profileImage.image = UIImage(named:"img-default")
         }
     }
+        
         let firstName = firstNameDefoults.value(forKey: firstNameDefoults_Key) as! String
         let lastName = lastNameDefoults.value(forKey: lastNameDefoults_Key) as! String
         handleLabel.text = "\(firstName.capitalized) \(lastName.capitalized)"
@@ -210,11 +206,10 @@ self.tableView.reloadData()
             switch (segmentedController.selectedSegmentIndex) {
             case 0:
                 type = walkTrails[indexPath.row].activityType
-                let maxPace = walkTrails[indexPath.row].pace.max
                 let maxAltitude = walkTrails[indexPath.row].altitudes.max
                 distanceLabel.text =  walkTrails[indexPath.row].distance
                 timeLabel.text =  walkTrails[indexPath.row].time
-                paceLabel.text = "\(maxPace)"
+                paceLabel.text = walkTrails[indexPath.row].pace
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  walkTrails[indexPath.row].activityName
                 url =  walkTrails[indexPath.row].pictureURL
@@ -234,11 +229,10 @@ self.tableView.reloadData()
                 break
             case 1:
                 type = runTrails[indexPath.row].activityType
-                let maxPace = runTrails[indexPath.row].pace.max
                 let maxAltitude = runTrails[indexPath.row].altitudes.max
                 distanceLabel.text =  runTrails[indexPath.row].distance
                 timeLabel.text =  runTrails[indexPath.row].time
-                paceLabel.text = "\(maxPace)"
+                paceLabel.text = runTrails[indexPath.row].pace
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  runTrails[indexPath.row].activityName
                 url = runTrails[indexPath.row].pictureURL
@@ -260,11 +254,10 @@ self.tableView.reloadData()
                 break
             case 2:
                 type = hikeTrails[indexPath.row].activityType
-                let maxPace = hikeTrails[indexPath.row].pace.max
                 let maxAltitude = hikeTrails[indexPath.row].altitudes.max
                 distanceLabel.text =  hikeTrails[indexPath.row].distance
                 timeLabel.text =  hikeTrails[indexPath.row].time
-                paceLabel.text = "\(maxPace)"
+                paceLabel.text = hikeTrails[indexPath.row].pace
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  hikeTrails[indexPath.row].activityName
                 url = hikeTrails[indexPath.row].pictureURL
@@ -286,11 +279,10 @@ self.tableView.reloadData()
                 break
             case 3:
                 type = bikeTrails[indexPath.row].activityType
-                let maxPace = bikeTrails[indexPath.row].pace.max
                 let maxAltitude = bikeTrails[indexPath.row].altitudes.max
                 distanceLabel.text =  bikeTrails[indexPath.row].distance
                 timeLabel.text =  bikeTrails[indexPath.row].time
-                paceLabel.text = "\(maxPace)"
+                paceLabel.text = bikeTrails[indexPath.row].pace
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  bikeTrails[indexPath.row].activityName
                 url = bikeTrails[indexPath.row].pictureURL
@@ -312,12 +304,8 @@ self.tableView.reloadData()
             default :
                 break
             }
-            
-        //if url != "" {
+
         getImage(url, imageView: imageCell)
-//        } else {
-//            imageCell.image =  UIImage(named:"img-default")
-//        }
         
         imageCell.contentMode = .scaleAspectFill
         imageCell.clipsToBounds = true
@@ -491,6 +479,7 @@ self.tableView.reloadData()
         let dest = segue.destination as! CellOutletFromProfileVC
         dest.arr = testArr
         dest.vcId = "ProfileVC"
+ 
     }
     
     //MARK -segmented controller
