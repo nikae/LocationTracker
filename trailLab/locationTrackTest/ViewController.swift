@@ -206,17 +206,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
        
         myLocations.append(locations[0] as CLLocation)
         
-        let spanX = 0.007
-        let spanY = 0.007
-
-        var location = CLLocation()
-        for L in myLocations {
-           location = L 
-        }
-//if I need this to change I sould zoom map at startUplateLocation Function
-        let newRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
-        theMap.setRegion(newRegion, animated: true)
-        
+//        let spanX = 0.007
+//        let spanY = 0.007
+//
+//        var location = CLLocation()
+//        for L in myLocations {
+//           location = L 
+//        }
+////if I need this to change I sould zoom map at startUplateLocation Function
+//        let newRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
+//        theMap.setRegion(newRegion, animated: true)
+//        
         
         if (myLocations.count > 3){
             let sourceIndex = myLocations.count - 1
@@ -382,7 +382,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             resultsDisplayView.isHidden = false
             viewSlider.moveViewDownOrUp(view: resultsDisplayView, moveUp: false)
             
-        mapView.zoomMap(val: 0.007, superVisor: manager, view: theMap)
+            mapView.zoomMap(val: 0.007, superVisor: manager, view: theMap)
             
                     } else {
 
