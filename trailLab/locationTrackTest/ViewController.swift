@@ -104,7 +104,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
                 if distanceInMiles <= 0.1 {
                     let polyline = MKPolyline(coordinates: &coordinatesPassed, count: coordinatesPassed.count)
-                    
+                     polyline.title = "polyline2"
                     self.theMap.add(polyline)
                                    } else {
                     
@@ -274,13 +274,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     
-    func removeOveraly()
+    func removeOveraly(title: String)
     {
         var overlaysToRemove = [MKOverlay]()
         let overlays = self.theMap.overlays
         
         for overlay in overlays {
-            if overlay.title! == "polyline"
+            if overlay.title! == title
             {
                 overlaysToRemove.append(overlay)
             }
@@ -296,17 +296,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         polylineRenderer.strokeColor = activityColor
         polylineRenderer.lineWidth = 8
         
-//        if passedLocations.count > 0 {
-//            let polylineRenderer2 = MKPolylineRenderer(overlay: overlay)
-//            polylineRenderer2.strokeColor = .black
-//            polylineRenderer2.lineWidth = 8
-//            
-//            return polylineRenderer2
-//        }
+        let polylineRenderer2 = MKPolylineRenderer(overlay: overlay)
+        if passedLocations.count > 0 {
+            polylineRenderer2.strokeColor = .gray
+            polylineRenderer2.lineWidth = 8
+            
+            passedLocations.removeAll()
+           return polylineRenderer2
+           
+        }
+        
         
         return polylineRenderer
        
     }
+    
+  
    //MARK -Calculate Pace method
     func paceInSeconds (hours: Double, minutes:Double, seconds: Double, distance: Double) -> Double {
         return ((hours*60) + (minutes*60) + seconds) / distance
@@ -377,7 +382,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             resultsDisplayView.isHidden = false
             viewSlider.moveViewDownOrUp(view: resultsDisplayView, moveUp: false)
             
-        
+        mapView.zoomMap(val: 0.007, superVisor: manager, view: theMap)
             
                     } else {
 
@@ -474,7 +479,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.endUpdatingLocation()
                     self.endUpdatingLocation_SetUp()
                     self.popUpActivityManager()
-                    self.removeOveraly()
+                    self.removeOveraly(title:  "polyline")
+                    self.removeOveraly(title:  "polyline2")
                     self.passedLocations.removeAll()
     
                     self.launchTest = true
@@ -531,6 +537,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBAction func startHit(_ sender: UIButton) {
          launchBool = !launchBool
         
+    }
+    @IBAction func backToMyLocationHit(_ sender: UIBarButtonItem) {
+         mapView.zoomMap(val: 0.007, superVisor: manager, view: theMap)
     }
 }
 
