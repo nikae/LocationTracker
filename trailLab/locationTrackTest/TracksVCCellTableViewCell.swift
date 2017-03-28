@@ -22,6 +22,8 @@ class TracksVCCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var starBut: UIButton!
     
+    @IBOutlet weak var distanceLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

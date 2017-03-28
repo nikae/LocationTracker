@@ -108,6 +108,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
 
         cell.favoritesLabel.text = "\(trails[indexPath.row].stars!)"
+        cell.distanceLabel.adjustsFontSizeToFitWidth = true
+        cell.distanceLabel.text = "Distance: \(trails[indexPath.row].distance)"
         
         let url = trails[indexPath.row].pictureURL
         
@@ -311,7 +313,11 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if favoriteTrails.count > 0 {
         return favoriteTrails.count
+        } else {
+            return 1
+        }
     }
 
     //MARK -CV
@@ -319,8 +325,11 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TracksCVCell", for: indexPath)
         
         cell.backgroundColor = .red
-        
+       
         let CVImage = cell.viewWithTag(1) as! UIImageView
+        let label = cell.viewWithTag(2) as! UILabel
+        
+        if favoriteTrails.count > 0 {
         
         CVImage.contentMode = .scaleAspectFill
         CVImage.isUserInteractionEnabled = true
@@ -328,6 +337,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         CVImage.layer.borderWidth = 2
         CVImage.clipsToBounds = true
         
+        label.adjustsFontSizeToFitWidth = true
+        label.text = favoriteTrails[indexPath.row].activityName
         
         let url = favoriteTrails[indexPath.row].pictureURL
 
@@ -345,7 +356,10 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         } else {
             CVImage.layer.borderColor = UIColor.white.cgColor
         }
-        
+        } else {
+            label.adjustsFontSizeToFitWidth = true
+            label.text = "No Favworites!"
+        }
         return cell
     }
     override func didReceiveMemoryWarning() {

@@ -218,5 +218,8 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
         
         self.performSegue(withIdentifier: "filterMap", sender: self)
     }
+    @IBAction func backToMyLocation(_ sender: UIBarButtonItem) {
+        mapView.zoomMap(val: 0.01, superVisor: manager, view: theMap)
+    }
 
 }
