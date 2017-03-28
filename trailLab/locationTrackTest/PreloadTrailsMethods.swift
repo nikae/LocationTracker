@@ -26,7 +26,7 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             let activityType = value["activityType"] as? String ?? ""
             let activityName = value["activityName"] as? String
             let distance = value["distance"] as? String ?? ""
-            let locations = value["locations"] as! [AnyObject]
+            let locations = value["locations"] as? [AnyObject]
             let time = value["time"] as? String ?? ""
             let pace = value["pace"] as? String ?? ""
             let altitudes: [Double]? = value["altitudes"] as? [Double] ?? [0]
@@ -35,11 +35,14 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             let whatToSee = value["swatToSee"] as? [String] ?? []
             let description = value["description"]  as? String ?? ""
             let pictureURL = value["pictureURL"]  as? String
+            let star = value["stars"] as? Int ?? 0
+            let favorite = value["favorites"] as? [String: Bool] ?? ["noUser": false]
             
+            if locations != nil {
                 var coordinate₀: CLLocation!
 
-                let latitude = locations[0]["Latitude"] as! CLLocationDegrees
-                let longitude = locations[0]["Longitude"] as! CLLocationDegrees
+                let latitude = locations?[0]["Latitude"] as! CLLocationDegrees
+                let longitude = locations?[0]["Longitude"] as! CLLocationDegrees
                 
                 coordinate₀ = CLLocation(latitude: latitude, longitude: longitude)
             
@@ -48,9 +51,9 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             
             
            if distanceInMiles <= radius {
-            trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL), at: 0)
+            trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite), at: 0)
         }
-            
+            }
         }
     }) { (error) in
         print(error.localizedDescription)
@@ -73,7 +76,7 @@ func preloadTrailsforProfile() {
             let activityType = value["activityType"] as? String ?? ""
             let activityName = value["activityName"] as? String
             let distance = value["distance"] as? String ?? ""
-            let locations = value["locations"] as! [AnyObject]
+            let locations = value["locations"] as? [AnyObject]
             let time = value["time"] as? String ?? ""
             let pace = value["pace"] as? String ?? ""
             let altitudes = value["altitudes"] as? [Double] ?? [0]
@@ -82,17 +85,19 @@ func preloadTrailsforProfile() {
             let whatToSee = value["swatToSee"] as? [String] ?? []
             let description = value["description"]  as? String ?? ""
             let pictureURL = value["pictureURL"]  as? String
+            let star = value["stars"] as? Int ?? 0
+            let favorite = value["favorites"] as? [String: Bool] ?? ["noUser": false]
             
             let curUserID = FIRAuth.auth()?.currentUser?.uid
             if curUserID == userId {
                 if activityType == "Walk" {
-                    walkTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL), at: 0)
+                    walkTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite), at: 0)
                 } else if activityType == "Run" {
-                    runTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                    runTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite ), at: 0)
                 } else if activityType == "Hike" {
-                    hikeTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL ), at: 0)
+                    hikeTrails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite ), at: 0)
                 } else if activityType == "Bike" {
-                    bikeTrails.insert(Trail(unicueID: unicueID,  userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL), at: 0)
+                    bikeTrails.insert(Trail(unicueID: unicueID,  userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite), at: 0)
                 }
             }
         }
@@ -101,3 +106,14 @@ func preloadTrailsforProfile() {
     }
     
 }
+
+
+//func saveFavorites(fav: Trail) {
+//    
+//    let databaseRef = FIRDatabase.database().reference()
+//    let userID = FIRAuth.auth()?.currentUser?.uid
+//    let key = databaseRef.child("Favorites").childByAutoId().key
+//    
+//    databaseRef.child("Favorites").child("\(userID!)").child("\(key)").setValue(fav as AnyObject)
+//}
+

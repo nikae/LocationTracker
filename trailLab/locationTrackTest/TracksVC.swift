@@ -19,14 +19,26 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
    
     var testArr: [Trail] = []
-
+    var favoriteTrails: [Trail] = []
+    var favs = [UIImage](repeating: UIImage(named: "Star_000000_25")!, count: (trails.count))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.reloadData()
         self.collectionView.reloadData()
+        
+        if trails.count != 0 {
+        for i in (0...trails.count - 1) {
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            if  trails[i].fav[uid!] != true {
+            favs[i] = UIImage(named: "Star_000000_25")!
+            } else {
+            favs[i] = UIImage(named: "Star_Black_000000_25")!
+            }
+        }
     }
+}
     
     override func viewWillAppear(_ animated: Bool) {
         getItemImage(item: profileTabBarItem)
@@ -81,6 +93,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         cell.difficultyLabel.adjustsFontSizeToFitWidth = true
         cell.accLabel.adjustsFontSizeToFitWidth = true
         
+        
         if trails[indexPath.row].difficulty.count > 0 {
             cell.difficultyLabel.text = "Difficulty: \(trails[indexPath.row].difficulty.joined(separator: ", "))"
         } else {
@@ -93,6 +106,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             cell.accLabel.text = "No what to see data!"
         }
 
+        cell.favoritesLabel.text = "\(trails[indexPath.row].stars!)"
+        
         let url = trails[indexPath.row].pictureURL
         
         getImage(url!, imageView: cell.cellImage)
@@ -118,19 +133,78 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
         
         cell.starBut.tag = indexPath.row
-        cell.starBut.addTarget(self, action: Selector(("launchStar")), for: .touchUpInside)
+        cell.starBut.addTarget(self, action: #selector(TracksVC.launchStar), for: .touchUpInside)
+        cell.starBut.setImage(favs[indexPath.row], for: .normal)
         
         return cell
     }
-  
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         testArr.append(trails[indexPath.row])
         self.performSegue(withIdentifier: "Segue5", sender: self)
         
     }
+    
+    func launchStar(sender: UIButton) {
+        print(sender.tag) // This works, every cell returns a different number and in order.
+        
+        
+            let uid = FIRAuth.auth()?.currentUser?.uid
+        if  trails[sender.tag].fav[uid!] != true {
+            
+            if favs[sender.tag] == UIImage(named: "Star_000000_25") {
+            favs[sender.tag] = UIImage(named: "Star_Black_000000_25")!
+            } else {
+            favs[sender.tag] = UIImage(named: "Star_000000_25")!
+            }
+
+                let databaseRef = FIRDatabase.database().reference()
+                let key = trails[sender.tag].unicueID!
+                databaseRef.child("Trails/\(key)/favorites/\(uid!)").setValue(true)
+            
+                stars = trails[sender.tag].stars!
+                stars += 1
+                print(stars)
+                databaseRef.child("Trails/\(key)/stars").setValue(stars as AnyObject)
+            
+                
+                // saveFavorites(fav: trails[sender.tag])
+                favoriteTrails.append(trails[sender.tag])
+                collectionView.reloadData()
+                tableView.reloadData()
+
+                
+            } else {
+            if favs[sender.tag] == UIImage(named: "Star_Black_000000_25") {
+                favs[sender.tag] = UIImage(named: "Star_000000_25")!
+            } else {
+                favs[sender.tag] = UIImage(named: "Star_Black_000000_25")!
+            }
+                let databaseRef = FIRDatabase.database().reference()
+                let key = trails[sender.tag].unicueID!
+                stars = trails[sender.tag].stars!
+                stars -= 1
+                print(stars)
+                databaseRef.child("Trails/\(key)/stars").setValue(stars as AnyObject)
+                databaseRef.child("Trails/\(key)/favorites/\(uid!)").setValue(false)
+                //
+                ////                    favoriteTrails[sender.tag] = nil
+                ////                    collectionView.reloadData()
+                //
+                tableView.reloadData()
+   
+        }
+            
+            
+       // } else {
+          //         }
+        sender.setImage(favs[sender.tag], for: .normal)
+    }
+    
+  
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -150,12 +224,12 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        testArr.append(trails[indexPath.row])
+        testArr.append(favoriteTrails[indexPath.row])
         self.performSegue(withIdentifier: "Segue5", sender: self)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trails.count
+        return favoriteTrails.count
     }
 
     //MARK -CV
@@ -172,7 +246,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         CVImage.layer.borderWidth = 2
         CVImage.clipsToBounds = true
         
-        let url = trails[indexPath.row].pictureURL
+        
+        let url = favoriteTrails[indexPath.row].pictureURL
         if url != "" {
              DispatchQueue.main.async {
             getImage(url!, imageView: CVImage)
@@ -181,7 +256,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             CVImage.image =  UIImage(named:"img-default")
         }
 
-        let type = trails[indexPath.row].activityType
+        let type = favoriteTrails[indexPath.row].activityType
         if type == "Walk" {
             CVImage.layer.borderColor = walkColor().cgColor
         } else if type == "Run" {

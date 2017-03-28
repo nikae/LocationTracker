@@ -11,24 +11,6 @@ import UIKit
 import Firebase
 
 
-struct Trail {
-    
-    let unicueID : String!
-    let userId : String!
-    let activityType : String!
-    let activityName : String!
-    let distance : String
-    var locations : [AnyObject]
-    let time : String!
-    var pace : String!
-    var altitudes : [Double]
-    let difficulty : [String]
-    let suitability : [String]
-    let whatToSee : [String]
-    let description : String!
-    let pictureURL : String!
-}
-
 
 func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
     

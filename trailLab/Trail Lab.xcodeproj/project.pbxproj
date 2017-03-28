@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2400D9791E89D18700DEE8E2 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2400D9781E89D18700DEE8E2 /* Trail.swift */; };
 		240DD1121DE531B100F68A28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240DD1111DE531B100F68A28 /* AppDelegate.swift */; };
 		240DD1141DE531B100F68A28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240DD1131DE531B100F68A28 /* ViewController.swift */; };
 		240DD1191DE531B100F68A28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 240DD1181DE531B100F68A28 /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		13CAB6F0E49B5742EB2726AC /* Pods_Trail_LabTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trail_LabTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2400D9781E89D18700DEE8E2 /* Trail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
 		240DD10E1DE531B100F68A28 /* Trail Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trail Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		240DD1111DE531B100F68A28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		240DD1131DE531B100F68A28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				2466AC9E1DFE1010001331DD /* CoreDataStack.swift */,
 				24FFF4001DFDE4420088B86C /* Varebles.swift */,
 				24D1BFC81E4A961C007151E8 /* Methods.swift */,
+				2400D9781E89D18700DEE8E2 /* Trail.swift */,
 				24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */,
 				2466ACA01DFE1300001331DD /* DataBaseModel.xcdatamodeld */,
 				24F9D0341E79F091008BE044 /* Main.storyboard */,
@@ -540,6 +543,7 @@
 				24EB64B11E831FDA00017A9C /* FilterVC.swift in Sources */,
 				2466ACA21DFE1300001331DD /* DataBaseModel.xcdatamodeld in Sources */,
 				24F114D91E7B47F200269D69 /* TracksMapVC.swift in Sources */,
+				2400D9791E89D18700DEE8E2 /* Trail.swift in Sources */,
 				2466AC9F1DFE1010001331DD /* CoreDataStack.swift in Sources */,
 				240DD1451DED025A00F68A28 /* ObjectColors.swift in Sources */,
 				24BAB1E91E57B6CB00E32E74 /* ResetPasswordVC.swift in Sources */,

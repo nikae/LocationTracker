@@ -112,6 +112,8 @@ var distanceTraveled = 0.0
 var arrayOfAltitude: [Double] = []
 
 var maxAltitude: Double = 0
+var stars = 0
+var favBool = false
 
 //Profile view animation
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
@@ -166,7 +168,7 @@ var hikeTrails = [Trail]()
 var bikeTrails = [Trail]()
 
 
-var radiusOfLoadingTrails: Double = 0.1
+var radiusOfLoadingTrails: Double = 2000
 
 var coordinate₁: CLLocation!
 

@@ -444,6 +444,8 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let watToSee = arrayOfWhatToSee
         let description = textView_ActivityDone.text ?? ""
         let pictureURL = picURL
+        let star = stars
+        let fav = [userID! : false]
         
         let key = databaseRef.child("Trails").childByAutoId().key
         
@@ -460,7 +462,9 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
                                                          "suitability" : suitability as AnyObject,
                                                          "swatToSee" : watToSee as AnyObject,
                                                          "description" : description as AnyObject,
-                                                         "pictureURL" : pictureURL as AnyObject]
+                                                         "pictureURL" : pictureURL as AnyObject,
+                                                         "stars" : star as AnyObject,
+                                                          "favorites" : fav as AnyObject]
         
        
        // let childUpdates = ["Trails/\(key)/\(trailInfo)"]
