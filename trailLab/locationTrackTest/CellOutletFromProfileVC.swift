@@ -265,5 +265,14 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     @IBAction func openImageHit(_ sender: UIButton) {
        self.performSegue(withIdentifier: "openImage", sender: self)
     }
+    @IBAction func backToMyLocation(_ sender: Any) {
+        //mapView.zoomMap(val: 0.010, superVisor: manager, view: theMap)
+        //mapView.setUpMapView(view: theMap, delegate: self)
+        let lat = coordinates1[0].latitude
+        let long = coordinates1[0].longitude
+        let span = MKCoordinateSpanMake(0.04, 0.04)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
+        theMap.setRegion(region, animated: true)
+    }
   
 }

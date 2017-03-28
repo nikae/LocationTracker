@@ -529,5 +529,9 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         arrayOfDifficulty.removeAll()
         arrayOfSuitability.removeAll()
     }
+    @IBAction func backToMyLocation(_ sender: Any) {
+        
+        mapView.zoomMap(val: 0.007, superVisor: manager, view: mapView_ActivityDone)
+    }
 
 }
