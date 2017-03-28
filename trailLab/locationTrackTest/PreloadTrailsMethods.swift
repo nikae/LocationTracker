@@ -117,3 +117,7 @@ func preloadTrailsforProfile() {
 //    databaseRef.child("Favorites").child("\(userID!)").child("\(key)").setValue(fav as AnyObject)
 //}
 
+
+
+
+

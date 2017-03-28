@@ -63,6 +63,8 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     @IBOutlet weak var UploadIndicator: UIActivityIndicatorView!
     var abc: [[String: AnyObject]] = []
     
+    @IBOutlet weak var progressView: UIProgressView!
+    
     var manager: CLLocationManager!
     let mapView = MyMapView()
     
@@ -70,6 +72,9 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        progressView.isHidden = true
+        progressView.progressTintColor = walkColor()
+        
         getgoalsDefoultsFunc()
         setGoals()
         
@@ -214,13 +219,27 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let imagePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
-        self.storageRef.child(imagePath).put(imageData!, metadata: metadata) { (metadata, error) in
+        let uploasTask = self.storageRef.child(imagePath).put(imageData!, metadata: metadata) { (metadata, error) in
                 if let error = error {
                     print("Error uploading: \(error)")
                     return
                 }
             self.picURL = self.storageRef.child((metadata?.path)!).description
         }
+        
+        uploasTask.observe(.progress, handler: { [weak self] (snapshot) in
+            
+            guard let strongSelf = self else {return}
+            guard let progress = snapshot.progress else {return}
+            strongSelf.progressView.progress = Float(progress.fractionCompleted)
+            strongSelf.progressView.isHidden = false
+            
+            if strongSelf.progressView.progress == 1.0 {
+                strongSelf.progressView.isHidden = true
+            }
+            
+            
+        } )
         
     }
 

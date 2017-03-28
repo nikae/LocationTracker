@@ -18,6 +18,9 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     
+    @IBOutlet weak var progressView: UIProgressView!
+   
+    
      var storageRef: FIRStorageReference!
      var databaseRef: FIRDatabaseReference!
      fileprivate var _refHandle: FIRDatabaseHandle!
@@ -27,6 +30,8 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        progressView.isHidden = true
         
         nameTF.delegate = self
         lastNameTF.delegate = self
@@ -174,17 +179,33 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         let imagePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
-        self.storageRef.child(imagePath)
+        let uploasTask = self.storageRef.child(imagePath)
             .put(imageData!, metadata: metadata) { (metadata, error) in
                 if let error = error {
                     print("Error uploading: \(error)")
                     return
                 }
+                
                 self.picURL = self.storageRef.child((metadata?.path)!).description
                 //print(self.picURL)
                 
                 self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
         }
+        
+            uploasTask.observe(.progress, handler: { [weak self] (snapshot) in
+       
+            guard let strongSelf = self else {return}
+            guard let progress = snapshot.progress else {return}
+            strongSelf.progressView.progress = Float(progress.fractionCompleted)
+            strongSelf.progressView.isHidden = false
+            
+            if strongSelf.progressView.progress == 1.0 {
+               strongSelf.progressView.isHidden = true
+            }
+            
+            
+        } )
+        
     }
 
     @IBAction func editProfilePictureHit(_ sender: UIButton) {

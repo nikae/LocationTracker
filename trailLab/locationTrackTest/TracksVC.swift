@@ -35,6 +35,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
             favs[i] = UIImage(named: "Star_000000_25")!
             } else {
             favs[i] = UIImage(named: "Star_Black_000000_25")!
+                favoriteTrails.append(trails[i])
             }
         }
     }
@@ -169,16 +170,55 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 print(stars)
                 databaseRef.child("Trails/\(key)/stars").setValue(stars as AnyObject)
             
+                databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
                 
+                    if snapshot.hasChildren() {
+                
+                        let value = snapshot.value as! NSDictionary
+                
+                        let unicueID = value["unicueID"] as? String
+                        let userId = value["userId"] as? String
+                        let activityType = value["activityType"] as? String ?? ""
+                        let activityName = value["activityName"] as? String
+                        let distance = value["distance"] as? String ?? ""
+                        let locations = value["locations"] as? [AnyObject]
+                        let time = value["time"] as? String ?? ""
+                        let pace = value["pace"] as? String ?? ""
+                        let altitudes: [Double]? = value["altitudes"] as? [Double] ?? [0]
+                        let difficulty = value["difficulty"] as? [String] ?? []
+                        let suitability = value["suitability"] as? [String] ?? []
+                        let whatToSee = value["swatToSee"] as? [String] ?? []
+                        let description = value["description"]  as? String ?? ""
+                        let pictureURL = value["pictureURL"]  as? String
+                        let star = value["stars"] as? Int ?? 0
+                        let favorite = value["favorites"] as? [String: Bool] ?? ["noUser": false]
+                
+                        if trails[sender.tag].unicueID == unicueID {
+                            trails[sender.tag] = Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite)
+                            self.favoriteTrails.append(trails[sender.tag])
+                            
+                            self.collectionView.reloadData()
+                            self.tableView.reloadData()
+                            
+                        }
+                    }
+                }) { (error) in
+                }
+                
+            
+
+            
+
                 // saveFavorites(fav: trails[sender.tag])
-                favoriteTrails.append(trails[sender.tag])
-                collectionView.reloadData()
-                tableView.reloadData()
+                //favoriteTrails.append(trails[sender.tag])
+            
 
                 
             } else {
             if favs[sender.tag] == UIImage(named: "Star_Black_000000_25") {
                 favs[sender.tag] = UIImage(named: "Star_000000_25")!
+                
+                favoriteTrails.removeAll()
             } else {
                 favs[sender.tag] = UIImage(named: "Star_Black_000000_25")!
             }
@@ -189,17 +229,59 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 print(stars)
                 databaseRef.child("Trails/\(key)/stars").setValue(stars as AnyObject)
                 databaseRef.child("Trails/\(key)/favorites/\(uid!)").setValue(false)
-                //
-                ////                    favoriteTrails[sender.tag] = nil
-                ////                    collectionView.reloadData()
-                //
+            
+        
+            
+                databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+                
+                if snapshot.hasChildren() {
+                    
+                    let value = snapshot.value as! NSDictionary
+                    
+                    let unicueID = value["unicueID"] as? String
+                    let userId = value["userId"] as? String
+                    let activityType = value["activityType"] as? String ?? ""
+                    let activityName = value["activityName"] as? String
+                    let distance = value["distance"] as? String ?? ""
+                    let locations = value["locations"] as? [AnyObject]
+                    let time = value["time"] as? String ?? ""
+                    let pace = value["pace"] as? String ?? ""
+                    let altitudes: [Double]? = value["altitudes"] as? [Double] ?? [0]
+                    let difficulty = value["difficulty"] as? [String] ?? []
+                    let suitability = value["suitability"] as? [String] ?? []
+                    let whatToSee = value["swatToSee"] as? [String] ?? []
+                    let description = value["description"]  as? String ?? ""
+                    let pictureURL = value["pictureURL"]  as? String
+                    let star = value["stars"] as? Int ?? 0
+                    let favorite = value["favorites"] as? [String: Bool] ?? ["noUser": false]
+                    
+                    if trails[sender.tag].unicueID == unicueID {
+                        trails[sender.tag] = Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite)
+  
+                        if trails.count != 0 {
+                            for i in (0...trails.count - 1) {
+                                let uid = FIRAuth.auth()?.currentUser?.uid
+                                if  trails[i].fav[uid!] == true {
+                                    self.favoriteTrails.append(trails[i])
+                                }
+                            }
+                        }
+
+                        self.collectionView.reloadData()
+                        self.tableView.reloadData()
+
+                        }
+                    
+                        
+                    }
+                
+            }) { (error) in
+            }
+            
                 tableView.reloadData()
    
         }
-            
-            
-       // } else {
-          //         }
+        
         sender.setImage(favs[sender.tag], for: .normal)
     }
     
@@ -248,13 +330,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         
         
         let url = favoriteTrails[indexPath.row].pictureURL
-        if url != "" {
-             DispatchQueue.main.async {
-            getImage(url!, imageView: CVImage)
-            }
-        } else {
-            CVImage.image =  UIImage(named:"img-default")
-        }
+
+        getImage(url!, imageView: CVImage)
 
         let type = favoriteTrails[indexPath.row].activityType
         if type == "Walk" {
