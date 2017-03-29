@@ -25,6 +25,7 @@ class FullImageVC: UIViewController {
         }
         
         buttShape(but: butt, color: bikeColor())
+        buttonShedow(but: butt)
     }
 
     override func didReceiveMemoryWarning() {

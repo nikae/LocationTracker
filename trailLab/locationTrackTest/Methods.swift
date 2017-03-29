@@ -260,4 +260,13 @@ func buttShape(but: UIButton, color: UIColor) {
 }
 
 
+func buttonShedow(but: UIButton) {
+    but.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
+    but.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+    but.layer.shadowOpacity = 1.0
+    but.layer.shadowRadius = 0.0
+    but.layer.masksToBounds = false
+   // but.layer.cornerRadius = 4.0
+}
+
 

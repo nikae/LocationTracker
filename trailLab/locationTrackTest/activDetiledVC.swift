@@ -57,6 +57,7 @@ class activDetiledVC: UIViewController {
 //        doneButton.clipsToBounds = true
 //        doneButton.layer.cornerRadius = doneButton.frame.height/2
         buttShape(but: doneButton, color: bikeColor())
+        buttonShedow(but: doneButton)
     }
 
     //MARK -Chart Method

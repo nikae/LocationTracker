@@ -43,6 +43,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        giveButton.isHidden = true
         
         getResults(UID: userID!)
         getgoalsDefoultsFunc()
@@ -89,6 +90,7 @@ self.tableView.reloadData()
     override func viewWillAppear(_ animated: Bool) {
         getItemImage(item: profileTabBarItem)
         buttShape(but: giveButton, color: runColor())
+        buttonShedow(but: giveButton)
     }
     
     override func viewDidLayoutSubviews() {

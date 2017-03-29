@@ -123,7 +123,9 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         self.mapView_ActivityDone.add(polyline)
         
         buttShape(but: deleteBtn, color: walkColor())
+        buttonShedow(but: deleteBtn)
         buttShape(but: saveBtn, color: hikeColor())
+        buttonShedow(but: saveBtn)
         
         buttShape(but: easy, color: hikeColor())
         buttShape(but: medium, color: runColor())

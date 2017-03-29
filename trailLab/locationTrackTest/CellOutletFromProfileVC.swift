@@ -142,8 +142,11 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
 
         
         buttShape(but: getDirectionsBtn, color: hikeColor())
+        buttonShedow(but: getDirectionsBtn)
         buttShape(but: doneBtn, color: bikeColor())
+        buttonShedow(but: doneBtn)
         buttShape(but: getTrailBtn, color: col)
+        buttonShedow(but: getTrailBtn)
     }
     
   //MARK -Get Directions
