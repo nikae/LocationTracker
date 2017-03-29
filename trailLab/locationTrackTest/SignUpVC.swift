@@ -66,30 +66,53 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
             
             FIRAuth.auth()?.createUser(withEmail: emailTF.text!, password: passwordTF.text!) {(user, error) in
                 if error == nil {
-                    print("You have Successfully signed up")
-                    firstNameDefoults.set(nil, forKey: firstNameDefoults_Key)
-                    firstNameDefoults.synchronize()
-                    lastNameDefoults.set(nil, forKey: lastNameDefoults_Key)
-                    lastNameDefoults.synchronize()
-                    profilePictureDefoults.set(nil, forKey: "image")
-                    profilePictureDefoults.synchronize()
                     
-                    let userID = FIRAuth.auth()?.currentUser?.uid
-                    if userID != nil {
-                    let databaseRef = FIRDatabase.database().reference()
-                        
-                    databaseRef.child("users/\(userID!)/email").setValue(self.emailTF.text!)
-                      
-                    //clearGoalsDefoultsFunc()
-                        saveTotalResults()
-                   print(saveTotalResults())
-                    //goalsDefoultsFunc()
+                    user?.sendEmailVerification(completion: {(error) in
+                        if error != nil {
+                            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                            alertController.addAction(action)
+                            self.present(alertController, animated: true, completion: nil)
+                        } else {
+                            
+                            let alert = UIAlertController(title: "Verification Email Sent", message: "Please veryfy your email", preferredStyle: .alert)
+                            
+                            let oKAction = UIAlertAction(title: "OK", style: .default )
+                            { (action: UIAlertAction) in
+                                
+                                print("You have Successfully signed up")
+                                
+                                    firstNameDefoults.set(nil, forKey: firstNameDefoults_Key)
+                                    firstNameDefoults.synchronize()
+                                    lastNameDefoults.set(nil, forKey: lastNameDefoults_Key)
+                                    lastNameDefoults.synchronize()
+                                    profilePictureDefoults.set(nil, forKey: "image")
+                                    profilePictureDefoults.synchronize()
+                                    
+                                    let userID = FIRAuth.auth()?.currentUser?.uid
+                                    if userID != nil {
+                                    let databaseRef = FIRDatabase.database().reference()
+                                        
+                                    databaseRef.child("users/\(userID!)/email").setValue(self.emailTF.text!)
+                                        
+                                    saveTotalResults()
+                                        
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "LogIn")
+                                    self.present(vc!, animated: true, completion: nil)
+                                    
+                                    
+                                }
+                            
+                            }
+
+                            alert.addAction(oKAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    })
+
                     
-                        
-                    }
                     
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfile")
-                    self.present(vc!, animated: true, completion: nil)
+                    
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                     let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)

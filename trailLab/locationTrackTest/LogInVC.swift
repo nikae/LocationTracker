@@ -87,6 +87,7 @@ class LogInVC: UIViewController, UITextFieldDelegate {
             FIRAuth.auth()?.signIn(withEmail: self.emailTF.text!, password: self.passwordTF.text!) { (user, error) in
                 if error == nil {
                    // print("You have successfully logged in")
+                    if (user?.isEmailVerified)! {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController")
                     self.present(vc!, animated: true, completion: nil)
                     
@@ -116,7 +117,18 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                     }
                     
                     getResults(UID: userID!)
+                    } else {
+                        let alert = UIAlertController(title: "Please veryfy your email", message: "We Have sent you an email with verification link", preferredStyle: .alert)
+                        let okHit = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                        let resendHit = UIAlertAction(title: "Resend Email", style: .default)
+                        { (action: UIAlertAction) in
+                        user?.sendEmailVerification()
+                        }
+                        alert.addAction(okHit)
+                        alert.addAction(resendHit)
+                        self.present(alert, animated: true, completion: nil)
 
+                    }
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
