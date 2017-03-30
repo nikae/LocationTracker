@@ -38,6 +38,9 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var TotalavaragePaceLabel: UILabel!
     @IBOutlet weak var totalMaxAltitudeLabel: UILabel!
     
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    
     let userID = FIRAuth.auth()?.currentUser?.uid
     
     override func viewDidLoad() {
@@ -49,6 +52,21 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
         getgoalsDefoultsFunc()
         
         lifeTime_Distance = (walkGoal + runGoal + hikeGoal + bikeGoal)
+        
+        if lifeTime_Distance <= 50.0 {
+            statusLabel.text = "Beginner"
+            statusLabel.textColor = walkColor()
+        } else if lifeTime_Distance > 50.0 && lifeTime_Distance <= 300 {
+            statusLabel.text = "Intermediate"
+            statusLabel.textColor = runColor()
+        } else if lifeTime_Distance > 300 && lifeTime_Distance <= 1000 {
+            statusLabel.text = "Expert"
+            statusLabel.textColor = bikeColor()
+        } else if lifeTime_Distance > 1000 {
+            statusLabel.text = "Pro"
+            statusLabel.textColor = hikeColor()
+        }
+
  
         totalActivities.text = "\(lifeTime_Activities)"
         totalMilsLabel.text = String(format: "%.2f mi", lifeTime_Distance)
@@ -203,6 +221,8 @@ self.tableView.reloadData()
         let suitabilityLabel = cell.viewWithTag(7) as! UILabel
             suitabilityLabel.adjustsFontSizeToFitWidth = true
         let imageCell = cell.viewWithTag(10) as! UIImageView
+        let starsLbl = cell.viewWithTag(11) as! UILabel
+            starsLbl.adjustsFontSizeToFitWidth = true
         var url = ""
         var type = ""
             switch (segmentedController.selectedSegmentIndex) {
@@ -215,6 +235,7 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  walkTrails[indexPath.row].activityName
                 url =  walkTrails[indexPath.row].pictureURL
+                starsLbl.text = "\(walkTrails[indexPath.row].stars!)★"
                 
                 if walkTrails[indexPath.row].difficulty.count > 0 {
                 difficultyLabel.text = "Difficulty: \(walkTrails[indexPath.row].difficulty.joined(separator: ", "))"
@@ -226,7 +247,37 @@ self.tableView.reloadData()
                 } else {
                 suitabilityLabel.text = "No suitability data!"
                 }
-                sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: goal)
+                
+                
+                var setGoalForWalk: Double = 0
+                //[50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
+                if walkGoal <= 50 {
+                    setGoalForWalk = arrayOfGoals[0]
+                } else if walkGoal > 50 && walkGoal <= 75 {
+                    setGoalForWalk = arrayOfGoals[1]
+                } else if walkGoal > 75 && walkGoal <= 100 {
+                    setGoalForWalk = arrayOfGoals[2]
+                } else if walkGoal > 100 && walkGoal <= 150 {
+                    setGoalForWalk = arrayOfGoals[3]
+                } else if walkGoal > 150 && walkGoal <= 200 {
+                    setGoalForWalk = arrayOfGoals[4]
+                } else if walkGoal > 200 && walkGoal <= 300 {
+                    setGoalForWalk = arrayOfGoals[5]
+                } else if walkGoal > 300 && walkGoal <= 500 {
+                    setGoalForWalk = arrayOfGoals[6]
+                } else if walkGoal > 500 && walkGoal <= 1000 {
+                    setGoalForWalk = arrayOfGoals[7]
+                } else if walkGoal > 1000 && walkGoal <= 5000 {
+                    setGoalForWalk = arrayOfGoals[8]
+                } else if walkGoal > 5000 && walkGoal <= 10000 {
+                    setGoalForWalk = arrayOfGoals[9]
+                } else if walkGoal > 10000 && walkGoal <= 100000 {
+                    setGoalForWalk = arrayOfGoals[10]
+                }
+                
+                
+                
+                sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: setGoalForWalk)
                 valueOfSlider = slider.run
                 break
             case 1:
@@ -238,6 +289,7 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  runTrails[indexPath.row].activityName
                 url = runTrails[indexPath.row].pictureURL
+                starsLbl.text = "\(runTrails[indexPath.row].stars!)★"
                 
                 if runTrails[indexPath.row].difficulty.count > 0 {
                 difficultyLabel.text = "Difficulty: \(runTrails[indexPath.row].difficulty.joined(separator: ", "))"
@@ -251,7 +303,35 @@ self.tableView.reloadData()
                     suitabilityLabel.text = "No suitability data!"
                 }
                 
-                sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: goal)
+                var setGoalForRun: Double = 0
+                ///[50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
+                if runGoal <= 50 {
+                    setGoalForRun = arrayOfGoals[0]
+                } else if runGoal > 50 && runGoal <= 75 {
+                    setGoalForRun = arrayOfGoals[1]
+                } else if runGoal > 75 && runGoal <= 100 {
+                    setGoalForRun = arrayOfGoals[2]
+                } else if runGoal > 100 && runGoal <= 150 {
+                    setGoalForRun = arrayOfGoals[3]
+                } else if runGoal > 150 && runGoal <= 200 {
+                    setGoalForRun = arrayOfGoals[4]
+                } else if runGoal > 200 && runGoal <= 300 {
+                    setGoalForRun = arrayOfGoals[5]
+                } else if runGoal > 300 && runGoal <= 500 {
+                    setGoalForRun = arrayOfGoals[6]
+                } else if runGoal > 500 && runGoal <= 1000 {
+                    setGoalForRun = arrayOfGoals[7]
+                } else if runGoal > 1000 && runGoal <= 5000 {
+                    setGoalForRun = arrayOfGoals[8]
+                } else if runGoal > 5000 && runGoal <= 10000 {
+                    setGoalForRun = arrayOfGoals[9]
+                } else if runGoal > 10000 && runGoal <= 100000 {
+                    setGoalForRun = arrayOfGoals[10]
+                }
+
+                
+                
+                sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: setGoalForRun)
                 valueOfSlider = slider.hike
                 break
             case 2:
@@ -263,6 +343,7 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  hikeTrails[indexPath.row].activityName
                 url = hikeTrails[indexPath.row].pictureURL
+                starsLbl.text = "\(hikeTrails[indexPath.row].stars!)★"
                 
                 if hikeTrails[indexPath.row].difficulty.count > 0 {
                 difficultyLabel.text =  "Difficulty: \(hikeTrails[indexPath.row].difficulty.joined(separator: ", "))"
@@ -276,7 +357,33 @@ self.tableView.reloadData()
                     suitabilityLabel.text = "No suitability data!"
                 }
                 
-                sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: goal)
+                var setGoalForHike: Double = 0
+                //[50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
+                if hikeGoal <= 50 {
+                    setGoalForHike = arrayOfGoals[0]
+                } else if hikeGoal > 50 && hikeGoal <= 75 {
+                    setGoalForHike = arrayOfGoals[1]
+                } else if hikeGoal > 75 && hikeGoal <= 100 {
+                    setGoalForHike = arrayOfGoals[2]
+                } else if hikeGoal > 100 && hikeGoal <= 150 {
+                    setGoalForHike = arrayOfGoals[3]
+                } else if hikeGoal > 150 && hikeGoal <= 200 {
+                    setGoalForHike = arrayOfGoals[4]
+                } else if hikeGoal > 200 && hikeGoal <= 300 {
+                    setGoalForHike = arrayOfGoals[5]
+                } else if hikeGoal > 300 && hikeGoal <= 500 {
+                    setGoalForHike = arrayOfGoals[6]
+                } else if hikeGoal > 500 && hikeGoal <= 1000 {
+                    setGoalForHike = arrayOfGoals[7]
+                } else if hikeGoal > 1000 && hikeGoal <= 5000 {
+                    setGoalForHike = arrayOfGoals[8]
+                } else if hikeGoal > 5000 && hikeGoal <= 10000 {
+                    setGoalForHike = arrayOfGoals[9]
+                } else if hikeGoal > 10000 && hikeGoal <= 100000 {
+                    setGoalForHike = arrayOfGoals[10]
+                }
+                
+                sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: setGoalForHike)
                 valueOfSlider = slider.bike
                 break
             case 3:
@@ -288,6 +395,7 @@ self.tableView.reloadData()
                 altitudeLabel.text = "\(maxAltitude)"
                 nameLabel.text =  bikeTrails[indexPath.row].activityName
                 url = bikeTrails[indexPath.row].pictureURL
+                starsLbl.text = "\(bikeTrails[indexPath.row].stars!)★"
                 
                 if bikeTrails[indexPath.row].difficulty.count > 0 {
                 difficultyLabel.text = "Difficulty: \(bikeTrails[indexPath.row].difficulty.joined(separator: ", "))"
@@ -300,7 +408,35 @@ self.tableView.reloadData()
                 } else {
                     suitabilityLabel.text = "No suitability data!"
                 }
-                sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: goal)
+                
+                
+                var setGoalForBike: Double = 0
+                //[50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
+                if bikeGoal <= 50 {
+                    setGoalForBike = arrayOfGoals[0]
+                } else if bikeGoal > 50 && bikeGoal <= 75 {
+                    setGoalForBike = arrayOfGoals[1]
+                } else if bikeGoal > 75 && bikeGoal <= 100 {
+                    setGoalForBike = arrayOfGoals[2]
+                } else if bikeGoal > 100 && bikeGoal <= 150 {
+                    setGoalForBike = arrayOfGoals[3]
+                } else if bikeGoal > 150 && bikeGoal <= 200 {
+                    setGoalForBike = arrayOfGoals[4]
+                } else if bikeGoal > 200 && bikeGoal <= 300 {
+                    setGoalForBike = arrayOfGoals[5]
+                } else if bikeGoal > 300 && bikeGoal <= 500 {
+                    setGoalForBike = arrayOfGoals[6]
+                } else if bikeGoal > 500 && bikeGoal <= 1000 {
+                    setGoalForBike = arrayOfGoals[7]
+                } else if bikeGoal > 1000 && bikeGoal <= 5000 {
+                    setGoalForBike = arrayOfGoals[8]
+                } else if bikeGoal > 5000 && bikeGoal <= 10000 {
+                    setGoalForBike = arrayOfGoals[9]
+                } else if bikeGoal > 10000 && bikeGoal <= 100000 {
+                    setGoalForBike = arrayOfGoals[10]
+                }
+
+                sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: setGoalForBike)
                 valueOfSlider = slider.walk
                 break
             default :
@@ -349,7 +485,7 @@ self.tableView.reloadData()
     }
     
     func returnAlert(action: UIAlertAction) {
-        let alertController = UIAlertController(title: "Delete Trail", message: "Delated Trails Can Not Be Retrived", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Delete Trail", message: "Delated Trail Can Not Be Retrived", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .default) {
             (action: UIAlertAction) in
             print("User Action Has Canceld")

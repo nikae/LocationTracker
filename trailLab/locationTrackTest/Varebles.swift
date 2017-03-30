@@ -122,7 +122,7 @@ let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the
 
 
 // Goales - totall results
-let arrayOfGoals: [Double] = [50, 75, 100, 150, 200, 300, 500, 1000, 5000]
+let arrayOfGoals: [Double] = [50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
 
 var timePassedToSave = TimeInterval()
 

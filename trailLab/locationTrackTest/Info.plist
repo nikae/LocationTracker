@@ -19,13 +19,17 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>6</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.healthcare-fitness</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>In case you want to add pictures</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Health Share Usage</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Health Update Usage</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>WE NEED TO TRACK YOU!!! LOL :)</string>
 	<key>NSPhotoLibraryUsageDescription</key>
