@@ -85,7 +85,21 @@ func sliderFunc(slider: UISlider, color: UIColor, image: UIImage, min: Double, m
     slider.minimumValue = 0
     slider.value = Float(min)
     slider.isUserInteractionEnabled = false
-}
+
+
+//    if let handleView = slider.subviews.last as? UIImageView {
+//        let label = UILabel(frame: handleView.bounds)
+//        label.layer.frame.origin.y = -10
+//        label.backgroundColor = .clear
+//        label.textAlignment = .center
+//        label.adjustsFontSizeToFitWidth = true
+//        label.text = "\(Int(min))/\(Int(max))"
+//        handleView.addSubview(label)
+//        
+//    }
+
+
+   }
 
 
 func setGoals() {
@@ -248,7 +262,6 @@ func delataImage(url: String) {
         }
     }
 }
-
 
 //MARK -Button Shape
 

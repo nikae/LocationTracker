@@ -42,9 +42,24 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var statusView: UIView!
     
     let userID = FIRAuth.auth()?.currentUser?.uid
-    
+   // var sliderLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+//        if let handleView = goalSlider.subviews.last as? UIImageView {
+//           let sliderLabel = UILabel(frame: handleView.bounds)
+//            sliderLabel.layer.frame.origin.y = -10
+//            sliderLabel.backgroundColor = .clear
+//            sliderLabel.textAlignment = .center
+//            sliderLabel.adjustsFontSizeToFitWidth = true
+//            sliderLabel.text = "\(Int(walkGoal))"
+//            handleView.addSubview(sliderLabel)
+//            
+//            
+//        }
+
+        
         
         giveButton.isHidden = true
         
@@ -278,6 +293,7 @@ self.tableView.reloadData()
                 
                 
                 sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: setGoalForWalk)
+    //            sliderLabel.text = "\(Int(walkGoal))/\(Int(setGoalForWalk))"
                 valueOfSlider = slider.run
                 break
             case 1:
@@ -332,6 +348,7 @@ self.tableView.reloadData()
                 
                 
                 sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: setGoalForRun)
+   //             sliderLabel.text = "\(Int(runGoal))/\(Int(setGoalForRun))"
                 valueOfSlider = slider.hike
                 break
             case 2:
@@ -384,6 +401,7 @@ self.tableView.reloadData()
                 }
                 
                 sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: setGoalForHike)
+   //             sliderLabel.text = "\(Int(hikeGoal))/\(Int(setGoalForHike))"
                 valueOfSlider = slider.bike
                 break
             case 3:
@@ -409,6 +427,7 @@ self.tableView.reloadData()
                     suitabilityLabel.text = "No suitability data!"
                 }
                 
+
                 
                 var setGoalForBike: Double = 0
                 //[50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
@@ -437,6 +456,7 @@ self.tableView.reloadData()
                 }
 
                 sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: setGoalForBike)
+   //             sliderLabel.text = "\(Int(bikeGoal))/\(Int(setGoalForBike))"
                 valueOfSlider = slider.walk
                 break
             default :
