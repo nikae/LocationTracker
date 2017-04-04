@@ -227,10 +227,15 @@ self.tableView.reloadData()
         cell.isUserInteractionEnabled = true
         
         let distanceLabel = cell.viewWithTag(1) as! UILabel
+            distanceLabel.adjustsFontSizeToFitWidth = true
         let timeLabel = cell.viewWithTag(2) as! UILabel
+            timeLabel.adjustsFontSizeToFitWidth = true
         let paceLabel = cell.viewWithTag(3) as! UILabel
+            paceLabel.adjustsFontSizeToFitWidth = true
         let altitudeLabel = cell.viewWithTag(4) as! UILabel
+            altitudeLabel.adjustsFontSizeToFitWidth = true
         let nameLabel = cell.viewWithTag(5) as! UILabel
+            nameLabel.adjustsFontSizeToFitWidth = true
         let difficultyLabel = cell.viewWithTag(6) as! UILabel
             difficultyLabel.adjustsFontSizeToFitWidth = true
         let suitabilityLabel = cell.viewWithTag(7) as! UILabel

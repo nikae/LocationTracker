@@ -22,7 +22,6 @@ struct Trail {
     let difficulty : [String]
     let suitability : [String]
     let whatToSee : [String]
-    let description : String!
     let pictureURL : String!
     let stars : Int!
     let fav:  [String: Bool]

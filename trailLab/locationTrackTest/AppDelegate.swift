@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         coordinate₁ = locationManager.location
         
         if coordinate₁ != nil {
-            preloadTrails(loc: coordinate₁!, radius: radiusOfLoadingTrails)
+            preloadTrails(loc: coordinate₁!, radius: 1)
         }
         preloadTrailsforProfile()
         return true

@@ -31,7 +31,7 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Health Update Usage</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>WE NEED TO TRACK YOU!!! LOL :)</string>
+	<string>To provide accurate data of your sport activities</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>In case you want to add pictures</string>
 	<key>UIBackgroundModes</key>

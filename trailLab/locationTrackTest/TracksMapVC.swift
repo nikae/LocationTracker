@@ -31,7 +31,6 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         super.viewDidLoad()
                 for loc in trails {
                     let name = loc.activityName
-                    let desc = loc.description
                     let url = loc.pictureURL
                     let type = loc.activityType
                     let unID = loc.unicueID
@@ -46,7 +45,6 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
                         
                         let point = TrailsAnnotation(coordinate: self.coordinate) //
                         point.title = name
-                        point.eta = desc
                         point.imageUrl = url!
                         point.actType = type
                         point.unicueId = unID

@@ -63,7 +63,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 //        }
 //*********************SAFETY ZONE*************************
         
-         }
+        distanceLabel.adjustsFontSizeToFitWidth = true
+        timeLabel.adjustsFontSizeToFitWidth = true
+        paceLabel.adjustsFontSizeToFitWidth = true
+        altitudeLabel.adjustsFontSizeToFitWidth = true
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

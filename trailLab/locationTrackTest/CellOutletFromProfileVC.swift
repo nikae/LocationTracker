@@ -85,8 +85,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         timeLabel.text = arr[0].time
         paceLabel.text = arr[0].pace
         altitudeLabel.text = String(format: "%.2f ft", arr[0].altitudes.max()!)
-        infoTV.text = arr[0].description
-        
+                
            // if arr[0].pictureURL != "" {
         getImage(arr[0].pictureURL, imageView: activeImageView)
            // }

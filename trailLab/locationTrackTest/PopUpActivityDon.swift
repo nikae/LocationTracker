@@ -53,7 +53,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     
     @IBOutlet weak var mapView_ActivityDone: MKMapView!
    
-    @IBOutlet weak var textView_ActivityDone: UITextView!
+    
    // @IBOutlet weak var textFiled_ActivityDone: UITextField!
     
     @IBOutlet weak var scrollView: UIView!
@@ -71,6 +71,11 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        distanceLabel.adjustsFontSizeToFitWidth = true
+        totalTimeLabel.adjustsFontSizeToFitWidth = true
+        paceLabel.adjustsFontSizeToFitWidth = true
+        altitudeLabel.adjustsFontSizeToFitWidth = true
        
         progressView.isHidden = true
         progressView.progressTintColor = walkColor()
@@ -88,12 +93,12 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         mapView.zoomMap(val: 0.04, superVisor: manager,view: mapView_ActivityDone)
         mapView_ActivityDone.showsUserLocation = false
   
-        textView_ActivityDone.layer.borderWidth = 0.5
-        textView_ActivityDone.layer.borderColor = UIColor.gray.cgColor
-        textView_ActivityDone.layer.cornerRadius = 10
+//        textView_ActivityDone.layer.borderWidth = 0.5
+//        textView_ActivityDone.layer.borderColor = UIColor.gray.cgColor
+//        textView_ActivityDone.layer.cornerRadius = 10
       
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.9)
-        textView_ActivityDone.delegate = self
+//       textView_ActivityDone.delegate = self
         activityNameTF.delegate = self
         
         activityNameTF.text = activityNameTF_String
@@ -249,17 +254,17 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     
     //MARK: -Figour Out KeyBoard / TextView - TextFiled
     //key shows
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if (textView == textView_ActivityDone) {
-            moveTextView(textView: textView, distance: -290, up: true)
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if (textView == textView_ActivityDone) {
-            moveTextView(textView: textView, distance: -290, up: false)
-        }
-    }
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        if (textView == textView_ActivityDone) {
+//            moveTextView(textView: textView, distance: -290, up: true)
+//        }
+//    }
+//    
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        if (textView == textView_ActivityDone) {
+//            moveTextView(textView: textView, distance: -290, up: false)
+//        }
+//    }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n") {
             textView.resignFirstResponder()
@@ -288,7 +293,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     //Dismiss keyboard Tap
     func keyboardDismiss() {
         activityNameTF.resignFirstResponder()
-        textView_ActivityDone.resignFirstResponder()
+       // textView_ActivityDone.resignFirstResponder()
     }
     
     @IBAction func viewTapped(_ sender: AnyObject) {
@@ -463,7 +468,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         let difficulty = arrayOfDifficulty
         let suitability = arrayOfSuitability
         let watToSee = arrayOfWhatToSee
-        let description = textView_ActivityDone.text ?? ""
+       // let description = textView_ActivityDone.text ?? ""
         let pictureURL = picURL
         let star = stars
         let fav = [userID! : false]
@@ -482,7 +487,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
                                                          "difficulty" : difficulty as AnyObject,
                                                          "suitability" : suitability as AnyObject,
                                                          "swatToSee" : watToSee as AnyObject,
-                                                         "description" : description as AnyObject,
+                                                        // "description" : description as AnyObject,
                                                          "pictureURL" : pictureURL as AnyObject,
                                                          "stars" : star as AnyObject,
                                                           "favorites" : fav as AnyObject]

@@ -24,6 +24,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+               
         
         self.tableView.reloadData()
         self.collectionView.reloadData()
@@ -190,13 +191,12 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                         let difficulty = value["difficulty"] as? [String] ?? []
                         let suitability = value["suitability"] as? [String] ?? []
                         let whatToSee = value["swatToSee"] as? [String] ?? []
-                        let description = value["description"]  as? String ?? ""
                         let pictureURL = value["pictureURL"]  as? String
                         let star = value["stars"] as? Int ?? 0
                         let favorite = value["favorites"] as? [String: Bool] ?? ["noUser": false]
                 
                         if trails[sender.tag].unicueID == unicueID {
-                            trails[sender.tag] = Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite)
+                            trails[sender.tag] = Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, pictureURL: pictureURL, stars: star, fav: favorite)
                             self.favoriteTrails.append(trails[sender.tag])
                             
                             self.collectionView.reloadData()
@@ -252,13 +252,12 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                     let difficulty = value["difficulty"] as? [String] ?? []
                     let suitability = value["suitability"] as? [String] ?? []
                     let whatToSee = value["swatToSee"] as? [String] ?? []
-                    let description = value["description"]  as? String ?? ""
                     let pictureURL = value["pictureURL"]  as? String
                     let star = value["stars"] as? Int ?? 0
                     let favorite = value["favorites"] as? [String: Bool] ?? ["noUser": false]
                     
                     if trails[sender.tag].unicueID == unicueID {
-                        trails[sender.tag] = Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, description: description, pictureURL: pictureURL, stars: star, fav: favorite)
+                        trails[sender.tag] = Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee,  pictureURL: pictureURL, stars: star, fav: favorite)
   
                         if trails.count != 0 {
                             for i in (0...trails.count - 1) {
@@ -380,26 +379,10 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
          
         }
     }
-//    @IBAction func testingDataLoadHit(_ sender: UIBarButtonItem) {
-//        if coordinate₁ != nil {
-//            if trails.count > 0 {
-//                trails.removeAll()
-//                walkTrails.removeAll()
-//                runTrails.removeAll()
-//                hikeTrails.removeAll()
-//                bikeTrails.removeAll()
-//            }
-//            preloadTrails(loc: coordinate₁!, radius: 50)
-//            tableView.reloadData()
-//            collectionView.reloadData()
-//        }
-//
-//        
-//    }
- 
 
     @IBAction func filterHit(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "filterTrails", sender: self)
+       // trails.removeAll()
         
     }
     

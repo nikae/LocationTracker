@@ -10,83 +10,82 @@ import UIKit
 import AVFoundation
 
 
-class FilterVC: UIViewController, UITextFieldDelegate {
+class FilterVC: UIViewController {
     
     var viewID = ""
     
     //Distance:
-    @IBOutlet weak var distanceTF: UITextField!
+    
+    @IBOutlet weak var btn_50: UIButton!
+    @IBOutlet weak var btn_100: UIButton!
+    @IBOutlet weak var btn_200: UIButton!
     
     //Activity Type:
-    @IBOutlet weak var allActivityTypeBtn: UIButton!
     @IBOutlet weak var walkBtn: UIButton!
     @IBOutlet weak var runBtn: UIButton!
     @IBOutlet weak var hikeBtn: UIButton!
     @IBOutlet weak var bikeBtn: UIButton!
     //Difficulty:
-    @IBOutlet weak var allDifficultyBtn: UIButton!
     @IBOutlet weak var easyBtn: UIButton!
     @IBOutlet weak var mediumBtn: UIButton!
     @IBOutlet weak var hardBtn: UIButton!
     //Suitability:
-    @IBOutlet weak var allSuitabilityBtn: UIButton!
     @IBOutlet weak var kidFriendlyBtn: UIButton!
     @IBOutlet weak var dogFriendlyBtn: UIButton!
     @IBOutlet weak var weelchairFriendlyBtn: UIButton!
     //What to see:
-    @IBOutlet weak var whatToSeeTF: UITextField!
+    @IBOutlet weak var ViewsButt: UIButton!
+    @IBOutlet weak var beachButton: UIButton!
+    @IBOutlet weak var riverButton: UIButton!
+    @IBOutlet weak var caveButton: UIButton!
+    @IBOutlet weak var lakeButton: UIButton!
+    @IBOutlet weak var waterFallButton: UIButton!
+    @IBOutlet weak var hotSpringsButton: UIButton!
+    
+    
     //Done:
     @IBOutlet weak var doneBtn: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-buttShape(but: allActivityTypeBtn, color: .gray)
+        
+        buttShape(but: btn_50, color: walkColor())
+        buttShape(but: btn_100, color: bikeColor())
+        buttShape(but: btn_200, color: runColor())
+
         buttShape(but: walkBtn, color: walkColor())
         buttShape(but: runBtn, color: runColor())
         buttShape(but: hikeBtn, color: hikeColor())
         buttShape(but: bikeBtn, color: bikeColor())
         
-        buttShape(but: allDifficultyBtn, color: .gray)
         buttShape(but: easyBtn, color: runColor())
-        buttShape(but: mediumBtn, color: runColor())
-        buttShape(but: hardBtn, color: runColor())
+        buttShape(but: mediumBtn, color: walkColor())
+        buttShape(but: hardBtn, color: hikeColor())
         
-        buttShape(but: allSuitabilityBtn, color: .gray)
-        buttShape(but: kidFriendlyBtn, color: hikeColor())
+        buttShape(but: kidFriendlyBtn, color: bikeColor())
         buttShape(but: dogFriendlyBtn, color: hikeColor())
-        buttShape(but: weelchairFriendlyBtn, color: hikeColor())
+        buttShape(but: weelchairFriendlyBtn, color: runColor())
+        
+        buttShape(but: ViewsButt, color: runColor())
+        buttShape(but: beachButton, color: bikeColor())
+        buttShape(but: riverButton, color: walkColor())
+        buttShape(but: caveButton, color: hikeColor())
+        buttShape(but: lakeButton, color: bikeColor())
+        buttShape(but: waterFallButton, color: runColor())
+        buttShape(but: hotSpringsButton, color: walkColor())
         
         buttShape(but: doneBtn, color: bikeColor())
         
-        distanceTF.delegate = self
         
     }
     
-    //MARK -textFiled only takes Int
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
-        return string.rangeOfCharacter(from: invalidCharacters, options: [], range: string.startIndex ..< string.endIndex) == nil
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    //Dismiss keyboard Tap
-    func keyboardDismiss() {
-        distanceTF.resignFirstResponder()
-    }
-
-    @IBAction func keyDisTap(_ sender: UITapGestureRecognizer) {
-        keyboardDismiss()
-    }
-    
+      
     var filteArayOfDifficulty: [String] = []
     var filterArrayOfSuitability: [String] = []
     var filterArrayOfWhatToSee: [String] = []
     var filterArrayOfctivityTypes: [String] = []
+    var distanceToShoveTrails: [String] = []
 
     func launchBool(sender: UIButton, bool: Bool) {
         
@@ -104,11 +103,14 @@ buttShape(but: allActivityTypeBtn, color: .gray)
             } else if sender.tag == 4 || sender.tag == 5 || sender.tag == 6 {
                 filterArrayOfSuitability.append(num)
                 print(filterArrayOfSuitability)
+            } else if sender.tag == 21 || sender.tag == 22 || sender.tag == 23 {
+                distanceToShoveTrails.append(num)
+                print(distanceToShoveTrails)
+                filterDistance()
+            } else {
+                filterArrayOfWhatToSee.append(num)
+                print(filterArrayOfWhatToSee)
             }
-//            else {
-//                filterArrayOfWhatToSee.append(num)
-//                print(filterArrayOfWhatToSee)
-//            }
             
             sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(0.5)
             
@@ -135,13 +137,19 @@ buttShape(but: allActivityTypeBtn, color: .gray)
                     print(filterArrayOfSuitability)
                 }
                 
+            } else if sender.tag == 21 || sender.tag == 22 || sender.tag == 23 {
+                if let index = distanceToShoveTrails.index(of: num) {
+                distanceToShoveTrails.remove(at: index)
+                print(distanceToShoveTrails)
+                    filterDistance()
+                }
             }
-//            else {
-//                if let index = arrayOfWhatToSee.index(of: num) {
-//                    arrayOfWhatToSee.remove(at: index)
-//                    print(arrayOfWhatToSee)
-//                }
-//            }
+            else {
+                if let index = filterArrayOfWhatToSee.index(of: num) {
+                    filterArrayOfWhatToSee.remove(at: index)
+                    print(filterArrayOfWhatToSee)
+                }
+            }
             
             
             sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1)
@@ -156,6 +164,23 @@ buttShape(but: allActivityTypeBtn, color: .gray)
             
         } else {
             launchBool(sender: button, bool: false)
+        }
+    }
+    
+
+    var launch50: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launch50, button: btn_50, array: distanceToShoveTrails)
+        }
+    }
+    var launch100: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launch100, button: btn_100, array: distanceToShoveTrails)
+        }
+    }
+    var launch200: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launch200, button: btn_200, array: distanceToShoveTrails)
         }
     }
     
@@ -210,41 +235,41 @@ buttShape(but: allActivityTypeBtn, color: .gray)
             makeBoolForLaunch(bool: launchWeelchairFriendly, button: weelchairFriendlyBtn, array: arrayOfSuitability)
         }
     }
-//    var launchViews: Bool = false {
-//        didSet{
-//            makeBoolForLaunch(bool: launchViews, button: ViewsButt, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchBeach: Bool = false {
-//        didSet{
-//            makeBoolForLaunch(bool: launchBeach, button: beachButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchRiver: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchRiver, button: riverButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchCave: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchCave, button: caveButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchLake: Bool = false {
-//        didSet{
-//            makeBoolForLaunch(bool: launchLake, button: lakeButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchWaterFall: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool:launchWaterFall, button: waterFallButton, array: arrayOfWhatToSee)
-//        }
-//    }
-//    var launchHotSprings: Bool = false {
-//        didSet {
-//            makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
-//        }
-//    }
+    var launchViews: Bool = false {
+        didSet{
+            makeBoolForLaunch(bool: launchViews, button: ViewsButt, array: arrayOfWhatToSee)
+        }
+    }
+    var launchBeach: Bool = false {
+        didSet{
+            makeBoolForLaunch(bool: launchBeach, button: beachButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchRiver: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchRiver, button: riverButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchCave: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchCave, button: caveButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchLake: Bool = false {
+        didSet{
+            makeBoolForLaunch(bool: launchLake, button: lakeButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchWaterFall: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool:launchWaterFall, button: waterFallButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchHotSprings: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
+        }
+    }
     
     
     
@@ -271,22 +296,27 @@ buttShape(but: allActivityTypeBtn, color: .gray)
             launchDogFriendly = !launchDogFriendly
         } else if sender.tag == 6 {
             launchWeelchairFriendly = !launchWeelchairFriendly
-        }
-//        else if sender.tag == 7 {
-//            launchViews = !launchViews
-//        }else if sender.tag == 8 {
-//            launchBeach = !launchBeach
-//        } else if sender.tag == 9 {
-//            launchRiver = !launchRiver
-//        } else if sender.tag == 10 {
-//            launchCave = !launchCave
-//        } else if sender.tag == 11 {
-//            launchLake = !launchLake
-//        } else if sender.tag == 12 {
-//            launchWaterFall = !launchWaterFall
-//        } else if sender.tag == 13 {
-//            launchHotSprings = !launchHotSprings
-//        }
+        } else if sender.tag == 31 {
+            launchViews = !launchViews
+        } else if sender.tag == 32 {
+            launchBeach = !launchBeach
+        } else if sender.tag == 33 {
+            launchRiver = !launchRiver
+        } else if sender.tag == 34 {
+            launchCave = !launchCave
+        } else if sender.tag == 35 {
+            launchLake = !launchLake
+        } else if sender.tag == 36 {
+            launchWaterFall = !launchWaterFall
+        } else if sender.tag == 37 {
+            launchHotSprings = !launchHotSprings
+        } else if sender.tag == 21 {
+            launch50 = !launch50
+        } else if sender.tag == 22 {
+            launch100 = !launch100
+        } else if sender.tag == 23 {
+            launch200 = !launch200
+    }
     
     }
 
@@ -299,26 +329,24 @@ buttShape(but: allActivityTypeBtn, color: .gray)
         // Dispose of any resources that can be recreated.
     }
     
+    func filterDistance() {
+        let radius: Double!
+        if distanceToShoveTrails != [] {
+            var distanceIntArr: [Double] = []
+            for i in distanceToShoveTrails {
+                distanceIntArr.append(Double(i)!)
+            }
+            radius = distanceIntArr.max()
+        } else {
+            radius = 0.5
+        }
+        if coordinate₁ != nil {
+            if trails.count > 0 {
+                trails.removeAll()
+            }
+            preloadTrails(loc: coordinate₁!, radius: radius!)
+        }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    let distanceToLoad = Int(distanceTF.text)
-    @IBAction func NEEDSTOBECHANGED(_ sender: UIButton) {
-//        if coordinate₁ != nil {
-//            if trails.count > 0 {
-//                trails.removeAll()
-//            }
-//            preloadTrails(loc: coordinate₁!, radius: 1000)
-//               }
-//
     }
     
     
@@ -328,8 +356,20 @@ buttShape(but: allActivityTypeBtn, color: .gray)
         } else if viewID == "TracksVC" {
             self.performSegue(withIdentifier: "backToTrailsFromFilter", sender: self)
         }
+        
+        for i in filterArrayOfctivityTypes {
+                    for cnt in (0...trails.count - 1)  {
+                        if trails[cnt].activityType != i {
+                       // trails.remove(at: cnt)
+                        print(trails[cnt].activityType)
+                        
+                }
+            }
+        }
+        
+       
+        
     }
-
-    
+       
 
 }
