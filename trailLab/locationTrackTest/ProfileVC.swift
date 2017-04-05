@@ -46,7 +46,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
 //        if let handleView = goalSlider.subviews.last as? UIImageView {
 //           let sliderLabel = UILabel(frame: handleView.bounds)
 //            sliderLabel.layer.frame.origin.y = -10
@@ -58,8 +57,6 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
 //            
 //            
 //        }
-
-        
         
         giveButton.isHidden = true
         
@@ -295,8 +292,6 @@ self.tableView.reloadData()
                     setGoalForWalk = arrayOfGoals[10]
                 }
                 
-                
-                
                 sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: setGoalForWalk)
     //            sliderLabel.text = "\(Int(walkGoal))/\(Int(setGoalForWalk))"
                 valueOfSlider = slider.run
@@ -349,8 +344,6 @@ self.tableView.reloadData()
                 } else if runGoal > 10000 && runGoal <= 100000 {
                     setGoalForRun = arrayOfGoals[10]
                 }
-
-                
                 
                 sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: setGoalForRun)
    //             sliderLabel.text = "\(Int(runGoal))/\(Int(setGoalForRun))"

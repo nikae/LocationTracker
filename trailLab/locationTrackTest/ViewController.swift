@@ -86,7 +86,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         getItemImage(item: profileTabBarItem)
         
         
-        
         if passedLocations.count > 0 {
             var coordinate: CLLocation!
             
@@ -147,9 +146,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             }
         }
 
-        
-
     }
+    
     
     //MARK -TabBar controller
     var viewController0: UIViewController?
@@ -314,9 +312,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
            
         }
         
-        
         return polylineRenderer
-       
     }
     
   
@@ -373,13 +369,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
     }
     
-    
-   
-    
+
     //MARK: -Start/End Updating Locations
-
-    
-
     func startUpdatingLocation(){
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true)
         zeroTime = NSDate.timeIntervalSinceReferenceDate

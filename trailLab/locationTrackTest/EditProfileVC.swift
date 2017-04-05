@@ -176,7 +176,8 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
    
     func saveImage(_ image:UIImage) {
         let imageData = UIImageJPEGRepresentation(image, 0.8)
-        let imagePath = "\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+        //(Int(Date.timeIntervalSinceReferenceDate * 1000))
+        let imagePath = "\(Date.timeIntervalSinceReferenceDate * 1000).jpg"
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
         let uploasTask = self.storageRef.child(imagePath)

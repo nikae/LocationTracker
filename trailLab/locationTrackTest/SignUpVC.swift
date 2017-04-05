@@ -16,7 +16,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var passwordTF: UITextField!
     
     
-    
     override func viewDidLoad() {
          super.viewDidLoad()
         
@@ -75,12 +74,12 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
                             self.present(alertController, animated: true, completion: nil)
                         } else {
                             
-                            let alert = UIAlertController(title: "Verification Email Sent", message: "Please veryfy your email", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Verification email sent", message: "Please check your email to verify", preferredStyle: .alert)
                             
                             let oKAction = UIAlertAction(title: "OK", style: .default )
                             { (action: UIAlertAction) in
                                 
-                                print("You have Successfully signed up")
+                                print("You have successfully signed up")
                                 
                                     firstNameDefoults.set(nil, forKey: firstNameDefoults_Key)
                                     firstNameDefoults.synchronize()
@@ -97,7 +96,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
                                         
                                     saveTotalResults()
                                         
-                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "LogIn")
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfile")
                                     self.present(vc!, animated: true, completion: nil)
                                     
                                     
@@ -109,9 +108,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
                             self.present(alert, animated: true, completion: nil)
                         }
                     })
-
-                    
-                    
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

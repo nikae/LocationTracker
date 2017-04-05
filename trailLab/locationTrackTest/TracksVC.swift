@@ -16,7 +16,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     @IBOutlet weak var segmentControler: UISegmentedControl!
-    
    
     var testArr: [Trail] = []
     var favoriteTrails: [Trail] = []
@@ -24,7 +23,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-               
         
         self.tableView.reloadData()
         self.collectionView.reloadData()
@@ -206,15 +204,9 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                     }
                 }) { (error) in
                 }
-                
-            
-
-            
 
                 // saveFavorites(fav: trails[sender.tag])
                 //favoriteTrails.append(trails[sender.tag])
-            
-
                 
             } else {
             if favs[sender.tag] == UIImage(named: "Star_Black_000000_25") {
@@ -286,8 +278,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         sender.setImage(favs[sender.tag], for: .normal)
     }
     
-  
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -304,6 +294,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
     }
     
+    
+    //MARK -CV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
@@ -319,7 +311,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
     }
 
-    //MARK -CV
+   
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TracksCVCell", for: indexPath)
         
@@ -357,10 +349,12 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
         } else {
             label.adjustsFontSizeToFitWidth = true
-            label.text = "No Favworites!"
+            label.text = "No Favorites!"
         }
         return cell
     }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

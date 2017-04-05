@@ -103,7 +103,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
                 
                 self.theMap.add(polyline)
             }
-            }
+        }
   
         setUpLocationManager()
        
@@ -206,14 +206,11 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         polylineRenderer.lineWidth = 5
         return polylineRenderer
     }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
     
     @IBAction func removeNoNeedData(_ sender: UIButton) {
         arr.removeAll()

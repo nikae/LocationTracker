@@ -21,7 +21,7 @@ func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
     UIGraphicsEndImageContext()
     
     let imageView: UIImageView = UIImageView(image: newImage)
-    // imageView.contentMode = .scaleAspectFill
+    imageView.contentMode = .scaleAspectFill
     var layer: CALayer = CALayer()
     layer = imageView.layer
     layer.borderWidth = 0.9

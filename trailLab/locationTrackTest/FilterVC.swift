@@ -15,11 +15,9 @@ class FilterVC: UIViewController {
     var viewID = ""
     
     //Distance:
-    
     @IBOutlet weak var btn_50: UIButton!
     @IBOutlet weak var btn_100: UIButton!
     @IBOutlet weak var btn_200: UIButton!
-    
     //Activity Type:
     @IBOutlet weak var walkBtn: UIButton!
     @IBOutlet weak var runBtn: UIButton!
@@ -41,8 +39,6 @@ class FilterVC: UIViewController {
     @IBOutlet weak var lakeButton: UIButton!
     @IBOutlet weak var waterFallButton: UIButton!
     @IBOutlet weak var hotSpringsButton: UIButton!
-    
-    
     //Done:
     @IBOutlet weak var doneBtn: UIButton!
     
@@ -319,10 +315,6 @@ class FilterVC: UIViewController {
     }
     
     }
-
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

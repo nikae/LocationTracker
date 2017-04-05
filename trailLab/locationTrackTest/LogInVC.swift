@@ -118,11 +118,19 @@ class LogInVC: UIViewController, UITextFieldDelegate {
                     
                     getResults(UID: userID!)
                     } else {
-                        let alert = UIAlertController(title: "Please veryfy your email", message: "We Have sent you an email with verification link", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Please verify your email address", message: "We have sent you an email with verification link", preferredStyle: .alert)
                         let okHit = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                        let resendHit = UIAlertAction(title: "Resend Email", style: .default)
+                        let resendHit = UIAlertAction(title: "Resend", style: .default)
                         { (action: UIAlertAction) in
                         user?.sendEmailVerification()
+                            
+                            let alert = UIAlertController(title: "Verification email sent", message: "Please check your email to verify", preferredStyle: .alert)
+                            let oKAction = UIAlertAction(title: "OK", style: .cancel)
+                            
+                            alert.addAction(oKAction)
+                            
+                            self.present(alert, animated: true, completion: nil)
+                            
                         }
                         alert.addAction(okHit)
                         alert.addAction(resendHit)

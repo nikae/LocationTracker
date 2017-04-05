@@ -176,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				240DD1111DE531B100F68A28 /* AppDelegate.swift */,
-				24EB64AE1E8200B200017A9C /* PreloadTrailsMethods.swift */,
 				240DD1131DE531B100F68A28 /* ViewController.swift */,
 				249666911E42BA4F009335E2 /* ProfileVC.swift */,
 				24BAB1EC1E5D0ACD00E32E74 /* EditProfileVC.swift */,
@@ -201,6 +200,7 @@
 				2466AC9E1DFE1010001331DD /* CoreDataStack.swift */,
 				24FFF4001DFDE4420088B86C /* Varebles.swift */,
 				24D1BFC81E4A961C007151E8 /* Methods.swift */,
+				24EB64AE1E8200B200017A9C /* PreloadTrailsMethods.swift */,
 				2400D9781E89D18700DEE8E2 /* Trail.swift */,
 				24D1BFCA1E4A9FE0007151E8 /* HealtKitManager.swift */,
 				2466ACA01DFE1300001331DD /* DataBaseModel.xcdatamodeld */,
@@ -715,6 +715,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				GCC_PREPROCESSOR_DEFINITIONS = "DISABLE_PUSH_NOTIFICATIONS=1";
 				INFOPLIST_FILE = locationTrackTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
@@ -730,6 +731,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				GCC_PREPROCESSOR_DEFINITIONS = "DISABLE_PUSH_NOTIFICATIONS=1";
 				INFOPLIST_FILE = locationTrackTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;

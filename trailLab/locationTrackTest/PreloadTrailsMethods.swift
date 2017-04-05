@@ -10,8 +10,6 @@ import Foundation
 import Firebase
 import CoreLocation
 
-
-
 func preloadTrails(loc: CLLocation, radius: Double) {
     
     let databaseRef = FIRDatabase.database().reference()
