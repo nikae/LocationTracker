@@ -24,6 +24,11 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+       
+        
+        
+        
         self.tableView.reloadData()
         self.collectionView.reloadData()
         
@@ -42,6 +47,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         getItemImage(item: profileTabBarItem)
+        
+       
     }
     
     //MARK -TabBar controller
@@ -82,12 +89,16 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     
         //MARK -TV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if trails.count > 0 {
         return trails.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TracksVCCellTableViewCell
-        
+        if trails.count > 0 {
         cell.nameLabel.text = trails[indexPath.row].activityName
         cell.nameLabel.adjustsFontSizeToFitWidth = true
         cell.difficultyLabel.adjustsFontSizeToFitWidth = true
@@ -137,16 +148,27 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         cell.starBut.tag = indexPath.row
         cell.starBut.addTarget(self, action: #selector(TracksVC.launchStar), for: .touchUpInside)
         cell.starBut.setImage(favs[indexPath.row], for: .normal)
+        } else {
+            cell.nameLabel.text = ""
+            cell.difficultyLabel.text = ""
+            cell.favoritesLabel.text = ""
+            cell.distanceLabel.text = "No Data!"
+            cell.accLabel.text = ""
+            cell.textLabel?.text = ""
+            cell.starBut.isHidden = true
+        }
         
         return cell
+            
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if trails.count > 0 {
         tableView.deselectRow(at: indexPath, animated: true)
         testArr.append(trails[indexPath.row])
         self.performSegue(withIdentifier: "Segue5", sender: self)
-        
+        }
     }
     
     func launchStar(sender: UIButton) {
@@ -376,7 +398,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
 
     @IBAction func filterHit(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "filterTrails", sender: self)
-       // trails.removeAll()
+        trails.removeAll()
         
     }
     

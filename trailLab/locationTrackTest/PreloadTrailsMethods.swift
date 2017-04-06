@@ -104,6 +104,8 @@ func preloadTrailsforProfile() {
 }
 
 
+
+
 //func saveFavorites(fav: Trail) {
 //    
 //    let databaseRef = FIRDatabase.database().reference()

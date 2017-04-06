@@ -62,7 +62,7 @@ func getImage(_ url:String, imageView: UIImageView) {
     FIRStorage.storage().reference(forURL: url).data(withMaxSize: 10 * 1024 * 1024, completion: { (data, error) in
         if error != nil {
             print(error?.localizedDescription ?? "ERROR")
-            image = UIImage(named: "images-1")!
+            image = UIImage(named: "BGT")!
         } else {
             //Dispatch the main thread here
             DispatchQueue.main.async {
@@ -72,7 +72,7 @@ func getImage(_ url:String, imageView: UIImageView) {
         }
     })
     } else {
-        image = UIImage(named: "images-1")!
+        image = UIImage(named: "BGT")!
         imageView.image = image
     }
 }

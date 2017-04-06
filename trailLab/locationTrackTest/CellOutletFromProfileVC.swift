@@ -86,9 +86,9 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         paceLabel.text = arr[0].pace
         altitudeLabel.text = String(format: "%.2f ft", arr[0].altitudes.max()!)
                 
-           // if arr[0].pictureURL != "" {
+         
         getImage(arr[0].pictureURL, imageView: activeImageView)
-           // }
+           
          for loc in arr {
             let loce = loc.locations
             
@@ -230,7 +230,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // get a reference to the second view controller
+    //     get a reference to the second view controller
         if segue.identifier == "SegueactivDetiledVC" {
         let dest = segue.destination as! activDetiledVC
         dest.arrADVC = arr

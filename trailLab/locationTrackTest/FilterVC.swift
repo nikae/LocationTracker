@@ -42,9 +42,17 @@ class FilterVC: UIViewController {
     //Done:
     @IBOutlet weak var doneBtn: UIButton!
     
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if coordinate₁ != nil {
+            if trails.count > 0 {
+                trails.removeAll()
+            }
+            preloadTrails(loc: coordinate₁!, radius: 2)
+        }
         
         buttShape(but: btn_50, color: walkColor())
         buttShape(but: btn_100, color: bikeColor())
@@ -125,6 +133,7 @@ class FilterVC: UIViewController {
                 if let index = filteArayOfDifficulty.index(of: num) {
                     filteArayOfDifficulty.remove(at: index)
                     print(filteArayOfDifficulty)
+                    
                 }
                 
             } else if sender.tag == 4 || sender.tag == 5 || sender.tag == 6 {
@@ -137,7 +146,8 @@ class FilterVC: UIViewController {
                 if let index = distanceToShoveTrails.index(of: num) {
                 distanceToShoveTrails.remove(at: index)
                 print(distanceToShoveTrails)
-                    filterDistance()
+                    
+                filterDistance()
                 }
             }
             else {
@@ -320,7 +330,9 @@ class FilterVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+   
     
+    //Mark -Filter Methods
     func filterDistance() {
         let radius: Double!
         if distanceToShoveTrails != [] {
@@ -342,6 +354,62 @@ class FilterVC: UIViewController {
     }
     
     
+    func filterActType() {
+        if filterArrayOfctivityTypes.count > 0 {
+        for i in filterArrayOfctivityTypes {
+           
+            trails = trails.filter(){$0.activityType == i}
+   
+        }
+    }
+}
+
+    var difId: [String] = []
+    var suId: [String] = []
+    var WTSId: [String] = []
+    
+    func filterArr(arrayOne: [String], arrayTwo: [Trail] ) -> [String] {
+       var Id: [String] = []
+        if arrayOne.count > 0 {
+            for i in arrayOne {
+                for cnt in 0..<arrayTwo.count {
+                    
+                    for b in arrayTwo[cnt].difficulty {
+                        if i == b {
+                            Id.append(trails[cnt].unicueID)
+                            //print(Id)
+                            
+                        }
+                    }
+                }
+            
+            }
+        }
+        
+        return Id
+    }
+    
+//       func filterArrays(dif: [String], su: [String], wts: [String]) -> [String] {
+//        var resultsArray: [String] = []
+//        let filteredArray1 = su.filter{ !dif.contains($0) }
+//        let filteredArray2 = wts.filter{!filteredArray1.contains($0)}
+//    
+//        resultsArray.append(contentsOf: filteredArray2)
+//        print("test\(resultsArray)")
+//        return resultsArray
+//    }
+    
+    
+    
+    func filterForFinal(id : [String]) {
+        
+        for i in id {
+            trails = trails.filter(){$0.unicueID == i}
+        }
+    }
+    
+    
+    
     @IBAction func doneHit(_ sender: UIButton) {
         if viewID == "TracksMapVC" {
         self.performSegue(withIdentifier: "backToMapFromFilter", sender: self)
@@ -349,18 +417,21 @@ class FilterVC: UIViewController {
             self.performSegue(withIdentifier: "backToTrailsFromFilter", sender: self)
         }
         
-        for i in filterArrayOfctivityTypes {
-                    for cnt in (0...trails.count - 1)  {
-                        if trails[cnt].activityType != i {
-                       // trails.remove(at: cnt)
-                        print(trails[cnt].activityType)
-                        
-                }
-            }
+        if trails.count > 0 {
+        filterActType()
+        
+        let dif = filterArr(arrayOne: filteArayOfDifficulty, arrayTwo: trails)
+        let su = filterArr(arrayOne: filterArrayOfSuitability, arrayTwo: trails)
+        let wts = filterArr(arrayOne: filterArrayOfWhatToSee, arrayTwo: trails)
+            
+       // let fA = filterArrays(dif: dif, su: su, wts: wts)
+            
+        filterForFinal(id: dif)
+        filterForFinal(id: su)
+        filterForFinal(id: wts)
+        
+            
         }
-        
-       
-        
     }
        
 

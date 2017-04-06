@@ -36,7 +36,7 @@ class activDetiledVC: UIViewController {
         scrollView.delaysContentTouches = false
         
             
-      //  var dPace:[Double] = []
+       // var dPace:[Double] = []
         let maxAlt = String(format: "%.2f ft", arrADVC[0].altitudes.max()!)
             
 //        for i in arrADVC[0].pace {

@@ -124,8 +124,7 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         
         // get a reference to the second view controller
         if segue.identifier == "SegMapToInfo" {
-        let dest = segue.destination as! CellOutletFromProfileVC
-       
+        let dest = segue.destination as! CellOutletFromProfileVC   
         dest.arr = testArr
         dest.vcId = "TracksMapVC"
         } else if segue.identifier == "filterMap" {

@@ -70,6 +70,7 @@ struct ActivityPicker {
         button.layer.shadowPath = UIBezierPath(rect: button.bounds).cgPath
         
         navigationBar.topItem?.title = headLineTitle
+       
 
     }
   

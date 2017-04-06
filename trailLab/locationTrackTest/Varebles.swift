@@ -159,8 +159,9 @@ var lifeTime_Pace: String = ""
 var lifeTime_MaxAltitude: Double = 0
 var lifeTime_Activities = 0
 
-//testing
+
 var trails: [Trail] = []
+
 var usersTrails = [Trail]()
 var walkTrails = [Trail]()
 var runTrails = [Trail]()
@@ -171,4 +172,9 @@ var bikeTrails = [Trail]()
 var radiusOfLoadingTrails: Double = 2000
 
 var coordinate₁: CLLocation!
+
+
+
+
+
 
