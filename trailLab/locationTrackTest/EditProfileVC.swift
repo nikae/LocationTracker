@@ -19,7 +19,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     @IBOutlet weak var emailTF: UITextField!
     
     @IBOutlet weak var progressView: UIProgressView!
-   
     
      var storageRef: FIRStorageReference!
      var databaseRef: FIRDatabaseReference!
@@ -48,7 +47,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 {
                     profileImageView.image = image
                 } else {
-                    profileImageView.image = UIImage(named:"img-default")
+                    profileImageView.image = UIImage(named:"BGT")
         }
     }
         
@@ -74,7 +73,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     profileImageView.clipsToBounds = true
     }
     
-    //MARK -Figour out KeyBoard
+//MARK -Figour out KeyBoard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTF {
             lastNameTF.becomeFirstResponder()
@@ -94,7 +93,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         keyboardDismiss()
     }
     
-    //MARK: -Camera / Add Picture
+//MARK: -Camera / Add Picture
     func addPhoto() {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -122,11 +121,12 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 
             let delete = UIAlertAction(title: "Delete", style: .default) {
                 (action: UIAlertAction) in
+                print(self.picURL)
                 delataImage(url: self.picURL)
                 self.picURL = ""
                 profilePictureDefoults.set(nil, forKey: "image")
                 profilePictureDefoults.synchronize()
-                self.profileImageView.image = UIImage(named:"img-default")
+                self.profileImageView.image = UIImage(named:"BGT")
             }
             
             let cancel = UIAlertAction(title: "Cancel", style: .default) {
@@ -188,8 +188,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 }
                 
                 self.picURL = self.storageRef.child((metadata?.path)!).description
-                //print(self.picURL)
-                
                 self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
         }
         
@@ -284,7 +282,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                
             }
             
-            //MARK -Edit user values at firebase
+//MARK -Edit user values at firebase
             self.databaseRef.child("users/\(userID!)/firstName").setValue(firstName)
             self.databaseRef.child("users/\(userID!)/lastName").setValue(lastName)
       

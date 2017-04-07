@@ -8,9 +8,8 @@
 import UIKit
 
 
-//Colors For PolyLine
+//Mark -Colors For PolyLine not currently in use
 
-    
 enum PolyLineColor {
         case red, red1, orange, orange1, yellow, yellow1, grin
         

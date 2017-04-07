@@ -42,7 +42,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var statusView: UIView!
     
     let userID = FIRAuth.auth()?.currentUser?.uid
-   // var sliderLabel = UILabel()
+// var sliderLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,7 +94,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
                 {
                     profileImage.image = image
                 } else {
-                    profileImage.image = UIImage(named:"img-default")
+                    profileImage.image = UIImage(named:"BGT")
         }
     }
         
@@ -128,7 +128,7 @@ self.tableView.reloadData()
         totalActivitiesScrollView.contentSize = CGSize(width: 600, height: totalActivitiesScrollView.frame.height)
     }
 
-    //MARK -TabBar controller
+//MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?
@@ -165,7 +165,7 @@ self.tableView.reloadData()
         }
     }
     
-    // MARK: -Table view processing
+// MARK: -Table view processing
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -245,11 +245,11 @@ self.tableView.reloadData()
             switch (segmentedController.selectedSegmentIndex) {
             case 0:
                 type = walkTrails[indexPath.row].activityType
-                let maxAltitude = walkTrails[indexPath.row].altitudes.max
+                let maxAltitude = String(format: "%.2f ft", walkTrails[indexPath.row].altitudes.max()!)
                 distanceLabel.text =  walkTrails[indexPath.row].distance
                 timeLabel.text =  walkTrails[indexPath.row].time
                 paceLabel.text = walkTrails[indexPath.row].pace
-                altitudeLabel.text = "\(maxAltitude)"
+                altitudeLabel.text = maxAltitude
                 nameLabel.text =  walkTrails[indexPath.row].activityName
                 url =  walkTrails[indexPath.row].pictureURL
                 starsLbl.text = "\(walkTrails[indexPath.row].stars!)★"
@@ -293,16 +293,16 @@ self.tableView.reloadData()
                 }
                 
                 sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: setGoalForWalk)
-    //            sliderLabel.text = "\(Int(walkGoal))/\(Int(setGoalForWalk))"
+               //sliderLabel.text = "\(Int(walkGoal))/\(Int(setGoalForWalk))"
                 valueOfSlider = slider.run
                 break
             case 1:
                 type = runTrails[indexPath.row].activityType
-                let maxAltitude = runTrails[indexPath.row].altitudes.max
+                let maxAltitude = String(format: "%.2f ft", runTrails[indexPath.row].altitudes.max()!)
                 distanceLabel.text =  runTrails[indexPath.row].distance
                 timeLabel.text =  runTrails[indexPath.row].time
                 paceLabel.text = runTrails[indexPath.row].pace
-                altitudeLabel.text = "\(maxAltitude)"
+                altitudeLabel.text = maxAltitude
                 nameLabel.text =  runTrails[indexPath.row].activityName
                 url = runTrails[indexPath.row].pictureURL
                 starsLbl.text = "\(runTrails[indexPath.row].stars!)★"
@@ -346,16 +346,16 @@ self.tableView.reloadData()
                 }
                 
                 sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: setGoalForRun)
-   //             sliderLabel.text = "\(Int(runGoal))/\(Int(setGoalForRun))"
+                //sliderLabel.text = "\(Int(runGoal))/\(Int(setGoalForRun))"
                 valueOfSlider = slider.hike
                 break
             case 2:
                 type = hikeTrails[indexPath.row].activityType
-                let maxAltitude = hikeTrails[indexPath.row].altitudes.max
+                let maxAltitude = String(format: "%.2f ft", hikeTrails[indexPath.row].altitudes.max()!)
                 distanceLabel.text =  hikeTrails[indexPath.row].distance
                 timeLabel.text =  hikeTrails[indexPath.row].time
                 paceLabel.text = hikeTrails[indexPath.row].pace
-                altitudeLabel.text = "\(maxAltitude)"
+                altitudeLabel.text = maxAltitude
                 nameLabel.text =  hikeTrails[indexPath.row].activityName
                 url = hikeTrails[indexPath.row].pictureURL
                 starsLbl.text = "\(hikeTrails[indexPath.row].stars!)★"
@@ -399,16 +399,16 @@ self.tableView.reloadData()
                 }
                 
                 sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: setGoalForHike)
-   //             sliderLabel.text = "\(Int(hikeGoal))/\(Int(setGoalForHike))"
+                //sliderLabel.text = "\(Int(hikeGoal))/\(Int(setGoalForHike))"
                 valueOfSlider = slider.bike
                 break
             case 3:
                 type = bikeTrails[indexPath.row].activityType
-                let maxAltitude = bikeTrails[indexPath.row].altitudes.max
+                let maxAltitude = String(format: "%.2f ft", bikeTrails[indexPath.row].altitudes.max()!)
                 distanceLabel.text =  bikeTrails[indexPath.row].distance
                 timeLabel.text =  bikeTrails[indexPath.row].time
                 paceLabel.text = bikeTrails[indexPath.row].pace
-                altitudeLabel.text = "\(maxAltitude)"
+                altitudeLabel.text = maxAltitude
                 nameLabel.text =  bikeTrails[indexPath.row].activityName
                 url = bikeTrails[indexPath.row].pictureURL
                 starsLbl.text = "\(bikeTrails[indexPath.row].stars!)★"
@@ -424,8 +424,6 @@ self.tableView.reloadData()
                 } else {
                     suitabilityLabel.text = "No suitability data!"
                 }
-                
-
                 
                 var setGoalForBike: Double = 0
                 //[50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
@@ -454,7 +452,7 @@ self.tableView.reloadData()
                 }
 
                 sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: setGoalForBike)
-   //             sliderLabel.text = "\(Int(bikeGoal))/\(Int(setGoalForBike))"
+                //sliderLabel.text = "\(Int(bikeGoal))/\(Int(setGoalForBike))"
                 valueOfSlider = slider.walk
                 break
             default :
@@ -638,12 +636,12 @@ self.tableView.reloadData()
  
     }
     
-    //MARK -segmented controller
+//MARK -segmented controller
     @IBAction func segmentedControllerHit(_ sender: UISegmentedControl) {
         tableView.reloadData()
     }
     
-    //Mark -Slider / Tap Action
+//Mark -Slider / Tap Action
     var valueOfSlider = slider.walk
     @IBAction func tapChangeSlidersValues(_ sender: UITapGestureRecognizer) {
         
@@ -662,7 +660,7 @@ self.tableView.reloadData()
         }
     }
     
-    //MARK -ScrollView
+//MARK -ScrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.y + headerView.bounds.height
@@ -690,11 +688,10 @@ self.tableView.reloadData()
             // SCROLL UP/DOWN
         else {
            
-            // Header
+            
             headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
             
-            // profile image
-            let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
+            let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4
             let avatarSizeVariation = ((profileImage.bounds.height * (1.0 + avatarScaleFactor)) - profileImage.bounds.height) / 2.0
             avatarTransform = CATransform3DTranslate(avatarTransform, 0, avatarSizeVariation, 0)
             avatarTransform = CATransform3DScale(avatarTransform, 1.0 - avatarScaleFactor, 1.0 - avatarScaleFactor, 0)

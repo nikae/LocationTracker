@@ -23,7 +23,6 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     @IBOutlet weak var infoView: UIView!
     
     @IBOutlet weak var decView1: UIView!
-    var manager: CLLocationManager!
     
     @IBOutlet weak var activeNameTF: UITextField!
     
@@ -45,9 +44,14 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     @IBOutlet weak var doneBtn: UIButton!
     @IBOutlet weak var contentView: UIView!
     
+    @IBOutlet weak var reportBtn: UIButton!
+    
+    
+    
     let mapView = MyMapView()
     var coordinates1: [CLLocationCoordinate2D] = []
-   
+    var manager: CLLocationManager!
+
     override func viewDidLoad() {
         super.viewDidLoad()
   
@@ -78,15 +82,13 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         print(arr[0].activityType)
         
         scrollView.delaysContentTouches = false
-        //scrollView.isUserInteractionEnabled = false
-        
+            
         activeNameTF.text = arr[0].activityName
         distanceLabel.text = arr[0].distance
         timeLabel.text = arr[0].time
         paceLabel.text = arr[0].pace
         altitudeLabel.text = String(format: "%.2f ft", arr[0].altitudes.max()!)
-                
-         
+            
         getImage(arr[0].pictureURL, imageView: activeImageView)
            
          for loc in arr {
@@ -139,16 +141,17 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
            col = hikeColor()
         }
 
-        
         buttShape(but: getDirectionsBtn, color: hikeColor())
         buttonShedow(but: getDirectionsBtn)
         buttShape(but: doneBtn, color: bikeColor())
         buttonShedow(but: doneBtn)
         buttShape(but: getTrailBtn, color: col)
         buttonShedow(but: getTrailBtn)
+        buttShape(but: reportBtn, color: walkColor())
+        buttonShedow(but: reportBtn)
     }
     
-  //MARK -Get Directions
+//MARK -Get Directions
     func openMapForPlace() {
    
         let regionDistance:CLLocationDistance = 10000
@@ -166,7 +169,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     }
     
     
-    //MARK -actions under scrollview
+//MARK -actions under scrollview
     func gestureRecognizer(_ shouldReceivegestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
     if (scrollView.superview != nil) {
     if ((touch.view?.isDescendant(of: scrollView)) != nil) { return false }
@@ -174,7 +177,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     return true
     }
     
-    //MARK: -setUp Location Manager
+//MARK: -setUp Location Manager
     func setUpLocationManager() {
         if (CLLocationManager.locationServicesEnabled()) {
             manager = CLLocationManager()
@@ -189,7 +192,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-     //   var colorforPolyline = UIColor()
+        
         let actName = self.arr[0].activityType
         
         if actName == "Walk" {
@@ -201,8 +204,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         } else if actName == "Hike" {
             polylineRenderer.strokeColor = hikeColor()
         }
-       
-       // polylineRenderer.strokeColor = .black
+
         polylineRenderer.lineWidth = 5
         return polylineRenderer
     }
@@ -230,7 +232,6 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-    //     get a reference to the second view controller
         if segue.identifier == "SegueactivDetiledVC" {
         let dest = segue.destination as! activDetiledVC
         dest.arrADVC = arr
@@ -248,8 +249,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     }
 
     @IBAction func detailsHit(_ sender: UIButton) {
-     // popUpActivityManager()
-        self.performSegue(withIdentifier: "SegueactivDetiledVC", sender: self) //SegueactivDetiledVC
+        self.performSegue(withIdentifier: "SegueactivDetiledVC", sender: self)
     }
     
     @IBAction func getDirectionsHit(_ sender: UIButton) {
@@ -265,13 +265,15 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
        self.performSegue(withIdentifier: "openImage", sender: self)
     }
     @IBAction func backToMyLocation(_ sender: Any) {
-        //mapView.zoomMap(val: 0.010, superVisor: manager, view: theMap)
-        //mapView.setUpMapView(view: theMap, delegate: self)
+        
         let lat = coordinates1[0].latitude
         let long = coordinates1[0].longitude
         let span = MKCoordinateSpanMake(0.04, 0.04)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
         theMap.setRegion(region, animated: true)
+    }
+    @IBAction func reportHit(_ sender: UIButton) {
+        print("I Am WORKING :)")
     }
   
 }

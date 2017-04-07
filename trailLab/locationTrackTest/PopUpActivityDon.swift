@@ -19,7 +19,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     var databaseRef: FIRDatabaseReference!
     fileprivate var _refHandle: FIRDatabaseHandle!
     var users: [FIRDataSnapshot] = []
-    //possible Error
     var picURL = ""
     let userID = FIRAuth.auth()?.currentUser?.uid
 
@@ -139,7 +138,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     }
     
  
-    //MARK: -setUp Location Manager
+//MARK: -setUp Location Manager
     func setUpLocationManager() {
         if (CLLocationManager.locationServicesEnabled()) {
             manager = CLLocationManager()
@@ -152,7 +151,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         }
     }
 
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
         polylineRenderer.strokeColor = blueColor
@@ -161,7 +159,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         
     }
 
-    //MARK: -Camera / Add Picture
+//MARK: -Camera / Add Picture
     func addPhoto(_ recognizer: UITapGestureRecognizer) {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -465,8 +463,7 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
                                                           "favorites" : fav as AnyObject]
         
        
-       // let childUpdates = ["Trails/\(key)/\(trailInfo)"]
-        
+       // let childUpdates = ["Trails/\(key)/\(trailInfo)"]  
         databaseRef.child("Trails").child("\(key)").setValue(trailInfo)
         
     }

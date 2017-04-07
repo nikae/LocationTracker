@@ -120,7 +120,7 @@ let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its tran
 let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the screen and the top of the White Label
 
 
-
+//MARK -Goals
 // Goales - totall results
 let arrayOfGoals: [Double] = [50, 75, 100, 150, 200, 300, 500, 1000, 5000, 10000, 100000]
 
@@ -160,6 +160,7 @@ var lifeTime_MaxAltitude: Double = 0
 var lifeTime_Activities = 0
 
 
+//MARK -Trails
 var trails: [Trail] = []
 
 var usersTrails = [Trail]()
@@ -167,7 +168,6 @@ var walkTrails = [Trail]()
 var runTrails = [Trail]()
 var hikeTrails = [Trail]()
 var bikeTrails = [Trail]()
-
 
 var radiusOfLoadingTrails: Double = 2000
 

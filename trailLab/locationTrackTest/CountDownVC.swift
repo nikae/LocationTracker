@@ -12,9 +12,7 @@ class CountDownVC: UIViewController {
 
     var timerCount = 3
     var timerRunning = false
-    
-  //  let delegate: startEndUpdatengLocationDelegate? = nil
-    
+      
     @IBOutlet weak var timerLabel: UILabel!
     
     override func viewDidLoad() {
@@ -28,7 +26,7 @@ class CountDownVC: UIViewController {
         startCountDown()
     }
     
-    //MARK: -Figure out Count method
+//MARK: -Figure out Count method
     func Counting() {
         if timerCount > 0 {
             timerLabel.text = "\(timerCount)"

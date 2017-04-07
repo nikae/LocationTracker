@@ -49,7 +49,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
        
     }
     
-    //MARK -TabBar controller
+//MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?
@@ -85,7 +85,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
     }
     
-        //MARK -TV
+//MARK -TV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if trails.count > 0 {
         return trails.count
@@ -170,10 +170,8 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     }
     
     func launchStar(sender: UIButton) {
-        print(sender.tag) // This works, every cell returns a different number and in order.
         
-        
-            let uid = FIRAuth.auth()?.currentUser?.uid
+        let uid = FIRAuth.auth()?.currentUser?.uid
         if  trails[sender.tag].fav[uid!] != true {
             
             if favs[sender.tag] == UIImage(named: "Star_000000_25") {
@@ -196,7 +194,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                     if snapshot.hasChildren() {
                 
                         let value = snapshot.value as! NSDictionary
-                
+                        
                         let unicueID = value["unicueID"] as? String
                         let userId = value["userId"] as? String
                         let activityType = value["activityType"] as? String ?? ""
@@ -225,10 +223,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 }) { (error) in
                 }
 
-                // saveFavorites(fav: trails[sender.tag])
-                //favoriteTrails.append(trails[sender.tag])
-                
-            } else {
+        } else {
             if favs[sender.tag] == UIImage(named: "Star_Black_000000_25") {
                 favs[sender.tag] = UIImage(named: "Star_000000_25")!
                 
@@ -243,9 +238,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                 print(stars)
                 databaseRef.child("Trails/\(key)/stars").setValue(stars as AnyObject)
                 databaseRef.child("Trails/\(key)/favorites/\(uid!)").setValue(false)
-            
-        
-            
                 databaseRef.child("Trails").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
                 
                 if snapshot.hasChildren() {
@@ -284,15 +276,11 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
                         self.tableView.reloadData()
 
                         }
-                    
-                        
                     }
                 
             }) { (error) in
             }
-            
                 tableView.reloadData()
-   
         }
         
         sender.setImage(favs[sender.tag], for: .normal)
@@ -315,7 +303,7 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     }
     
     
-    //MARK -CV
+//MARK -Collection View
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
@@ -373,7 +361,6 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
         }
         return cell
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -37,17 +37,16 @@ class LogInVC: UIViewController, UITextFieldDelegate {
         case true:
             let image = UIImage(named: "Checked Checkbox 2_000000_25") as UIImage?
             keepMeLoggedIn.setImage(image, for: .normal)
-           // print("true")
             
         case false:
             let image = UIImage(named: "Unchecked Checkbox_000000_25") as UIImage?
             keepMeLoggedIn.setImage(image, for: .normal)
-            //print("False")
+            
         }
        
     }
    
-    //Mark -Figour out KeyBoard
+//Mark -Figour out KeyBoard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTF {
             passwordTF.becomeFirstResponder()

@@ -85,7 +85,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         getItemImage(item: profileTabBarItem)
         
-        
         if passedLocations.count > 0 {
             var coordinate: CLLocation!
             
@@ -149,7 +148,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     
-    //MARK -TabBar controller
+//MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?
@@ -316,12 +315,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
   
-   //MARK -Calculate Pace method
+//MARK -Calculate Pace method
     func paceInSeconds (hours: Double, minutes:Double, seconds: Double, distance: Double) -> Double {
         return ((hours*60) + (minutes*60) + seconds) / distance
     }
     
-   //MARK -Updare Activity Time
+//MARK -Updare Activity Time
     func updateTime() {
         let currentTime = NSDate.timeIntervalSinceReferenceDate
         var timePassed = currentTime - zeroTime
@@ -342,10 +341,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         timeLabel_String = "\(strHours):\(strMinutes):\(strSeconds)"
         timeLabel.text = timeLabel_String
   
-        //MARK -Calculate Pace
+//MARK -Calculate Pace
         if distanceTraveled != 0 {
-            
- //needs correction
+
         let paceMinutes = paceInSeconds(hours: Double(hours), minutes: Double(minutes), seconds: Double(seconds), distance: distanceTraveled) / 60
             
             let roundedPaceMinutes = Double(floor(paceMinutes))
@@ -370,7 +368,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
 
-    //MARK: -Start/End Updating Locations
+//MARK: -Start/End Updating Locations
     func startUpdatingLocation(){
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true)
         zeroTime = NSDate.timeIntervalSinceReferenceDate
@@ -494,7 +492,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     
-  //MARK: -Guestures for sports picker view
+//MARK: -Guestures for sports picker view
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     @IBOutlet var swipeDownsportsPick: UISwipeGestureRecognizer!
     @IBOutlet var swipeUpSportsPick: UISwipeGestureRecognizer!
@@ -532,7 +530,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         tabStart.isEnabled = true
     }
 
-    //MARK -Start / End Hit
+//MARK -Start / End Hit
     @IBAction func startHit(_ sender: UIButton) {
          launchBool = !launchBool
         

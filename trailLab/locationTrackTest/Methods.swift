@@ -48,8 +48,8 @@ func getItemImage(item: UITabBarItem) {
             
             
         } else {
-            item.selectedImage = resizeImage(image: (UIImage(named:"img-default"))!, newWidth: 30).withRenderingMode(.alwaysOriginal)
-            item.image  = resizeImage(image: (UIImage(named:"img-default"))!, newWidth: 30).withRenderingMode(.alwaysOriginal)
+            item.selectedImage = resizeImage(image: (UIImage(named:"BGT"))!, newWidth: 30).withRenderingMode(.alwaysOriginal)
+            item.image  = resizeImage(image: (UIImage(named:"BGT"))!, newWidth: 30).withRenderingMode(.alwaysOriginal)
         }
         
     }
@@ -264,7 +264,6 @@ func delataImage(url: String) {
 }
 
 //MARK -Button Shape
-
 func buttShape(but: UIButton, color: UIColor) {
     but.backgroundColor = color
     but.clipsToBounds = true

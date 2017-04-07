@@ -42,8 +42,6 @@ class FilterVC: UIViewController {
     //Done:
     @IBOutlet weak var doneBtn: UIButton!
     
-   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,7 +78,6 @@ class FilterVC: UIViewController {
         buttShape(but: hotSpringsButton, color: walkColor())
         
         buttShape(but: doneBtn, color: bikeColor())
-        
         
     }
     
@@ -155,7 +152,6 @@ class FilterVC: UIViewController {
                     print(filterArrayOfWhatToSee)
                 }
             }
-            
             
             sender.backgroundColor = sender.backgroundColor?.withAlphaComponent(1)
             
@@ -321,8 +317,7 @@ class FilterVC: UIViewController {
     }
 }
     
-    //Mark -Filter Methods
-    
+//Mark -Filter Methods
     func filterDistance() {
         let radius: Double!
         if distanceToShoveTrails != [] {
@@ -344,7 +339,6 @@ class FilterVC: UIViewController {
 
     }
     
-    
     func filterActType() {
         if filterArrayOfctivityTypes.count > 0 {
             trails = trails.filter(){ filterArrayOfctivityTypes.contains($0.activityType)}
@@ -352,7 +346,7 @@ class FilterVC: UIViewController {
     }
 }
     
-    func filterdif() {
+    func filter() {
         
         if filterArrayOfDifficulty.count > 0 {
             
@@ -362,12 +356,10 @@ class FilterVC: UIViewController {
         
         if filterArrayOfSuitability.count > 0 {
             
-            
             trails = trails.filter { $0.suitability.contains(where: {filterArrayOfSuitability.contains($0)}) }
             filterArrayOfSuitability.removeAll()
         }
         if filterArrayOfWhatToSee.count > 0 {
-            
             
             trails = trails.filter { $0.whatToSee.contains(where: {filterArrayOfWhatToSee.contains($0)}) }
             filterArrayOfWhatToSee.removeAll()
@@ -384,7 +376,7 @@ class FilterVC: UIViewController {
         
         if trails.count > 0 {
             filterActType()
-            filterdif()
+            filter()
             
         }
     }

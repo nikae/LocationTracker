@@ -12,7 +12,7 @@ import MapKit
 
 struct ActivityPicker {
    
-    //MARK: -User Defoults for Fports Buttons Views \ Includs NavigationBar Title
+//MARK: -User Defoults for Fports Buttons Views \ Includs NavigationBar Title
     func getSavedSportsButton(button: UIButton, navigationBar: UINavigationBar, off: Bool){
         if off == true {
         switch (sportsButtonDefoults.integer(forKey: sportsButtonDefoultsKey)) {
@@ -38,6 +38,7 @@ struct ActivityPicker {
             activityColor = walkColor()
         }
     } else {
+            
     switch (sportsButtonDefoults.integer(forKey: sportsButtonDefoultsKey_End)) {
     case 0:
     self.startButtonView(image: imageCancelString_50, button: button, color: walkColor(), headLineTitle: walkString, navigationBar: navigationBar)
@@ -54,7 +55,7 @@ struct ActivityPicker {
  }
 }
     
-    //MARK: -Start Button View
+//MARK: -Start Button View
     func startButtonView(image: String, button: UIButton, color: UIColor, headLineTitle: String, navigationBar: UINavigationBar) {
         let image = UIImage(named: image) as UIImage?
         button.setImage(image, for: .normal)
@@ -74,7 +75,7 @@ struct ActivityPicker {
 
     }
   
-    //MARK: -Activity Button Views
+//MARK: -Activity Button Views
     func activityPickerView_Button(image: String, button: UIButton, color: UIColor) {
         let image = UIImage(named: image) as UIImage?
         button.setImage(image, for: .normal)
@@ -86,7 +87,7 @@ struct ActivityPicker {
        
     }
     
-    //MARK: -First View of Buttons
+//MARK: -First View of Buttons
     func activityPickerView(view: UIView, walk: UIButton, run: UIButton, hike: UIButton, bike: UIButton) {
        
     view.backgroundColor = UIColor(white: 1, alpha: 0.8)
@@ -105,7 +106,7 @@ struct ActivityPicker {
     self.activityPickerView_Button(image: imageBikeString_32, button: bike, color: bikeColor())
         }
     
-    //MARK: -Activity View Slider Up\Down
+//MARK: -Activity View Slider Up\Down
     func moveSportsViewDown(view: UIView, button: UIView, tapGesture: UITapGestureRecognizer, swipeDownGesture: UISwipeGestureRecognizer, swipeUpGesture: UISwipeGestureRecognizer, moveUp: Bool) {
         
         if moveUp == false {

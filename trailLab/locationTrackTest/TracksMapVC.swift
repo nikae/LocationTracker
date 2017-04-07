@@ -16,10 +16,8 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     @IBOutlet weak var theMap: MKMapView!
     
-   // var trails = [Trail]()
     let mapView = MyMapView()
     var manager: CLLocationManager!
-    //var coordinatesTracksMap: [CLLocationCoordinate2D] = []
     var testArr = [Trail]()
     var coordinate: CLLocationCoordinate2D! = nil
     
@@ -64,8 +62,7 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         
     }
     
-    
-   // MARK -MKAnnotation
+// MARK -MKAnnotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if !(annotation is TrailsAnnotation){
             return nil
@@ -80,8 +77,7 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         }else{
             annotationView?.annotation = annotation
         }
-        
-        // Left Accessory
+
         let trailsAnnotation = annotation as! TrailsAnnotation
 
         let imView = UIImageView()
@@ -89,7 +85,6 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
         imView.frame = CGRect(x: 0,y:0,width: 50,height: 50)
         annotationView?.leftCalloutAccessoryView = imView
         
-        // Right accessory view
         let image = UIImage(named: "Forward_000000_25")
         let button = UIButton(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -122,7 +117,6 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // get a reference to the second view controller
         if segue.identifier == "SegMapToInfo" {
         let dest = segue.destination as! CellOutletFromProfileVC   
         dest.arr = testArr
@@ -153,7 +147,7 @@ func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayR
     return polylineRenderer
     
 }
-    //MARK -TabBar controller
+//MARK -TabBar controller
     var viewController0: UIViewController?
     var viewController1: UIViewController?
     var viewController2: UIViewController?

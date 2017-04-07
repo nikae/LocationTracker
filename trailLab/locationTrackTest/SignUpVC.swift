@@ -23,7 +23,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
         passwordTF.delegate = self
     }
     
-    //Mark -Figour out KeyBoard
+//Mark -Figour out KeyBoard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTF {
             passwordTF.becomeFirstResponder()

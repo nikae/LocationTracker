@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-//import FirebaseAuth
 
 class ResetPasswordVC: UIViewController, UITextFieldDelegate {
 
@@ -20,7 +19,7 @@ class ResetPasswordVC: UIViewController, UITextFieldDelegate {
         emailTF.delegate = self
     }
     
-    //Mark -Figour out KeyBoard
+//Mark -Figour out KeyBoard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
             textField.resignFirstResponder()
