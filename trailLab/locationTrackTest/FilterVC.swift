@@ -356,20 +356,20 @@ class FilterVC: UIViewController {
         
         if filterArrayOfDifficulty.count > 0 {
             
-            trails = trails.filter { $0.difficulty.contains(filterArrayOfDifficulty[0]) }
+            trails = trails.filter { $0.difficulty.contains(where: {filterArrayOfDifficulty.contains($0)}) }
                     filterArrayOfDifficulty.removeAll()
         }
         
         if filterArrayOfSuitability.count > 0 {
             
             
-            trails = trails.filter { $0.suitability.contains(filterArrayOfSuitability[0]) }
+            trails = trails.filter { $0.suitability.contains(where: {filterArrayOfSuitability.contains($0)}) }
             filterArrayOfSuitability.removeAll()
         }
         if filterArrayOfWhatToSee.count > 0 {
             
             
-            trails = trails.filter { $0.whatToSee.contains(filterArrayOfWhatToSee[0]) }
+            trails = trails.filter { $0.whatToSee.contains(where: {filterArrayOfWhatToSee.contains($0)}) }
             filterArrayOfWhatToSee.removeAll()
         }
         
