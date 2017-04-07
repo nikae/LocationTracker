@@ -272,8 +272,117 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
         theMap.setRegion(region, animated: true)
     }
+    
+    func thankYouForReporting() {
+        let thanksAlert = UIAlertController(title: "Thank You", message: "We will review your report", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        
+        thanksAlert.addAction(ok)
+        
+        present(thanksAlert, animated: true, completion: nil)
+    }
+    
+    func sendReportToDatabase(uniID: String, reprtReason: String) {
+        
+        let date = Date()
+        let doubleDate = "\(date)"
+        let handled = false
+        
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        if userID != nil {
+            let databaseRef = FIRDatabase.database().reference()
+            
+            let report: Dictionary<String, AnyObject> = ["trailUnicueID" : uniID as AnyObject,
+                                                            "reporterId" : userID as AnyObject,
+                                                            "reason" : reprtReason as AnyObject,
+                                                            "reportedAt" : doubleDate as AnyObject,
+                                                            "handeld" : handled as AnyObject]
+            
+            databaseRef.child("reportes").childByAutoId().setValue(report)
+            
+        }
+    }
+    
+    
     @IBAction func reportHit(_ sender: UIButton) {
-        print("I Am WORKING :)")
+        
+        let alert = UIAlertController(title: "Report?", message: "Please provide reason of reporting" , preferredStyle: .actionSheet)
+        
+        let wrongDirections = UIAlertAction(title: "Wrong directions", style: .default) {
+            (action: UIAlertAction) in
+           
+            if self.arr.count > 0 {
+                var uniId = ""
+                uniId = self.arr[0].unicueID
+                
+                self.sendReportToDatabase(uniID: uniId, reprtReason: "Wrong directions")
+                self.thankYouForReporting()
+            }
+            
+        }
+        
+        let wrongData = UIAlertAction(title: "Wrong information", style: .default) {
+            (action: UIAlertAction) in
+            
+            if self.arr.count > 0 {
+                var uniId = ""
+                uniId = self.arr[0].unicueID
+                
+                self.sendReportToDatabase(uniID: uniId, reprtReason: "Wrong information")
+                self.thankYouForReporting()
+            }
+            
+        }
+        let safety = UIAlertAction(title: "Safety", style: .default) {
+            (action: UIAlertAction) in
+            
+            if self.arr.count > 0 {
+                var uniId = ""
+                uniId = self.arr[0].unicueID
+            
+                self.sendReportToDatabase(uniID: uniId, reprtReason: "Safety")
+                self.thankYouForReporting()
+            }
+        }
+        
+        let notReal = UIAlertAction(title: "Trail is not real", style: .default) {
+            (action: UIAlertAction) in
+            
+            
+            
+            if self.arr.count > 0 {
+                var uniId = ""
+                uniId = self.arr[0].unicueID
+            
+                self.sendReportToDatabase(uniID: uniId, reprtReason: "Not real")
+                self.thankYouForReporting()
+            }
+        }
+        
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(wrongDirections)
+        alert.addAction(wrongData)
+        alert.addAction(safety)
+        alert.addAction(notReal)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+        
     }
   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
