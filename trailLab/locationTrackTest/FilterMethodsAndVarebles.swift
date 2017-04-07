@@ -13,11 +13,6 @@ import Firebase
 
 
 
-var filteArayOfDifficulty: [String] = []
-var filterArrayOfSuitability: [String] = []
-var filterArrayOfWhatToSee: [String] = []
-var filterArrayOfctivityTypes: [String] = []
-var distanceToShoveTrails: [String] = []
 
 
 //func filter(dist: [String], dif: [String], suit: [String], wts: [String], type: [String]) {

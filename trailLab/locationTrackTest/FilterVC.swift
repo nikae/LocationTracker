@@ -84,13 +84,12 @@ class FilterVC: UIViewController {
         
     }
     
-      
-    var filteArayOfDifficulty: [String] = []
+    var filterArrayOfDifficulty: [String] = []
     var filterArrayOfSuitability: [String] = []
     var filterArrayOfWhatToSee: [String] = []
     var filterArrayOfctivityTypes: [String] = []
     var distanceToShoveTrails: [String] = []
-
+    
     func launchBool(sender: UIButton, bool: Bool) {
         
         if bool == true {
@@ -101,8 +100,8 @@ class FilterVC: UIViewController {
                 print(filterArrayOfctivityTypes)
                 
             } else if sender.tag == 1 || sender.tag == 2 || sender.tag == 3 {
-                filteArayOfDifficulty.append(num)
-                print(filteArayOfDifficulty)
+                filterArrayOfDifficulty.append(num)
+                print(filterArrayOfDifficulty)
                 
             } else if sender.tag == 4 || sender.tag == 5 || sender.tag == 6 {
                 filterArrayOfSuitability.append(num)
@@ -130,9 +129,9 @@ class FilterVC: UIViewController {
                 
             } else if sender.tag == 1 || sender.tag == 2 || sender.tag == 3 {
                 
-                if let index = filteArayOfDifficulty.index(of: num) {
-                    filteArayOfDifficulty.remove(at: index)
-                    print(filteArayOfDifficulty)
+                if let index = filterArrayOfDifficulty.index(of: num) {
+                    filterArrayOfDifficulty.remove(at: index)
+                    print(filterArrayOfDifficulty)
                     
                 }
                 
@@ -163,7 +162,6 @@ class FilterVC: UIViewController {
         }
     }
 
-    
     func makeBoolForLaunch(bool: Bool, button: UIButton, array: [String]){
         if bool == true {
             launchBool(sender: button, bool: true)
@@ -277,8 +275,6 @@ class FilterVC: UIViewController {
         }
     }
     
-    
-    
   @IBAction func whatToSeeHit(_ sender: UIButton) {
     AudioServicesPlaySystemSound (systemSoundID)
     
@@ -323,16 +319,10 @@ class FilterVC: UIViewController {
         } else if sender.tag == 23 {
             launch200 = !launch200
     }
-    
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-   
+}
     
     //Mark -Filter Methods
+    
     func filterDistance() {
         let radius: Double!
         if distanceToShoveTrails != [] {
@@ -349,6 +339,7 @@ class FilterVC: UIViewController {
                 trails.removeAll()
             }
             preloadTrails(loc: coordinate₁!, radius: radius!)
+            distanceToShoveTrails.removeAll()
         }
 
     }
@@ -356,59 +347,33 @@ class FilterVC: UIViewController {
     
     func filterActType() {
         if filterArrayOfctivityTypes.count > 0 {
-        for i in filterArrayOfctivityTypes {
-           
-            trails = trails.filter(){$0.activityType == i}
-   
-        }
+            trails = trails.filter(){ filterArrayOfctivityTypes.contains($0.activityType)}
+            filterArrayOfctivityTypes.removeAll()
     }
 }
-
-    var difId: [String] = []
-    var suId: [String] = []
-    var WTSId: [String] = []
     
-    func filterArr(arrayOne: [String], arrayTwo: [Trail] ) -> [String] {
-       var Id: [String] = []
-        if arrayOne.count > 0 {
-            for i in arrayOne {
-                for cnt in 0..<arrayTwo.count {
-                    
-                    for b in arrayTwo[cnt].difficulty {
-                        if i == b {
-                            Id.append(trails[cnt].unicueID)
-                            //print(Id)
-                            
-                        }
-                    }
-                }
+    func filterdif() {
+        
+        if filterArrayOfDifficulty.count > 0 {
             
-            }
+            trails = trails.filter { $0.difficulty.contains(filterArrayOfDifficulty[0]) }
+                    filterArrayOfDifficulty.removeAll()
         }
         
-        return Id
-    }
-    
-//       func filterArrays(dif: [String], su: [String], wts: [String]) -> [String] {
-//        var resultsArray: [String] = []
-//        let filteredArray1 = su.filter{ !dif.contains($0) }
-//        let filteredArray2 = wts.filter{!filteredArray1.contains($0)}
-//    
-//        resultsArray.append(contentsOf: filteredArray2)
-//        print("test\(resultsArray)")
-//        return resultsArray
-//    }
-    
-    
-    
-    func filterForFinal(id : [String]) {
-        
-        for i in id {
-            trails = trails.filter(){$0.unicueID == i}
+        if filterArrayOfSuitability.count > 0 {
+            
+            
+            trails = trails.filter { $0.suitability.contains(filterArrayOfSuitability[0]) }
+            filterArrayOfSuitability.removeAll()
         }
+        if filterArrayOfWhatToSee.count > 0 {
+            
+            
+            trails = trails.filter { $0.whatToSee.contains(filterArrayOfWhatToSee[0]) }
+            filterArrayOfWhatToSee.removeAll()
+        }
+        
     }
-    
-    
     
     @IBAction func doneHit(_ sender: UIButton) {
         if viewID == "TracksMapVC" {
@@ -418,21 +383,9 @@ class FilterVC: UIViewController {
         }
         
         if trails.count > 0 {
-        filterActType()
-        
-        let dif = filterArr(arrayOne: filteArayOfDifficulty, arrayTwo: trails)
-        let su = filterArr(arrayOne: filterArrayOfSuitability, arrayTwo: trails)
-        let wts = filterArr(arrayOne: filterArrayOfWhatToSee, arrayTwo: trails)
-            
-       // let fA = filterArrays(dif: dif, su: su, wts: wts)
-            
-        filterForFinal(id: dif)
-        filterForFinal(id: su)
-        filterForFinal(id: wts)
-        
+            filterActType()
+            filterdif()
             
         }
     }
-       
-
 }

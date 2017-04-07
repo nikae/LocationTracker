@@ -3319,10 +3319,10 @@
         <image name="img-default" width="300" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="621-PQ-dcp"/>
-        <segue reference="9uE-5a-jRH"/>
-        <segue reference="KH2-7u-OAm"/>
-        <segue reference="Uef-nh-iAE"/>
         <segue reference="ncA-fg-OxT"/>
+        <segue reference="KcJ-mh-RV7"/>
+        <segue reference="KH2-7u-OAm"/>
+        <segue reference="9uE-5a-jRH"/>
+        <segue reference="Uef-nh-iAE"/>
     </inferredMetricsTieBreakers>
 </document>

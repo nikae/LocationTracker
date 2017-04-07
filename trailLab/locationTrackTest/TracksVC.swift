@@ -21,12 +21,10 @@ class TracksVC: UIViewController, UITabBarDelegate, UITableViewDelegate, UITable
     var favoriteTrails: [Trail] = []
     var favs = [UIImage](repeating: UIImage(named: "Star_000000_25")!, count: (trails.count))
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-       
-        
         
         
         self.tableView.reloadData()

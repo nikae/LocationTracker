@@ -16,7 +16,7 @@ class TracksMapVC: UIViewController, UITabBarDelegate, MKMapViewDelegate, CLLoca
     @IBOutlet weak var profileTabBarItem: UITabBarItem!
     @IBOutlet weak var theMap: MKMapView!
     
-    //var trails = [Trail]()
+   // var trails = [Trail]()
     let mapView = MyMapView()
     var manager: CLLocationManager!
     //var coordinatesTracksMap: [CLLocationCoordinate2D] = []

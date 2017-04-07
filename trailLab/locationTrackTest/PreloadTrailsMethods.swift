@@ -49,9 +49,10 @@ func preloadTrails(loc: CLLocation, radius: Double) {
             
            if distanceInMiles <= radius {
             trails.insert(Trail(unicueID: unicueID, userId: userId, activityType: activityType ,activityName: activityName, distance: distance, locations: locations!, time: time, pace: pace, altitudes: altitudes!, difficulty: difficulty, suitability: suitability, whatToSee: whatToSee, pictureURL: pictureURL, stars: star, fav: favorite), at: 0)
-        }
+                }
             }
         }
+        
     }) { (error) in
         print(error.localizedDescription)
     }
