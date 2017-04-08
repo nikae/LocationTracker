@@ -122,7 +122,10 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             let delete = UIAlertAction(title: "Delete", style: .default) {
                 (action: UIAlertAction) in
                 print(self.picURL)
-                delataImage(url: self.picURL)
+                let url = profilePictureURLDefoults.value(forKey: profilePictureURLDefoults_key) as? String ?? ""
+                if url != "" {
+                delataImage(url: url)
+                }
                 self.picURL = ""
                 profilePictureDefoults.set(nil, forKey: "image")
                 profilePictureDefoults.synchronize()
@@ -154,13 +157,14 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            if picURL != "" {
-                delataImage(url: picURL)
+            let url = profilePictureURLDefoults.value(forKey: profilePictureURLDefoults_key) as? String ?? ""
+            if url != "" {
+                delataImage(url: url)
                 self.picURL = ""
                 profilePictureDefoults.set(nil, forKey: "image")
                 profilePictureDefoults.synchronize()
             }
-            
+                     
             profileImageView.image = image
             let imageData = UIImageJPEGRepresentation(image, 1)
             profilePictureDefoults.set(imageData, forKey: "image")
@@ -189,6 +193,9 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                 
                 self.picURL = self.storageRef.child((metadata?.path)!).description
                 self.databaseRef.child("users/\(self.userID!)/imageURL").setValue(self.picURL)
+                profilePictureURLDefoults.set(self.picURL, forKey: profilePictureURLDefoults_key)
+                profilePictureURLDefoults.synchronize()
+                
         }
         
             uploasTask.observe(.progress, handler: { [weak self] (snapshot) in

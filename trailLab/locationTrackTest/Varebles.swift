@@ -17,6 +17,9 @@ import CoreLocation
 let sportsButtonDefoults = UserDefaults.standard
 let profilePictureDefoults = UserDefaults.standard
 let keepMeLogedInDefoultsDefoults = UserDefaults.standard
+let profilePictureURLDefoults = UserDefaults.standard
+
+let profilePictureURLDefoults_key = "profilePictureURLDefoults"
 
 let firstNameDefoults = UserDefaults.standard
 let lastNameDefoults = UserDefaults.standard

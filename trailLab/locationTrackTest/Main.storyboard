@@ -2608,21 +2608,33 @@
                                 <rect key="frame" x="8" y="94" width="110" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beginner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47D-2a-wTu">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0g-dj-nd8">
+                                        <rect key="frame" x="0.0" y="23" width="110" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="47D-2a-wTu" secondAttribute="trailing" id="7lW-1m-RCG"/>
-                                    <constraint firstAttribute="bottom" secondItem="47D-2a-wTu" secondAttribute="bottom" id="FJS-lS-tKt"/>
-                                    <constraint firstItem="47D-2a-wTu" firstAttribute="top" secondItem="bJV-Lb-fUW" secondAttribute="top" id="Q1c-8t-alL"/>
+                                    <constraint firstItem="47D-2a-wTu" firstAttribute="top" secondItem="bJV-Lb-fUW" secondAttribute="top" id="AET-lb-Hum"/>
                                     <constraint firstAttribute="width" constant="110" id="RbJ-sQ-VBX"/>
-                                    <constraint firstItem="47D-2a-wTu" firstAttribute="leading" secondItem="bJV-Lb-fUW" secondAttribute="leading" id="sDp-JJ-vK2"/>
+                                    <constraint firstAttribute="trailing" secondItem="47D-2a-wTu" secondAttribute="trailing" id="UbX-Ge-lBE"/>
+                                    <constraint firstItem="I0g-dj-nd8" firstAttribute="leading" secondItem="bJV-Lb-fUW" secondAttribute="leading" id="exx-1E-kwp"/>
+                                    <constraint firstAttribute="trailing" secondItem="I0g-dj-nd8" secondAttribute="trailing" id="hcx-dX-LwM"/>
+                                    <constraint firstAttribute="bottom" secondItem="I0g-dj-nd8" secondAttribute="bottom" id="t21-vw-Teg"/>
                                     <constraint firstAttribute="height" constant="40" id="upj-LN-et0"/>
+                                    <constraint firstItem="47D-2a-wTu" firstAttribute="leading" secondItem="bJV-Lb-fUW" secondAttribute="leading" id="v82-5M-YAy"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="azP-eR-yTA" appends="YES" id="8rD-km-HgY"/>
+                                </connections>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1o-VK-2v0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
@@ -2697,6 +2709,7 @@
                         <outlet property="profileView" destination="hcm-Jg-k42" id="GD9-2l-5eq"/>
                         <outlet property="segmentedController" destination="43s-wk-3IW" id="TDt-8e-uHs"/>
                         <outlet property="segmentedView" destination="p1v-ZS-3kJ" id="KHs-bO-xBD"/>
+                        <outlet property="sliderLabel" destination="I0g-dj-nd8" id="rbE-N3-Hct"/>
                         <outlet property="statusLabel" destination="47D-2a-wTu" id="Z0I-DD-1m4"/>
                         <outlet property="statusView" destination="bJV-Lb-fUW" id="nl7-QB-Ys0"/>
                         <outlet property="tableView" destination="Dbf-5q-h1W" id="AG4-ga-JPD"/>
@@ -2712,6 +2725,11 @@
                 <tapGestureRecognizer id="OlN-OX-UOW">
                     <connections>
                         <action selector="tapChangeSlidersValues:" destination="9kS-01-VYZ" id="GlQ-ad-pfr"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="azP-eR-yTA">
+                    <connections>
+                        <action selector="goalInfo:" destination="9kS-01-VYZ" id="Bi7-s9-JFE"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

@@ -41,8 +41,9 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
     
+    @IBOutlet weak var sliderLabel: UILabel!
     let userID = FIRAuth.auth()?.currentUser?.uid
-// var sliderLabel = UILabel()
+ //var sliderLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,11 +53,13 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
 //            sliderLabel.backgroundColor = .clear
 //            sliderLabel.textAlignment = .center
 //            sliderLabel.adjustsFontSizeToFitWidth = true
-//            sliderLabel.text = "\(Int(walkGoal))"
+//            sliderLabel.text = ""
 //            handleView.addSubview(sliderLabel)
 //            
 //            
 //        }
+        
+        //lifeTime_Distance = 4678
         
         giveButton.isHidden = true
         
@@ -78,8 +81,37 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
             statusLabel.text = "Pro"
             statusLabel.textColor = hikeColor()
         }
+        
+        var setGoalForWalk: Double = 0
+        
+        if lifeTime_Distance <= 50 {
+            setGoalForWalk = arrayOfGoals[0]
+        } else if lifeTime_Distance > 50 && lifeTime_Distance <= 75 {
+            setGoalForWalk = arrayOfGoals[1]
+        } else if lifeTime_Distance > 75 && lifeTime_Distance <= 100 {
+            setGoalForWalk = arrayOfGoals[2]
+        } else if lifeTime_Distance > 100 && lifeTime_Distance <= 150 {
+            setGoalForWalk = arrayOfGoals[3]
+        } else if lifeTime_Distance > 150 && lifeTime_Distance <= 200 {
+            setGoalForWalk = arrayOfGoals[4]
+        } else if lifeTime_Distance > 200 && lifeTime_Distance <= 300 {
+            setGoalForWalk = arrayOfGoals[5]
+        } else if lifeTime_Distance > 300 && lifeTime_Distance <= 500 {
+            setGoalForWalk = arrayOfGoals[6]
+        } else if lifeTime_Distance > 500 && lifeTime_Distance <= 1000 {
+            setGoalForWalk = arrayOfGoals[7]
+        } else if lifeTime_Distance > 1000 && lifeTime_Distance <= 5000 {
+            setGoalForWalk = arrayOfGoals[8]
+        } else if lifeTime_Distance > 5000 && lifeTime_Distance <= 10000 {
+            setGoalForWalk = arrayOfGoals[9]
+        } else if lifeTime_Distance > 10000 && lifeTime_Distance <= 100000 {
+            setGoalForWalk = arrayOfGoals[10]
+        }
 
- 
+
+        sliderLabel.text = "Goal: \(Int(lifeTime_Distance)) mi/\(Int(setGoalForWalk)) mi"
+        sliderLabel.adjustsFontSizeToFitWidth = true
+        
         totalActivities.text = "\(lifeTime_Activities)"
         totalMilsLabel.text = String(format: "%.2f mi", lifeTime_Distance)
         totalTimeLabel.text = calculateTotalTime(time: lifeTime_Time)
@@ -293,7 +325,7 @@ self.tableView.reloadData()
                 }
                 
                 sliderFunc(slider: goalSlider, color: walkColor(), image: UIImage(named: imageWalkString_25)!, min: walkGoal, max: setGoalForWalk)
-               //sliderLabel.text = "\(Int(walkGoal))/\(Int(setGoalForWalk))"
+               //sliderLabel.text = "Goal: \(Int(walkGoal)) mi/\(Int(setGoalForWalk)) mi"
                 valueOfSlider = slider.run
                 break
             case 1:
@@ -346,7 +378,7 @@ self.tableView.reloadData()
                 }
                 
                 sliderFunc(slider: goalSlider, color: runColor(), image: UIImage(named: imageRunString_25)!, min: runGoal, max: setGoalForRun)
-                //sliderLabel.text = "\(Int(runGoal))/\(Int(setGoalForRun))"
+                //sliderLabel.text = "Goal: \(Int(runGoal)) mi/\(Int(setGoalForRun)) mi"
                 valueOfSlider = slider.hike
                 break
             case 2:
@@ -399,7 +431,7 @@ self.tableView.reloadData()
                 }
                 
                 sliderFunc(slider: goalSlider, color: hikeColor(), image: UIImage(named: imageHikeString_25)!, min: hikeGoal, max: setGoalForHike)
-                //sliderLabel.text = "\(Int(hikeGoal))/\(Int(setGoalForHike))"
+               // sliderLabel.text = "Goal: \(Int(hikeGoal)) mi/\(Int(setGoalForHike)) mi"
                 valueOfSlider = slider.bike
                 break
             case 3:
@@ -452,7 +484,7 @@ self.tableView.reloadData()
                 }
 
                 sliderFunc(slider: goalSlider, color: bikeColor(), image: UIImage(named: imageBikeString_25)!, min: bikeGoal, max: setGoalForBike)
-                //sliderLabel.text = "\(Int(bikeGoal))/\(Int(setGoalForBike))"
+               // sliderLabel.text = "Goal: \(Int(bikeGoal)) mi/\(Int(setGoalForBike)) mi"
                 valueOfSlider = slider.walk
                 break
             default :
@@ -735,6 +767,16 @@ self.tableView.reloadData()
     
     @IBAction func logOutHit(_ sender: UIButton) {
        print("NEEDS TO BE CHANGED")
+    }
+    @IBAction func goalInfo(_ sender: UITapGestureRecognizer) {
+        
+  
+        let alert = UIAlertController(title: "Goal info:", message: "Beginner: 0 - 50 mi \nIntermediate: 50 - 300 mi \nExpert: 300 - 1000 mi \nPro: 1000 < mi", preferredStyle: .alert)
+        let okHit = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        
+        alert.addAction(okHit)
+        present(alert, animated: true, completion: nil)
+
     }
    
 }
