@@ -306,7 +306,7 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
     
     @IBAction func reportHit(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Report?", message: "Please provide reason of reporting" , preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Report?", message: "Please provide reason for reporting" , preferredStyle: .actionSheet)
         
         let wrongDirections = UIAlertAction(title: "Wrong directions", style: .default) {
             (action: UIAlertAction) in
@@ -321,14 +321,14 @@ class CellOutletFromProfileVC: UIViewController, MKMapViewDelegate, CLLocationMa
             
         }
         
-        let wrongData = UIAlertAction(title: "Wrong information", style: .default) {
+        let wrongData = UIAlertAction(title: "Incorrect information", style: .default) {
             (action: UIAlertAction) in
             
             if self.arr.count > 0 {
                 var uniId = ""
                 uniId = self.arr[0].unicueID
                 
-                self.sendReportToDatabase(uniID: uniId, reprtReason: "Wrong information")
+                self.sendReportToDatabase(uniID: uniId, reprtReason: "Incorrect information")
                 self.thankYouForReporting()
             }
             

@@ -27,6 +27,9 @@ class activDetiledVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        paceChartView.isHidden = true
+        
         if arrADVC.count > 0 {
         let url = arrADVC[0].pictureURL
         getImage(url!, imageView: imageView)

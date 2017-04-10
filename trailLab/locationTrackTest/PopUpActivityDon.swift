@@ -38,6 +38,12 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
     @IBOutlet weak var lakeButton: UIButton!
     @IBOutlet weak var waterFallButton: UIButton!
     @IBOutlet weak var hotSpringsButton: UIButton!
+    @IBOutlet weak var parksAndRecreationButton: UIButton!
+    @IBOutlet weak var forestButton: UIButton!
+    @IBOutlet weak var dogParkButton: UIButton!
+    @IBOutlet weak var wildlifeButton: UIButton!
+    @IBOutlet weak var landmarksButton: UIButton!
+    
     
     @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
@@ -135,6 +141,11 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         buttShape(but: lakeButton, color: hikeColor())
         buttShape(but: waterFallButton, color: runColor())
         buttShape(but: hotSpringsButton, color: walkColor())
+        buttShape(but: parksAndRecreationButton, color: bikeColor())
+        buttShape(but: dogParkButton, color: walkColor())
+        buttShape(but: forestButton, color: runColor())
+        buttShape(but: wildlifeButton, color: bikeColor())
+        buttShape(but: landmarksButton, color: hikeColor())
     }
     
  
@@ -393,6 +404,33 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
             makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
         }
     }
+    var launchParksAndRecreation: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchParksAndRecreation, button: parksAndRecreationButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchDogPark: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchDogPark, button: dogParkButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchForest: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchForest, button: forestButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchWildlife: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchWildlife, button: wildlifeButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchLandmarks: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchLandmarks, button: landmarksButton, array: arrayOfWhatToSee)
+        }
+    }
+
+
 
     
     @IBAction func whatToSeeHit(_ sender: UIButton) {
@@ -423,6 +461,16 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
             launchWaterFall = !launchWaterFall
         } else if sender.tag == 13 {
             launchHotSprings = !launchHotSprings
+        } else if sender.tag == 14 {
+            launchParksAndRecreation = !launchParksAndRecreation
+        } else if sender.tag == 15 {
+            launchDogPark = !launchDogPark
+        } else if sender.tag == 16 {
+            launchForest = !launchForest
+        } else if sender.tag == 17 {
+            launchWildlife = !launchWildlife
+        } else if sender.tag == 18 {
+            launchLandmarks = !launchLandmarks
         }
       
     }

@@ -51,6 +51,7 @@ class LogInVC: UIViewController, UITextFieldDelegate {
         if textField == emailTF {
             passwordTF.becomeFirstResponder()
         } else {
+        textField.returnKeyType = .done
         textField.resignFirstResponder()
         performAction()
         }

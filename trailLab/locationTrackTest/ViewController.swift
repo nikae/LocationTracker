@@ -52,17 +52,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//***************DANGER DANGER DANGER *********************
-//*************REMOVES ALL EXISTED DATA********************
-//      let dt = FIRDatabase.database().reference()
-//        dt.child("Trails").removeValue { (error, ref) in
-//            if error != nil {
-//                print("error \(error)")
-//            }
-//        }
-//*********************SAFETY ZONE*************************
-        
+   
         distanceLabel.adjustsFontSizeToFitWidth = true
         timeLabel.adjustsFontSizeToFitWidth = true
         paceLabel.adjustsFontSizeToFitWidth = true
@@ -72,7 +62,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+ 
         setUpLocationManager()
         
         mapView.setUpMapView(view: theMap, delegate: self)
@@ -111,7 +101,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.theMap.add(polyline)
                                    } else {
                     
-                    let alertController = UIAlertController(title: "You are too far away!", message: "You can get directions to trailhead!", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "You are too far away!", message: "You can get directions to the trailhead!", preferredStyle: .alert)
                     
                     let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
                         (action: UIAlertAction) in
@@ -203,6 +193,44 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     print("Location services are not enabled")
     }
  }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            manager.requestAlwaysAuthorization()
+            break
+        case .authorizedWhenInUse:
+            break
+        case .authorizedAlways:
+            break
+        case .restricted:
+            // restricted by e.g. parental controls. User can't enable Location Services
+            break
+        case .denied:
+            let alert = UIAlertController(title: "Location Error!", message: "Please enable location access.", preferredStyle: .alert)
+            
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    return
+                }
+                
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        print("Settings opened: \(success)") // Prints true
+                    })
+                }
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(settingsAction)
+            alert.addAction(cancel)
+            
+            present(alert, animated: true, completion: nil)
+            
+            break
+        }
+    }
+
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
        

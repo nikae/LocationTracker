@@ -117,7 +117,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         
         let delete = UIAlertAction(title: "Delete Image", style: .default) {
             (action: UIAlertAction) in
-            let alertController = UIAlertController(title: "Delete?", message: "do you want to delete profile picture", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Delete?", message: "Do you want to delete profile picture?", preferredStyle: .alert)
 
             let delete = UIAlertAction(title: "Delete", style: .default) {
                 (action: UIAlertAction) in
@@ -294,7 +294,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             self.databaseRef.child("users/\(userID!)/lastName").setValue(lastName)
       
         } else {
-            presentAlert(title: "Please provide Full Name", message: "")
+            presentAlert(title: "Please provide full name", message: "")
         }
     }
     

@@ -74,7 +74,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate{
                             self.present(alertController, animated: true, completion: nil)
                         } else {
                             
-                            let alert = UIAlertController(title: "Verification email sent", message: "Please check your email to verify", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Verification email sent", message: "Please check your email to verify.", preferredStyle: .alert)
                             
                             let oKAction = UIAlertAction(title: "OK", style: .default )
                             { (action: UIAlertAction) in

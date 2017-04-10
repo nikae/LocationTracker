@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let locationManager = CLLocationManager()
+        let locationManager1 = CLLocationManager()
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -30,15 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         
         if CLLocationManager.locationServicesEnabled() {
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            self.locationManager.startUpdatingLocation()
+            self.locationManager1.delegate = self
+            self.locationManager1.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            self.locationManager1.startUpdatingLocation()
         }
         
-        coordinate₁ = locationManager.location
+        coordinate₁ = locationManager1.location
         
         if coordinate₁ != nil {
-            preloadTrails(loc: coordinate₁!, radius: 1)
+            preloadTrails(loc: coordinate₁!, radius: 25.0)
         }
         preloadTrailsforProfile()
         return true
@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             window.removeConstraints(window.constraints)
         }
     }
+    
     
 
 }

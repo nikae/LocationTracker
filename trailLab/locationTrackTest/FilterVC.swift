@@ -39,6 +39,13 @@ class FilterVC: UIViewController {
     @IBOutlet weak var lakeButton: UIButton!
     @IBOutlet weak var waterFallButton: UIButton!
     @IBOutlet weak var hotSpringsButton: UIButton!
+    @IBOutlet weak var parksAndRecreationButton: UIButton!
+    @IBOutlet weak var DogParkButton: UIButton!
+    @IBOutlet weak var forestButton: UIButton!
+    @IBOutlet weak var wildlifeButton: UIButton!
+    @IBOutlet weak var landmarksButton: UIButton!
+    
+    
     //Done:
     @IBOutlet weak var doneBtn: UIButton!
     
@@ -76,6 +83,11 @@ class FilterVC: UIViewController {
         buttShape(but: lakeButton, color: bikeColor())
         buttShape(but: waterFallButton, color: runColor())
         buttShape(but: hotSpringsButton, color: walkColor())
+        buttShape(but: parksAndRecreationButton, color: hikeColor())
+        buttShape(but: DogParkButton, color: bikeColor())
+        buttShape(but: forestButton, color: runColor())
+        buttShape(but: wildlifeButton, color: walkColor())
+        buttShape(but: landmarksButton, color: hikeColor())
         
         buttShape(but: doneBtn, color: bikeColor())
         
@@ -270,6 +282,32 @@ class FilterVC: UIViewController {
             makeBoolForLaunch(bool: launchHotSprings, button: hotSpringsButton, array: arrayOfWhatToSee)
         }
     }
+    var launchParksAndRecreation: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchParksAndRecreation, button: parksAndRecreationButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchDogPark: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchDogPark, button: DogParkButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchForest: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchForest, button: forestButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchWildlife: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchWildlife, button: wildlifeButton, array: arrayOfWhatToSee)
+        }
+    }
+    var launchLandmarks: Bool = false {
+        didSet {
+            makeBoolForLaunch(bool: launchLandmarks, button: landmarksButton, array: arrayOfWhatToSee)
+        }
+    }
+
     
   @IBAction func whatToSeeHit(_ sender: UIButton) {
     AudioServicesPlaySystemSound (systemSoundID)
@@ -308,6 +346,16 @@ class FilterVC: UIViewController {
             launchWaterFall = !launchWaterFall
         } else if sender.tag == 37 {
             launchHotSprings = !launchHotSprings
+        } else if sender.tag == 38 {
+            launchParksAndRecreation = !launchParksAndRecreation
+        } else if sender.tag == 39 {
+            launchDogPark = !launchDogPark
+        } else if sender.tag == 40 {
+            launchForest = !launchForest
+        } else if sender.tag == 41 {
+            launchWildlife = !launchWildlife
+        } else if sender.tag == 42 {
+            launchLandmarks = !launchLandmarks
         } else if sender.tag == 21 {
             launch50 = !launch50
         } else if sender.tag == 22 {

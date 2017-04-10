@@ -46,7 +46,7 @@ class ResetPasswordVC: UIViewController, UITextFieldDelegate {
     
     func ressetPassword() {
         if emailTF.text == "" {
-            let alertController = UIAlertController(title: "Error", message: "Please enter your email and password", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Error", message: "Please enter your email address", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(action)
             present(alertController, animated: true, completion: nil)

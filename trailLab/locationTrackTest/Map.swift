@@ -22,18 +22,18 @@ struct MyMapView {
     view.showsScale = true
     view.showsCompass = true
     view.showsBuildings = true
-    }
-    
-    //NEEDS ERROR HANDLING
-    func zoomMap(val: Double, superVisor: CLLocationManager, view: MKMapView ) {
-        let lat = superVisor.location?.coordinate.latitude ?? 42.345573 //ForNOW Needs error handling
-        let long = superVisor.location?.coordinate.longitude ??  -71.098326  //ForNOW Needs error handling
-        let span = MKCoordinateSpanMake(val, val)
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
-        view.setRegion(region, animated: true)
         
     }
     
+    
+    func zoomMap(val: Double, superVisor: CLLocationManager, view: MKMapView ) {
+        
+        if let lat = superVisor.location?.coordinate.latitude, let long = superVisor.location?.coordinate.longitude {
+        let span = MKCoordinateSpanMake(val, val)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
+        view.setRegion(region, animated: true)
+        }
+    }
     
 
 }

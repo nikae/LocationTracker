@@ -13,6 +13,14 @@ enum slider {
     case walk, run, hike, bike
 }
 
+//extension NSLayoutConstraint {
+//    
+//    override open var description: String {
+//        let id = identifier ?? ""
+//        return "id: \(id), constant: \(constant)" //you may print whatever you want here
+//    }
+//}
+
 
 class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -59,7 +67,7 @@ class ProfileVC: UIViewController, UITabBarDelegate, UIScrollViewDelegate, UITab
 //            
 //        }
         
-        //lifeTime_Distance = 4678
+        //lifeTime_Distance = 548
         
         giveButton.isHidden = true
         
@@ -533,7 +541,7 @@ self.tableView.reloadData()
     }
     
     func returnAlert(action: UIAlertAction) {
-        let alertController = UIAlertController(title: "Delete Trail", message: "Delated Trail Can Not Be Retrived", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Delete Trail", message: "Delated trail can not be retrieved", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .default) {
             (action: UIAlertAction) in
             print("User Action Has Canceld")
