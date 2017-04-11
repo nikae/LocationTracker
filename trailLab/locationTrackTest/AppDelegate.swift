@@ -67,13 +67,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     //MARK -needts to be tested
-    func application(_ application: UIApplication, willChangeStatusBarFrame newStatusBarFrame: CGRect) {
-        let windows = UIApplication.shared.windows
-        
-        for window in windows {
-            window.removeConstraints(window.constraints)
-        }
-    }
+//    func application(_ application: UIApplication, willChangeStatusBarFrame newStatusBarFrame: CGRect) {
+//        let windows = UIApplication.shared.windows
+//        
+//        for window in windows {
+//            if window != UIKeyboa {
+//            window.removeConstraints(window.constraints)
+//            }
+//        }
+    
+//    }
     
     
 

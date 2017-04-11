@@ -430,8 +430,6 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
         }
     }
 
-
-
     
     @IBAction func whatToSeeHit(_ sender: UIButton) {
         AudioServicesPlaySystemSound (systemSoundID)
@@ -518,25 +516,82 @@ class PopUpActivityDon: UIViewController, UITextFieldDelegate,UITextViewDelegate
 
     
     @IBAction func doneActivityHit(_ sender: UIButton) {
-        lifeTime_Activities += 1
-        lifeTime_Time += timePassedToSave
-        if maxAltitude > lifeTime_MaxAltitude {
-        lifeTime_MaxAltitude = maxAltitude
+        
+        
+        let alert = UIAlertController(title: "Done Review?", message: "Please make sure to provide all the serch elements", preferredStyle: .actionSheet)
+        
+        let save = UIAlertAction(title: "Save", style: .default) { (action: UIAlertAction) in
+            
+            lifeTime_Activities += 1
+            lifeTime_Time += timePassedToSave
+            if maxAltitude > lifeTime_MaxAltitude {
+                lifeTime_MaxAltitude = maxAltitude
+            }
+            lifeTime_Pace = paceLabel_String
+            
+            self.saveTrail()
+            saveTotalResults()
+            goalsDefoultsFunc()
+            
+            arrayOfWhatToSee.removeAll()
+            arrayOfDifficulty.removeAll()
+            arrayOfSuitability.removeAll()
+            
+            distanceTraveled = 0
+            timePassedToSave = 0
+            myLocations.removeAll()
+            
+            
+            self.view.removeFromSuperview()
+            
         }
-        lifeTime_Pace = paceLabel_String
         
-        saveTrail()
-        saveTotalResults()
-        goalsDefoultsFunc()
+        let saveAndShare = UIAlertAction(title: "Save and share", style: .default) { (action: UIAlertAction) in
+            
+            lifeTime_Activities += 1
+            lifeTime_Time += timePassedToSave
+            if maxAltitude > lifeTime_MaxAltitude {
+                lifeTime_MaxAltitude = maxAltitude
+            }
+            lifeTime_Pace = paceLabel_String
+            
+            self.saveTrail()
+            saveTotalResults()
+            goalsDefoultsFunc()
+            
+            arrayOfWhatToSee.removeAll()
+            arrayOfDifficulty.removeAll()
+            arrayOfSuitability.removeAll()
+            
+            distanceTraveled = 0
+            timePassedToSave = 0
+            myLocations.removeAll()
+            
+            
+            //Set the default sharing message.
+            let message = "\(activity_String): \(distanceLabel_String), tracked with #TrailLab"
+            //Set the link to share.
+            if let link = NSURL(string: "https://traillabblog.wordpress.com")
+            {
+                let objectsToShare = [message,link] as [Any]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+                self.present(activityVC, animated: true, completion: nil)
+            }
+            
+            self.view.removeFromSuperview()
+            
+        }
+       
         
-        arrayOfWhatToSee.removeAll()
-        arrayOfDifficulty.removeAll()
-        arrayOfSuitability.removeAll()
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        distanceTraveled = 0
-        timePassedToSave = 0
-        myLocations.removeAll()
-        self.view.removeFromSuperview()
+        alert.addAction(saveAndShare)
+        alert.addAction(save)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+       
 
     }
    

@@ -286,7 +286,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             distanceTraveled += lastDistance * 0.000621371192 //In Miles
             //1 Meter = 0.000621371192 Miles 
             //1 Mile = 1609.344 Meters
-            distanceLabel_String = String(format: "%.2f  mi", distanceTraveled)
+            distanceLabel_String = String(format: "%.2f mi", distanceTraveled)
             distanceLabel.text = distanceLabel_String
             let altitude = lastLocation.altitude // In Meters
             let altitudeInFeets = altitude / 0.3048 //In Feets
@@ -302,7 +302,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error Location Filed: \(error.localizedDescription)")
     }
-    
     
     func removeOveraly(title: String)
     {
