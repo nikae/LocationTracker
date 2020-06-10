@@ -11,21 +11,21 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            Text("Data")
+            AppBackground()
                 .tabItem {
                     Image(systemName: "1.circle")
                     Text("First")
             }.tag(0)
-            Text("Second View")
+            WorkoutVIew()
                 .tabItem {
                     Image(systemName: "2.circle")
                     Text("Main")
             }.tag(1)
-            Text("Second View")
+            AppBackground()
                 .tabItem {
                     Image(systemName: "3.circle")
                     Text("Profile")
-            }.tag(1)
+            }.tag(2)
         }
     }
 }

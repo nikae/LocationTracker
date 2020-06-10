@@ -16,6 +16,8 @@
 		24181374249073360072389D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24181372249073360072389D /* LaunchScreen.storyboard */; };
 		2418137F249073360072389D /* Trail_LabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418137E249073360072389D /* Trail_LabTests.swift */; };
 		2418138A249073360072389D /* Trail_LabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181389249073360072389D /* Trail_LabUITests.swift */; };
+		2418139924909AEB0072389D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139824909AEB0072389D /* Color.swift */; };
+		2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139B24909CE00072389D /* WorkoutVIew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		24181385249073360072389D /* Trail LabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Trail LabUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24181389249073360072389D /* Trail_LabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail_LabUITests.swift; sourceTree = "<group>"; };
 		2418138B249073360072389D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2418139824909AEB0072389D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2418139B24909CE00072389D /* WorkoutVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutVIew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				24181364249073340072389D /* AppDelegate.swift */,
 				24181366249073340072389D /* SceneDelegate.swift */,
 				2418136B249073340072389D /* ContentView.swift */,
+				2418139A24909C960072389D /* MainView */,
+				2418139724909ACF0072389D /* Utils */,
 				2418136D249073360072389D /* Assets.xcassets */,
 				24181372249073360072389D /* LaunchScreen.storyboard */,
 				24181375249073360072389D /* Info.plist */,
@@ -137,6 +143,22 @@
 				2418138B249073360072389D /* Info.plist */,
 			);
 			path = "Trail LabUITests";
+			sourceTree = "<group>";
+		};
+		2418139724909ACF0072389D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2418139824909AEB0072389D /* Color.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2418139A24909C960072389D /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				2418139B24909CE00072389D /* WorkoutVIew.swift */,
+			);
+			path = MainView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,7 +294,9 @@
 			files = (
 				24181365249073340072389D /* AppDelegate.swift in Sources */,
 				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
+				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
+				2418139924909AEB0072389D /* Color.swift in Sources */,
 				24181367249073340072389D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
