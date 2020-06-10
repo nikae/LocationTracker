@@ -1,0 +1,618 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24181365249073340072389D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181364249073340072389D /* AppDelegate.swift */; };
+		24181367249073340072389D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181366249073340072389D /* SceneDelegate.swift */; };
+		2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24181368249073340072389D /* Trail_Lab.xcdatamodeld */; };
+		2418136C249073340072389D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418136B249073340072389D /* ContentView.swift */; };
+		2418136E249073360072389D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2418136D249073360072389D /* Assets.xcassets */; };
+		24181371249073360072389D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24181370249073360072389D /* Preview Assets.xcassets */; };
+		24181374249073360072389D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24181372249073360072389D /* LaunchScreen.storyboard */; };
+		2418137F249073360072389D /* Trail_LabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418137E249073360072389D /* Trail_LabTests.swift */; };
+		2418138A249073360072389D /* Trail_LabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181389249073360072389D /* Trail_LabUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2418137B249073360072389D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24181359249073340072389D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24181360249073340072389D;
+			remoteInfo = "Trail Lab";
+		};
+		24181386249073360072389D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24181359249073340072389D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24181360249073340072389D;
+			remoteInfo = "Trail Lab";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		24181361249073340072389D /* Trail Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trail Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24181364249073340072389D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		24181366249073340072389D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		24181369249073340072389D /* Trail_Lab.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Trail_Lab.xcdatamodel; sourceTree = "<group>"; };
+		2418136B249073340072389D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2418136D249073360072389D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		24181370249073360072389D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		24181373249073360072389D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		24181375249073360072389D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2418137A249073360072389D /* Trail LabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Trail LabTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2418137E249073360072389D /* Trail_LabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail_LabTests.swift; sourceTree = "<group>"; };
+		24181380249073360072389D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24181385249073360072389D /* Trail LabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Trail LabUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24181389249073360072389D /* Trail_LabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail_LabUITests.swift; sourceTree = "<group>"; };
+		2418138B249073360072389D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2418135E249073340072389D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24181377249073360072389D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24181382249073360072389D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24181358249073340072389D = {
+			isa = PBXGroup;
+			children = (
+				24181363249073340072389D /* Trail Lab */,
+				2418137D249073360072389D /* Trail LabTests */,
+				24181388249073360072389D /* Trail LabUITests */,
+				24181362249073340072389D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		24181362249073340072389D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24181361249073340072389D /* Trail Lab.app */,
+				2418137A249073360072389D /* Trail LabTests.xctest */,
+				24181385249073360072389D /* Trail LabUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24181363249073340072389D /* Trail Lab */ = {
+			isa = PBXGroup;
+			children = (
+				24181364249073340072389D /* AppDelegate.swift */,
+				24181366249073340072389D /* SceneDelegate.swift */,
+				2418136B249073340072389D /* ContentView.swift */,
+				2418136D249073360072389D /* Assets.xcassets */,
+				24181372249073360072389D /* LaunchScreen.storyboard */,
+				24181375249073360072389D /* Info.plist */,
+				24181368249073340072389D /* Trail_Lab.xcdatamodeld */,
+				2418136F249073360072389D /* Preview Content */,
+			);
+			path = "Trail Lab";
+			sourceTree = "<group>";
+		};
+		2418136F249073360072389D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				24181370249073360072389D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2418137D249073360072389D /* Trail LabTests */ = {
+			isa = PBXGroup;
+			children = (
+				2418137E249073360072389D /* Trail_LabTests.swift */,
+				24181380249073360072389D /* Info.plist */,
+			);
+			path = "Trail LabTests";
+			sourceTree = "<group>";
+		};
+		24181388249073360072389D /* Trail LabUITests */ = {
+			isa = PBXGroup;
+			children = (
+				24181389249073360072389D /* Trail_LabUITests.swift */,
+				2418138B249073360072389D /* Info.plist */,
+			);
+			path = "Trail LabUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		24181360249073340072389D /* Trail Lab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2418138E249073360072389D /* Build configuration list for PBXNativeTarget "Trail Lab" */;
+			buildPhases = (
+				2418135D249073340072389D /* Sources */,
+				2418135E249073340072389D /* Frameworks */,
+				2418135F249073340072389D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Trail Lab";
+			productName = "Trail Lab";
+			productReference = 24181361249073340072389D /* Trail Lab.app */;
+			productType = "com.apple.product-type.application";
+		};
+		24181379249073360072389D /* Trail LabTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24181391249073360072389D /* Build configuration list for PBXNativeTarget "Trail LabTests" */;
+			buildPhases = (
+				24181376249073360072389D /* Sources */,
+				24181377249073360072389D /* Frameworks */,
+				24181378249073360072389D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2418137C249073360072389D /* PBXTargetDependency */,
+			);
+			name = "Trail LabTests";
+			productName = "Trail LabTests";
+			productReference = 2418137A249073360072389D /* Trail LabTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		24181384249073360072389D /* Trail LabUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24181394249073360072389D /* Build configuration list for PBXNativeTarget "Trail LabUITests" */;
+			buildPhases = (
+				24181381249073360072389D /* Sources */,
+				24181382249073360072389D /* Frameworks */,
+				24181383249073360072389D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24181387249073360072389D /* PBXTargetDependency */,
+			);
+			name = "Trail LabUITests";
+			productName = "Trail LabUITests";
+			productReference = 24181385249073360072389D /* Trail LabUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		24181359249073340072389D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = nilka;
+				TargetAttributes = {
+					24181360249073340072389D = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					24181379249073360072389D = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 24181360249073340072389D;
+					};
+					24181384249073360072389D = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 24181360249073340072389D;
+					};
+				};
+			};
+			buildConfigurationList = 2418135C249073340072389D /* Build configuration list for PBXProject "Trail Lab" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 24181358249073340072389D;
+			productRefGroup = 24181362249073340072389D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				24181360249073340072389D /* Trail Lab */,
+				24181379249073360072389D /* Trail LabTests */,
+				24181384249073360072389D /* Trail LabUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2418135F249073340072389D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24181374249073360072389D /* LaunchScreen.storyboard in Resources */,
+				24181371249073360072389D /* Preview Assets.xcassets in Resources */,
+				2418136E249073360072389D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24181378249073360072389D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24181383249073360072389D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2418135D249073340072389D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24181365249073340072389D /* AppDelegate.swift in Sources */,
+				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
+				2418136C249073340072389D /* ContentView.swift in Sources */,
+				24181367249073340072389D /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24181376249073360072389D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2418137F249073360072389D /* Trail_LabTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24181381249073360072389D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2418138A249073360072389D /* Trail_LabUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2418137C249073360072389D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24181360249073340072389D /* Trail Lab */;
+			targetProxy = 2418137B249073360072389D /* PBXContainerItemProxy */;
+		};
+		24181387249073360072389D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24181360249073340072389D /* Trail Lab */;
+			targetProxy = 24181386249073360072389D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		24181372249073360072389D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				24181373249073360072389D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2418138C249073360072389D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2418138D249073360072389D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2418138F249073360072389D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_ASSET_PATHS = "\"Trail Lab/Preview Content\"";
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Trail Lab/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		24181390249073360072389D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_ASSET_PATHS = "\"Trail Lab/Preview Content\"";
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Trail Lab/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		24181392249073360072389D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				INFOPLIST_FILE = "Trail LabTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trail Lab.app/Trail Lab";
+			};
+			name = Debug;
+		};
+		24181393249073360072389D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				INFOPLIST_FILE = "Trail LabTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trail Lab.app/Trail Lab";
+			};
+			name = Release;
+		};
+		24181395249073360072389D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				INFOPLIST_FILE = "Trail LabUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Trail Lab";
+			};
+			name = Debug;
+		};
+		24181396249073360072389D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				INFOPLIST_FILE = "Trail LabUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Trail Lab";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2418135C249073340072389D /* Build configuration list for PBXProject "Trail Lab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2418138C249073360072389D /* Debug */,
+				2418138D249073360072389D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2418138E249073360072389D /* Build configuration list for PBXNativeTarget "Trail Lab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2418138F249073360072389D /* Debug */,
+				24181390249073360072389D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24181391249073360072389D /* Build configuration list for PBXNativeTarget "Trail LabTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24181392249073360072389D /* Debug */,
+				24181393249073360072389D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24181394249073360072389D /* Build configuration list for PBXNativeTarget "Trail LabUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24181395249073360072389D /* Debug */,
+				24181396249073360072389D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		24181368249073340072389D /* Trail_Lab.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				24181369249073340072389D /* Trail_Lab.xcdatamodel */,
+			);
+			currentVersion = 24181369249073340072389D /* Trail_Lab.xcdatamodel */;
+			path = Trail_Lab.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 24181359249073340072389D /* Project object */;
+}
