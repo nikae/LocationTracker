@@ -34,7 +34,7 @@ extension UIColor {
     struct background {
         static let primary = dynamicColor(
             light: .white,
-            dark: UIColor(netHex: 0x09090A))
+            dark: UIColor(netHex: 0x1C1C1D))
         static let primaryDark = dynamicColor(
             light: .white,
             dark: UIColor(netHex: 0x050505))

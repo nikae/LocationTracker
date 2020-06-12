@@ -8,14 +8,26 @@
 
 import SwiftUI
 import MapKit
+import UIKit
 
 struct WorkoutVIew: View {
+
+    @EnvironmentObject var dragBottomSheetHandler: DragBottomSheetHandler
 
     var body: some View {
         ZStack {
             AppBackground()
             MapView()
                 .edgesIgnoringSafeArea(.all)
+            SlideCard() {
+                VStack {
+                    Color(UIColor.background.primary)
+                        .opacity(0.9)
+                    Spacer()
+                }
+            }
+            .environmentObject(dragBottomSheetHandler)
+
         }
     }
 }
@@ -47,21 +59,22 @@ extension View {
 
 struct MapView: UIViewRepresentable {
 
-  var locationManager = CLLocationManager()
-  func setupManager() {
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    locationManager.requestWhenInUseAuthorization()
-    locationManager.requestAlwaysAuthorization()
-  }
+    var locationManager = CLLocationManager()
+    func setupManager() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
+    }
 
-  func makeUIView(context: Context) -> MKMapView {
-    setupManager()
-    let mapView = MKMapView(frame: UIScreen.main.bounds)
-    mapView.showsUserLocation = true
-    mapView.userTrackingMode = .follow
-    return mapView
-  }
-
-  func updateUIView(_ uiView: MKMapView, context: Context) {
-  }
+    func makeUIView(context: Context) -> MKMapView {
+        setupManager()
+        let mapView = MKMapView(frame: UIScreen.main.bounds)
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+        return mapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+    }
 }
+
