@@ -20,12 +20,60 @@ struct WorkoutVIew: View {
             MapView()
                 .edgesIgnoringSafeArea(.all)
             SlideCard() {
+
                 VStack {
-                    Color(UIColor.background.primary)
-                        .opacity(0.9)
+                    HStack(spacing: 0) {
+
+                        Button(action: {
+                            print("")
+                        }, label: {
+                            self.workoutButton(
+                                withBorder: true,
+                                background: Color(UIColor.SportColors.walk),
+                                imageName: "walking")
+                        })
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                        Button(action: {
+                            print("")
+                        }, label: {
+                            self.workoutButton(
+                                withBorder: true,
+                                background: Color(UIColor.SportColors.run),
+                                imageName: "running")
+                        })
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                        Button(action: {
+                            print("")
+                        }, label: {
+                            self.workoutButton(
+                                withBorder: true,
+                                background: Color(UIColor.SportColors.hike),
+                                imageName: "trekking")
+                        })
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                        Button(action: {
+                            print("")
+                        }, label: {
+                           self.workoutButton(
+                            withBorder: true,
+                            background: Color(UIColor.SportColors.bike),
+                            imageName: "cycling")
+                        })
+                            .frame(minWidth: 0, maxWidth: .infinity)
+
+
+
+                    }
+                    .frame(height: 70)
+                    .padding(.top, 100)
+                    .padding(.horizontal)
+
                     Spacer()
                 }
+            .background(Color(UIColor.background.primary)
+            .opacity(0.9))
             }
+                
             .environmentObject(dragBottomSheetHandler)
 
         }
@@ -41,17 +89,6 @@ struct WorkoutVIew_Previews: PreviewProvider {
 extension View {
     func AppBackground() -> some View {
         return Color(UIColor.background.primary)
-            .edgesIgnoringSafeArea(.all)
-    }
-
-    func AppBackgroundGeadient() -> some View {
-        let topColor = Color(UIColor.Blue.primary)
-        let bottomColor = Color(UIColor.Blue.primaryDark)
-        return LinearGradient(
-            gradient: Gradient(
-                colors: [topColor, bottomColor]),
-            startPoint: .topTrailing,
-            endPoint: .bottomLeading)
             .edgesIgnoringSafeArea(.all)
     }
 }

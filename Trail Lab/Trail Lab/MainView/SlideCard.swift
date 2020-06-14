@@ -25,7 +25,7 @@ struct SlideCard<Content: View> : View {
         return Group {
             self.content()
         }
-        .frame(height: UIScreen.main.bounds.height)
+        .frame(height: dragBottomSheetHandler.viewHeight)
         .background(Color.clear)
         .cornerRadius(22.0)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.4), radius: 10.0)

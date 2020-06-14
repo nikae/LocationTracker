@@ -45,6 +45,8 @@ class DragBottomSheetHandler: ObservableObject {
 
     var positionBelow: CGFloat = .zero
     var positionAbove: CGFloat = .zero
+    var viewHeight: CGFloat = .zero
+    var isSmallDevice: Bool = false
 
     func onDragEnded(drag: DragGesture.Value) {
         let verticalDirection = drag.predictedEndLocation.y - drag.location.y
@@ -67,4 +69,13 @@ class DragBottomSheetHandler: ObservableObject {
         return position + dragState.translation.height >= positionAbove &&
             position + dragState.translation.height <= positionBelow
     }
+
+    func isDragWindowAbove() {
+        if position + dragState.translation.height < positionAbove && position != positionAbove {
+            position = positionAbove
+        } else if position + dragState.translation.height > positionBelow && position != positionBelow  {
+            position = positionBelow
+        }
+    }
+    
 }

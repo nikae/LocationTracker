@@ -35,19 +35,26 @@ struct ContentView: View {
                         Text("Profile")
                 }.tag(2)
             }
-            .preference(key: Size.self, value: [proxy.frame(in: CoordinateSpace.global)])
+                .preference(key: Size.self, value: [proxy.frame(in: CoordinateSpace.global), CGRect(x: 0, y: 0, width: proxy.safeAreaInsets.top, height: proxy.safeAreaInsets.bottom)])
             }
 
             .onPreferenceChange(Size.self, perform: { (v) in
-                let a = (v.last?.height ?? .zero) - 10
+                let pos = (v.first?.height ?? .zero)
+                let safeAreaBottom = (v.last?.height ?? .zero)
+                let safeAreaTop = (v.last?.width ?? .zero)
+                self.dragBottomSheetHandler.viewHeight = pos + safeAreaBottom + safeAreaTop
+                //This is not the best way to detect if device is X but works for now
+                let a = pos - (safeAreaBottom == 0 ? safeAreaTop : 0)
+                self.dragBottomSheetHandler.isSmallDevice = safeAreaBottom == 0
                 self.dragBottomSheetHandler.position = a
                 self.dragBottomSheetHandler.positionBelow = a
-                self.dragBottomSheetHandler.positionAbove = a - 300
+                self.dragBottomSheetHandler.positionAbove = a - 200
                 print("self.playerFrame \(self.playerFrame.height)")
             })
 
             StartButton(selectedTab: $selectedTab)
                 .environmentObject(dragBottomSheetHandler)
+            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.2), radius: 10.0)
         }
     }
 }
