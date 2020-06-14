@@ -11,13 +11,14 @@ import SwiftUI
 struct StartButton: View {
     let width: CGFloat = 80
     @EnvironmentObject var dragBottomSheetHandler: DragBottomSheetHandler
+    @EnvironmentObject var activityHandler: ActivityHandler
     @Binding var selectedTab: Int
     @GestureState var dragState = DragState.inactive
 
     var body: some View {
         VStack {
-            workoutButton(background: Color(UIColor.SportColors.bike),
-                          imageName: "cycling")
+            workoutButton(background: activityHandler.selectedActivityType.color(),
+                          imageName: activityHandler.selectedActivityType.imageName())
                 .frame(width: width, height: width)
             Spacer()
         }

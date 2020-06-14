@@ -21,6 +21,8 @@
 		241813A12492B1990072389D /* SlideCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241813A02492B1990072389D /* SlideCard.swift */; };
 		245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139E2492A5300072389D /* DragBottomSheetHandler.swift */; };
 		245BDEDC249316E7000A954A /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BDEDB249316E7000A954A /* StartButton.swift */; };
+		245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A42495E154009BF67A /* ActivityHandler.swift */; };
+		245F78A72495E9EF009BF67A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A62495E9EF009BF67A /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		2418139E2492A5300072389D /* DragBottomSheetHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragBottomSheetHandler.swift; sourceTree = "<group>"; };
 		241813A02492B1990072389D /* SlideCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCard.swift; sourceTree = "<group>"; };
 		245BDEDB249316E7000A954A /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
+		245F78A42495E154009BF67A /* ActivityHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHandler.swift; sourceTree = "<group>"; };
+		245F78A62495E9EF009BF67A /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				2418139824909AEB0072389D /* Color.swift */,
+				245F78A62495E9EF009BF67A /* Preferences.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				2418139E2492A5300072389D /* DragBottomSheetHandler.swift */,
+				245F78A42495E154009BF67A /* ActivityHandler.swift */,
 			);
 			path = "View Handlers";
 			sourceTree = "<group>";
@@ -312,9 +318,11 @@
 				24181365249073340072389D /* AppDelegate.swift in Sources */,
 				245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */,
 				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
+				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
+				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
 				245BDEDC249316E7000A954A /* StartButton.swift in Sources */,
 				2418139924909AEB0072389D /* Color.swift in Sources */,
 				24181367249073340072389D /* SceneDelegate.swift in Sources */,

@@ -19,6 +19,7 @@ struct SlideCard<Content: View> : View {
             .updating($dragState) { drag, state, transaction in
                 state = .dragging(translation: drag.translation)
                 self.dragBottomSheetHandler.dragState = state
+                 self.dragBottomSheetHandler.isDragWindowAbove()
         }
         .onEnded(dragBottomSheetHandler.onDragEnded)
 

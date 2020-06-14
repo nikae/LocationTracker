@@ -13,6 +13,7 @@ import UIKit
 struct WorkoutVIew: View {
 
     @EnvironmentObject var dragBottomSheetHandler: DragBottomSheetHandler
+    @EnvironmentObject var activityHandler: ActivityHandler
 
     var body: some View {
         ZStack {
@@ -25,53 +26,64 @@ struct WorkoutVIew: View {
                     HStack(spacing: 0) {
 
                         Button(action: {
-                            print("")
+                            withAnimation(.linear) {
+                                self.activityHandler.selectedActivityType = .walking
+                            }
+                            Preferences.activityType = ActivityType.walking.rawValue
+
                         }, label: {
                             self.workoutButton(
                                 withBorder: true,
                                 background: Color(UIColor.SportColors.walk),
-                                imageName: "walking")
+                                imageName: ActivityType.walking.imageName())
                         })
                             .frame(minWidth: 0, maxWidth: .infinity)
                         Button(action: {
-                            print("")
+                            withAnimation(.linear) {
+                                self.activityHandler.selectedActivityType = .running
+                            }
+                            Preferences.activityType = ActivityType.running.rawValue
                         }, label: {
                             self.workoutButton(
                                 withBorder: true,
                                 background: Color(UIColor.SportColors.run),
-                                imageName: "running")
+                                imageName: ActivityType.running.imageName())
                         })
                             .frame(minWidth: 0, maxWidth: .infinity)
                         Button(action: {
-                            print("")
+                            withAnimation(.linear) {
+                                self.activityHandler.selectedActivityType = .hiking
+                            }
+                            Preferences.activityType = ActivityType.hiking.rawValue
                         }, label: {
                             self.workoutButton(
                                 withBorder: true,
                                 background: Color(UIColor.SportColors.hike),
-                                imageName: "trekking")
+                                imageName: ActivityType.hiking.imageName())
                         })
                             .frame(minWidth: 0, maxWidth: .infinity)
                         Button(action: {
-                            print("")
+                            withAnimation(.linear) {
+                                self.activityHandler.selectedActivityType = .biking
+                            }
+                            Preferences.activityType = ActivityType.biking.rawValue
                         }, label: {
-                           self.workoutButton(
-                            withBorder: true,
-                            background: Color(UIColor.SportColors.bike),
-                            imageName: "cycling")
+                            self.workoutButton(
+                                withBorder: true,
+                                background: Color(UIColor.SportColors.bike),
+                                imageName: ActivityType.biking.imageName())
                         })
                             .frame(minWidth: 0, maxWidth: .infinity)
 
-
-
                     }
                     .frame(height: 70)
-                    .padding(.top, 100)
+                    .padding(.top, 60)
                     .padding(.horizontal)
 
                     Spacer()
                 }
-            .background(Color(UIColor.background.primary)
-            .opacity(0.9))
+                .background(Color(UIColor.background.primary)
+                .opacity(0.9))
             }
                 
             .environmentObject(dragBottomSheetHandler)
