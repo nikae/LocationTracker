@@ -14,6 +14,7 @@ struct StartButton: View {
     @EnvironmentObject var activityHandler: ActivityHandler
     @Binding var selectedTab: Int
     @GestureState var dragState = DragState.inactive
+    @GestureState var testDrag = DragState.inactive
 
     var body: some View {
         VStack {
@@ -33,41 +34,21 @@ struct StartButton: View {
                 }
         }
 
-        .gesture(
+        .gesture( self.selectedTab == 1 ?
             DragGesture()
                 .updating($dragState) { drag, state, transaction in
                     state = .dragging(translation: drag.translation)
                     self.dragBottomSheetHandler.dragState = .dragging(translation: drag.translation)
-                    self.dragBottomSheetHandler.isDragWindowAbove() 
+                    self.dragBottomSheetHandler.isDragWindowAbove()
             }
-            .onEnded(dragBottomSheetHandler.onDragEnded))
+            .onEnded(dragBottomSheetHandler.onDragEnded) : DragGesture().updating($testDrag) { _, _, _ in}
+            .onEnded(dragBottomSheetHandler.onDragEndedTest))
     }
 }
 
 struct StartButton_Previews: PreviewProvider {
     static var previews: some View {
         StartButton(selectedTab: .constant(0))
-    }
-}
-
-extension View {
-    func workoutButton(withBorder: Bool = false,
-                background: Color = .blue,
-                imageName: String = "")
-        -> some View {
-            return ZStack(alignment: .center) {
-                Circle()
-                .overlay(
-                  Circle()
-                    .stroke(withBorder ? Color.black : .clear ,lineWidth: 0.5)
-                ).foregroundColor(background)
-
-                Image(imageName)
-                .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.black)
-                .padding(20)
-            }
     }
 }
 

@@ -67,7 +67,6 @@ enum ActivityType: Int {
             return Color(UIColor.SportColors.bike)
         }
     }
-
 }
 
 struct Activity {
@@ -77,6 +76,7 @@ struct Activity {
 
 class ActivityHandler: ObservableObject {
     @Published var selectedActivityType: ActivityType = ActivityType(rawValue:Preferences.activityType) ?? .walking
+    @Published var activityButtonTitle: String = "Start"
 
 }
 

@@ -42,6 +42,8 @@ class DragBottomSheetHandler: ObservableObject {
 
     @Published var position: CGFloat = .zero
     @Published var dragState: DragState = DragState.inactive
+    @Published var zoom: Double = 0.075
+    @Published var showMapTypes: Bool = false
 
     var positionBelow: CGFloat = .zero
     var positionAbove: CGFloat = .zero
@@ -59,10 +61,17 @@ class DragBottomSheetHandler: ObservableObject {
             initialVelocity: 10.0)) {
                 if verticalDirection > 0 {
                     self.position = positionBelow
+                    zoom = 0.075
+                    showMapTypes = false
                 } else {
                     self.position = positionAbove
+                     zoom = 0.15
                 }
         }
+    }
+
+    func onDragEndedTest(drag: DragGesture.Value) {
+        //
     }
 
     func isDragWindow() -> (Bool) {

@@ -41,6 +41,9 @@ extension UIColor {
         static let secondary =  dynamicColor(
             light: .white,
             dark: UIColor(netHex: 0x454547))
+        static let accentColor =  dynamicColor(
+                   light: UIColor(netHex: 0x454547),
+                   dark: UIColor(netHex: 0x525254))
     }
 
     struct SportColors {

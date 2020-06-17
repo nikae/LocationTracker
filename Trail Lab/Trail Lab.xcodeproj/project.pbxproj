@@ -23,6 +23,10 @@
 		245BDEDC249316E7000A954A /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BDEDB249316E7000A954A /* StartButton.swift */; };
 		245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A42495E154009BF67A /* ActivityHandler.swift */; };
 		245F78A72495E9EF009BF67A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A62495E9EF009BF67A /* Preferences.swift */; };
+		245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AA24987113009BF67A /* MapViewHandler.swift */; };
+		245F78AC249932E9009BF67A /* BottomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A824986E09009BF67A /* BottomCard.swift */; };
+		245F78AE249994F7009BF67A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AD249994F7009BF67A /* MapView.swift */; };
+		245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AF2499981A009BF67A /* ViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		245BDEDB249316E7000A954A /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		245F78A42495E154009BF67A /* ActivityHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHandler.swift; sourceTree = "<group>"; };
 		245F78A62495E9EF009BF67A /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		245F78A824986E09009BF67A /* BottomCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCard.swift; sourceTree = "<group>"; };
+		245F78AA24987113009BF67A /* MapViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewHandler.swift; sourceTree = "<group>"; };
+		245F78AD249994F7009BF67A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		245F78AF2499981A009BF67A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +169,7 @@
 			children = (
 				2418139824909AEB0072389D /* Color.swift */,
 				245F78A62495E9EF009BF67A /* Preferences.swift */,
+				245F78AF2499981A009BF67A /* ViewExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -171,6 +180,8 @@
 				2418139B24909CE00072389D /* WorkoutVIew.swift */,
 				241813A02492B1990072389D /* SlideCard.swift */,
 				245BDEDB249316E7000A954A /* StartButton.swift */,
+				245F78A824986E09009BF67A /* BottomCard.swift */,
+				245F78AD249994F7009BF67A /* MapView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -180,6 +191,7 @@
 			children = (
 				2418139E2492A5300072389D /* DragBottomSheetHandler.swift */,
 				245F78A42495E154009BF67A /* ActivityHandler.swift */,
+				245F78AA24987113009BF67A /* MapViewHandler.swift */,
 			);
 			path = "View Handlers";
 			sourceTree = "<group>";
@@ -318,14 +330,18 @@
 				24181365249073340072389D /* AppDelegate.swift in Sources */,
 				245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */,
 				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
+				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
 				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
+				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
 				245BDEDC249316E7000A954A /* StartButton.swift in Sources */,
 				2418139924909AEB0072389D /* Color.swift in Sources */,
 				24181367249073340072389D /* SceneDelegate.swift in Sources */,
+				245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */,
+				245F78AC249932E9009BF67A /* BottomCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
