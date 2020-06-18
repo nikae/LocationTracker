@@ -15,12 +15,32 @@ struct StartButton: View {
     @Binding var selectedTab: Int
     @GestureState var dragState = DragState.inactive
     @GestureState var testDrag = DragState.inactive
+    @State var longPressinProgress: Bool = false
+    @State var progress: Float = 0
+
+    func simple(sucsess: Bool) {
+        let generator = UINotificationFeedbackGenerator()
+        if sucsess {
+        generator.notificationOccurred(.success)
+        } else {
+            generator.notificationOccurred(.warning)
+        }
+    }
+
 
     var body: some View {
         VStack {
-            workoutButton(background: activityHandler.selectedActivityType.color(),
-                          imageName: activityHandler.selectedActivityType.imageName())
-                .frame(width: width, height: width)
+            ZStack {
+                workoutButton(background: activityHandler.selectedActivityType.color(),
+                          imageName: activityHandler.activityState == .inactive ? activityHandler.selectedActivityType.imageName() : activityHandler.activityState == .active  ? "stop.fill" : "play.fill",
+                          isSystemIcon: activityHandler.activityState != .inactive )
+
+                if self.activityHandler.activityState != .inactive {
+                    ProgressBar(progress: $progress)
+                }
+            }
+             .frame(width: width, height: width)
+
             Spacer()
         }
         .offset(y:dragBottomSheetHandler.isDragWindow() ?
@@ -30,8 +50,33 @@ struct StartButton: View {
                 if self.selectedTab != 1 {
                     self.selectedTab = 1
                 } else {
-                    //TODO: START WORKOUT
+                    if self.activityHandler.activityState != .active {
+                        self.activityHandler.startActivity()
+                        self.activityHandler.activityButtonTitle = "Tap and Hold"
+                    } else {
+//                        self.activityHandler.pauseActivity()
+//                        self.activityHandler.activityButtonTitle = "Resume"
+//                        self.simple(sucsess: false)
+                    }
                 }
+        }
+
+        .onLongPressGesture(minimumDuration: 2, pressing: { inProgress in
+            print("In progress: \(inProgress)!")
+            self.longPressinProgress = inProgress
+            withAnimation(.linear(duration: !inProgress ? 0.3 : 2)) {
+                if self.activityHandler.activityState != .inactive {
+                    self.progress = inProgress ? 1 : 0
+                }
+            }
+        }) {
+            print("Long pressed!")
+            if self.activityHandler.activityState != .inactive {
+                self.simple(sucsess: true)
+                self.activityHandler.stopActivity()
+                self.activityHandler.activityButtonTitle = "Start"
+                print("inactive")
+            }
         }
 
         .gesture( self.selectedTab == 1 ?

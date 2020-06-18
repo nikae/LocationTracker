@@ -15,8 +15,9 @@ struct WorkoutVIew: View {
     @EnvironmentObject var mapViewHandler: MapViewHandler 
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             AppBackground()
+
             MapView(zoom: $dragBottomSheetHandler.zoom)
             .environmentObject(self.mapViewHandler)
                 .edgesIgnoringSafeArea(.bottom)
@@ -28,8 +29,13 @@ struct WorkoutVIew: View {
                 .background(Color(UIColor.background.primary)
                 .opacity(0.9))
             }
-                
             .environmentObject(dragBottomSheetHandler)
+
+            ActivityStatsView()
+                .padding(.horizontal)
+                .aspectRatio(2, contentMode: .fit)
+                .offset(y: activityHandler.activityState == .inactive ? -300 : 60)
+
         }
     }
 }

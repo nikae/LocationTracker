@@ -27,6 +27,7 @@
 		245F78AC249932E9009BF67A /* BottomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A824986E09009BF67A /* BottomCard.swift */; };
 		245F78AE249994F7009BF67A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AD249994F7009BF67A /* MapView.swift */; };
 		245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AF2499981A009BF67A /* ViewExtensions.swift */; };
+		245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B12499A3C7009BF67A /* ActivityStatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		245F78AA24987113009BF67A /* MapViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewHandler.swift; sourceTree = "<group>"; };
 		245F78AD249994F7009BF67A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		245F78AF2499981A009BF67A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		245F78B12499A3C7009BF67A /* ActivityStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				245BDEDB249316E7000A954A /* StartButton.swift */,
 				245F78A824986E09009BF67A /* BottomCard.swift */,
 				245F78AD249994F7009BF67A /* MapView.swift */,
+				245F78B12499A3C7009BF67A /* ActivityStatsView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				2418136C249073340072389D /* ContentView.swift in Sources */,
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
+				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
 				245BDEDC249316E7000A954A /* StartButton.swift in Sources */,
 				2418139924909AEB0072389D /* Color.swift in Sources */,

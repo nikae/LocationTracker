@@ -74,9 +74,30 @@ struct Activity {
 
 }
 
+enum ActivityState {
+    case active
+    case inactive
+    case paused
+}
+
 class ActivityHandler: ObservableObject {
     @Published var selectedActivityType: ActivityType = ActivityType(rawValue:Preferences.activityType) ?? .walking
     @Published var activityButtonTitle: String = "Start"
+    @Published var activityState: ActivityState = .inactive
+
+    func startActivity() {
+        activityState = .active
+    }
+
+    func stopActivity() {
+        activityState = .inactive
+    }
+
+    func pauseActivity() {
+        activityState = .paused
+    }
+
+
 
 }
 
