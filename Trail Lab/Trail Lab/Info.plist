@@ -60,5 +60,9 @@
 	<string>TBD</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>TBD</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>We meed to write health</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We meed to write health</string>
 </dict>
 </plist>

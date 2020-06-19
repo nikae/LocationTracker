@@ -28,6 +28,10 @@
 		245F78AE249994F7009BF67A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AD249994F7009BF67A /* MapView.swift */; };
 		245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AF2499981A009BF67A /* ViewExtensions.swift */; };
 		245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B12499A3C7009BF67A /* ActivityStatsView.swift */; };
+		245F78B5249BD402009BF67A /* HealthPermisionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B4249BD402009BF67A /* HealthPermisionsHandler.swift */; };
+		245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245F78B8249BD45F009BF67A /* HealthKit.framework */; };
+		245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BA249BDA25009BF67A /* UserDataStore.swift */; };
+		245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +79,11 @@
 		245F78AD249994F7009BF67A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		245F78AF2499981A009BF67A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		245F78B12499A3C7009BF67A /* ActivityStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatsView.swift; sourceTree = "<group>"; };
+		245F78B4249BD402009BF67A /* HealthPermisionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPermisionsHandler.swift; sourceTree = "<group>"; };
+		245F78B6249BD45F009BF67A /* Trail Lab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Trail Lab.entitlements"; sourceTree = "<group>"; };
+		245F78B8249BD45F009BF67A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		245F78BA249BDA25009BF67A /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
+		245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +119,7 @@
 				2418137D249073360072389D /* Trail LabTests */,
 				24181388249073360072389D /* Trail LabUITests */,
 				24181362249073340072389D /* Products */,
+				245F78B7249BD45F009BF67A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,11 +136,13 @@
 		24181363249073340072389D /* Trail Lab */ = {
 			isa = PBXGroup;
 			children = (
+				245F78B6249BD45F009BF67A /* Trail Lab.entitlements */,
 				24181364249073340072389D /* AppDelegate.swift */,
 				24181366249073340072389D /* SceneDelegate.swift */,
 				2418136B249073340072389D /* ContentView.swift */,
 				2418139A24909C960072389D /* MainView */,
 				2418139D2492A5150072389D /* View Handlers */,
+				245F78B3249BD3C5009BF67A /* Helpers */,
 				2418139724909ACF0072389D /* Utils */,
 				2418136D249073360072389D /* Assets.xcassets */,
 				24181372249073360072389D /* LaunchScreen.storyboard */,
@@ -197,6 +210,24 @@
 				245F78AA24987113009BF67A /* MapViewHandler.swift */,
 			);
 			path = "View Handlers";
+			sourceTree = "<group>";
+		};
+		245F78B3249BD3C5009BF67A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				245F78B4249BD402009BF67A /* HealthPermisionsHandler.swift */,
+				245F78BA249BDA25009BF67A /* UserDataStore.swift */,
+				245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		245F78B7249BD45F009BF67A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				245F78B8249BD45F009BF67A /* HealthKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +364,7 @@
 				24181365249073340072389D /* AppDelegate.swift in Sources */,
 				245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */,
 				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
+				245F78B5249BD402009BF67A /* HealthPermisionsHandler.swift in Sources */,
 				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
 				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
@@ -340,7 +372,9 @@
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
+				245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
+				245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */,
 				245BDEDC249316E7000A954A /* StartButton.swift in Sources */,
 				2418139924909AEB0072389D /* Color.swift in Sources */,
 				24181367249073340072389D /* SceneDelegate.swift in Sources */,
@@ -510,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Trail Lab/Trail Lab.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Trail Lab/Preview Content\"";
@@ -531,6 +566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Trail Lab/Trail Lab.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Trail Lab/Preview Content\"";

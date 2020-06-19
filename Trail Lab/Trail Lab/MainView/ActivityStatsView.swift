@@ -9,10 +9,12 @@
 import SwiftUI
 
 struct ActivityStatsView: View {
+    @EnvironmentObject var activityHandler: ActivityHandler
     var body: some View {
         ZStack {
             AppBackground()
                 .cornerRadius(12)
+            Text("\(activityHandler.activity?.duration.rounded() ?? 0)")
         }
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.4), radius: 10.0)
     }

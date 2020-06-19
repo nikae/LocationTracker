@@ -70,7 +70,11 @@ struct ContentView: View {
                 .shadow(color: Color( .sRGBLinear, white: 0, opacity: 0.2),
                         radius: 10.0)
         }
+        .onAppear {
+            self.activityHandler.authorizeHealthKit()
+        }
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
