@@ -12,7 +12,7 @@ struct ContentView: View {
 
     @EnvironmentObject var dragBottomSheetHandler: DragBottomSheetHandler
     @EnvironmentObject var activityHandler: ActivityHandler
-    var mapViewHandler: MapViewHandler = MapViewHandler()
+    @EnvironmentObject var mapViewHandler: MapViewHandler 
     @State private var selectedTab = 1
     @State var playerFrame = CGRect.zero
 
@@ -40,11 +40,11 @@ struct ContentView: View {
                     }.tag(0)
 
                     WorkoutVIew()
-                        .environmentObject(self.dragBottomSheetHandler)
-                        .environmentObject(self.activityHandler)
-                        .environmentObject(self.mapViewHandler)
-                        .tabItem {
-                            Text(self.selectedTab != 1 ?"Workout" :
+                        .onAppear {
+                            self.activityHandler.mapViewDelegate = self.mapViewHandler
+                    }
+                    .tabItem {
+                        Text(self.selectedTab != 1 ?"Workout" :
                                 self.activityHandler.activityButtonTitle)
                     }.tag(1)
                     self.AppBackground()
@@ -65,8 +65,6 @@ struct ContentView: View {
             })
 
             StartButton(selectedTab: $selectedTab)
-                .environmentObject(dragBottomSheetHandler)
-                .environmentObject(activityHandler)
                 .shadow(color: Color( .sRGBLinear, white: 0, opacity: 0.2),
                         radius: 10.0)
         }

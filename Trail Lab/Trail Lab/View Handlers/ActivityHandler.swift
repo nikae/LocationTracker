@@ -9,6 +9,7 @@
 import Foundation
 import HealthKit
 import SwiftUI
+import CoreLocation
 
 enum ActivityType: Int {
     case walking = 1
@@ -75,16 +76,20 @@ enum ActivityState {
     case paused
 }
 
+
 class ActivityHandler: ObservableObject {
     @Published var selectedActivityType: ActivityType = ActivityType(rawValue:Preferences.activityType) ?? .walking
     @Published var activityButtonTitle: String = "Start"
     @Published var activityState: ActivityState = .inactive
     @Published var activity: Activity?
+    @Published var tempLocation: String = ""
+    let locationManager = LocationManager()
 
     private (set) var startDate: Date!
     private (set) var endDate: Date!
     private var activityTimer: Timer?
 
+    weak var mapViewDelegate: MapViewDelegate?
 
     func startActivity() {
         let startDate = Date()
@@ -93,8 +98,12 @@ class ActivityHandler: ObservableObject {
         activity = Activity(start: startDate,
                             activityType: selectedActivityType,
                             intervals: [])
+        locationManager.startLocationUpdates(locationListener: { location in
+            self.locationListener(location: location)
+        }) { error in
+            print(error)
+        }
         startTimer()
-
     }
 
     func stopActivity() {
@@ -105,12 +114,23 @@ class ActivityHandler: ObservableObject {
         guard let activity = activity else {
             return
         }
-        ActivityDataStore.save(activity: activity) { sucsess, error in
+        ActivityDataStore().save(activity: activity) { sucsess, error in
             if let error = error {
                 print(error.localizedDescription)
             }
 
             print(sucsess)
+        }
+        locationManager.stopLocationUpdates { error in
+            print(error)
+        }
+    }
+
+     private func locationListener(location: CLLocation) {
+        self.activity?.locations.append(location)
+        tempLocation = "\(location)"
+        if let locations = self.activity?.locations {
+        mapViewDelegate?.updatePolyline(with:  locations)
         }
     }
 

@@ -10,13 +10,17 @@ import SwiftUI
 import MapKit
 import UIKit
 
+protocol MapViewDelegate: class {
+    func updatePolyline(with location: [CLLocation])
+}
+
 struct MapView: UIViewRepresentable {
     @Binding var zoom: Double
     @EnvironmentObject var mapViewHandler: MapViewHandler
+    @EnvironmentObject var activityHandler: ActivityHandler
 
     func makeUIView(context: Context) -> MKMapView {
         mapViewHandler.setupManager()
-
         mapViewHandler.mapView.showsUserLocation = true
         mapViewHandler.mapView.userTrackingMode = .follow
         mapViewHandler.mapView.mapType = mapViewHandler.mapType
@@ -44,12 +48,12 @@ struct MapView: UIViewRepresentable {
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
 
-        mapViewHandler.zoomMap(
-            val: zoom,
-            superVisor: mapViewHandler.locationManager,
-            view: uiView)
-
-
+        if activityHandler.activityState != .active {
+            mapViewHandler.zoomMap(
+                val: zoom,
+                superVisor: mapViewHandler.locationManager,
+                view: uiView)
+        }
 
         if mapViewHandler.mapType != mapViewHandler.oldMapType {
             uiView.mapType = mapViewHandler.mapType

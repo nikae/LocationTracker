@@ -12,6 +12,7 @@ struct StartButton: View {
     let width: CGFloat = 80
     @EnvironmentObject var dragBottomSheetHandler: DragBottomSheetHandler
     @EnvironmentObject var activityHandler: ActivityHandler
+    @EnvironmentObject var mapViewHandler: MapViewHandler
     @Binding var selectedTab: Int
     @GestureState var dragState = DragState.inactive
     @GestureState var testDrag = DragState.inactive
@@ -26,7 +27,6 @@ struct StartButton: View {
             generator.notificationOccurred(.warning)
         }
     }
-
 
     var body: some View {
         VStack {
@@ -53,6 +53,7 @@ struct StartButton: View {
                     if self.activityHandler.activityState != .active {
                         self.activityHandler.startActivity()
                         self.activityHandler.activityButtonTitle = "Tap and Hold"
+                        self.mapViewHandler.zoomToActive()
                     } else {
 //                        self.activityHandler.pauseActivity()
 //                        self.activityHandler.activityButtonTitle = "Resume"

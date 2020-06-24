@@ -39,129 +39,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Trail Lab/View Handlers/MapViewHandler.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "MapViewHandler"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8 - 8b5a973ac3be86a1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "property wrapper backing initializer of Trail_Lab.MapViewHandler.mapType : __C.MKMapType"
-                  moduleName = "Trail Lab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nickelashvili/Applications/Trail_Lab/Trail%20Lab/Trail%20Lab/View%20Handlers/MapViewHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8 - cd62ec15fe3f0a4b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trail_Lab.MapViewHandler.mapType.getter : __C.MKMapType"
-                  moduleName = "Trail Lab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nickelashvili/Applications/Trail_Lab/Trail%20Lab/Trail%20Lab/View%20Handlers/MapViewHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "136">
-               </Location>
-               <Location
-                  uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8 - 367bbdfc11d8065f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trail_Lab.MapViewHandler.mapType.setter : __C.MKMapType"
-                  moduleName = "Trail Lab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nickelashvili/Applications/Trail_Lab/Trail%20Lab/Trail%20Lab/View%20Handlers/MapViewHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "192">
-               </Location>
-               <Location
-                  uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8 - 9e9606c977545b4e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trail_Lab.MapViewHandler.mapType.modify : __C.MKMapType"
-                  moduleName = "Trail Lab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nickelashvili/Applications/Trail_Lab/Trail%20Lab/Trail%20Lab/View%20Handlers/MapViewHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8 - f539e9356fde735f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trail_Lab.MapViewHandler.mapType.modify : __C.MKMapType with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Trail Lab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nickelashvili/Applications/Trail_Lab/Trail%20Lab/Trail%20Lab/View%20Handlers/MapViewHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8 - dc8ffedcb9038d74"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trail_Lab.MapViewHandler.$mapType.getter : Combine.Published&lt;__C.MKMapType&gt;.Publisher"
-                  moduleName = "Trail Lab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nickelashvili/Applications/Trail_Lab/Trail%20Lab/Trail%20Lab/View%20Handlers/MapViewHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "140">
-               </Location>
-               <Location
-                  uuid = "CDF0843A-9CE4-40A0-95BE-1989A17FB2A8 - 525a845956a21572"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trail_Lab.MapViewHandler.init() -&gt; Trail_Lab.MapViewHandler"
-                  moduleName = "Trail Lab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nickelashvili/Applications/Trail_Lab/Trail%20Lab/Trail%20Lab/View%20Handlers/MapViewHandler.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "124">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "9077A58E-25E9-4A7B-969C-5481E5B3C30F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -169,8 +46,8 @@
             filePath = "Trail Lab/MainView/StartButton.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -217,8 +94,8 @@
             filePath = "Trail Lab/MainView/StartButton.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -249,10 +126,26 @@
             filePath = "Trail Lab/MainView/StartButton.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C98F3E8F-20C1-4A85-B859-852FCFC89887"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Trail Lab/MainView/MapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "updateUIView(_:context:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

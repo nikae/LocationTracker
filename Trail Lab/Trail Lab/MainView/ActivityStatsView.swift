@@ -14,7 +14,10 @@ struct ActivityStatsView: View {
         ZStack {
             AppBackground()
                 .cornerRadius(12)
-            Text("\(activityHandler.activity?.duration.rounded() ?? 0)")
+            VStack {
+                Text("\(activityHandler.activity?.duration.rounded() ?? 0)")
+                Text(activityHandler.tempLocation)
+            }
         }
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.4), radius: 10.0)
     }

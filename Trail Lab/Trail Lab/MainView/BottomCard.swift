@@ -91,11 +91,13 @@ struct BottomCard: View {
 
                     MapTypeChoices()
                         .frame(width: self.dragBottomSheetHandler.showMapTypes ? proxy.size.width - 100 : .zero)
-                        .environmentObject(self.mapViewHandler)
-
 
                     Button(action: {
-                        self.dragBottomSheetHandler.zoom = 0.15
+                        if self.activityHandler.activityState != .active {
+                            self.dragBottomSheetHandler.zoom = 0.15
+                        } else {
+                            self.mapViewHandler.zoomToActive()
+                        }
                     }) {
                         Image(systemName: "location.circle")
                             .resizable()
