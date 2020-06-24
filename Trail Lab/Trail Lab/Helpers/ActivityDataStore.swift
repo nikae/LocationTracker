@@ -19,6 +19,15 @@ struct Activity {
     var intervals: [ActivityInterval]
     var locations: [CLLocation] = []
 
+    var numberOfSteps: Int?
+    var distance: Double?
+    var pace: Double?
+    var speed: Double?
+    var averagePace: Double?
+    var floorsAscended: Int?
+    var floorsDscended: Int?
+    var cadence: Double?
+
     init(start: Date,
          activityType: ActivityType,
          intervals: [ActivityInterval]) {

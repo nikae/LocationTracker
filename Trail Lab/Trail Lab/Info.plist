@@ -30,6 +30,8 @@
 	<string>TBD</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>TBD</string>
+	<key>NSMotionUsageDescription</key>
+	<string>TBD</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -83,7 +83,8 @@ class ActivityHandler: ObservableObject {
     @Published var activityState: ActivityState = .inactive
     @Published var activity: Activity?
     @Published var tempLocation: String = ""
-    let locationManager = LocationManager()
+    let locationManager = LocationManager.shared
+    let pedometerManager = PedometerManager()
 
     private (set) var startDate: Date!
     private (set) var endDate: Date!
@@ -104,6 +105,7 @@ class ActivityHandler: ObservableObject {
             print(error)
         }
         startTimer()
+        beginPedometerDataCollection(startDate)
     }
 
     func stopActivity() {
@@ -124,6 +126,7 @@ class ActivityHandler: ObservableObject {
         locationManager.stopLocationUpdates { error in
             print(error)
         }
+        pedometerManager.stopMonitoring()
     }
 
      private func locationListener(location: CLLocation) {
@@ -181,6 +184,22 @@ class ActivityHandler: ObservableObject {
 
             print("HealthKit Successfully Authorized.")
         }
+    }
+
+    private func beginPedometerDataCollection(_ startDate: Date) {
+        pedometerManager.resetPedometer()
+        pedometerManager.stepsCountingHandler = { steps , distance, averagePace, pace, floorsAscended, floorsDscended, cadence in
+            DispatchQueue.main.async {
+                self.activity?.numberOfSteps = steps
+                self.activity?.distance = distance
+                self.activity?.averagePace = averagePace
+                self.activity?.pace = pace
+                self.activity?.floorsAscended = floorsAscended
+                self.activity?.floorsDscended = floorsDscended
+                self.activity?.cadence = cadence
+            }
+        }
+        pedometerManager.startMonitoring(startDate)
     }
 }
 
