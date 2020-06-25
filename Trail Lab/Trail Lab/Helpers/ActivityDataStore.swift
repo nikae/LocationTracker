@@ -74,7 +74,6 @@ class ActivityDataStore: NSObject {
 
     var routeBuilder: HKWorkoutRouteBuilder!
     let healthStore = HKHealthStore()
-    let workoutConfiguration = HKWorkoutConfiguration()
 
     override init() {
         super.init()
@@ -85,43 +84,41 @@ class ActivityDataStore: NSObject {
         activity: Activity,
         completion: @escaping ((Bool, Error?) -> Swift.Void)) {
 
-        workoutConfiguration.activityType = activity.activityType.hkValue()
-        workoutConfiguration.locationType = .outdoor
+        var metadata: [String: Any] = [:]
+        let totalDistance = HKQuantity(unit: .meter(), doubleValue: activity.distance ?? 0)
+        let steps = HKQuantity(unit: .count(), doubleValue: Double(activity.numberOfSteps ?? 0))
+        let totalEnergyBurned = HKQuantity(unit: .kilocalorie(), doubleValue: activity.totalEnergyBurned)
 
-        addLocationTotheBuilder(location: activity.locations)
+        metadata["Steps Count"] = steps
 
-        let builder = HKWorkoutBuilder(healthStore: healthStore,
-                                       configuration: workoutConfiguration,
-                                       device: .local())
+        let healthkitWorkout = HKWorkout(activityType: activity.activityType.hkValue(),
+                                         start: activity.start,
+                                         end: activity.end,
+                                         duration: activity.duration,
+                                         totalEnergyBurned: totalEnergyBurned,
+                                                totalDistance: totalDistance,
+                                                device: .local(),
+                                                metadata: metadata)
 
-        builder.beginCollection(withStart: activity.start) { (success, error) in
+
+        var mySamples: [HKSample] = []
+        let activeEnergyBurned = self.samples(for: activity)
+        let distanceSamples = self.distanceSamples(for: activity)
+        mySamples.append(contentsOf: activeEnergyBurned)
+        mySamples.append(contentsOf: distanceSamples)
+
+        healthStore.save(healthkitWorkout) { (success, error) in
             guard success else {
                 completion(false, error)
                 return
             }
-        }
 
-        let samples = self.samples(for: activity)
+            self.addLocationTotheBuilder(healthkitWorkout, location: activity.locations)
 
-        builder.add(samples) { (success, error) in
-            guard success else {
-                completion(false, error)
-                return
-            }
-
-            builder.endCollection(withEnd: activity.end) { (success, error) in
+            self.healthStore.add(mySamples, to: healthkitWorkout) { (success, error) in
                 guard success else {
                     completion(false, error)
-
                     return
-                }
-
-                builder.finishWorkout { (workout, error) in
-                    let success = error == nil
-                    completion(success, error)
-                    if let workout = workout {
-                        self.saveToRouteBuilder(workout: workout )
-                    }
                 }
             }
         }
@@ -150,6 +147,32 @@ class ActivityDataStore: NSObject {
         return samples
     }
 
+    private func distanceSamples(for activity: Activity) -> [HKSample] {
+        var distanceWalkingRunning: HKQuantityTypeIdentifier {
+            return activity.activityType.hkValue() == .cycling ? .distanceCycling : .distanceWalkingRunning
+        }
+          //1. Verify that the energy quantity type is still available to HealthKit.
+          guard let energyQuantityType = HKSampleType.quantityType(
+              forIdentifier: distanceWalkingRunning) else {
+                  fatalError("*** Energy Burned Type Not Available ***")
+          }
+
+          //2. Create a sample for each PrancerciseWorkoutInterval
+              let calorieQuantity = HKQuantity(
+                  unit: .meter(),
+                  doubleValue: activity.distance ?? 0)
+
+        let samples: [HKSample] = [HKCumulativeQuantitySample(
+                  type: energyQuantityType,
+                  quantity: calorieQuantity,
+                  start: activity.start,
+                  end: activity.end)]
+
+
+          return samples
+      }
+
+    //MARK: get workouts ftom health
     class func loadPrancerciseWorkouts(completion:
         @escaping ([HKWorkout]?, Error?) -> Void) {
         //1. Get all workouts with the "Other" activity type.
@@ -162,8 +185,9 @@ class ActivityDataStore: NSObject {
         let compound = NSCompoundPredicate(andPredicateWithSubpredicates:
             [workoutPredicate, sourcePredicate])
 
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate,
-                                              ascending: true)
+        let sortDescriptor = NSSortDescriptor(
+            key: HKSampleSortIdentifierEndDate,
+            ascending: true)
 
         let query = HKSampleQuery(
             sampleType: .workoutType(),
@@ -171,7 +195,7 @@ class ActivityDataStore: NSObject {
             limit: 0,
             sortDescriptors: [sortDescriptor]) { query, samples, error in
                 DispatchQueue.main.async {
-                    guard let samples = samples as? [HKWorkout],error == nil else {
+                    guard let samples = samples as? [HKWorkout], error == nil else {
                         completion(nil, error)
                         return
                     }
@@ -183,25 +207,23 @@ class ActivityDataStore: NSObject {
         HKHealthStore().execute(query)
     }
 
-    func addLocationTotheBuilder(location: [CLLocation]) {
+    func addLocationTotheBuilder(_ workout: HKWorkout, location: [CLLocation]) {
 
         self.routeBuilder?.insertRouteData(location, completion: { (success, error) in
             guard error == nil else {
-                print("ERROR: Error in inserting locations to route builder: \(error!.localizedDescription)")
-
+                print(error?.localizedDescription ?? "Error insertRouteData")
                 return
             }
-            print("DEBUG: successfully inserted the route data \(success)")
 
+            self.saveToRouteBuilder(workout: workout)
         })
     }
 
     func saveToRouteBuilder(workout: HKWorkout) {
         self.routeBuilder?.finishRoute(with: workout, metadata: nil, completion: { (route, error) in
-            if route == nil{
-                print("ERROR: finishing route failed with error: \(String(describing: error?.localizedDescription))")
+            if route == nil {
+                print(error?.localizedDescription ?? "route == nil")
             }
-            print("DEBUG: route successfully finished: \(String(describing: route))")
         })
     }
 }

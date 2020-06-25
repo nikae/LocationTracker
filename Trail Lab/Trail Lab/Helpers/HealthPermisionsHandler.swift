@@ -21,35 +21,38 @@ class HealthPermisionsHandler {
             return
         }
 
-        guard let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
-            let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType),
-            let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
-            let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
-            let height = HKObjectType.quantityType(forIdentifier: .height),
+        //TODO: Add charaqteristics when needed
+        guard let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount),
+            let distanceWalkingRunning = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning),
+            let distanceCycling = HKObjectType.quantityType(forIdentifier: .distanceCycling),
             let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else {
-
                 completion(false, HealthkitSetupError.dataTypeNotAvailable)
                 return
         }
+
         let workoutRoute = HKSeriesType.workoutRoute()
         let workoutType =  HKObjectType.workoutType()
 
-        let healthKitTypesToWrite: Set<HKSampleType> = [bodyMassIndex,
-                                                        activeEnergy,
-                                                         workoutType,
-                                                         workoutRoute]
+        let healthKitTypesToWrite: Set<HKSampleType> = [
+            activeEnergy,
+            distanceCycling,
+            distanceWalkingRunning,
+            stepCount,
+            workoutType,
+            workoutRoute]
 
-        let healthKitTypesToRead: Set<HKObjectType> = [dateOfBirth,
-                                                       bloodType,
-                                                       biologicalSex,
-                                                       bodyMassIndex,
-                                                       height,
-                                                       workoutType,
-                                                       workoutRoute]
+        let healthKitTypesToRead: Set<HKObjectType> = [
+            activeEnergy,
+            distanceCycling,
+            distanceWalkingRunning,
+            stepCount,
+            workoutType,
+            workoutRoute]
 
-        HKHealthStore().requestAuthorization(toShare: healthKitTypesToWrite,
-                                             read: healthKitTypesToRead) { (success, error) in
-                                                completion(success, error)
+        HKHealthStore().requestAuthorization(
+            toShare: healthKitTypesToWrite,
+            read: healthKitTypesToRead) { (success, error) in
+                completion(success, error)
         }
     }
 }

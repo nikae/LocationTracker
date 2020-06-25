@@ -88,12 +88,7 @@ class PedometerManager: NSObject {
           }
       }
 
-
      func startMonitoring(_ startDate: Date) {
-        if CMMotionActivityManager.isActivityAvailable() {
-            startTrackingActivityType()
-        }
-
         if CMPedometer.isStepCountingAvailable() {
             startCountingSteps(startDate)
         }
