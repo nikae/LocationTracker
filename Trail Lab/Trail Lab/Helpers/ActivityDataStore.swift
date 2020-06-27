@@ -20,13 +20,25 @@ struct Activity {
     var locations: [CLLocation] = []
 
     var numberOfSteps: Int?
-    var distance: Double?
-    var pace: Double?
-    var speed: Double?
-    var averagePace: Double?
+    var distance: Meter?
+    var pace: SecondsPerMeter?
+    var speedCurrent: MetersPerSecond?
+    var averagePace: SecondsPerMeter?
     var floorsAscended: Int?
     var floorsDscended: Int?
     var cadence: Double?
+    var elevationGain: Meter?
+    var reletiveAltitude: Meter?
+    var altitude: Meter?
+    var maxAltitude: Meter?
+
+    var speed: MetersPerSecond? {
+        if let distance = distance, duration > 0 {
+            return distance / duration
+        } else {
+            return nil
+        }
+    }
 
     init(start: Date,
          activityType: ActivityType,
@@ -96,9 +108,9 @@ class ActivityDataStore: NSObject {
                                          end: activity.end,
                                          duration: activity.duration,
                                          totalEnergyBurned: totalEnergyBurned,
-                                                totalDistance: totalDistance,
-                                                device: .local(),
-                                                metadata: metadata)
+                                         totalDistance: totalDistance,
+                                         device: .local(),
+                                         metadata: metadata)
 
 
         var mySamples: [HKSample] = []
@@ -151,26 +163,26 @@ class ActivityDataStore: NSObject {
         var distanceWalkingRunning: HKQuantityTypeIdentifier {
             return activity.activityType.hkValue() == .cycling ? .distanceCycling : .distanceWalkingRunning
         }
-          //1. Verify that the energy quantity type is still available to HealthKit.
-          guard let energyQuantityType = HKSampleType.quantityType(
-              forIdentifier: distanceWalkingRunning) else {
-                  fatalError("*** Energy Burned Type Not Available ***")
-          }
+        //1. Verify that the energy quantity type is still available to HealthKit.
+        guard let energyQuantityType = HKSampleType.quantityType(
+            forIdentifier: distanceWalkingRunning) else {
+                fatalError("*** Energy Burned Type Not Available ***")
+        }
 
-          //2. Create a sample for each PrancerciseWorkoutInterval
-              let calorieQuantity = HKQuantity(
-                  unit: .meter(),
-                  doubleValue: activity.distance ?? 0)
+        //2. Create a sample for each PrancerciseWorkoutInterval
+        let calorieQuantity = HKQuantity(
+            unit: .meter(),
+            doubleValue: activity.distance ?? 0)
 
         let samples: [HKSample] = [HKCumulativeQuantitySample(
-                  type: energyQuantityType,
-                  quantity: calorieQuantity,
-                  start: activity.start,
-                  end: activity.end)]
+            type: energyQuantityType,
+            quantity: calorieQuantity,
+            start: activity.start,
+            end: activity.end)]
 
 
-          return samples
-      }
+        return samples
+    }
 
     //MARK: get workouts ftom health
     class func loadPrancerciseWorkouts(completion:

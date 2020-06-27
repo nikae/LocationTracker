@@ -26,11 +26,12 @@ struct WorkoutVIew: View {
                 .opacity(0.9))
             }
 
-            ActivityStatsView()
-                .padding(.horizontal)
-                .aspectRatio(2, contentMode: .fit)
-                .offset(y: activityHandler.activityState == .inactive ? -300 : 60)
-
+            if activityHandler.activityState == .active {
+                ActivityStatsView()
+                    .padding(.horizontal)
+                    .aspectRatio(2, contentMode: .fit)
+                    .offset(y: activityHandler.statsViewOffset)
+            }
         }
     }
 }

@@ -29,14 +29,27 @@ struct ContentView: View {
         self.dragBottomSheetHandler.positionAbove = a - 210
     }
 
+    //FIXME: This needs to be moved into settings
+    @State private var showGreeting = UnitPreferance(rawValue: Preferences.unit) == .metric
+
     var body: some View {
         ZStack {
             GeometryReader { proxy in
                 TabView(selection: self.$selectedTab) {
-                    self.AppBackground()
-                        .tabItem {
-                            Image(systemName: "1.circle")
-                            Text("First")
+                    ZStack {
+                        self.AppBackground()
+                        //FIXME: This needs to be moved into settings
+                        Toggle(isOn: self.$showGreeting) {
+                            Text("Metric \(self.showGreeting ? "On" : "Off"): (Move into settings)")
+                        }.padding()
+                            .onReceive([self.showGreeting].publisher.first()) { (value) in
+                                Preferences.unit = value ? UnitPreferance.metric.rawValue : UnitPreferance.imperial.rawValue
+                        }
+
+                    }
+                    .tabItem {
+                        Image(systemName: "1.circle")
+                        Text("First")
                     }.tag(0)
 
                     WorkoutVIew()
@@ -45,7 +58,7 @@ struct ContentView: View {
                     }
                     .tabItem {
                         Text(self.selectedTab != 1 ?"Workout" :
-                                self.activityHandler.activityButtonTitle)
+                            self.activityHandler.activityButtonTitle)
                     }.tag(1)
                     self.AppBackground()
                         .tabItem {

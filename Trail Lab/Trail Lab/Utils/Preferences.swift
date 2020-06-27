@@ -27,4 +27,22 @@ public struct UserDefault<T> {
 struct Preferences {
     @UserDefault("ACTIVITY_TYPE", defaultValue: ActivityType.walking.rawValue)
     static var activityType: Int
+    @UserDefault("PREFERED_UNIT", defaultValue: getLocal().rawValue)
+    static var unit: Int
 }
+
+enum UnitPreferance: Int {
+    case metric = 0
+    case imperial = 1
+}
+
+/// Gets device local.
+      /// This method is used to determin users default unit preferance before user explisitly sets it into the app setting
+      /// - Returns: UnitPreferance based on device local
+   func getLocal() -> UnitPreferance {
+       //User region setting return
+       let locale = Locale.current //NSLocale.current
+       //Returns true if the locale uses the metric system (Note: Only three countries do not use the metric system: the US, Liberia and Myanmar.)
+       let isMetric = locale.usesMetricSystem
+       return isMetric ? .metric : .imperial
+   }

@@ -20,6 +20,9 @@
 		2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139B24909CE00072389D /* WorkoutVIew.swift */; };
 		241813A12492B1990072389D /* SlideCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241813A02492B1990072389D /* SlideCard.swift */; };
 		24301F2124A2E22D0029137C /* PedometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2024A2E22D0029137C /* PedometerManager.swift */; };
+		24301F2324A512070029137C /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2224A512070029137C /* ViewModifiers.swift */; };
+		24301F2524A516880029137C /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2424A516880029137C /* ImageExtensions.swift */; };
+		24301F2724A573570029137C /* FormattingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2624A573570029137C /* FormattingExtensions.swift */; };
 		245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139E2492A5300072389D /* DragBottomSheetHandler.swift */; };
 		245BDEDC249316E7000A954A /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BDEDB249316E7000A954A /* StartButton.swift */; };
 		245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A42495E154009BF67A /* ActivityHandler.swift */; };
@@ -74,6 +77,9 @@
 		2418139E2492A5300072389D /* DragBottomSheetHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragBottomSheetHandler.swift; sourceTree = "<group>"; };
 		241813A02492B1990072389D /* SlideCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCard.swift; sourceTree = "<group>"; };
 		24301F2024A2E22D0029137C /* PedometerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedometerManager.swift; sourceTree = "<group>"; };
+		24301F2224A512070029137C /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		24301F2424A516880029137C /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		24301F2624A573570029137C /* FormattingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingExtensions.swift; sourceTree = "<group>"; };
 		245BDEDB249316E7000A954A /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		245F78A42495E154009BF67A /* ActivityHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHandler.swift; sourceTree = "<group>"; };
 		245F78A62495E9EF009BF67A /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -189,6 +195,9 @@
 				2418139824909AEB0072389D /* Color.swift */,
 				245F78A62495E9EF009BF67A /* Preferences.swift */,
 				245F78AF2499981A009BF67A /* ViewExtensions.swift */,
+				24301F2424A516880029137C /* ImageExtensions.swift */,
+				24301F2224A512070029137C /* ViewModifiers.swift */,
+				24301F2624A573570029137C /* FormattingExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -376,14 +385,17 @@
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
+				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
 				245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */,
 				245F78BF249D2720009BF67A /* LocationManager.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
 				245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */,
+				24301F2724A573570029137C /* FormattingExtensions.swift in Sources */,
 				24301F2124A2E22D0029137C /* PedometerManager.swift in Sources */,
 				245BDEDC249316E7000A954A /* StartButton.swift in Sources */,
+				24301F2524A516880029137C /* ImageExtensions.swift in Sources */,
 				2418139924909AEB0072389D /* Color.swift in Sources */,
 				24181367249073340072389D /* SceneDelegate.swift in Sources */,
 				245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */,

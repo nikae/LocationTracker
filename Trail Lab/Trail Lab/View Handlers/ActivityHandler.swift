@@ -11,6 +11,7 @@ import HealthKit
 import SwiftUI
 import CoreLocation
 
+
 enum ActivityType: Int {
     case walking = 1
     case running = 2
@@ -76,13 +77,13 @@ enum ActivityState {
     case paused
 }
 
-
 class ActivityHandler: ObservableObject {
     @Published var selectedActivityType: ActivityType = ActivityType(rawValue:Preferences.activityType) ?? .walking
     @Published var activityButtonTitle: String = "Start"
     @Published var activityState: ActivityState = .inactive
     @Published var activity: Activity?
     @Published var tempLocation: String = ""
+    @Published var statsViewOffset: CGFloat = -300
     let locationManager = LocationManager.shared
     let pedometerManager = PedometerManager()
 
@@ -91,6 +92,15 @@ class ActivityHandler: ObservableObject {
     private var activityTimer: Timer?
 
     weak var mapViewDelegate: MapViewDelegate?
+
+    func animateStatsView(_ offset: CGFloat) {
+        withAnimation(.interpolatingSpring(mass: 1.2,
+        stiffness: 100,
+        damping: 25,
+        initialVelocity: 10)) {
+            statsViewOffset = offset
+        }
+    }
 
     func startActivity() {
         let startDate = Date()
@@ -106,6 +116,7 @@ class ActivityHandler: ObservableObject {
         }
         startTimer()
         beginPedometerDataCollection(startDate)
+        animateStatsView(60)
     }
 
     func stopActivity() {
@@ -116,6 +127,7 @@ class ActivityHandler: ObservableObject {
         guard let activity = activity else {
             return
         }
+        if activity.duration > 60 {
         ActivityDataStore().save(activity: activity) { sucsess, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -123,14 +135,36 @@ class ActivityHandler: ObservableObject {
 
             print(sucsess)
         }
+        }
         locationManager.stopLocationUpdates { error in
             print(error)
         }
         pedometerManager.stopMonitoring()
+        animateStatsView(-300)
     }
 
      private func locationListener(location: CLLocation) {
+        let lastDistance = self.activity?.locations.last
         self.activity?.locations.append(location)
+        self.activity?.altitude = location.altitude
+        if (self.activity?.maxAltitude ?? 0) < location.altitude {
+            self.activity?.maxAltitude = location.altitude 
+        }
+
+        if activity?.activityType.hkValue() == .cycling {
+            if let lastDistance = lastDistance {
+                if self.activity?.distance == nil {
+                    self.activity?.distance = location.distance(from: lastDistance)
+                } else {
+                    self.activity?.distance! += location.distance(from: lastDistance)
+                }
+            }
+
+            if location.speedAccuracy != -1 {
+                self.activity?.speedCurrent = location.speed
+            }
+        }
+
         tempLocation = "\(location)"
         if let locations = self.activity?.locations {
         mapViewDelegate?.updatePolyline(with:  locations)
@@ -188,17 +222,25 @@ class ActivityHandler: ObservableObject {
 
     private func beginPedometerDataCollection(_ startDate: Date) {
         pedometerManager.resetPedometer()
-        pedometerManager.stepsCountingHandler = { steps , distance, averagePace, pace, floorsAscended, floorsDscended, cadence in
+        pedometerManager.pedometerListener = { steps , distance, averagePace, pace, floorsAscended, floorsDscended, cadence in
             DispatchQueue.main.async {
-                self.activity?.numberOfSteps = steps
+                if self.activity?.activityType.hkValue() != .cycling {
+                    self.activity?.numberOfSteps = steps
                 self.activity?.distance = distance
                 self.activity?.averagePace = averagePace
                 self.activity?.pace = pace
+                }
                 self.activity?.floorsAscended = floorsAscended
                 self.activity?.floorsDscended = floorsDscended
                 self.activity?.cadence = cadence
             }
         }
+
+        pedometerManager.altimeterListener = { elevationGain, reletiveAltitude in
+            self.activity?.elevationGain = elevationGain
+            self.activity?.reletiveAltitude = reletiveAltitude
+        }
+
         pedometerManager.startMonitoring(startDate)
     }
 }

@@ -73,3 +73,38 @@ struct ProgressBar: View {
             .rotationEffect(Angle(degrees: 270.0))
     }
 }
+
+
+//MARK: StatsView
+extension View {
+    func StatsView(value: String,
+                   title: String,
+                   tintColor: Color) -> some View {
+        return VStack(spacing: 2) {
+            Text(value)
+                .font(.body)
+                .fontWeight(.bold)
+                Text(title)
+                    .font(.caption)
+                    .foregroundColor(tintColor)
+        }
+    }
+}
+
+
+//MARK: Extension Previews
+struct Extension_Previews: View {
+var body: some View {
+    self.StatsView(value: "5h:45m:1sec",
+                   title: "Duration",
+                   tintColor: .blue)
+            .frame(height: 40)
+    }
+}
+
+struct Extension_Previews_Previews: PreviewProvider {
+    static var previews: some View {
+       Extension_Previews()
+    }
+}
+
