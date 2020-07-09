@@ -37,6 +37,8 @@
 		245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BA249BDA25009BF67A /* UserDataStore.swift */; };
 		245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */; };
 		245F78BF249D2720009BF67A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BE249D2720009BF67A /* LocationManager.swift */; };
+		247BA1D524A6E1D2007747BC /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* HistoryView.swift */; };
+		247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		245F78BA249BDA25009BF67A /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataStore.swift; sourceTree = "<group>"; };
 		245F78BE249D2720009BF67A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		247BA1D424A6E1D2007747BC /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				2418139B24909CE00072389D /* WorkoutVIew.swift */,
+				247BA1D424A6E1D2007747BC /* HistoryView.swift */,
 				241813A02492B1990072389D /* SlideCard.swift */,
 				245BDEDB249316E7000A954A /* StartButton.swift */,
 				245F78A824986E09009BF67A /* BottomCard.swift */,
@@ -221,6 +226,7 @@
 				2418139E2492A5300072389D /* DragBottomSheetHandler.swift */,
 				245F78A42495E154009BF67A /* ActivityHandler.swift */,
 				245F78AA24987113009BF67A /* MapViewHandler.swift */,
+				247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */,
 			);
 			path = "View Handlers";
 			sourceTree = "<group>";
@@ -383,6 +389,8 @@
 				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
 				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
+				247BA1D524A6E1D2007747BC /* HistoryView.swift in Sources */,
+				247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,

@@ -60,7 +60,8 @@ struct ContentView: View {
                         Text(self.selectedTab != 1 ?"Workout" :
                             self.activityHandler.activityButtonTitle)
                     }.tag(1)
-                    self.AppBackground()
+                    HistoryView()
+                    .environmentObject(HistoryViewHandler())
                         .tabItem {
                             Image(systemName: "3.circle")
                             Text("Profile")

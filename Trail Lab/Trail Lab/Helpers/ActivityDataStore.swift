@@ -9,8 +9,10 @@
 import Foundation
 import HealthKit
 import CoreLocation
+import UserNotifications
 
 struct Activity {
+    let id = UUID()
     let activityType: ActivityType
     var start: Date
     var end: Date {
@@ -188,14 +190,17 @@ class ActivityDataStore: NSObject {
     class func loadPrancerciseWorkouts(completion:
         @escaping ([HKWorkout]?, Error?) -> Void) {
         //1. Get all workouts with the "Other" activity type.
-        let workoutPredicate = HKQuery.predicateForWorkouts(with: .other)
+//        let workoutPredicateWalking = HKQuery.predicateForWorkouts(with: .walking)
+//        let workoutPredicateRunning = HKQuery.predicateForWorkouts(with: .running)
+//        let workoutPredicateHiking = HKQuery.predicateForWorkouts(with: .hiking)
+        //let workoutPredicateCycling = HKQuery.predicateForWorkouts(with: .hiking)
 
         //2. Get all workouts that only came from this app.
         let sourcePredicate = HKQuery.predicateForObjects(from: .default())
 
         //3. Combine the predicates into a single predicate.
         let compound = NSCompoundPredicate(andPredicateWithSubpredicates:
-            [workoutPredicate, sourcePredicate])
+            [sourcePredicate])
 
         let sortDescriptor = NSSortDescriptor(
             key: HKSampleSortIdentifierEndDate,
