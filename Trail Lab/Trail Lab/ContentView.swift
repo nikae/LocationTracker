@@ -12,7 +12,8 @@ struct ContentView: View {
 
     @EnvironmentObject var dragBottomSheetHandler: DragBottomSheetHandler
     @EnvironmentObject var activityHandler: ActivityHandler
-    @EnvironmentObject var mapViewHandler: MapViewHandler 
+    @EnvironmentObject var mapViewHandler: MapViewHandler
+    @EnvironmentObject var historyViewHandler: HistoryViewHandler
     @State private var selectedTab = 1
     @State var playerFrame = CGRect.zero
 
@@ -37,19 +38,20 @@ struct ContentView: View {
             GeometryReader { proxy in
                 TabView(selection: self.$selectedTab) {
                     ZStack {
-                        self.AppBackground()
-                        //FIXME: This needs to be moved into settings
-                        Toggle(isOn: self.$showGreeting) {
-                            Text("Metric \(self.showGreeting ? "On" : "Off"): (Move into settings)")
-                        }.padding()
-                            .onReceive([self.showGreeting].publisher.first()) { (value) in
-                                Preferences.unit = value ? UnitPreferance.metric.rawValue : UnitPreferance.imperial.rawValue
-                        }
+                        HistoryView()
+//                        self.AppBackground()
+//                        //FIXME: This needs to be moved into settings
+//                        Toggle(isOn: self.$showGreeting) {
+//                            Text("Metric \(self.showGreeting ? "On" : "Off"): (Move into settings)")
+//                        }.padding()
+//                            .onReceive([self.showGreeting].publisher.first()) { (value) in
+//                                Preferences.unit = value ? UnitPreferance.metric.rawValue : UnitPreferance.imperial.rawValue
+//                        }
 
                     }
                     .tabItem {
-                        Image(systemName: "1.circle")
-                        Text("First")
+                        Image(systemName: "rectangle.grid.1x2.fill")
+                        Text("Activity")
                     }.tag(0)
 
                     WorkoutVIew()
@@ -57,16 +59,16 @@ struct ContentView: View {
                             self.activityHandler.mapViewDelegate = self.mapViewHandler
                     }
                     .tabItem {
-                        Text(self.selectedTab != 1 ?"Workout" :
+                        Text(self.selectedTab != 1 ? "Workout" :
                             self.activityHandler.activityButtonTitle)
                     }.tag(1)
-                    HistoryView()
-                    .environmentObject(HistoryViewHandler())
+                    TrendsView()
                         .tabItem {
-                            Image(systemName: "3.circle")
-                            Text("Profile")
+                            Image(systemName: "chart.bar.fill")
+                            Text("Trends")
                     }.tag(2)
                 }
+                .accentColor(self.activityHandler.selectedActivityType.color())
                 .preference(
                     key: ScreenPreferance.self,
                     value: [Screen(

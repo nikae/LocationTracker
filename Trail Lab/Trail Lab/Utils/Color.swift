@@ -39,7 +39,7 @@ extension UIColor {
             light: .white,
             dark: UIColor(netHex: 0x050505))
         static let secondary =  dynamicColor(
-            light: .white,
+            light: .secondarySystemBackground,
             dark: UIColor(netHex: 0x454547))
         static let accentColor =  dynamicColor(
                    light: UIColor(netHex: 0x454547),

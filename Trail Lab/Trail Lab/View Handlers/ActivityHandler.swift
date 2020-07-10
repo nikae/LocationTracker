@@ -80,6 +80,7 @@ enum ActivityState {
 class ActivityHandler: ObservableObject {
     @Published var selectedActivityType: ActivityType = ActivityType(rawValue:Preferences.activityType) ?? .walking
     @Published var activityButtonTitle: String = "Start"
+    @Published var activityButtonColor: Color = Color(.secondaryLabel)
     @Published var activityState: ActivityState = .inactive
     @Published var activity: Activity?
     @Published var tempLocation: String = ""

@@ -58,6 +58,20 @@ extension View {
                 .lineLimit(1)
                 .foregroundColor(Color(.label))
     }
+
+    func directionalButton(_ direction: graphDirection)  -> some View  {
+        let name: String
+
+        switch direction {
+        case .previous:
+            name = "chevron.left.circle.fill"
+        case .next:
+            name = "chevron.right.circle.fill"
+        }
+        return Image(systemName: name)
+
+    }
+    
 }
 
 struct ProgressBar: View {

@@ -15,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let dragBottomSheetHandler = DragBottomSheetHandler()
     let activityHandler = ActivityHandler()
     var mapViewHandler = MapViewHandler()
+    var historyViewHandler = HistoryViewHandler()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -31,6 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(dragBottomSheetHandler)
             .environmentObject(activityHandler)
             .environmentObject(mapViewHandler)
+            .environmentObject(historyViewHandler)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

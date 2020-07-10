@@ -31,7 +31,7 @@ struct StartButton: View {
     var body: some View {
         VStack {
             ZStack {
-                workoutButton(background: activityHandler.selectedActivityType.color(),
+                workoutButton(background: self.selectedTab != 1 ? Color(.systemGray) : activityHandler.selectedActivityType.color(),
                           imageName: activityHandler.activityState == .inactive ? activityHandler.selectedActivityType.imageName() : activityHandler.activityState == .active  ? "stop.fill" : "play.fill",
                           isSystemIcon: activityHandler.activityState != .inactive )
 

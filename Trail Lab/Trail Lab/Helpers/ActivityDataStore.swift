@@ -44,10 +44,12 @@ struct Activity {
 
     init(start: Date,
          activityType: ActivityType,
-         intervals: [ActivityInterval]) {
+         intervals: [ActivityInterval],
+         distance: Meter? = nil) {
         self.start = start
         self.activityType = activityType
         self.intervals = intervals
+        self.distance = distance
     }
 
     var totalEnergyBurned: Double {
@@ -105,14 +107,15 @@ class ActivityDataStore: NSObject {
 
         metadata["Steps Count"] = steps
 
-        let healthkitWorkout = HKWorkout(activityType: activity.activityType.hkValue(),
-                                         start: activity.start,
-                                         end: activity.end,
-                                         duration: activity.duration,
-                                         totalEnergyBurned: totalEnergyBurned,
-                                         totalDistance: totalDistance,
-                                         device: .local(),
-                                         metadata: metadata)
+        let healthkitWorkout = HKWorkout(
+            activityType: activity.activityType.hkValue(),
+            start: activity.start,
+            end: activity.end,
+            duration: activity.duration,
+            totalEnergyBurned: totalEnergyBurned,
+            totalDistance: totalDistance,
+            device: .local(),
+            metadata: metadata)
 
 
         var mySamples: [HKSample] = []
@@ -190,9 +193,9 @@ class ActivityDataStore: NSObject {
     class func loadPrancerciseWorkouts(completion:
         @escaping ([HKWorkout]?, Error?) -> Void) {
         //1. Get all workouts with the "Other" activity type.
-//        let workoutPredicateWalking = HKQuery.predicateForWorkouts(with: .walking)
-//        let workoutPredicateRunning = HKQuery.predicateForWorkouts(with: .running)
-//        let workoutPredicateHiking = HKQuery.predicateForWorkouts(with: .hiking)
+        //        let workoutPredicateWalking = HKQuery.predicateForWorkouts(with: .walking)
+        //        let workoutPredicateRunning = HKQuery.predicateForWorkouts(with: .running)
+        //        let workoutPredicateHiking = HKQuery.predicateForWorkouts(with: .hiking)
         //let workoutPredicateCycling = HKQuery.predicateForWorkouts(with: .hiking)
 
         //2. Get all workouts that only came from this app.

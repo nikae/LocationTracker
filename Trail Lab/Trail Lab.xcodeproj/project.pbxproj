@@ -23,8 +23,12 @@
 		24301F2324A512070029137C /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2224A512070029137C /* ViewModifiers.swift */; };
 		24301F2524A516880029137C /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2424A516880029137C /* ImageExtensions.swift */; };
 		24301F2724A573570029137C /* FormattingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2624A573570029137C /* FormattingExtensions.swift */; };
+		244461ED24B83A9200062194 /* GraphTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244461EC24B83A9200062194 /* GraphTile.swift */; };
 		245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139E2492A5300072389D /* DragBottomSheetHandler.swift */; };
 		245BDEDC249316E7000A954A /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BDEDB249316E7000A954A /* StartButton.swift */; };
+		245DF9C624B6A345001345C5 /* TrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C524B6A345001345C5 /* TrendsView.swift */; };
+		245DF9C824B6A65C001345C5 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C724B6A65C001345C5 /* BarView.swift */; };
+		245DF9CA24B6A809001345C5 /* GraphBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C924B6A809001345C5 /* GraphBars.swift */; };
 		245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A42495E154009BF67A /* ActivityHandler.swift */; };
 		245F78A72495E9EF009BF67A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A62495E9EF009BF67A /* Preferences.swift */; };
 		245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AA24987113009BF67A /* MapViewHandler.swift */; };
@@ -82,7 +86,11 @@
 		24301F2224A512070029137C /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		24301F2424A516880029137C /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		24301F2624A573570029137C /* FormattingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingExtensions.swift; sourceTree = "<group>"; };
+		244461EC24B83A9200062194 /* GraphTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTile.swift; sourceTree = "<group>"; };
 		245BDEDB249316E7000A954A /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
+		245DF9C524B6A345001345C5 /* TrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsView.swift; sourceTree = "<group>"; };
+		245DF9C724B6A65C001345C5 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		245DF9C924B6A809001345C5 /* GraphBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBars.swift; sourceTree = "<group>"; };
 		245F78A42495E154009BF67A /* ActivityHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityHandler.swift; sourceTree = "<group>"; };
 		245F78A62495E9EF009BF67A /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		245F78A824986E09009BF67A /* BottomCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCard.swift; sourceTree = "<group>"; };
@@ -155,6 +163,7 @@
 				24181366249073340072389D /* SceneDelegate.swift */,
 				2418136B249073340072389D /* ContentView.swift */,
 				2418139A24909C960072389D /* MainView */,
+				245DF9C424B6A326001345C5 /* Trends */,
 				2418139D2492A5150072389D /* View Handlers */,
 				245F78B3249BD3C5009BF67A /* Helpers */,
 				2418139724909ACF0072389D /* Utils */,
@@ -229,6 +238,17 @@
 				247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */,
 			);
 			path = "View Handlers";
+			sourceTree = "<group>";
+		};
+		245DF9C424B6A326001345C5 /* Trends */ = {
+			isa = PBXGroup;
+			children = (
+				245DF9C524B6A345001345C5 /* TrendsView.swift */,
+				245DF9C724B6A65C001345C5 /* BarView.swift */,
+				245DF9C924B6A809001345C5 /* GraphBars.swift */,
+				244461EC24B83A9200062194 /* GraphTile.swift */,
+			);
+			path = Trends;
 			sourceTree = "<group>";
 		};
 		245F78B3249BD3C5009BF67A /* Helpers */ = {
@@ -382,10 +402,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245DF9C824B6A65C001345C5 /* BarView.swift in Sources */,
 				24181365249073340072389D /* AppDelegate.swift in Sources */,
 				245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */,
 				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
 				245F78B5249BD402009BF67A /* HealthPermisionsHandler.swift in Sources */,
+				245DF9CA24B6A809001345C5 /* GraphBars.swift in Sources */,
 				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
 				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
@@ -398,7 +420,9 @@
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
 				245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */,
 				245F78BF249D2720009BF67A /* LocationManager.swift in Sources */,
+				245DF9C624B6A345001345C5 /* TrendsView.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
+				244461ED24B83A9200062194 /* GraphTile.swift in Sources */,
 				245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */,
 				24301F2724A573570029137C /* FormattingExtensions.swift in Sources */,
 				24301F2124A2E22D0029137C /* PedometerManager.swift in Sources */,

@@ -12,21 +12,19 @@ struct HistoryView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
     var body: some View {
         ZStack {
-         self.AppBackground()
+            self.AppBackground()
             List {
                 ForEach(historyViewHandler.activityList, id: \.id) { act in
                     VStack {
-                    Text("\(act.start) \(act.activityType.name())")
-                       // Text("\(act.start) \(act.activityType.name())")
+                        Text("\(act.start) \(act.activityType.name())")
+                        // Text("\(act.start) \(act.activityType.name())")
                     }
                 }
             }
-
-
-    }
+        }
         .onAppear {
-                      self.historyViewHandler.getActivityList()
-              }
+            self.historyViewHandler.getActivityList()
+        }
     }
 }
 
