@@ -10,6 +10,8 @@ import SwiftUI
 
 struct HistoryView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
+
+    @State var open: Bool = false
     var body: some View {
         ZStack {
             self.AppBackground()
@@ -17,13 +19,19 @@ struct HistoryView: View {
                 ForEach(historyViewHandler.activityList, id: \.id) { act in
                     VStack {
                         Text("\(act.start) \(act.activityType.name())")
-                        // Text("\(act.start) \(act.activityType.name())")
+                            .onTapGesture {
+                                self.historyViewHandler.selectedActivity = act
+                                  self.open.toggle()
+                        }
                     }
                 }
             }
         }
-        .onAppear {
-            self.historyViewHandler.getActivityList()
+        .sheet(isPresented: $open, content: {
+            SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: false)
+        })
+            .onAppear {
+                self.historyViewHandler.getActivityList()
         }
     }
 }
@@ -31,5 +39,17 @@ struct HistoryView: View {
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView()
+    }
+}
+
+struct DismissIcon: View {
+    @Environment(\.presentationMode) var presentationMode
+    var body: some View {
+        Image(systemName: "chevron.compact.down")
+            .padding(.top)
+            .font(.system(size: 30, weight: .light, design: .default))
+            .onTapGesture {
+                self.presentationMode.wrappedValue.dismiss()
+        }
     }
 }

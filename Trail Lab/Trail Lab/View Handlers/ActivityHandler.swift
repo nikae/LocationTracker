@@ -11,6 +11,23 @@ import HealthKit
 import SwiftUI
 import CoreLocation
 
+extension HKWorkoutActivityType {
+    func localValue() -> ActivityType {
+        switch self {
+        case .walking:
+            return .walking
+        case .running:
+            return .running
+        case .hiking:
+            return .hiking
+        case .cycling:
+            return .biking
+        default:
+            return .walking
+        }
+    }
+}
+
 
 enum ActivityType: Int {
     case walking = 1
@@ -69,6 +86,19 @@ enum ActivityType: Int {
             return Color(UIColor.SportColors.bike)
         }
     }
+
+    func uiColor() -> UIColor {
+           switch self {
+           case .walking:
+               return UIColor.SportColors.walk
+           case .running:
+               return UIColor.SportColors.run
+           case .hiking:
+               return UIColor.SportColors.hike
+           case .biking:
+               return UIColor.SportColors.bike
+           }
+       }
 }
 
 enum ActivityState {

@@ -15,6 +15,7 @@ struct Activity {
     let id = UUID()
     let activityType: ActivityType
     var start: Date
+    var hkValue: HKWorkout?
     var end: Date {
         return intervals.last?.end ?? Date()
     }
@@ -44,9 +45,11 @@ struct Activity {
 
     init(start: Date,
          activityType: ActivityType,
+         hkValue: HKWorkout? = nil,
          intervals: [ActivityInterval],
          distance: Meter? = nil) {
         self.start = start
+        self.hkValue = hkValue
         self.activityType = activityType
         self.intervals = intervals
         self.distance = distance
@@ -226,6 +229,74 @@ class ActivityDataStore: NSObject {
 
         HKHealthStore().execute(query)
     }
+
+    func getLocations(_ workout: HKWorkout, completion: @escaping (_ path: [CLLocation]?) -> Void) {
+
+        var  path: [CLLocation] = []
+
+        let runningObjectQuery = HKQuery.predicateForObjects(from: workout)
+
+        let routeQuery = HKAnchoredObjectQuery(type: HKSeriesType.workoutRoute(), predicate: runningObjectQuery, anchor: nil, limit: HKObjectQueryNoLimit) { (query, samples, deletedObjects, anchor, error) in
+
+            guard error == nil else {
+                // Handle any errors here.
+                fatalError("The initial query failed.")
+            }
+
+           guard samples!.count > 0 else { fatalError("No samples") }
+
+            guard let route = samples?.first as? HKWorkoutRoute else {
+                fatalError("No samples")
+            }
+
+            // Create the route query.
+                   let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNill, done, errorOrNil) in
+
+                       // This block may be called multiple times.
+
+                       if let error = errorOrNil {
+                           // Handle any errors here.
+                           return
+                       }
+
+                       guard let locations = locationsOrNill else {
+                           fatalError("*** Invalid State: This can only fail if there was an error. ***")
+                       }
+
+
+                       // Do something with this batch of location data.
+                    print("DDDDDD: \(locations.count)")
+                    path.append(contentsOf: locations)
+                       if done {
+                        print("DDDDDD: 2\(locations.count)")
+                        completion(path)
+                           // The query returned all the location data associated with the route.
+                           // Do something with the complete data set.
+                       }
+
+                       // You can stop the query by calling:
+                       // store.stop(query)
+
+                   }
+            self.healthStore.execute(query)
+        }
+
+        routeQuery.updateHandler = { (query, samples, deleted, anchor, error) in
+
+            guard error == nil else {
+                // Handle any errors here.
+                fatalError("The update failed.")
+            }
+
+            // Process updates or additions here.
+        }
+
+        healthStore.execute(routeQuery)
+
+
+
+    }
+    
 
     func addLocationTotheBuilder(_ workout: HKWorkout, location: [CLLocation]) {
 

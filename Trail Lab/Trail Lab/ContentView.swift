@@ -62,7 +62,10 @@ struct ContentView: View {
                         Text(self.selectedTab != 1 ? "Workout" :
                             self.activityHandler.activityButtonTitle)
                     }.tag(1)
+                    NavigationView {
                     TrendsView()
+                        .navigationBarTitle("Trends", displayMode: .large)
+                    }
                         .tabItem {
                             Image(systemName: "chart.bar.fill")
                             Text("Trends")
@@ -81,7 +84,7 @@ struct ContentView: View {
             })
 
             StartButton(selectedTab: $selectedTab)
-                .shadow(color: Color( .sRGBLinear, white: 0, opacity: 0.2),
+                .shadow(color: selectedTab == 1 ? Color(.sRGBLinear, white: 0, opacity: 0.2) : .clear,
                         radius: 10.0)
         }
         .onAppear {

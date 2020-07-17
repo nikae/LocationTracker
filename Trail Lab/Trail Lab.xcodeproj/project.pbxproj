@@ -41,6 +41,10 @@
 		245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BA249BDA25009BF67A /* UserDataStore.swift */; };
 		245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */; };
 		245F78BF249D2720009BF67A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BE249D2720009BF67A /* LocationManager.swift */; };
+		2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2475683B24C0ED2E0016FADB /* GradientPolylineRenderer.swift */; };
+		2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */; };
+		247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99824BE934C0004AA49 /* ActivityMapView.swift */; };
+		247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */; };
 		247BA1D524A6E1D2007747BC /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* HistoryView.swift */; };
 		247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +108,10 @@
 		245F78BA249BDA25009BF67A /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataStore.swift; sourceTree = "<group>"; };
 		245F78BE249D2720009BF67A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		2475683B24C0ED2E0016FADB /* GradientPolylineRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPolylineRenderer.swift; sourceTree = "<group>"; };
+		2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityViewHandler.swift; sourceTree = "<group>"; };
+		247AB99824BE934C0004AA49 /* ActivityMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMapView.swift; sourceTree = "<group>"; };
+		247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityView.swift; sourceTree = "<group>"; };
 		247BA1D424A6E1D2007747BC /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +173,7 @@
 				2418139A24909C960072389D /* MainView */,
 				245DF9C424B6A326001345C5 /* Trends */,
 				2418139D2492A5150072389D /* View Handlers */,
+				247AB99724BE931B0004AA49 /* Single Activitie */,
 				245F78B3249BD3C5009BF67A /* Helpers */,
 				2418139724909ACF0072389D /* Utils */,
 				2418136D249073360072389D /* Assets.xcassets */,
@@ -259,6 +268,7 @@
 				245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */,
 				245F78BE249D2720009BF67A /* LocationManager.swift */,
 				24301F2024A2E22D0029137C /* PedometerManager.swift */,
+				2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -269,6 +279,16 @@
 				245F78B8249BD45F009BF67A /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		247AB99724BE931B0004AA49 /* Single Activitie */ = {
+			isa = PBXGroup;
+			children = (
+				247AB99824BE934C0004AA49 /* ActivityMapView.swift */,
+				247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */,
+				2475683B24C0ED2E0016FADB /* GradientPolylineRenderer.swift */,
+			);
+			path = "Single Activitie";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,13 +433,16 @@
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
 				247BA1D524A6E1D2007747BC /* HistoryView.swift in Sources */,
 				247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */,
+				247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
+				2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */,
 				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
 				245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */,
 				245F78BF249D2720009BF67A /* LocationManager.swift in Sources */,
+				2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */,
 				245DF9C624B6A345001345C5 /* TrendsView.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
 				244461ED24B83A9200062194 /* GraphTile.swift in Sources */,
@@ -430,6 +453,7 @@
 				24301F2524A516880029137C /* ImageExtensions.swift in Sources */,
 				2418139924909AEB0072389D /* Color.swift in Sources */,
 				24181367249073340072389D /* SceneDelegate.swift in Sources */,
+				247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */,
 				245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */,
 				245F78AC249932E9009BF67A /* BottomCard.swift in Sources */,
 			);

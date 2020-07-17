@@ -11,11 +11,13 @@ import SwiftUI
 struct BarView: View {
     let height: CGFloat
     let colors: [Color]
+    let day: String
     @State var h: CGFloat = 0
 
     var body: some View {
-        GeometryReader { proxy in
-            ZStack(alignment: .bottom){
+            VStack {
+                GeometryReader { proxy in
+                    ZStack(alignment: .bottom){
                 Capsule()
                     .foregroundColor(Color(UIColor.background.secondary))
                     .opacity(1)
@@ -29,11 +31,18 @@ struct BarView: View {
                     .onAppear {
                         self.h = self.height
                 }
-            }
+                }
+                }
+                VStack {
+                    Divider()
+                    Text(self.day)
+                        .font(.subheadline)
+                }
+                .frame(height: 30)
+
             .onDisappear {
                 self.h = 0
             }
-
         }
     }
 }
@@ -41,11 +50,11 @@ struct BarView: View {
 struct BarView_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            BarView(height: 1, colors: [.red, .red, .green, .blue])
+            BarView(height: 1, colors: [.red, .red, .green, .blue], day: "M")
                 .padding()
-            BarView(height: 1, colors: [.red, .green])
+            BarView(height: 1, colors: [.red, .green], day: "T")
                 .padding()
-            BarView(height: 1, colors: [.red, .red, .yellow])
+            BarView(height: 1, colors: [.red, .red, .yellow], day: "W")
                 .padding()
         }
         .padding()

@@ -27,6 +27,8 @@ enum graphDirection {
 
 class HistoryViewHandler: ObservableObject {
     @Published var activityList: [Activity] = []
+    @Published var selectedActivity: Activity =
+        Activity(start: Date(), activityType: .walking, hkValue: nil, intervals: [], distance: 0)
     @Published var activityListWeekly: [ActivitiesByWeek] = []
     var selectedDateForDraphs: Date = Date()
     @Published var barGraphModels: [BarGraphModel] = []
@@ -150,6 +152,7 @@ class HistoryViewHandler: ObservableObject {
                 list.append(Activity(
                     start: startDate,
                     activityType: localValue(workoutActivityType),
+                    hkValue: activity,
                     intervals: [],
                     distance: distance ?? 0))
             }
@@ -163,11 +166,11 @@ class HistoryViewHandler: ObservableObject {
             return
         }
         for i in arr {
-            self.barGraphModels.append(getProcent(arr: i.activitys ?? [Activity(start: Date(), activityType: .walking, intervals: [], distance: 0.1)]))
+            self.barGraphModels.append(getProcent(arr: i.activitys ?? [Activity(start: Date(), activityType: .walking, intervals: [], distance: 0.1)], date: i.date))
         }
     }
 
-    func getProcent(arr: [Activity]) -> BarGraphModel {
+    func getProcent(arr: [Activity], date: Date) -> BarGraphModel {
         var distance = 0.0
         var typeArr:[ActivityType] = []
         var colors: [Color] = []
@@ -200,11 +203,20 @@ class HistoryViewHandler: ObservableObject {
 
         print("distance: \(CGFloat(distance))")
         print("colors count: \(colors.count)")
-        return BarGraphModel(v: CGFloat(distance), c: colors)
+        return BarGraphModel(v: CGFloat(distance), c: colors, day: date.weekDay())
     }
+
+
 }
 
 extension Date {
+    func weekDay() -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "eeeee"
+            let weekDay = dateFormatter.string(from: self)
+            return weekDay
+      }
+
     func getWeekDaysInEnglish() -> [String] {
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "en_US_POSIX")

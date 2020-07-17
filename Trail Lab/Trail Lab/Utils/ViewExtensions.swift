@@ -64,11 +64,20 @@ extension View {
 
         switch direction {
         case .previous:
-            name = "chevron.left.circle.fill"
+            name = "chevron.left"
         case .next:
-            name = "chevron.right.circle.fill"
+            name = "chevron.right"
         }
-        return Image(systemName: name)
+        return HStack {
+            if direction == .previous {
+                Spacer()
+            }
+            Image(systemName: name)
+            if direction == .next {
+                Spacer()
+            }
+        }
+        .frame(minWidth: .zero, maxWidth: .infinity)
 
     }
     

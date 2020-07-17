@@ -20,3 +20,17 @@ struct Title: ViewModifier {
             .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
+
+struct appShadow: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.4), radius: 10.0)
+    }
+}
+
+struct noShadow: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .shadow(color: Color.clear, radius: 0)
+    }
+}

@@ -12,6 +12,7 @@ struct BarGraphModel {
     let id: UUID = UUID()
     let v: CGFloat
     let c: [Color]
+    let day: String
 }
 
 struct GraphBars: View {
@@ -30,16 +31,27 @@ struct GraphBars: View {
     var body: some View {
         VStack {
             BarsHeader()
-            HStack {
-                ForEach(historyViewHandler.barGraphModels, id: \.id) { height in
-                    BarView(
-                        height: self.calcHeight(maxH: self.macH, height: height.v),
-                        colors: height.c)
-                        .frame(maxWidth: 50, maxHeight: 200)
+                .opacity(0.5)
+            ZStack {
+
+                HStack {
+                    Spacer()
+                    ForEach(self.historyViewHandler.barGraphModels, id: \.id) { height in
+                        BarView(
+                            height: self.calcHeight(maxH: self.macH, height: height.v),
+                            colors: height.c,
+                            day: height.day)
+                            .frame(maxWidth: 30, maxHeight: 230)
+                    }
+
+                
                 }
+                .padding(.trailing)
+                Test(maxHeight: self.macH)
+                .frame(height: 230)
             }
         }
-        .padding(.horizontal)
+        //.padding()
     }
     
     func calcHeight(maxH: CGFloat, height: CGFloat) -> CGFloat {
@@ -51,13 +63,14 @@ struct BarsHeader: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
     var body: some View {
         HStack {
+            Spacer()
             Button(action: {
                 let date = self.historyViewHandler.getMonday(.previous)
                 self.historyViewHandler.getWorkoutsForAWeek(for: date)
             }) {
                 directionalButton(.previous)
             }
-            Spacer()
+
             Button(action: {
                 self.historyViewHandler.selectedDateForDraphs = Date()
                 self.historyViewHandler.getWorkoutsForAWeek(for: self.historyViewHandler.selectedDateForDraphs)
@@ -67,17 +80,20 @@ struct BarsHeader: View {
                     .fontWeight(.medium)
                     .lineLimit(1)
                     .minimumScaleFactor(.leastNonzeroMagnitude)
+                .frame(minWidth: 200, maxWidth: .infinity)
             }
             .padding(.horizontal)
-            Spacer()
+
             Button(action: {
                 let date = self.historyViewHandler.getMonday(.next)
                 self.historyViewHandler.getWorkoutsForAWeek(for: date)
             }) {
                 directionalButton(.next)
             }
+            Spacer()
         }
         .foregroundColor(Color(.label))
+
     }
 }
 

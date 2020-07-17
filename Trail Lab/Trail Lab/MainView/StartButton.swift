@@ -18,6 +18,7 @@ struct StartButton: View {
     @GestureState var testDrag = DragState.inactive
     @State var longPressinProgress: Bool = false
     @State var progress: Float = 0
+    @State var openSingleActivityView: Bool = false
 
     func simple(sucsess: Bool) {
         let generator = UINotificationFeedbackGenerator()
@@ -31,7 +32,7 @@ struct StartButton: View {
     var body: some View {
         VStack {
             ZStack {
-                workoutButton(background: self.selectedTab != 1 ? Color(.systemGray) : activityHandler.selectedActivityType.color(),
+                workoutButton(background: self.selectedTab != 1 ? Color(.secondarySystemBackground) : activityHandler.selectedActivityType.color(),
                           imageName: activityHandler.activityState == .inactive ? activityHandler.selectedActivityType.imageName() : activityHandler.activityState == .active  ? "stop.fill" : "play.fill",
                           isSystemIcon: activityHandler.activityState != .inactive )
 
@@ -39,10 +40,14 @@ struct StartButton: View {
                     ProgressBar(progress: $progress)
                 }
             }
-             .frame(width: width, height: width)
+            .frame(width: width, height: width)
+            .sheet(isPresented: $openSingleActivityView) {
+                self.checkForSingleActivityView()
+            }
 
             Spacer()
         }
+            
         .offset(y:dragBottomSheetHandler.isDragWindow() ?
             dragBottomSheetHandler.position - (self.width + (dragBottomSheetHandler.isSmallDevice ? 0 : 20)) + dragBottomSheetHandler.dragState.translation.height :
             dragBottomSheetHandler.position - (self.width + (dragBottomSheetHandler.isSmallDevice ? 0 : 20)))
@@ -76,6 +81,7 @@ struct StartButton: View {
                 self.simple(sucsess: true)
                 self.activityHandler.stopActivity()
                 self.activityHandler.activityButtonTitle = "Start"
+                self.openSingleActivityView.toggle()
                 print("inactive")
             }
         }
@@ -90,6 +96,13 @@ struct StartButton: View {
             .onEnded(dragBottomSheetHandler.onDragEnded) : DragGesture().updating($testDrag) { _, _, _ in}
             .onEnded(dragBottomSheetHandler.onDragEndedTest))
     }
+
+    func checkForSingleActivityView() -> some View {
+           if let activitie = activityHandler.activity {
+              return AnyView(SingleActivityView(activity: activitie, isNewActivity: true))
+           }
+        return AnyView(EmptyView())
+       }
 }
 
 struct StartButton_Previews: PreviewProvider {

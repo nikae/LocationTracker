@@ -11,10 +11,9 @@ import SwiftUI
 struct TrendsView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
     var body: some View {
-        ZStack {
-            self.AppBackground()
+        ScrollView(.vertical) {
             VStack {
-           GraphTile()
+                GraphTile()
                 HStack {
                     Text("Goals")
                         .font(.headline)
@@ -22,7 +21,7 @@ struct TrendsView: View {
                     Spacer()
                 }
                 .padding()
-                 Spacer()
+                Spacer()
             }
         }
         .onAppear {
