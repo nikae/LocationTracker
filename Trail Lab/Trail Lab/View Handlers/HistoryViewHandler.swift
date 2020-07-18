@@ -28,7 +28,7 @@ enum graphDirection {
 class HistoryViewHandler: ObservableObject {
     @Published var activityList: [Activity] = []
     @Published var selectedActivity: Activity =
-        Activity(start: Date(), activityType: .walking, hkValue: nil, intervals: [], distance: 0)
+        Activity(start: Date(), end: Date(), activityType: .walking, hkValue: nil, intervals: [], distance: 0)
     @Published var activityListWeekly: [ActivitiesByWeek] = []
     var selectedDateForDraphs: Date = Date()
     @Published var barGraphModels: [BarGraphModel] = []
@@ -147,14 +147,34 @@ class HistoryViewHandler: ObservableObject {
             var list: [Activity] = []
             for activity in activityList {
                 let startDate = activity.startDate
+                let endDate = activity.endDate
                 let workoutActivityType = activity.workoutActivityType
                 let distance = activity.totalDistance?.doubleValue(for: .meter())
+                let metadata = activity.metadata
+                let calories = activity.totalEnergyBurned?.doubleValue(for: .kilocalorie())
+
+
+                let steps = (metadata?[MetadataKeys.stepsCount.rawValue] as? HKQuantity)?.doubleValue(for: .count())
+                let elevationGain = (metadata?[MetadataKeys.elevationGain.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
+                let reletiveAltitude = (metadata?[MetadataKeys.reletiveAltitude.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
+                let maxAltitude = (metadata?[MetadataKeys.maxAltitude.rawValue] as? HKQuantity)?.doubleValue(for: .meter())
+
+                let timeInterval = endDate.timeIntervalSince(startDate)
+                let pace = Pace.calcPace(from: distance ?? 0, over: timeInterval)
+
                 list.append(Activity(
                     start: startDate,
+                    end: endDate,
                     activityType: localValue(workoutActivityType),
                     hkValue: activity,
                     intervals: [],
-                    distance: distance ?? 0))
+                    calories: calories,
+                    distance: distance ?? 0,
+                    numberOfSteps: Int(steps ?? 0),
+                    averagePace: pace,
+                    elevationGain: elevationGain,
+                    reletiveAltitude: reletiveAltitude,
+                    maxAltitude: maxAltitude))
             }
             self.activityList = list
 
@@ -166,7 +186,7 @@ class HistoryViewHandler: ObservableObject {
             return
         }
         for i in arr {
-            self.barGraphModels.append(getProcent(arr: i.activitys ?? [Activity(start: Date(), activityType: .walking, intervals: [], distance: 0.1)], date: i.date))
+            self.barGraphModels.append(getProcent(arr: i.activitys ?? [Activity(start: Date(), end: Date(), activityType: .walking, intervals: [], distance: 0.1)], date: i.date))
         }
     }
 

@@ -16,9 +16,7 @@ struct Activity {
     let activityType: ActivityType
     var start: Date
     var hkValue: HKWorkout?
-    var end: Date {
-        return intervals.last?.end ?? Date()
-    }
+    var end: Date
     var intervals: [ActivityInterval]
     var locations: [CLLocation] = []
 
@@ -35,24 +33,32 @@ struct Activity {
     var altitude: Meter?
     var maxAltitude: Meter?
 
-    var speed: MetersPerSecond? {
-        if let distance = distance, duration > 0 {
-            return distance / duration
-        } else {
-            return nil
-        }
-    }
+    var calories: Double?
 
     init(start: Date,
+         end: Date,
          activityType: ActivityType,
          hkValue: HKWorkout? = nil,
          intervals: [ActivityInterval],
-         distance: Meter? = nil) {
+         calories: Double? = nil,
+         distance: Meter? = nil,
+         numberOfSteps: Int? = nil,
+         averagePace: SecondsPerMeter? = nil,
+         elevationGain: Meter? = nil,
+         reletiveAltitude: Meter? = nil,
+         maxAltitude: Meter?  = nil) {
         self.start = start
+        self.end = end
         self.hkValue = hkValue
         self.activityType = activityType
         self.intervals = intervals
         self.distance = distance
+        self.numberOfSteps = numberOfSteps
+        self.averagePace = averagePace
+        self.elevationGain = elevationGain
+        self.reletiveAltitude = reletiveAltitude
+        self.maxAltitude = maxAltitude
+        self.calories = calories
     }
 
     var totalEnergyBurned: Double {
@@ -64,6 +70,14 @@ struct Activity {
     var duration: TimeInterval {
         return intervals.reduce(0) { (result, interval) in
             result + interval.duration
+        }
+    }
+
+    var speed: MetersPerSecond? {
+        if let distance = distance, duration > 0 {
+            return distance / duration
+        } else {
+            return nil
         }
     }
 }
@@ -89,6 +103,13 @@ struct ActivityInterval {
     }
 }
 
+enum MetadataKeys: String {
+      case stepsCount = "Steps Count"
+      case elevationGain = "Elevation Gain"
+      case reletiveAltitude = "Reletive Altitude"
+      case maxAltitude = "Max Altitude"
+  }
+
 class ActivityDataStore: NSObject {
 
     var routeBuilder: HKWorkoutRouteBuilder!
@@ -99,16 +120,20 @@ class ActivityDataStore: NSObject {
         self.routeBuilder = HKWorkoutRouteBuilder(healthStore: self.healthStore, device: .local())
     }
 
-    func save(
-        activity: Activity,
-        completion: @escaping ((Bool, Error?) -> Swift.Void)) {
+    func save(activity: Activity, completion: @escaping ((Bool, Error?) -> Swift.Void)) {
 
         var metadata: [String: Any] = [:]
         let totalDistance = HKQuantity(unit: .meter(), doubleValue: activity.distance ?? 0)
         let steps = HKQuantity(unit: .count(), doubleValue: Double(activity.numberOfSteps ?? 0))
         let totalEnergyBurned = HKQuantity(unit: .kilocalorie(), doubleValue: activity.totalEnergyBurned)
+        let elevationGain = HKQuantity(unit: .meter(), doubleValue: activity.elevationGain ?? 0)
+        let reletiveAltitude = HKQuantity(unit: .meter(), doubleValue: activity.reletiveAltitude ?? 0)
+        let maxAltitude = HKQuantity(unit: .meter(), doubleValue: activity.maxAltitude ?? 0)
 
-        metadata["Steps Count"] = steps
+        metadata[MetadataKeys.stepsCount.rawValue] = steps
+        metadata[MetadataKeys.elevationGain.rawValue] = elevationGain
+        metadata[MetadataKeys.reletiveAltitude.rawValue] = reletiveAltitude
+        metadata[MetadataKeys.maxAltitude.rawValue] = maxAltitude
 
         let healthkitWorkout = HKWorkout(
             activityType: activity.activityType.hkValue(),
@@ -119,7 +144,6 @@ class ActivityDataStore: NSObject {
             totalDistance: totalDistance,
             device: .local(),
             metadata: metadata)
-
 
         var mySamples: [HKSample] = []
         let activeEnergyBurned = self.samples(for: activity)
@@ -243,9 +267,16 @@ class ActivityDataStore: NSObject {
                 fatalError("The initial query failed.")
             }
 
-           guard samples!.count > 0 else { fatalError("No samples") }
+            guard let samples = samples else {
+                print("No samples")
+                return
+            }
+            guard samples.count > 0 else {
+                print("No samples")
+                return
+            }
 
-            guard let route = samples?.first as? HKWorkoutRoute else {
+            guard let route = samples.first as? HKWorkoutRoute else {
                 fatalError("No samples")
             }
 

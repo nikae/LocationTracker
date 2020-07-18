@@ -138,6 +138,7 @@ class ActivityHandler: ObservableObject {
         activityState = .active
         self.startDate = startDate
         activity = Activity(start: startDate,
+                            end: Date(),
                             activityType: selectedActivityType,
                             intervals: [])
         locationManager.startLocationUpdates(locationListener: { location in
@@ -155,6 +156,7 @@ class ActivityHandler: ObservableObject {
         stopTimer()
         let endDate = Date()
         addNewInterval(with: endDate)
+        self.activity?.end = endDate
         guard let activity = activity else {
             return
         }

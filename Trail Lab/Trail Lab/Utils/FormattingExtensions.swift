@@ -89,4 +89,37 @@ extension Double {
     }
 }
 
+//MARK: Localized
+extension Date {
+    var localizedStringTime: String {
+        return DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
+    }
 
+    var localaizedDate: String {
+        return DateFormatter.localizedString(from: self, dateStyle: .full, timeStyle: .none)
+    }
+}
+
+import HealthKit
+struct Pace {
+    static func calcPace(from meters: Double, over seconds: TimeInterval) -> TimeInterval? {
+        guard meters > 0 && seconds > 0 else {
+            return nil
+        }
+        var splitDistanceUnit: HKUnit = .mile()
+        if let unitsPreference = UnitPreferance(rawValue: Preferences.unit) {
+            switch unitsPreference {
+            case .metric:
+                splitDistanceUnit = .meterUnit(with: .kilo)
+            case .imperial:
+                splitDistanceUnit = .mile()
+            }
+        }
+        let splitDistance = HKQuantity(unit: splitDistanceUnit, doubleValue: 1)
+        let splitMeters = splitDistance.doubleValue(for: .meter())
+        let speed = meters / seconds
+        let pace = TimeInterval(splitMeters / speed)
+        if pace >= 3600 { return nil } // Too slow
+        return pace
+    }
+}

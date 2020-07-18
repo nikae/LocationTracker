@@ -23,6 +23,8 @@
 		24301F2324A512070029137C /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2224A512070029137C /* ViewModifiers.swift */; };
 		24301F2524A516880029137C /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2424A516880029137C /* ImageExtensions.swift */; };
 		24301F2724A573570029137C /* FormattingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2624A573570029137C /* FormattingExtensions.swift */; };
+		243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493324C39AE300FB9E35 /* SingleActivityStatsView.swift */; };
+		243F493624C39C6F00FB9E35 /* SingleActivityTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493524C39C6F00FB9E35 /* SingleActivityTitleView.swift */; };
 		244461ED24B83A9200062194 /* GraphTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244461EC24B83A9200062194 /* GraphTile.swift */; };
 		245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139E2492A5300072389D /* DragBottomSheetHandler.swift */; };
 		245BDEDC249316E7000A954A /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BDEDB249316E7000A954A /* StartButton.swift */; };
@@ -90,6 +92,8 @@
 		24301F2224A512070029137C /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		24301F2424A516880029137C /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		24301F2624A573570029137C /* FormattingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingExtensions.swift; sourceTree = "<group>"; };
+		243F493324C39AE300FB9E35 /* SingleActivityStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityStatsView.swift; sourceTree = "<group>"; };
+		243F493524C39C6F00FB9E35 /* SingleActivityTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityTitleView.swift; sourceTree = "<group>"; };
 		244461EC24B83A9200062194 /* GraphTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTile.swift; sourceTree = "<group>"; };
 		245BDEDB249316E7000A954A /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		245DF9C524B6A345001345C5 /* TrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsView.swift; sourceTree = "<group>"; };
@@ -286,6 +290,8 @@
 			children = (
 				247AB99824BE934C0004AA49 /* ActivityMapView.swift */,
 				247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */,
+				243F493324C39AE300FB9E35 /* SingleActivityStatsView.swift */,
+				243F493524C39C6F00FB9E35 /* SingleActivityTitleView.swift */,
 				2475683B24C0ED2E0016FADB /* GradientPolylineRenderer.swift */,
 			);
 			path = "Single Activitie";
@@ -438,6 +444,7 @@
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */,
 				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,
+				243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
 				245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */,
@@ -445,6 +452,7 @@
 				2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */,
 				245DF9C624B6A345001345C5 /* TrendsView.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
+				243F493624C39C6F00FB9E35 /* SingleActivityTitleView.swift in Sources */,
 				244461ED24B83A9200062194 /* GraphTile.swift in Sources */,
 				245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */,
 				24301F2724A573570029137C /* FormattingExtensions.swift in Sources */,

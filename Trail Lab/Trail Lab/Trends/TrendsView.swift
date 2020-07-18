@@ -10,6 +10,10 @@ import SwiftUI
 
 struct TrendsView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
+    @State var showActivityList: Bool = false
+    @State var routeWaypoint: [RouteWaypoint] = []
+    @State var showMap: Bool = false
+
     var body: some View {
         ScrollView(.vertical) {
             VStack {
@@ -18,10 +22,35 @@ struct TrendsView: View {
                     Text("Goals")
                         .font(.headline)
                         .foregroundColor(Color(.label))
+                        .onTapGesture {
+                            self.showActivityList.toggle()
+                    }
                     Spacer()
                 }
                 .padding()
                 Spacer()
+            }
+            .sheet(isPresented: $showActivityList) { 
+                HistoryView()
+                    .environmentObject(self.historyViewHandler)
+            }
+
+            if historyViewHandler.activityList.last != nil {
+                Divider()
+                .padding(.horizontal)
+                HStack {
+                    Text("Recent Activity")
+                        .font(.headline)
+                        .foregroundColor(Color(.label))
+                    Spacer()
+                }
+                .padding(.horizontal)
+                SingleActivityTitleView(activity: historyViewHandler.activityList.last!)
+                    .padding()
+                SingleActivityStatsView(activity: historyViewHandler.activityList.last!,
+                                        isNewActivity: false)
+                    .padding(.horizontal)
+             //TODO: ADD MAPVIEW HERE
             }
         }
         .onAppear {

@@ -112,6 +112,22 @@ extension View {
                     .foregroundColor(tintColor)
         }
     }
+
+    func StatsViewLarg(value: String,
+                     title: String,
+                     tintColor: Color) -> some View {
+        return HStack {
+            VStack(alignment:.leading, spacing: 2) {
+              Text(value)
+                .font(.system(.title, design: .rounded))
+                  .fontWeight(.bold)
+                  Text(title)
+                      .font(.headline)
+                      .foregroundColor(tintColor)
+            }
+            Spacer()
+          }
+      }
 }
 
 
