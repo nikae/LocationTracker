@@ -162,10 +162,13 @@ class HistoryViewHandler: ObservableObject {
                 let timeInterval = endDate.timeIntervalSince(startDate)
                 let pace = Pace.calcPace(from: distance ?? 0, over: timeInterval)
 
+                let title = metadata?[MetadataKeys.title.rawValue] as? String
+
                 list.append(Activity(
                     start: startDate,
                     end: endDate,
                     activityType: localValue(workoutActivityType),
+                    title: title,
                     hkValue: activity,
                     intervals: [],
                     calories: calories,

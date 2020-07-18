@@ -61,6 +61,19 @@ enum ActivityType: Int {
         }
     }
 
+    func title() -> String {
+           switch self {
+           case .walking:
+               return "walk"
+           case .running:
+               return "run"
+           case .hiking:
+               return "hike"
+           case .biking:
+               return "bike ride"
+           }
+       }
+
     func imageName() -> String {
         switch self {
         case .walking:
@@ -157,23 +170,65 @@ class ActivityHandler: ObservableObject {
         let endDate = Date()
         addNewInterval(with: endDate)
         self.activity?.end = endDate
-        guard let activity = activity else {
-            return
-        }
-        if activity.duration > 60 {
-        ActivityDataStore().save(activity: activity) { sucsess, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
 
-            print(sucsess)
+        if let startLocation = self.activity?.locations.first {
+            makeActivityTitle(startLocation) { placeMarkString in
+                if let placeMarkString = placeMarkString {
+                    self.activity?.title = "\(placeMarkString) \(self.activity?.activityType.title() ?? "")"
+                }
+                self.saveActivity()
+            }
+        } else {
+            saveActivity()
         }
-        }
+
         locationManager.stopLocationUpdates { error in
             print(error)
         }
         pedometerManager.stopMonitoring()
         animateStatsView(-300)
+    }
+
+    func saveActivity() {
+        guard let activity = activity else { return }
+        if activity.duration > 60 {
+            ActivityDataStore().save(activity: activity) { sucsess, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                print(sucsess)
+            }
+        }
+    }
+
+    func makeActivityTitle(_ loc: CLLocation, completionHandler: @escaping ((String?) -> Void)) {
+        
+        CLGeocoder().reverseGeocodeLocation(loc, completionHandler: {(placemaks, error)->Void in
+            if error != nil {
+                print("Reverse geocoder filed with error: \(error!.localizedDescription)")
+                return
+            }
+            if let pm = placemaks?.first {
+
+                if let areasOfInterest = pm.areasOfInterest?.first, let subLocality = pm.subLocality {
+                    let randomBool = Bool.random()
+                    completionHandler(randomBool ? areasOfInterest : subLocality)
+                } else if let areasOfInterest = pm.areasOfInterest?.first {
+                    completionHandler(areasOfInterest)
+                } else if let subLocality = pm.subLocality {
+                    completionHandler(subLocality)
+                } else if let locality = pm.locality {
+                    completionHandler(locality)
+                } else if let administrativeArea = pm.administrativeArea {
+                    completionHandler(administrativeArea)
+                } else {
+                    completionHandler(nil)
+                }
+
+            } else {
+                completionHandler(nil)
+            }
+        })
     }
 
      private func locationListener(location: CLLocation) {

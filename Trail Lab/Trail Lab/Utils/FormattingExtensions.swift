@@ -106,20 +106,6 @@ struct Pace {
         guard meters > 0 && seconds > 0 else {
             return nil
         }
-        var splitDistanceUnit: HKUnit = .mile()
-        if let unitsPreference = UnitPreferance(rawValue: Preferences.unit) {
-            switch unitsPreference {
-            case .metric:
-                splitDistanceUnit = .meterUnit(with: .kilo)
-            case .imperial:
-                splitDistanceUnit = .mile()
-            }
-        }
-        let splitDistance = HKQuantity(unit: splitDistanceUnit, doubleValue: 1)
-        let splitMeters = splitDistance.doubleValue(for: .meter())
-        let speed = meters / seconds
-        let pace = TimeInterval(splitMeters / speed)
-        if pace >= 3600 { return nil } // Too slow
-        return pace
+        return seconds / meters
     }
 }

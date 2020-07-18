@@ -19,12 +19,11 @@ struct SingleActivityTitleView: View {
                 Spacer()
             }
             HStack(alignment: .top) {
-                Text("\(self.activity.activityType.name())".capitalized)
-                Text("\(self.activity.start.localizedStringTime) - \(self.activity.end.localizedStringTime)")
+                Text("\(self.activity.title ?? self.activity.activityType.name())".capitalized)
+                + Text(" \(self.activity.start.localizedStringTime) - \(self.activity.end.localizedStringTime)")
                 Spacer()
             }
             .font(.headline)
-            
         }
     }
 }

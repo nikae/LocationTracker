@@ -16,6 +16,7 @@ struct Activity {
     let activityType: ActivityType
     var start: Date
     var hkValue: HKWorkout?
+    var title: String?
     var end: Date
     var intervals: [ActivityInterval]
     var locations: [CLLocation] = []
@@ -38,6 +39,7 @@ struct Activity {
     init(start: Date,
          end: Date,
          activityType: ActivityType,
+         title: String? = nil,
          hkValue: HKWorkout? = nil,
          intervals: [ActivityInterval],
          calories: Double? = nil,
@@ -51,6 +53,7 @@ struct Activity {
         self.end = end
         self.hkValue = hkValue
         self.activityType = activityType
+        self.title = title
         self.intervals = intervals
         self.distance = distance
         self.numberOfSteps = numberOfSteps
@@ -104,11 +107,12 @@ struct ActivityInterval {
 }
 
 enum MetadataKeys: String {
-      case stepsCount = "Steps Count"
-      case elevationGain = "Elevation Gain"
-      case reletiveAltitude = "Reletive Altitude"
-      case maxAltitude = "Max Altitude"
-  }
+    case stepsCount = "Steps Count"
+    case elevationGain = "Elevation Gain"
+    case reletiveAltitude = "Reletive Altitude"
+    case maxAltitude = "Max Altitude"
+    case title = "Title"
+}
 
 class ActivityDataStore: NSObject {
 
@@ -134,6 +138,10 @@ class ActivityDataStore: NSObject {
         metadata[MetadataKeys.elevationGain.rawValue] = elevationGain
         metadata[MetadataKeys.reletiveAltitude.rawValue] = reletiveAltitude
         metadata[MetadataKeys.maxAltitude.rawValue] = maxAltitude
+
+        if let title = activity.title {
+            metadata[MetadataKeys.title.rawValue] = title
+        }
 
         let healthkitWorkout = HKWorkout(
             activityType: activity.activityType.hkValue(),
