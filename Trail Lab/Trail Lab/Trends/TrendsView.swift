@@ -22,9 +22,6 @@ struct TrendsView: View {
                     Text("Goals")
                         .font(.headline)
                         .foregroundColor(Color(.label))
-                        .onTapGesture {
-                            self.showActivityList.toggle()
-                    }
                     Spacer()
                 }
                 .padding()
@@ -34,6 +31,13 @@ struct TrendsView: View {
                 HistoryView()
                     .environmentObject(self.historyViewHandler)
             }
+
+//            if historyViewHandler.maxAltitudeList.count > 1{
+//                linearGraph(dataPoints: historyViewHandler.maxAltitudeList)
+//                    .onTapGesture {
+//                        self.historyViewHandler.getMaxAltitudeList(forWeek: false)
+//                }
+//            }
 
             if historyViewHandler.activityList.last != nil {
                 Divider()
@@ -57,6 +61,13 @@ struct TrendsView: View {
             self.historyViewHandler.selectedDateForDraphs = Date()
             self.historyViewHandler.getWorkoutsForAWeek(for: self.historyViewHandler.selectedDateForDraphs)
         }
+        .navigationBarItems(trailing:
+            Button(action: {
+                 self.showActivityList.toggle()
+            }, label: { 
+                Image(systemName: "rectangle.grid.1x2.fill")
+            })
+        )
     }
 }
 

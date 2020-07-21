@@ -30,6 +30,7 @@ class HistoryViewHandler: ObservableObject {
     @Published var selectedActivity: Activity =
         Activity(start: Date(), end: Date(), activityType: .walking, hkValue: nil, intervals: [], distance: 0)
     @Published var activityListWeekly: [ActivitiesByWeek] = []
+    var maxAltitudeList: [CGFloat] = []
     var selectedDateForDraphs: Date = Date()
     @Published var barGraphModels: [BarGraphModel] = []
     @Published var dateTitle: String = ""
@@ -57,6 +58,7 @@ class HistoryViewHandler: ObservableObject {
 
         self.activityListWeekly.removeAll()
         self.activityListWeekly = activitiesByWeek
+        self.getMaxAltitudeList(forWeek: true)
 
         self.barGraphModels.removeAll()
         self.gerMod()
@@ -229,7 +231,33 @@ class HistoryViewHandler: ObservableObject {
         return BarGraphModel(v: CGFloat(distance), c: colors, day: date.weekDay())
     }
 
+    func getMaxAltitudeList(forWeek: Bool) {
+        var list: [CGFloat] = []
+        if forWeek {
+            for activitiesByDay in activityListWeekly {
+                if let activitiesByDaylist = activitiesByDay.activitys {
+                    for day in activitiesByDaylist {
+                        if let activitys = day.activitys {
+                            for activitie in activitys {
+                                if let maxAltitude = activitie.maxAltitude {
+                                    list.append(CGFloat(maxAltitude))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            for activitie in activityList {
+                if let maxAltitude = activitie.maxAltitude {
+                    list.append(CGFloat(maxAltitude))
+                }
+            }
+        }
 
+        maxAltitudeList.removeAll()
+        maxAltitudeList = list
+    }
 }
 
 extension Date {

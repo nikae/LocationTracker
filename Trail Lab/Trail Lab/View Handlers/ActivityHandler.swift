@@ -191,14 +191,14 @@ class ActivityHandler: ObservableObject {
 
     func saveActivity() {
         guard let activity = activity else { return }
-        if activity.duration > 60 {
+      //  if activity.duration > 60 {
             ActivityDataStore().save(activity: activity) { sucsess, error in
                 if let error = error {
                     print(error.localizedDescription)
                 }
                 print(sucsess)
             }
-        }
+    //    }
     }
 
     func makeActivityTitle(_ loc: CLLocation, completionHandler: @escaping ((String?) -> Void)) {

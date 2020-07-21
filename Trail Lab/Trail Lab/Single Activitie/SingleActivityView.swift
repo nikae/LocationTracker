@@ -87,6 +87,10 @@ struct SingleActivityView: View {
                         .padding(.horizontal)
                         .background(Color(.systemBackground))
                         .animation(self.animateStats ? .easeOut : .none)
+                    
+                    if self.singleActivityViewHandler.showMap && !self.singleActivityViewHandler.altitudeList.isEmpty {
+                        linearGraph(dataPoints: self.singleActivityViewHandler.altitudeList)
+                    }
                 }
                 Spacer()
             }
@@ -109,12 +113,15 @@ struct SingleActivityView: View {
             }
         } else {
             self.singleActivityViewHandler.getWaypointsFromHK(
-            activity: self.activity) { waypoints in
+            activity: self.activity) { waypoints, altitudes in
+                DispatchQueue.main.async {
                 if let waypoints = waypoints {
-                    DispatchQueue.main.async {
                         self.routeWaypoint = waypoints
                         self.singleActivityViewHandler.showMap = true
                     }
+//                    if let altitudes = altitudes {
+//                        self.singleActivityViewHandler.altitudeList = altitudes
+//                    }
                 }
             }
         }
