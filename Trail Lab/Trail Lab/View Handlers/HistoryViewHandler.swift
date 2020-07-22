@@ -25,7 +25,24 @@ enum graphDirection {
     case next
 }
 
+struct WeeklyGoal {
+    var distance: Meter
+    var distanceGoal: Meter
+    var distanceProgress: Float
+    var distanceFormmated: String
+
+    var time: TimeInterval
+    var timeGoal: TimeInterval
+    var timeProgress: Float
+    var timeFormmated: String
+}
+
 class HistoryViewHandler: ObservableObject {
+
+    let distanceGoal = 16000.0
+    let timeGoal: TimeInterval = 10800
+
+
     @Published var activityList: [Activity] = []
     @Published var selectedActivity: Activity =
         Activity(start: Date(), end: Date(), activityType: .walking, hkValue: nil, intervals: [], distance: 0)
@@ -34,6 +51,45 @@ class HistoryViewHandler: ObservableObject {
     var selectedDateForDraphs: Date = Date()
     @Published var barGraphModels: [BarGraphModel] = []
     @Published var dateTitle: String = ""
+    @Published var weeklyGoal: WeeklyGoal = WeeklyGoal(
+        distance: 0,
+        distanceGoal: 16000.0,
+        distanceProgress: 0,
+        distanceFormmated: "--",
+        time: 0,
+        timeGoal: 3600,
+        timeProgress: 0,
+        timeFormmated: "--")
+
+    func getGoals(activitiesByWeek: ActivitiesByWeek) {
+        var totalDistance: Meter = 0
+        var totalDuration: TimeInterval = 0
+
+        guard let weekActivitys =  activitiesByWeek.activitys else { return }
+
+        for activitieByDay in weekActivitys {
+            if let activities = activitieByDay.activitys {
+                for activitie in activities {
+                    totalDistance += activitie.distance ?? 0
+                    totalDuration += activitie.end.timeIntervalSince(activitie.start)
+                }
+            }
+        }
+
+        let distanceFormmated = "\(totalDistance.formatDistane()) / \n\(distanceGoal.formatDistane())"
+        let timeFormmated = "\(totalDuration.format(using: [.hour, .minute]) ?? "--") / \n\(timeGoal.format(using: [.hour, .minute]) ?? "--")"
+
+        self.weeklyGoal = WeeklyGoal(
+            distance: totalDistance,
+            distanceGoal: distanceGoal,
+            distanceProgress: Float(totalDistance / distanceGoal),
+            distanceFormmated:distanceFormmated,
+            time: totalDuration,
+            timeGoal: timeGoal,
+            timeProgress: Float(totalDuration / timeGoal),
+            timeFormmated: timeFormmated)
+
+    }
 
     func getWorkoutsForAWeek(for date: Date) {
         let arr = getWeekdays(for: date)
@@ -193,6 +249,8 @@ class HistoryViewHandler: ObservableObject {
         for i in arr {
             self.barGraphModels.append(getProcent(arr: i.activitys ?? [Activity(start: Date(), end: Date(), activityType: .walking, intervals: [], distance: 0.1)], date: i.date))
         }
+
+        getGoals(activitiesByWeek: activityListWeekly.first!)
     }
 
     func getProcent(arr: [Activity], date: Date) -> BarGraphModel {

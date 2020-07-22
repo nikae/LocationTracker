@@ -83,7 +83,7 @@ extension View {
     
 }
 
-struct ProgressBar: View {
+struct EndProgressBar: View {
     @Binding var progress: Float
     var body: some View {
         Circle()

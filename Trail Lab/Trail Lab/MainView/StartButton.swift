@@ -37,7 +37,7 @@ struct StartButton: View {
                           isSystemIcon: activityHandler.activityState != .inactive )
 
                 if self.activityHandler.activityState != .inactive {
-                    ProgressBar(progress: $progress)
+                    EndProgressBar(progress: $progress)
                 }
             }
             .frame(width: width, height: width)

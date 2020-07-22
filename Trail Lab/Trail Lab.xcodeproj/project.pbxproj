@@ -26,6 +26,7 @@
 		243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493324C39AE300FB9E35 /* SingleActivityStatsView.swift */; };
 		243F493624C39C6F00FB9E35 /* SingleActivityTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493524C39C6F00FB9E35 /* SingleActivityTitleView.swift */; };
 		243F493824C3B5B500FB9E35 /* linearGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493724C3B5B500FB9E35 /* linearGraph.swift */; };
+		243F493A24C67AB700FB9E35 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493924C67AB700FB9E35 /* ProgressBar.swift */; };
 		244461ED24B83A9200062194 /* GraphTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244461EC24B83A9200062194 /* GraphTile.swift */; };
 		245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139E2492A5300072389D /* DragBottomSheetHandler.swift */; };
 		245BDEDC249316E7000A954A /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BDEDB249316E7000A954A /* StartButton.swift */; };
@@ -96,6 +97,7 @@
 		243F493324C39AE300FB9E35 /* SingleActivityStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityStatsView.swift; sourceTree = "<group>"; };
 		243F493524C39C6F00FB9E35 /* SingleActivityTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityTitleView.swift; sourceTree = "<group>"; };
 		243F493724C3B5B500FB9E35 /* linearGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = linearGraph.swift; sourceTree = "<group>"; };
+		243F493924C67AB700FB9E35 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		244461EC24B83A9200062194 /* GraphTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTile.swift; sourceTree = "<group>"; };
 		245BDEDB249316E7000A954A /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		245DF9C524B6A345001345C5 /* TrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				245DF9C924B6A809001345C5 /* GraphBars.swift */,
 				244461EC24B83A9200062194 /* GraphTile.swift */,
 				243F493724C3B5B500FB9E35 /* linearGraph.swift */,
+				243F493924C67AB700FB9E35 /* ProgressBar.swift */,
 			);
 			path = Trends;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
+				243F493A24C67AB700FB9E35 /* ProgressBar.swift in Sources */,
 				245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */,
 				245F78BF249D2720009BF67A /* LocationManager.swift in Sources */,
 				2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */,

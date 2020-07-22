@@ -11,6 +11,7 @@ import SwiftUI
 struct TrendsView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
     @State var showActivityList: Bool = false
+    @State var showRecentActivity: Bool = false
     @State var routeWaypoint: [RouteWaypoint] = []
     @State var showMap: Bool = false
 
@@ -18,16 +19,31 @@ struct TrendsView: View {
         ScrollView(.vertical) {
             VStack {
                 GraphTile()
+                VStack {
                 HStack {
-                    Text("Goals")
+                    Text("Weekly Goals")
                         .font(.headline)
                         .foregroundColor(Color(.label))
                     Spacer()
                 }
                 .padding()
+
+                HStack {
+                    ProgressBar(progress: self.$historyViewHandler.weeklyGoal.distanceProgress,
+                                progressLabel: self.$historyViewHandler.weeklyGoal.distanceFormmated, title: "Distance")
+                        .frame(minWidth: 100, maxWidth: .infinity)
+                        .frame(height: 130)
+                    ProgressBar(progress: self.$historyViewHandler.weeklyGoal.timeProgress, progressLabel: self.$historyViewHandler.weeklyGoal.timeFormmated, title: "Time")
+                        .frame(minWidth: 100, maxWidth: .infinity)
+                    .frame(height: 130)
+                }
+                .padding()
+                }
+                 .background(self.AppBackground())
+
                 Spacer()
             }
-            .sheet(isPresented: $showActivityList) { 
+            .sheet(isPresented: $showActivityList) {
                 HistoryView()
                     .environmentObject(self.historyViewHandler)
             }
@@ -51,6 +67,13 @@ struct TrendsView: View {
                 .padding(.horizontal)
                 SingleActivityTitleView(activity: historyViewHandler.activityList.last!)
                     .padding()
+                    .onTapGesture {
+                        self.showRecentActivity.toggle()
+                }
+                .sheet(isPresented: $showRecentActivity) {
+                    SingleActivityView(activity: self.historyViewHandler.activityList.last!, isNewActivity: false)
+
+                           }
                 SingleActivityStatsView(activity: historyViewHandler.activityList.last!,
                                         isNewActivity: false)
                     .padding(.horizontal)
