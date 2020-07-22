@@ -1,5 +1,5 @@
 //
-//  HistoryView.swift
+//  ActivitiesView.swift
 //  Trail Lab
 //
 //  Created by Nika on 6/26/20.
@@ -8,37 +8,29 @@
 
 import SwiftUI
 
-struct HistoryView: View {
+struct ActivitiesView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
 
     @State var open: Bool = false
     var body: some View {
-        ZStack {
-            self.AppBackground()
             List {
                 ForEach(historyViewHandler.activityList, id: \.id) { act in
-                    VStack {
-                        Text("\(act.start) \(act.activityType.name())")
-                            .onTapGesture {
-                                self.historyViewHandler.selectedActivity = act
-                                  self.open.toggle()
-                        }
+                    ActivityCell(activity: act)
+                        .onTapGesture {
+                            self.historyViewHandler.selectedActivity = act
+                            self.open.toggle()
                     }
                 }
             }
-        }
         .sheet(isPresented: $open, content: {
             SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: false)
         })
-            .onAppear {
-                self.historyViewHandler.getActivityList()
-        }
     }
 }
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView()
+        ActivitiesView()
     }
 }
 

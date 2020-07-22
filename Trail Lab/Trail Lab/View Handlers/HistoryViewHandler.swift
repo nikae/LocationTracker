@@ -237,7 +237,9 @@ class HistoryViewHandler: ObservableObject {
                     reletiveAltitude: reletiveAltitude,
                     maxAltitude: maxAltitude))
             }
-            self.activityList = list
+
+            let sortedList = list.sorted { $0.start > $1.start}
+            self.activityList = sortedList
 
         }
     }

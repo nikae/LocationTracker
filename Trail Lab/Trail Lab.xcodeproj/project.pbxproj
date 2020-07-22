@@ -30,6 +30,7 @@
 		244461ED24B83A9200062194 /* GraphTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244461EC24B83A9200062194 /* GraphTile.swift */; };
 		245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139E2492A5300072389D /* DragBottomSheetHandler.swift */; };
 		245BDEDC249316E7000A954A /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BDEDB249316E7000A954A /* StartButton.swift */; };
+		245C8D8524C7F13B00536D1D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245C8D8424C7F13B00536D1D /* ActivityCell.swift */; };
 		245DF9C624B6A345001345C5 /* TrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C524B6A345001345C5 /* TrendsView.swift */; };
 		245DF9C824B6A65C001345C5 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C724B6A65C001345C5 /* BarView.swift */; };
 		245DF9CA24B6A809001345C5 /* GraphBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C924B6A809001345C5 /* GraphBars.swift */; };
@@ -49,7 +50,7 @@
 		2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */; };
 		247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99824BE934C0004AA49 /* ActivityMapView.swift */; };
 		247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */; };
-		247BA1D524A6E1D2007747BC /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* HistoryView.swift */; };
+		247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* ActivitiesView.swift */; };
 		247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		243F493924C67AB700FB9E35 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		244461EC24B83A9200062194 /* GraphTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTile.swift; sourceTree = "<group>"; };
 		245BDEDB249316E7000A954A /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
+		245C8D8424C7F13B00536D1D /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		245DF9C524B6A345001345C5 /* TrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsView.swift; sourceTree = "<group>"; };
 		245DF9C724B6A65C001345C5 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		245DF9C924B6A809001345C5 /* GraphBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBars.swift; sourceTree = "<group>"; };
@@ -120,7 +122,7 @@
 		2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityViewHandler.swift; sourceTree = "<group>"; };
 		247AB99824BE934C0004AA49 /* ActivityMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMapView.swift; sourceTree = "<group>"; };
 		247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityView.swift; sourceTree = "<group>"; };
-		247BA1D424A6E1D2007747BC /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		247BA1D424A6E1D2007747BC /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -236,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				2418139B24909CE00072389D /* WorkoutVIew.swift */,
-				247BA1D424A6E1D2007747BC /* HistoryView.swift */,
+				247BA1D424A6E1D2007747BC /* ActivitiesView.swift */,
 				241813A02492B1990072389D /* SlideCard.swift */,
 				245BDEDB249316E7000A954A /* StartButton.swift */,
 				245F78A824986E09009BF67A /* BottomCard.swift */,
@@ -266,6 +268,7 @@
 				244461EC24B83A9200062194 /* GraphTile.swift */,
 				243F493724C3B5B500FB9E35 /* linearGraph.swift */,
 				243F493924C67AB700FB9E35 /* ProgressBar.swift */,
+				245C8D8424C7F13B00536D1D /* ActivityCell.swift */,
 			);
 			path = Trends;
 			sourceTree = "<group>";
@@ -441,10 +444,11 @@
 				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
 				245F78B5249BD402009BF67A /* HealthPermisionsHandler.swift in Sources */,
 				245DF9CA24B6A809001345C5 /* GraphBars.swift in Sources */,
+				245C8D8524C7F13B00536D1D /* ActivityCell.swift in Sources */,
 				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
 				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
-				247BA1D524A6E1D2007747BC /* HistoryView.swift in Sources */,
+				247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */,
 				247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */,
 				247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,

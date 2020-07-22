@@ -44,8 +44,11 @@ struct TrendsView: View {
                 Spacer()
             }
             .sheet(isPresented: $showActivityList) {
-                HistoryView()
-                    .environmentObject(self.historyViewHandler)
+                VStack {
+                    DismissIcon()
+                    ActivitiesView()
+                        .environmentObject(self.historyViewHandler)
+                }
             }
 
 //            if historyViewHandler.maxAltitudeList.count > 1{

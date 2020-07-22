@@ -38,7 +38,10 @@ struct ContentView: View {
             GeometryReader { proxy in
                 TabView(selection: self.$selectedTab) {
                     ZStack {
-                        HistoryView()
+                         NavigationView {
+                        ActivitiesView()
+                            .navigationBarTitle("Activities", displayMode: .large)
+                        }
 //                        self.AppBackground()
 //                        //FIXME: This needs to be moved into settings
 //                        Toggle(isOn: self.$showGreeting) {
@@ -51,7 +54,7 @@ struct ContentView: View {
                     }
                     .tabItem {
                         Image(systemName: "rectangle.grid.1x2.fill")
-                        Text("Activity")
+                        Text("Activities")
                     }.tag(0)
 
                     WorkoutVIew()

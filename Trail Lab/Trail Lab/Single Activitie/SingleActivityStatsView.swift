@@ -26,7 +26,7 @@ struct SingleActivityStatsView: View {
     var body: some View {
         VStack(spacing: 20) {
             HStack(alignment: .bottom) {
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: (self.activity.end.timeIntervalSince(self.activity.start)).format() ?? "__",
                     title: "Duration".uppercased(),
                     tintColor: self.color)
@@ -34,12 +34,12 @@ struct SingleActivityStatsView: View {
             }
             Divider()
             HStack(alignment: .bottom) {
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: (self.activity.calories ?? 0).formatCalories(),
                     title: "calories".uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: self.isSpeedType ? self.activity.speedCurrent?.formatSpeed() ?? "--" : "\(self.activity.numberOfSteps ?? 0)",
                     title: self.isSpeedType ? "Speed".uppercased() : "Steps".uppercased(),
                     tintColor: self.color)
@@ -47,13 +47,13 @@ struct SingleActivityStatsView: View {
             }
             Divider()
             HStack(alignment: .bottom) {
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: self.activity.distance?.formatDistane() ?? "--",
                     title: "Distance".uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
 
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: self.isSpeedType ? self.activity.speed?.formatSpeed() ?? "--" : self.activity.averagePace?.formatPace() ?? "-:-",
                     title: (self.isSpeedType ? "Avg Speed" : "Pace").uppercased(),
                     tintColor: self.color)
@@ -61,12 +61,12 @@ struct SingleActivityStatsView: View {
             }
             Divider()
             HStack(alignment: .bottom) {
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: self.activity.elevationGain?.formatAltitude() ?? "__",
                     title: "Elev Gain".uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: self.activity.reletiveAltitude?.formatAltitude() ?? "__",
                     title: "Relat Alt".uppercased(),
                     tintColor: self.color)
@@ -75,13 +75,13 @@ struct SingleActivityStatsView: View {
             Divider()
             HStack(alignment: .bottom) {
                 if self.isNewActivity {
-                    self.StatsViewLarg(
+                    self.StatsViewLarge(
                         value: self.activity.altitude?.formatAltitude() ?? "--",
                         title: "Altitude".uppercased(),
                         tintColor: self.color)
                         .frame(minWidth: 0, maxWidth: .infinity)
                 }
-                self.StatsViewLarg(
+                self.StatsViewLarge(
                     value: self.activity.maxAltitude?.formatAltitude() ?? "--",
                     title: "Max Altitude".uppercased(),
                     tintColor: self.color)

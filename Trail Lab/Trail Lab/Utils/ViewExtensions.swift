@@ -113,7 +113,7 @@ extension View {
         }
     }
 
-    func StatsViewLarg(value: String,
+    func StatsViewLarge(value: String,
                      title: String,
                      tintColor: Color) -> some View {
         return HStack {
