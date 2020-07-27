@@ -20,6 +20,7 @@ struct GraphTile: View {
             GraphBars()
                 .background(Color(.clear)
                     .cornerRadius(10))
+            ColorGuide()
         }
         .padding()
 //        .padding(.bottom)

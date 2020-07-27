@@ -38,18 +38,18 @@ struct ContentView: View {
             GeometryReader { proxy in
                 TabView(selection: self.$selectedTab) {
                     ZStack {
-                         NavigationView {
-                        ActivitiesView()
-                            .navigationBarTitle("Activities", displayMode: .large)
+                        NavigationView {
+                            ActivitiesView()
+                                .navigationBarTitle("Activities", displayMode: .large)
                         }
-//                        self.AppBackground()
-//                        //FIXME: This needs to be moved into settings
-//                        Toggle(isOn: self.$showGreeting) {
-//                            Text("Metric \(self.showGreeting ? "On" : "Off"): (Move into settings)")
-//                        }.padding()
-//                            .onReceive([self.showGreeting].publisher.first()) { (value) in
-//                                Preferences.unit = value ? UnitPreferance.metric.rawValue : UnitPreferance.imperial.rawValue
-//                        }
+                        //                        self.AppBackground()
+                        //                        //FIXME: This needs to be moved into settings
+                        //                        Toggle(isOn: self.$showGreeting) {
+                        //                            Text("Metric \(self.showGreeting ? "On" : "Off"): (Move into settings)")
+                        //                        }.padding()
+                        //                            .onReceive([self.showGreeting].publisher.first()) { (value) in
+                        //                                Preferences.unit = value ? UnitPreferance.metric.rawValue : UnitPreferance.imperial.rawValue
+                        //                        }
 
                     }
                     .tabItem {
@@ -62,16 +62,19 @@ struct ContentView: View {
                             self.activityHandler.mapViewDelegate = self.mapViewHandler
                     }
                     .tabItem {
+                        if self.selectedTab != 1 {
+                            Image(self.activityHandler.selectedActivityType.imageName())
+                        }
                         Text(self.selectedTab != 1 ? "Workout" :
                             self.activityHandler.activityButtonTitle)
                     }.tag(1)
                     NavigationView {
-                    TrendsView()
-                        .navigationBarTitle("Trends", displayMode: .large)
+                        TrendsView()
+                            .navigationBarTitle("Trends", displayMode: .large)
                     }
-                        .tabItem {
-                            Image(systemName: "chart.bar.fill")
-                            Text("Trends")
+                    .tabItem {
+                        Image(systemName: "chart.bar.fill")
+                        Text("Trends")
                     }.tag(2)
                 }
                 .accentColor(self.activityHandler.selectedActivityType.color())
@@ -86,12 +89,18 @@ struct ContentView: View {
                 self.configureBottomCardSize(value)
             })
 
-            StartButton(selectedTab: $selectedTab)
-                .shadow(color: selectedTab == 1 ? Color(.sRGBLinear, white: 0, opacity: 0.2) : .clear,
-                        radius: 10.0)
+            if selectedTab == 1 {
+                StartButton(selectedTab: $selectedTab)
+                    .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.2), radius: 10.0)
+            }
+
+        }
+        .sheet(isPresented: self.$historyViewHandler.newWorkoutLoadingIsDone) {
+            SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: true)
         }
         .onAppear {
             self.activityHandler.authorizeHealthKit()
+            self.activityHandler.activityHandlerDelegate = self.historyViewHandler
         }
     }
 

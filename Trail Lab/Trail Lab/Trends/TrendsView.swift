@@ -14,6 +14,7 @@ struct TrendsView: View {
     @State var showRecentActivity: Bool = false
     @State var routeWaypoint: [RouteWaypoint] = []
     @State var showMap: Bool = false
+    @State var animateStats: Bool = false
 
     var body: some View {
         ScrollView(.vertical) {
@@ -29,14 +30,25 @@ struct TrendsView: View {
                 .padding()
 
                 HStack {
-                    ProgressBar(progress: self.$historyViewHandler.weeklyGoal.distanceProgress,
-                                progressLabel: self.$historyViewHandler.weeklyGoal.distanceFormmated, title: "Distance")
+                    ProgressBar(
+                        progress: self.$historyViewHandler.weeklyGoal.distanceProgress,
+                        progressLabel: self.$historyViewHandler.weeklyGoal.distanceFormmated,
+                        animated: $animateStats,
+                        title: "Distance")
                         .frame(minWidth: 100, maxWidth: .infinity)
                         .frame(height: 130)
-                    ProgressBar(progress: self.$historyViewHandler.weeklyGoal.timeProgress, progressLabel: self.$historyViewHandler.weeklyGoal.timeFormmated, title: "Time")
+                    ProgressBar(
+                        progress: self.$historyViewHandler.weeklyGoal.timeProgress,
+                        progressLabel: self.$historyViewHandler.weeklyGoal.timeFormmated,
+                        animated: $animateStats,
+                        title: "Time")
                         .frame(minWidth: 100, maxWidth: .infinity)
-                    .frame(height: 130)
+                        .frame(height: 130)
                 }
+                .onAppear {
+                    self.animateStats = true
+                }
+
                 .padding()
                 }
                  .background(self.AppBackground())
@@ -68,17 +80,18 @@ struct TrendsView: View {
                     Spacer()
                 }
                 .padding(.horizontal)
-                SingleActivityTitleView(activity: historyViewHandler.activityList.last!)
+                SingleActivityTitleView(activity: historyViewHandler.activityList.first!)
                     .padding()
                     .onTapGesture {
                         self.showRecentActivity.toggle()
                 }
                 .sheet(isPresented: $showRecentActivity) {
-                    SingleActivityView(activity: self.historyViewHandler.activityList.last!, isNewActivity: false)
+                    SingleActivityView(
+                        activity: self.historyViewHandler.activityList.last!,
+                        isNewActivity: false)
 
-                           }
-                SingleActivityStatsView(activity: historyViewHandler.activityList.last!,
-                                        isNewActivity: false)
+                }
+                SingleActivityStatsView(activity: historyViewHandler.activityList.first!)
                     .padding(.horizontal)
              //TODO: ADD MAPVIEW HERE
             }

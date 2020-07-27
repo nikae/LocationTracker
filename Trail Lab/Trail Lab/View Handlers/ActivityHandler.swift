@@ -62,17 +62,17 @@ enum ActivityType: Int {
     }
 
     func title() -> String {
-           switch self {
-           case .walking:
-               return "walk"
-           case .running:
-               return "run"
-           case .hiking:
-               return "hike"
-           case .biking:
-               return "bike ride"
-           }
-       }
+        switch self {
+        case .walking:
+            return "walk"
+        case .running:
+            return "run"
+        case .hiking:
+            return "hike"
+        case .biking:
+            return "bike ride"
+        }
+    }
 
     func imageName() -> String {
         switch self {
@@ -101,23 +101,27 @@ enum ActivityType: Int {
     }
 
     func uiColor() -> UIColor {
-           switch self {
-           case .walking:
-               return UIColor.SportColors.walk
-           case .running:
-               return UIColor.SportColors.run
-           case .hiking:
-               return UIColor.SportColors.hike
-           case .biking:
-               return UIColor.SportColors.bike
-           }
-       }
+        switch self {
+        case .walking:
+            return UIColor.SportColors.walk
+        case .running:
+            return UIColor.SportColors.run
+        case .hiking:
+            return UIColor.SportColors.hike
+        case .biking:
+            return UIColor.SportColors.bike
+        }
+    }
 }
 
 enum ActivityState {
     case active
     case inactive
     case paused
+}
+
+protocol ActivityHandlerDelegate: class {
+    func activitySaved()
 }
 
 class ActivityHandler: ObservableObject {
@@ -128,6 +132,7 @@ class ActivityHandler: ObservableObject {
     @Published var activity: Activity?
     @Published var tempLocation: String = ""
     @Published var statsViewOffset: CGFloat = -300
+
     let locationManager = LocationManager.shared
     let pedometerManager = PedometerManager()
 
@@ -136,13 +141,14 @@ class ActivityHandler: ObservableObject {
     private var activityTimer: Timer?
 
     weak var mapViewDelegate: MapViewDelegate?
+    weak var activityHandlerDelegate: ActivityHandlerDelegate?
 
     func animateStatsView(_ offset: CGFloat) {
         withAnimation(.interpolatingSpring(mass: 1.2,
-        stiffness: 100,
-        damping: 25,
-        initialVelocity: 10)) {
-            statsViewOffset = offset
+                                           stiffness: 100,
+                                           damping: 25,
+                                           initialVelocity: 10)) {
+                                            statsViewOffset = offset
         }
     }
 
@@ -191,14 +197,15 @@ class ActivityHandler: ObservableObject {
 
     func saveActivity() {
         guard let activity = activity else { return }
-      //  if activity.duration > 60 {
-            ActivityDataStore().save(activity: activity) { sucsess, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                print(sucsess)
+        ActivityDataStore().save(activity: activity) { sucsess, error in
+
+            self.activityHandlerDelegate?.activitySaved()
+
+            if let error = error {
+                print(error.localizedDescription)
             }
-    //    }
+            print(sucsess)
+        }
     }
 
     func makeActivityTitle(_ loc: CLLocation, completionHandler: @escaping ((String?) -> Void)) {
@@ -206,8 +213,8 @@ class ActivityHandler: ObservableObject {
         CLGeocoder().reverseGeocodeLocation(loc, completionHandler: {(placemaks, error)->Void in
             if error != nil {
                 print("Reverse geocoder filed with error: \(error!.localizedDescription)")
-                return
             }
+
             if let pm = placemaks?.first {
 
                 if let areasOfInterest = pm.areasOfInterest?.first, let subLocality = pm.subLocality {
@@ -231,7 +238,7 @@ class ActivityHandler: ObservableObject {
         })
     }
 
-     private func locationListener(location: CLLocation) {
+    private func locationListener(location: CLLocation) {
         let lastDistance = self.activity?.locations.last
         self.activity?.locations.append(location)
         self.activity?.altitude = location.altitude
@@ -255,7 +262,7 @@ class ActivityHandler: ObservableObject {
 
         tempLocation = "\(location)"
         if let locations = self.activity?.locations {
-        mapViewDelegate?.updatePolyline(with:  locations)
+            mapViewDelegate?.updatePolyline(with:  locations)
         }
     }
 
@@ -263,24 +270,23 @@ class ActivityHandler: ObservableObject {
         activityState = .paused
     }
 
-       private func startTimer() {
-           guard activityTimer == nil else {print("Workout timer already started!"); return}
-           activityTimer = Timer(timeInterval: 1.0, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
-           RunLoop.main.add(activityTimer!, forMode: .default)
-       }
+    private func startTimer() {
+        guard activityTimer == nil else {print("Workout timer already started!"); return}
+        activityTimer = Timer(timeInterval: 1.0, target: self, selector: #selector(timerTick), userInfo: nil, repeats: true)
+        RunLoop.main.add(activityTimer!, forMode: .default)
+    }
 
-       private func stopTimer() {
-           guard activityTimer != nil else {print("Workout timer already stopped!"); return}
-           activityTimer?.invalidate()
-           activityTimer = nil
-       }
+    private func stopTimer() {
+        guard activityTimer != nil else {print("Workout timer already stopped!"); return}
+        activityTimer?.invalidate()
+        activityTimer = nil
+    }
 
-     @objc private func timerTick() {
+    @objc private func timerTick() {
         let date = Date()
         addNewInterval(with: date)
         startDate = date
     }
-
 
     private func addNewInterval(with endDate: Date) {
         let interval = ActivityInterval(start: startDate, end: endDate)
@@ -314,9 +320,9 @@ class ActivityHandler: ObservableObject {
             DispatchQueue.main.async {
                 if self.activity?.activityType.hkValue() != .cycling {
                     self.activity?.numberOfSteps = steps
-                self.activity?.distance = distance
-                self.activity?.averagePace = averagePace
-                self.activity?.pace = pace
+                    self.activity?.distance = distance
+                    self.activity?.averagePace = averagePace
+                    self.activity?.pace = pace
                 }
                 self.activity?.floorsAscended = floorsAscended
                 self.activity?.floorsDscended = floorsDscended

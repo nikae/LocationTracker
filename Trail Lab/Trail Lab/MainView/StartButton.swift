@@ -32,7 +32,7 @@ struct StartButton: View {
     var body: some View {
         VStack {
             ZStack {
-                workoutButton(background: self.selectedTab != 1 ? Color(.secondarySystemBackground) : activityHandler.selectedActivityType.color(),
+                workoutButton(background: activityHandler.selectedActivityType.color(),
                           imageName: activityHandler.activityState == .inactive ? activityHandler.selectedActivityType.imageName() : activityHandler.activityState == .active  ? "stop.fill" : "play.fill",
                           isSystemIcon: activityHandler.activityState != .inactive )
 
@@ -41,9 +41,6 @@ struct StartButton: View {
                 }
             }
             .frame(width: width, height: width)
-            .sheet(isPresented: $openSingleActivityView) {
-                self.checkForSingleActivityView()
-            }
 
             Spacer()
         }
@@ -96,13 +93,6 @@ struct StartButton: View {
             .onEnded(dragBottomSheetHandler.onDragEnded) : DragGesture().updating($testDrag) { _, _, _ in}
             .onEnded(dragBottomSheetHandler.onDragEndedTest))
     }
-
-    func checkForSingleActivityView() -> some View {
-           if let activitie = activityHandler.activity {
-              return AnyView(SingleActivityView(activity: activitie, isNewActivity: true))
-           }
-        return AnyView(EmptyView())
-       }
 }
 
 struct StartButton_Previews: PreviewProvider {

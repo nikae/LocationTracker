@@ -11,6 +11,7 @@ import SwiftUI
 struct ProgressBar: View {
     @Binding var progress: Float
     @Binding var progressLabel: String
+    @Binding var animated: Bool
     let title: String
 
 
@@ -37,7 +38,7 @@ struct ProgressBar: View {
                         lineWidth: 20)
                   .foregroundColor(Color.red)
                   .rotationEffect(Angle(degrees: -215))
-                .animation(.linear)
+                .animation(animated ? .linear : .none)
             Text(progressLabel)
                 .font(.system(.body, design: .default))
                 .multilineTextAlignment(.center)
@@ -52,6 +53,10 @@ struct ProgressBar: View {
 
 struct ProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        ProgressBar(progress: .constant(0.5), progressLabel: .constant("--"), title: "--")
+        ProgressBar(
+            progress: .constant(0.5),
+            progressLabel: .constant("--"),
+            animated: .constant(true),
+            title: "--")
     }
 }

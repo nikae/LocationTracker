@@ -15,7 +15,6 @@ class SingleActivityViewHandler: ObservableObject {
     @Published var showMap: Bool = false
     @Published var altitudeList: [CGFloat] = []
     
-
     func getWaypointsFromHK(activity: Activity, completion: @escaping (_ path: [RouteWaypoint]?, [CGFloat]?) -> Void) {
         guard let activity = activity.hkValue else {
             completion([], [])

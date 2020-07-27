@@ -128,6 +128,25 @@ extension View {
             Spacer()
           }
       }
+
+    //MARK: textWithCircle
+    func TextWithCircle(color: Color, title: String) -> some View {
+        return HStack {
+            Image(systemName: "circle.fill").foregroundColor(color)
+            Text(title)
+        }
+        .font(.footnote)
+    }
+
+    func ColorGuide() -> some View {
+        let arr: [ActivityType] = [.walking, .running, .hiking, .biking]
+        return HStack {
+            ForEach(arr, id: \.self) { type in
+                self.TextWithCircle(color: type.color(), title: type.name())
+                .frame(minWidth: .zero, maxWidth: .infinity)
+            }
+        }
+    }
 }
 
 

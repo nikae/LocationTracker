@@ -60,6 +60,7 @@ class HistoryViewHandler: ObservableObject {
         timeGoal: 3600,
         timeProgress: 0,
         timeFormmated: "--")
+    @Published var newWorkoutLoadingIsDone: Bool = false
 
     func getGoals(activitiesByWeek: ActivitiesByWeek) {
         var totalDistance: Meter = 0
@@ -174,73 +175,10 @@ class HistoryViewHandler: ObservableObject {
         return currentWeekMonday
     }
 
-    func getActivityList() {
-
-        ActivityDataStore.loadPrancerciseWorkouts{ activityList, error in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "No activity")
-                return
-            }
-
-            guard let activityList = activityList else {
-                print("No activity")
-                return
-            }
-
-            func localValue(_ t: HKWorkoutActivityType) -> ActivityType {
-                switch t {
-                case .walking:
-                    return .walking
-                case .running:
-                    return .running
-                case .hiking:
-                    return .hiking
-                case .cycling:
-                    return .biking
-                default:
-                    return .walking
-                }
-            }
-
-            var list: [Activity] = []
-            for activity in activityList {
-                let startDate = activity.startDate
-                let endDate = activity.endDate
-                let workoutActivityType = activity.workoutActivityType
-                let distance = activity.totalDistance?.doubleValue(for: .meter())
-                let metadata = activity.metadata
-                let calories = activity.totalEnergyBurned?.doubleValue(for: .kilocalorie())
-
-
-                let steps = (metadata?[MetadataKeys.stepsCount.rawValue] as? HKQuantity)?.doubleValue(for: .count())
-                let elevationGain = (metadata?[MetadataKeys.elevationGain.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
-                let reletiveAltitude = (metadata?[MetadataKeys.reletiveAltitude.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
-                let maxAltitude = (metadata?[MetadataKeys.maxAltitude.rawValue] as? HKQuantity)?.doubleValue(for: .meter())
-
-                let timeInterval = endDate.timeIntervalSince(startDate)
-                let pace = Pace.calcPace(from: distance ?? 0, over: timeInterval)
-
-                let title = metadata?[MetadataKeys.title.rawValue] as? String
-
-                list.append(Activity(
-                    start: startDate,
-                    end: endDate,
-                    activityType: localValue(workoutActivityType),
-                    title: title,
-                    hkValue: activity,
-                    intervals: [],
-                    calories: calories,
-                    distance: distance ?? 0,
-                    numberOfSteps: Int(steps ?? 0),
-                    averagePace: pace,
-                    elevationGain: elevationGain,
-                    reletiveAltitude: reletiveAltitude,
-                    maxAltitude: maxAltitude))
-            }
-
-            let sortedList = list.sorted { $0.start > $1.start}
-            self.activityList = sortedList
-
+    func getActivityList(completion: @escaping (Bool) -> Void) {
+        ActivityDataStore.getActivityList { activityListin in
+            self.activityList = activityListin
+            completion(true)
         }
     }
 
@@ -319,7 +257,19 @@ class HistoryViewHandler: ObservableObject {
         maxAltitudeList = list
     }
 }
+extension HistoryViewHandler: ActivityHandlerDelegate {
+    func activitySaved() {
+        self.getActivityList { _ in
+            if let activitie = self.activityList.first {
+                self.selectedActivity = activitie
+                self.newWorkoutLoadingIsDone.toggle()
+            }
+        }
+    }
+}
 
+
+//TODO Move those out of here
 extension Date {
     func weekDay() -> String {
             let dateFormatter = DateFormatter()

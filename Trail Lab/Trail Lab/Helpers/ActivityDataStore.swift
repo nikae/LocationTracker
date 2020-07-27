@@ -10,6 +10,7 @@ import Foundation
 import HealthKit
 import CoreLocation
 import UserNotifications
+import UIKit
 
 struct Activity {
     let id = UUID()
@@ -124,7 +125,7 @@ class ActivityDataStore: NSObject {
         self.routeBuilder = HKWorkoutRouteBuilder(healthStore: self.healthStore, device: .local())
     }
 
-    func save(activity: Activity, completion: @escaping ((Bool, Error?) -> Swift.Void)) {
+    func save(activity: Activity, completion: @escaping (_ succsess: Bool, _ error: Error?) -> Void) {
 
         var metadata: [String: Any] = [:]
         let totalDistance = HKQuantity(unit: .meter(), doubleValue: activity.distance ?? 0)
@@ -159,20 +160,34 @@ class ActivityDataStore: NSObject {
         mySamples.append(contentsOf: activeEnergyBurned)
         mySamples.append(contentsOf: distanceSamples)
 
+        let group = DispatchGroup()
+        group.enter()
+
+        //ImplementErrorHendling
+
         healthStore.save(healthkitWorkout) { (success, error) in
-            guard success else {
-                completion(false, error)
-                return
-            }
+            print("DispatchGroup \(1.1)")
+            group.leave()
+            print("DispatchGroup \(1.2)")
+        }
 
-            self.addLocationTotheBuilder(healthkitWorkout, location: activity.locations)
+        group.enter()
+        self.addLocationTotheBuilder(healthkitWorkout, location: activity.locations) { success, error in
+            print("DispatchGroup \(2.1)")
+            group.leave()
+            print("DispatchGroup \(2.2)")
+        }
 
+        group.enter()
             self.healthStore.add(mySamples, to: healthkitWorkout) { (success, error) in
-                guard success else {
-                    completion(false, error)
-                    return
-                }
-            }
+                print("DispatchGroup \(3.1)")
+                group.leave()
+                print("DispatchGroup \(3.2)")
+        }
+
+        group.notify(queue: .main) {
+             print("DispatchGroup Done")
+            completion(true, nil)
         }
     }
 
@@ -225,7 +240,7 @@ class ActivityDataStore: NSObject {
     }
 
     //MARK: get workouts ftom health
-    class func loadPrancerciseWorkouts(completion:
+    static func loadPrancerciseWorkouts(completion:
         @escaping ([HKWorkout]?, Error?) -> Void) {
         //1. Get all workouts with the "Other" activity type.
         //        let workoutPredicateWalking = HKQuery.predicateForWorkouts(with: .walking)
@@ -261,6 +276,8 @@ class ActivityDataStore: NSObject {
 
         HKHealthStore().execute(query)
     }
+
+
 
     func getLocations(_ workout: HKWorkout, completion: @escaping (_ path: [CLLocation]?) -> Void) {
 
@@ -337,7 +354,7 @@ class ActivityDataStore: NSObject {
     }
     
 
-    func addLocationTotheBuilder(_ workout: HKWorkout, location: [CLLocation]) {
+    func addLocationTotheBuilder(_ workout: HKWorkout, location: [CLLocation], completion: @escaping (_ succsess: Bool, _ error: Error?) -> Void) {
 
         self.routeBuilder?.insertRouteData(location, completion: { (success, error) in
             guard error == nil else {
@@ -345,15 +362,96 @@ class ActivityDataStore: NSObject {
                 return
             }
 
-            self.saveToRouteBuilder(workout: workout)
-        })
-    }
-
-    func saveToRouteBuilder(workout: HKWorkout) {
-        self.routeBuilder?.finishRoute(with: workout, metadata: nil, completion: { (route, error) in
-            if route == nil {
-                print(error?.localizedDescription ?? "route == nil")
+            self.saveToRouteBuilder(workout: workout) { success, error in
+                completion(success, error)
             }
         })
     }
+
+    func saveToRouteBuilder(workout: HKWorkout, completion: @escaping (_ succsess: Bool, _ error: Error?) -> Void) {
+        self.routeBuilder?.finishRoute(with: workout, metadata: nil, completion: { (route, error) in
+
+            if route == nil {
+                print(error?.localizedDescription ?? "route == nil")
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        })
+    }
+
+    func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+
+    class func getActivityList(completion: @escaping ([Activity]) -> Void) {
+
+        loadPrancerciseWorkouts { activityList, error in
+            guard error == nil else {
+                print(error?.localizedDescription ?? "No activity")
+                return
+            }
+
+            guard let activityList = activityList else {
+                print("No activity")
+                return
+            }
+
+            func localValue(_ t: HKWorkoutActivityType) -> ActivityType {
+                switch t {
+                case .walking:
+                    return .walking
+                case .running:
+                    return .running
+                case .hiking:
+                    return .hiking
+                case .cycling:
+                    return .biking
+                default:
+                    return .walking
+                }
+            }
+
+            var list: [Activity] = []
+            for activity in activityList {
+                let startDate = activity.startDate
+                let endDate = activity.endDate
+                let workoutActivityType = activity.workoutActivityType
+                let distance = activity.totalDistance?.doubleValue(for: .meter())
+                let metadata = activity.metadata
+                let calories = activity.totalEnergyBurned?.doubleValue(for: .kilocalorie())
+
+
+                let steps = (metadata?[MetadataKeys.stepsCount.rawValue] as? HKQuantity)?.doubleValue(for: .count())
+                let elevationGain = (metadata?[MetadataKeys.elevationGain.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
+                let reletiveAltitude = (metadata?[MetadataKeys.reletiveAltitude.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
+                let maxAltitude = (metadata?[MetadataKeys.maxAltitude.rawValue] as? HKQuantity)?.doubleValue(for: .meter())
+
+                let timeInterval = endDate.timeIntervalSince(startDate)
+                let pace = Pace.calcPace(from: distance ?? 0, over: timeInterval)
+
+                let title = metadata?[MetadataKeys.title.rawValue] as? String
+
+                list.append(Activity(
+                    start: startDate,
+                    end: endDate,
+                    activityType: localValue(workoutActivityType),
+                    title: title,
+                    hkValue: activity,
+                    intervals: [],
+                    calories: calories,
+                    distance: distance ?? 0,
+                    numberOfSteps: Int(steps ?? 0),
+                    averagePace: pace,
+                    elevationGain: elevationGain,
+                    reletiveAltitude: reletiveAltitude,
+                    maxAltitude: maxAltitude))
+            }
+
+            let sortedList = list.sorted { $0.start > $1.start}
+            completion(sortedList)
+        }
+    }
+
 }

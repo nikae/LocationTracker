@@ -33,8 +33,8 @@ struct SingleActivityView: View {
                 DismissIcon()
                 ScrollView {
                     SingleActivityTitleView(activity: self.activity)
-                    .padding(.top)
-                    .padding(.horizontal)
+                        .padding(.top)
+                        .padding(.horizontal)
                     ZStack(alignment: .bottom) {
                         if self.singleActivityViewHandler.showMap {
                             ActivityMapView(routeWaypoints: self.routeWaypoint)
@@ -82,8 +82,7 @@ struct SingleActivityView: View {
                     .environmentObject(self.mapViewHandler)
 
                     Spacer()
-                    SingleActivityStatsView(activity: self.activity,
-                                            isNewActivity: self.isNewActivity)
+                    SingleActivityStatsView(activity: self.activity)
                         .padding(.horizontal)
                         .background(Color(.systemBackground))
                         .animation(self.animateStats ? .easeOut : .none)
@@ -101,28 +100,16 @@ struct SingleActivityView: View {
     }
 
     fileprivate func getWayPointsForTheMap() {
-        if self.isNewActivity {
-            self.singleActivityViewHandler.getWaypointsFromLocalActivity(
-            activity: self.activity) { waypoints in
+        self.singleActivityViewHandler.getWaypointsFromHK(
+        activity: self.activity) { waypoints, altitudes in
+            DispatchQueue.main.async {
                 if let waypoints = waypoints {
-                    DispatchQueue.main.async {
-                        self.routeWaypoint = waypoints
-                        self.singleActivityViewHandler.showMap = true
-                    }
+                    self.routeWaypoint = waypoints
+                    self.singleActivityViewHandler.showMap = true
                 }
-            }
-        } else {
-            self.singleActivityViewHandler.getWaypointsFromHK(
-            activity: self.activity) { waypoints, altitudes in
-                DispatchQueue.main.async {
-                if let waypoints = waypoints {
-                        self.routeWaypoint = waypoints
-                        self.singleActivityViewHandler.showMap = true
-                    }
-//                    if let altitudes = altitudes {
-//                        self.singleActivityViewHandler.altitudeList = altitudes
-//                    }
-                }
+                //                    if let altitudes = altitudes {
+                //                        self.singleActivityViewHandler.altitudeList = altitudes
+                //                    }
             }
         }
     }
@@ -138,7 +125,7 @@ struct SingleActivityView_Previews: PreviewProvider {
 }
 
 let MocActivity = Activity(
-start: Date(),
-end: Date(),
-activityType: .walking,
-intervals: [])
+    start: Date(),
+    end: Date(),
+    activityType: .walking,
+    intervals: [])

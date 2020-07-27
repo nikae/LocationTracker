@@ -23,7 +23,9 @@ struct ActivitiesView: View {
                 }
             }
         .sheet(isPresented: $open, content: {
-            SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: false)
+            SingleActivityView(
+                activity: self.historyViewHandler.selectedActivity,
+                isNewActivity: false)
         })
     }
 }

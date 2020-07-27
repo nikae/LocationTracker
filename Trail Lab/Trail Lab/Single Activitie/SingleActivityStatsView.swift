@@ -13,7 +13,6 @@ import SwiftUI
 
 struct SingleActivityStatsView: View {
     let activity: Activity
-    let isNewActivity: Bool
 
     var color: Color {
         return activity.activityType.color()
@@ -74,13 +73,11 @@ struct SingleActivityStatsView: View {
             }
             Divider()
             HStack(alignment: .bottom) {
-                if self.isNewActivity {
-                    self.StatsViewLarge(
-                        value: self.activity.altitude?.formatAltitude() ?? "--",
-                        title: "Altitude".uppercased(),
-                        tintColor: self.color)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                }
+//                    self.StatsViewLarge(
+//                        value: self.activity.altitude?.formatAltitude() ?? "--",
+//                        title: "Altitude".uppercased(),
+//                        tintColor: self.color)
+//                        .frame(minWidth: 0, maxWidth: .infinity)
                 self.StatsViewLarge(
                     value: self.activity.maxAltitude?.formatAltitude() ?? "--",
                     title: "Max Altitude".uppercased(),

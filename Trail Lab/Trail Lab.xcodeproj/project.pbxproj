@@ -52,6 +52,7 @@
 		247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */; };
 		247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* ActivitiesView.swift */; };
 		247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */; };
+		24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A9142824C9260E00C9EF02 /* HealthKitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityView.swift; sourceTree = "<group>"; };
 		247BA1D424A6E1D2007747BC /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewHandler.swift; sourceTree = "<group>"; };
+		24A9142824C9260E00C9EF02 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				245F78B4249BD402009BF67A /* HealthPermisionsHandler.swift */,
+				24A9142824C9260E00C9EF02 /* HealthKitManager.swift */,
 				245F78BA249BDA25009BF67A /* UserDataStore.swift */,
 				245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */,
 				245F78BE249D2720009BF67A /* LocationManager.swift */,
@@ -455,6 +458,7 @@
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */,
 				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,
+				24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */,
 				243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
