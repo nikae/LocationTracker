@@ -35,10 +35,10 @@ struct ActivityCell: View {
                     title: (self.isSpeedType ? "Avg Speed" : "Pace").uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
-            }        }
-            .padding(.vertical)
-        //.background(self.AppBackground().cornerRadius(12))
-
+            }
+        }
+        .background(Color(.systemBackground))
+        .padding(.vertical)
     }
 }
 

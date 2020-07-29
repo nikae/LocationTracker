@@ -107,8 +107,8 @@
             filePath = "Trail Lab/Helpers/ActivityDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "getLocations(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>

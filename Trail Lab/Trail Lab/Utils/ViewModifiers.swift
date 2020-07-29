@@ -34,3 +34,13 @@ struct noShadow: ViewModifier {
             .shadow(color: Color.clear, radius: 0)
     }
 }
+
+extension Notification.Name {
+    static let errorWithMessage = Notification.Name("errorWithMessage")
+}
+
+func postDebugErrorNotification(_ withMessage: String) {
+    #if DEBUG
+    NotificationCenter.default.post(name: .errorWithMessage, object: withMessage)
+    #endif
+}

@@ -87,7 +87,7 @@ struct TrendsView: View {
                 }
                 .sheet(isPresented: $showRecentActivity) {
                     SingleActivityView(
-                        activity: self.historyViewHandler.activityList.last!,
+                        activity: self.historyViewHandler.activityList.first!,
                         isNewActivity: false)
 
                 }

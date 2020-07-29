@@ -98,6 +98,11 @@ struct ContentView: View {
         .sheet(isPresented: self.$historyViewHandler.newWorkoutLoadingIsDone) {
             SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: true)
         }
+        .alert(isPresented: $historyViewHandler.showAlert) {
+            Alert(title: Text("Error"), message: Text(historyViewHandler.errorMessage), dismissButton: .cancel({
+                self.historyViewHandler.showAlert.toggle()
+            }))
+        }
         .onAppear {
             self.activityHandler.authorizeHealthKit()
             self.activityHandler.activityHandlerDelegate = self.historyViewHandler

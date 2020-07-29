@@ -167,6 +167,9 @@ class ActivityDataStore: NSObject {
 
         healthStore.save(healthkitWorkout) { (success, error) in
             print("DispatchGroup \(1.1)")
+            if let error = error {
+                postDebugErrorNotification(error.localizedDescription)
+            }
             group.leave()
             print("DispatchGroup \(1.2)")
         }
@@ -174,6 +177,10 @@ class ActivityDataStore: NSObject {
         group.enter()
         self.addLocationTotheBuilder(healthkitWorkout, location: activity.locations) { success, error in
             print("DispatchGroup \(2.1)")
+            if let error = error {
+                postDebugErrorNotification(error.localizedDescription)
+            }
+
             group.leave()
             print("DispatchGroup \(2.2)")
         }
@@ -181,6 +188,10 @@ class ActivityDataStore: NSObject {
         group.enter()
             self.healthStore.add(mySamples, to: healthkitWorkout) { (success, error) in
                 print("DispatchGroup \(3.1)")
+                if let error = error {
+                    postDebugErrorNotification(error.localizedDescription)
+                }
+
                 group.leave()
                 print("DispatchGroup \(3.2)")
         }
@@ -310,10 +321,10 @@ class ActivityDataStore: NSObject {
 
                        // This block may be called multiple times.
 
-                       if let error = errorOrNil {
-                           // Handle any errors here.
-                           return
-                       }
+                    if let error = errorOrNil {
+                        postDebugErrorNotification(error.localizedDescription)
+                        return
+                    }
 
                        guard let locations = locationsOrNill else {
                            fatalError("*** Invalid State: This can only fail if there was an error. ***")
@@ -359,6 +370,9 @@ class ActivityDataStore: NSObject {
         self.routeBuilder?.insertRouteData(location, completion: { (success, error) in
             guard error == nil else {
                 print(error?.localizedDescription ?? "Error insertRouteData")
+                if let error = error {
+                    postDebugErrorNotification(error.localizedDescription)
+                }
                 return
             }
 
@@ -390,6 +404,7 @@ class ActivityDataStore: NSObject {
         loadPrancerciseWorkouts { activityList, error in
             guard error == nil else {
                 print(error?.localizedDescription ?? "No activity")
+                postDebugErrorNotification(error?.localizedDescription ?? "No activity")
                 return
             }
 

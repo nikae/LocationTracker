@@ -62,6 +62,24 @@ class HistoryViewHandler: ObservableObject {
         timeFormmated: "--")
     @Published var newWorkoutLoadingIsDone: Bool = false
 
+    @Published var errorMessage: String = "Error"
+    @Published var showAlert: Bool = false
+
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(echoToggled), name: .errorWithMessage, object: nil)
+    }
+
+    @objc func echoToggled(notification: Notification){
+        if let state = notification.object as? String{
+            DispatchQueue.main.async {
+                self.errorMessage = state
+                if !self.showAlert {
+                    self.showAlert.toggle()
+                }
+            }
+        }
+    }
+    
     func getGoals(activitiesByWeek: ActivitiesByWeek) {
         var totalDistance: Meter = 0
         var totalDuration: TimeInterval = 0
