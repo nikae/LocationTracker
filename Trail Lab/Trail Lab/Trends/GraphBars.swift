@@ -11,7 +11,7 @@ import SwiftUI
 struct BarGraphModel {
     let id: UUID = UUID()
     let v: CGFloat
-    let c: [Color]
+    let c: Gradient
     let day: String
 }
 
@@ -39,7 +39,7 @@ struct GraphBars: View {
                     ForEach(self.historyViewHandler.barGraphModels, id: \.id) { height in
                         BarView(
                             height: self.calcHeight(maxH: self.macH, height: height.v),
-                            colors: height.c,
+                            gradient: height.c,
                             day: height.day)
                             .frame(maxWidth: 30, maxHeight: 230)
                     }

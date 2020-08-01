@@ -54,6 +54,19 @@ extension Double {
         return formatter.string(from: converted as Measurement<Unit>)
     }
 
+    //MARK: Distane
+    func formatDistaneForGoals() -> String {
+        let unit = UnitPreferance(rawValue: Preferences.unit)
+        let unitLength: UnitLength = unit == .metric ? .kilometers : .miles
+        let value = NSMeasurement(doubleValue: self, unit: unitLength)
+        let formatter = MeasurementFormatter()
+        formatter.numberFormatter.maximumFractionDigits = 2
+        formatter.unitOptions = .providedUnit
+        let converted = value.converting(to: unitLength)
+
+        return formatter.string(from: converted as Measurement<Unit>)
+    }
+
     //MARK: Pace
     func formatPace() -> String {
         let isMetric = UnitPreferance(rawValue: Preferences.unit) == .metric

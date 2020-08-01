@@ -73,18 +73,19 @@ struct SingleActivityStatsView: View {
             }
             Divider()
             HStack(alignment: .bottom) {
-//                    self.StatsViewLarge(
-//                        value: self.activity.altitude?.formatAltitude() ?? "--",
-//                        title: "Altitude".uppercased(),
-//                        tintColor: self.color)
-//                        .frame(minWidth: 0, maxWidth: .infinity)
+                if self.activity.minAltitude != nil {
+                self.StatsViewLarge(
+                    value: self.activity.minAltitude?.formatAltitude() ?? "--",
+                    title: "Min Altitude".uppercased(),
+                    tintColor: self.color)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                }
                 self.StatsViewLarge(
                     value: self.activity.maxAltitude?.formatAltitude() ?? "--",
                     title: "Max Altitude".uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
             }
-
         }
     }
 }

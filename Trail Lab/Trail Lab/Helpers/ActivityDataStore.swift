@@ -34,6 +34,7 @@ struct Activity {
     var reletiveAltitude: Meter?
     var altitude: Meter?
     var maxAltitude: Meter?
+    var minAltitude: Meter?
 
     var calories: Double?
 
@@ -49,7 +50,8 @@ struct Activity {
          averagePace: SecondsPerMeter? = nil,
          elevationGain: Meter? = nil,
          reletiveAltitude: Meter? = nil,
-         maxAltitude: Meter?  = nil) {
+         maxAltitude: Meter?  = nil,
+         minAltitude: Meter?  = nil) {
         self.start = start
         self.end = end
         self.hkValue = hkValue
@@ -62,6 +64,7 @@ struct Activity {
         self.elevationGain = elevationGain
         self.reletiveAltitude = reletiveAltitude
         self.maxAltitude = maxAltitude
+        self.minAltitude = minAltitude
         self.calories = calories
     }
 
@@ -72,7 +75,8 @@ struct Activity {
     }
 
     var duration: TimeInterval {
-        return intervals.reduce(0) { (result, interval) in
+         let timeInterval = end.timeIntervalSince(start)
+        return intervals.isEmpty ? timeInterval :  intervals.reduce(0) { (result, interval) in
             result + interval.duration
         }
     }
@@ -112,6 +116,7 @@ enum MetadataKeys: String {
     case elevationGain = "Elevation Gain"
     case reletiveAltitude = "Reletive Altitude"
     case maxAltitude = "Max Altitude"
+    case minAltitude = "Min Altitude"
     case title = "Title"
 }
 
@@ -134,11 +139,13 @@ class ActivityDataStore: NSObject {
         let elevationGain = HKQuantity(unit: .meter(), doubleValue: activity.elevationGain ?? 0)
         let reletiveAltitude = HKQuantity(unit: .meter(), doubleValue: activity.reletiveAltitude ?? 0)
         let maxAltitude = HKQuantity(unit: .meter(), doubleValue: activity.maxAltitude ?? 0)
+        let minAltitude = HKQuantity(unit: .meter(), doubleValue: activity.minAltitude ?? 0)
 
         metadata[MetadataKeys.stepsCount.rawValue] = steps
         metadata[MetadataKeys.elevationGain.rawValue] = elevationGain
         metadata[MetadataKeys.reletiveAltitude.rawValue] = reletiveAltitude
         metadata[MetadataKeys.maxAltitude.rawValue] = maxAltitude
+        metadata[MetadataKeys.minAltitude.rawValue] = minAltitude
 
         if let title = activity.title {
             metadata[MetadataKeys.title.rawValue] = title
@@ -178,7 +185,7 @@ class ActivityDataStore: NSObject {
         self.addLocationTotheBuilder(healthkitWorkout, location: activity.locations) { success, error in
             print("DispatchGroup \(2.1)")
             if let error = error {
-                postDebugErrorNotification(error.localizedDescription)
+                postDebugErrorNotification("localized: \(error.localizedDescription) ::::: \(error)")
             }
 
             group.leave()
@@ -368,13 +375,10 @@ class ActivityDataStore: NSObject {
     func addLocationTotheBuilder(_ workout: HKWorkout, location: [CLLocation], completion: @escaping (_ succsess: Bool, _ error: Error?) -> Void) {
 
         self.routeBuilder?.insertRouteData(location, completion: { (success, error) in
-            guard error == nil else {
-                print(error?.localizedDescription ?? "Error insertRouteData")
-                if let error = error {
-                    postDebugErrorNotification(error.localizedDescription)
-                }
-                return
-            }
+            if let error = error {
+                print(error.localizedDescription)
+                postDebugErrorNotification("\(error.localizedDescription) <--- Error insertRouteData ////// :::::: \(error)")
+        }
 
             self.saveToRouteBuilder(workout: workout) { success, error in
                 completion(success, error)
@@ -442,6 +446,7 @@ class ActivityDataStore: NSObject {
                 let elevationGain = (metadata?[MetadataKeys.elevationGain.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
                 let reletiveAltitude = (metadata?[MetadataKeys.reletiveAltitude.rawValue]  as? HKQuantity)?.doubleValue(for: .meter())
                 let maxAltitude = (metadata?[MetadataKeys.maxAltitude.rawValue] as? HKQuantity)?.doubleValue(for: .meter())
+                let minAltitude = (metadata?[MetadataKeys.minAltitude.rawValue] as? HKQuantity)?.doubleValue(for: .meter())
 
                 let timeInterval = endDate.timeIntervalSince(startDate)
                 let pace = Pace.calcPace(from: distance ?? 0, over: timeInterval)
@@ -461,7 +466,8 @@ class ActivityDataStore: NSObject {
                     averagePace: pace,
                     elevationGain: elevationGain,
                     reletiveAltitude: reletiveAltitude,
-                    maxAltitude: maxAltitude))
+                    maxAltitude: maxAltitude,
+                    minAltitude: minAltitude))
             }
 
             let sortedList = list.sorted { $0.start > $1.start}

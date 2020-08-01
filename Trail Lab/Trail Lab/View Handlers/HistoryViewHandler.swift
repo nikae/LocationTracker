@@ -64,6 +64,7 @@ class HistoryViewHandler: ObservableObject {
 
     @Published var errorMessage: String = "Error"
     @Published var showAlert: Bool = false
+    @Published var showDistanceGoal: Bool = false
 
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(echoToggled), name: .errorWithMessage, object: nil)
@@ -211,40 +212,81 @@ class HistoryViewHandler: ObservableObject {
         getGoals(activitiesByWeek: activityListWeekly.first!)
     }
 
+    func getDistanceProcentFor(arr: [Activity]) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+
+        var walkProcent: CGFloat = 0
+        var runProcent: CGFloat = 0
+        var hikeProcent: CGFloat = 0
+        var bikeProcent: CGFloat = 0
+
+        var walkDistance: Double = 0
+        var runDistance: Double = 0
+        var hikeDistance: Double = 0
+        var bikeDistance: Double = 0
+
+        var totalDouble: Double { return walkDistance + runDistance + hikeDistance + bikeDistance }
+
+        for i in arr {
+            switch i.activityType {
+            case .walking:
+                walkDistance += i.distance ?? 0
+            case .running:
+                runDistance += i.distance ?? 0
+            case .hiking:
+                hikeDistance += i.distance ?? 0
+            case .biking:
+                bikeDistance += i.distance ?? 0
+
+            }
+        }
+
+        walkProcent = walkDistance > 0 && totalDouble > 0 ?
+            CGFloat(walkDistance / totalDouble) : 0
+        runProcent = runDistance > 0 && totalDouble > 0 ?
+            CGFloat(runDistance / totalDouble) : 0
+        hikeProcent = hikeDistance > 0 && totalDouble > 0 ?
+            CGFloat(hikeDistance / totalDouble) : 0
+        bikeProcent = bikeDistance > 0 && totalDouble > 0 ?
+            CGFloat(bikeDistance / totalDouble) : 0
+
+        return (walkProcent , runProcent, hikeProcent, bikeProcent)
+    }
+    
+
     func getProcent(arr: [Activity], date: Date) -> BarGraphModel {
         var distance = 0.0
-        var typeArr:[ActivityType] = []
-        var colors: [Color] = []
 
         for acrivity in arr {
             distance += acrivity.distance ?? 0
-            typeArr.append(acrivity.activityType)
         }
 
-        typeArr = typeArr.sorted { $0.rawValue < $1.rawValue }
+        let (walkProcent, runProcent, hikeProcent, bikeProcent) = getDistanceProcentFor(arr: arr)
 
-        for i in typeArr {
-            switch  i {
-            case .walking:
-                colors.append(ActivityType.walking.color())
-            case .running:
-                colors.append(ActivityType.running.color())
-            case .hiking:
-                colors.append(ActivityType.hiking.color())
-            case .biking:
-                colors.append(ActivityType.biking.color())
+
+        var gradient = Gradient(stops: [])
+
+        if walkProcent > 0 {
+            gradient.stops.append(.init(color: ActivityType.walking.color(), location: 0))
+        }
+        if runProcent > 0 {
+            gradient.stops.append(.init(color: ActivityType.running.color(), location: walkProcent))
+        }
+        if hikeProcent > 0 {
+            gradient.stops.append(.init(
+                color: ActivityType.hiking.color(),
+                location: walkProcent + runProcent))
+        }
+        if bikeProcent > 0 {
+            gradient.stops.append(.init(color: ActivityType.biking.color(), location: walkProcent + runProcent + hikeProcent))
+        }
+
+        if gradient.stops.count == 1 {
+            if let newStep = gradient.stops.first {
+                gradient.stops.append(newStep)
             }
         }
 
-        if colors.count <= 1 {
-            if let c = colors.first {
-                colors.append(c)
-            }
-        }
-
-        print("distance: \(CGFloat(distance))")
-        print("colors count: \(colors.count)")
-        return BarGraphModel(v: CGFloat(distance), c: colors, day: date.weekDay())
+        return BarGraphModel(v: CGFloat(distance), c: gradient, day: date.weekDay())
     }
 
     func getMaxAltitudeList(forWeek: Bool) {

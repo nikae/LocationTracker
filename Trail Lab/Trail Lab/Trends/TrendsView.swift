@@ -37,6 +37,9 @@ struct TrendsView: View {
                         title: "Distance")
                         .frame(minWidth: 100, maxWidth: .infinity)
                         .frame(height: 130)
+                        .onTapGesture {
+                            self.historyViewHandler.showDistanceGoal.toggle()
+                    }
                     ProgressBar(
                         progress: self.$historyViewHandler.weeklyGoal.timeProgress,
                         progressLabel: self.$historyViewHandler.weeklyGoal.timeFormmated,

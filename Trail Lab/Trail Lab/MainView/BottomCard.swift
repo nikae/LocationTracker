@@ -26,7 +26,7 @@ struct BottomCard: View {
                 }, label: {
                     self.workoutButton(
                         withBorder: true,
-                        background: Color(UIColor.SportColors.walk),
+                        background: ActivityType.walking.color(),
                         imageName: ActivityType.walking.imageName())
                 })
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -38,7 +38,7 @@ struct BottomCard: View {
                 }, label: {
                     self.workoutButton(
                         withBorder: true,
-                        background: Color(UIColor.SportColors.run),
+                        background: ActivityType.running.color(),
                         imageName: ActivityType.running.imageName())
                 })
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -50,7 +50,7 @@ struct BottomCard: View {
                 }, label: {
                     self.workoutButton(
                         withBorder: true,
-                        background: Color(UIColor.SportColors.hike),
+                        background: ActivityType.hiking.color(),
                         imageName: ActivityType.hiking.imageName())
                 })
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -62,7 +62,7 @@ struct BottomCard: View {
                 }, label: {
                     self.workoutButton(
                         withBorder: true,
-                        background: Color(UIColor.SportColors.bike),
+                        background: ActivityType.biking.color(),
                         imageName: ActivityType.biking.imageName())
                 })
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -70,6 +70,8 @@ struct BottomCard: View {
             .frame(height: 70)
             .padding(.top, 60)
             .padding(.horizontal)
+            .opacity(activityHandler.activityState == .inactive ? 1 : 0.3)
+            .allowsHitTesting(activityHandler.activityState == .inactive)
 
             Divider()
                 .padding(.top)

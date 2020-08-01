@@ -10,9 +10,11 @@ import SwiftUI
 
 struct BarView: View {
     let height: CGFloat
-    let colors: [Color]
+    let gradient: Gradient
     let day: String
     @State var h: CGFloat = 0
+
+
 
     var body: some View {
             VStack {
@@ -23,7 +25,7 @@ struct BarView: View {
                     .opacity(1)
                 Capsule()
                     .fill(LinearGradient(
-                        gradient: Gradient(colors: self.colors),
+                        gradient: self.gradient,
                         startPoint: .bottom,
                         endPoint: .top))
                     .frame(height: proxy.size.height * self.h)
@@ -46,17 +48,17 @@ struct BarView: View {
         }
     }
 }
-
-struct BarView_Previews: PreviewProvider {
-    static var previews: some View {
-        HStack {
-            BarView(height: 1, colors: [.red, .red, .green, .blue], day: "M")
-                .padding()
-            BarView(height: 1, colors: [.red, .green], day: "T")
-                .padding()
-            BarView(height: 1, colors: [.red, .red, .yellow], day: "W")
-                .padding()
-        }
-        .padding()
-    }
-}
+//
+//struct BarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HStack {
+//            BarView(height: 1, colors: [.red, .red, .green, .blue], day: "M")
+//                .padding()
+//            BarView(height: 1, colors: [.red, .green], day: "T")
+//                .padding()
+//            BarView(height: 1, colors: [.red, .red, .yellow], day: "W")
+//                .padding()
+//        }
+//        .padding()
+//    }
+//}

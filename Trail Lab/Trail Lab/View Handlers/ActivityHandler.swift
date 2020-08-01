@@ -177,15 +177,17 @@ class ActivityHandler: ObservableObject {
         addNewInterval(with: endDate)
         self.activity?.end = endDate
 
-        if let startLocation = self.activity?.locations.first {
-            makeActivityTitle(startLocation) { placeMarkString in
-                if let placeMarkString = placeMarkString {
-                    self.activity?.title = "\(placeMarkString) \(self.activity?.activityType.title() ?? "")"
+        if (activity?.duration ?? 0) > 60 {
+            if let startLocation = self.activity?.locations.first {
+                makeActivityTitle(startLocation) { placeMarkString in
+                    if let placeMarkString = placeMarkString {
+                        self.activity?.title = "\(placeMarkString) \(self.activity?.activityType.title() ?? "")"
+                    }
+                    self.saveActivity()
                 }
-                self.saveActivity()
+            } else {
+                saveActivity()
             }
-        } else {
-            saveActivity()
         }
 
         locationManager.stopLocationUpdates { error in
@@ -244,6 +246,12 @@ class ActivityHandler: ObservableObject {
         self.activity?.altitude = location.altitude
         if (self.activity?.maxAltitude ?? 0) < location.altitude {
             self.activity?.maxAltitude = location.altitude 
+        }
+
+        if self.activity?.minAltitude == nil {
+            self.activity?.minAltitude = location.altitude
+        } else if (self.activity?.minAltitude ?? 0) > location.altitude {
+            self.activity?.minAltitude = location.altitude
         }
 
         if activity?.activityType.hkValue() == .cycling {

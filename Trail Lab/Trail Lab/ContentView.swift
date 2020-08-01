@@ -94,6 +94,12 @@ struct ContentView: View {
                     .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.2), radius: 10.0)
             }
 
+            if historyViewHandler.showDistanceGoal {
+                ProgressPicker(
+                    open: $historyViewHandler.showDistanceGoal,
+                    isDistancePicker: false)
+            }
+
         }
         .sheet(isPresented: self.$historyViewHandler.newWorkoutLoadingIsDone) {
             SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: true)
