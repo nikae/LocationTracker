@@ -30,18 +30,21 @@ struct ActivityStatsView: View {
                     self.StatsViewLarge(
                         value: self.activityHandler.activity?.duration.format() ?? "__",
                         title: "Duration".uppercased(),
-                        tintColor: self.color)
+                        tintColor: self.color,
+                        larger: true)
                         .padding()
                     HStack {
                         self.StatsViewLarge(
                             value: self.activityHandler.activity?.distance?.formatDistane() ?? "--",
                             title: "Distance".uppercased(),
-                            tintColor: self.color)
+                            tintColor: self.color,
+                            larger: true)
                             .frame(minWidth: 0, maxWidth: .infinity)
                         self.StatsViewLarge(
                             value: self.isSpeedType ? self.activityHandler.activity?.speedCurrent?.formatSpeed() ?? "--" : activityHandler.activity?.averagePace?.formatPace() ?? "-:-",
                             title:self.isSpeedType ? "Speed".uppercased() : "Pace".uppercased(),
-                            tintColor: self.color)
+                            tintColor: self.color,
+                            larger: true)
                             .frame(minWidth: 0, maxWidth: .infinity)
 
                     }

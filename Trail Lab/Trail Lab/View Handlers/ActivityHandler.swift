@@ -153,6 +153,7 @@ class ActivityHandler: ObservableObject {
     }
 
     func startActivity() {
+        UIApplication.shared.isIdleTimerDisabled = true
         let startDate = Date()
         activityState = .active
         self.startDate = startDate
@@ -195,6 +196,7 @@ class ActivityHandler: ObservableObject {
         }
         pedometerManager.stopMonitoring()
         animateStatsView(-300)
+        UIApplication.shared.isIdleTimerDisabled = false
     }
 
     func saveActivity() {

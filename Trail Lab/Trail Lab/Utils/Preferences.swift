@@ -29,6 +29,10 @@ struct Preferences {
     static var activityType: Int
     @UserDefault("PREFERED_UNIT", defaultValue: getLocal().rawValue)
     static var unit: Int
+    @UserDefault("DISTANCE_WEEKLY_GOAL", defaultValue: 16000.0)
+    static var distanceGoal: Meter
+    @UserDefault("TIME_WEEKLY_GOAL", defaultValue: 9000)
+    static var timeGoal: TimeInterval
 }
 
 enum UnitPreferance: Int {

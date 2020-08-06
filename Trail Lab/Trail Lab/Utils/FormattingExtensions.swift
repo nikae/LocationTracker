@@ -67,6 +67,19 @@ extension Double {
         return formatter.string(from: converted as Measurement<Unit>)
     }
 
+    func convert(fromMiters: Bool) -> Double {
+        let unit = UnitPreferance(rawValue: Preferences.unit)
+        let unitLength: UnitLength = unit == .metric ? .kilometers : .miles
+        let value = NSMeasurement(doubleValue: self, unit: fromMiters ? UnitLength.meters : unitLength)
+        let formatter = MeasurementFormatter()
+        formatter.numberFormatter.maximumFractionDigits = 2
+        formatter.unitOptions = .providedUnit
+        let converted = value.converting(to: fromMiters ? unitLength : UnitLength.meters)
+
+        return converted.value
+    }
+    
+
     //MARK: Pace
     func formatPace() -> String {
         let isMetric = UnitPreferance(rawValue: Preferences.unit) == .metric
@@ -110,6 +123,12 @@ extension Date {
 
     var localaizedDate: String {
         return DateFormatter.localizedString(from: self, dateStyle: .full, timeStyle: .none)
+    }
+}
+
+extension TimeInterval {
+    func secondsToHoursMinutesSeconds() -> (hours: Int, minutes: Int, seconds: Int) {
+        return (Int(self) / 3600, (Int(self) % 3600) / 60, (Int(self) % 3600) % 60)
     }
 }
 

@@ -115,11 +115,11 @@ extension View {
 
     func StatsViewLarge(value: String,
                      title: String,
-                     tintColor: Color) -> some View {
+                     tintColor: Color, larger: Bool = false) -> some View {
         return HStack {
             VStack(alignment:.leading, spacing: 2) {
               Text(value)
-                .font(.system(.title, design: .rounded))
+                .font(.system(larger ? .largeTitle : .title, design: .rounded))
                   .fontWeight(.bold)
                   Text(title)
                       .font(.headline)

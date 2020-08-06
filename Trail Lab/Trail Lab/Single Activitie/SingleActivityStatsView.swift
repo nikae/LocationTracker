@@ -30,19 +30,28 @@ struct SingleActivityStatsView: View {
                     title: "Duration".uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
+                if self.isSpeedType {
+                    self.StatsViewLarge(
+                        value: (self.activity.calories ?? 0).formatCalories(),
+                        title: "calories".uppercased(),
+                        tintColor: self.color)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                }
             }
-            Divider()
-            HStack(alignment: .bottom) {
-                self.StatsViewLarge(
-                    value: (self.activity.calories ?? 0).formatCalories(),
-                    title: "calories".uppercased(),
-                    tintColor: self.color)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                self.StatsViewLarge(
-                    value: self.isSpeedType ? self.activity.speedCurrent?.formatSpeed() ?? "--" : "\(self.activity.numberOfSteps ?? 0)",
-                    title: self.isSpeedType ? "Speed".uppercased() : "Steps".uppercased(),
-                    tintColor: self.color)
-                    .frame(minWidth: 0, maxWidth: .infinity)
+            if !self.isSpeedType  {
+                Divider()
+                HStack(alignment: .bottom) {
+                    self.StatsViewLarge(
+                        value: (self.activity.calories ?? 0).formatCalories(),
+                        title: "calories".uppercased(),
+                        tintColor: self.color)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                    self.StatsViewLarge(
+                        value: "\(self.activity.numberOfSteps ?? 0)",
+                        title: "Steps".uppercased(),
+                        tintColor: self.color)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                }
             }
             Divider()
             HStack(alignment: .bottom) {

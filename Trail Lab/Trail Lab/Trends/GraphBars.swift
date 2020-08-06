@@ -65,15 +65,16 @@ struct BarsHeader: View {
         HStack {
             Spacer()
             Button(action: {
-                let date = self.historyViewHandler.getMonday(.previous)
+                let date = self.historyViewHandler.getMonday(.previous,
+                                                             for: self.historyViewHandler.selectedDateForDraphs)
                 self.historyViewHandler.getWorkoutsForAWeek(for: date)
             }) {
                 directionalButton(.previous)
             }
 
             Button(action: {
-                self.historyViewHandler.selectedDateForDraphs = Date()
-                self.historyViewHandler.getWorkoutsForAWeek(for: self.historyViewHandler.selectedDateForDraphs)
+                 let date = self.historyViewHandler.getMonday(.previous, for: Date())
+                self.historyViewHandler.getWorkoutsForAWeek(for: date)
             }) {
                 Text(historyViewHandler.dateTitle)
                     .font(.subheadline)
@@ -85,7 +86,7 @@ struct BarsHeader: View {
             .padding(.horizontal)
 
             Button(action: {
-                let date = self.historyViewHandler.getMonday(.next)
+                let date = self.historyViewHandler.getMonday(.next, for: self.historyViewHandler.selectedDateForDraphs)
                 self.historyViewHandler.getWorkoutsForAWeek(for: date)
             }) {
                 directionalButton(.next)

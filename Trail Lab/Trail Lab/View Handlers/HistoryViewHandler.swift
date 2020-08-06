@@ -39,10 +39,6 @@ struct WeeklyGoal {
 
 class HistoryViewHandler: ObservableObject {
 
-    let distanceGoal = 16000.0
-    let timeGoal: TimeInterval = 10800
-
-
     @Published var activityList: [Activity] = []
     @Published var selectedActivity: Activity =
         Activity(start: Date(), end: Date(), activityType: .walking, hkValue: nil, intervals: [], distance: 0)
@@ -53,11 +49,11 @@ class HistoryViewHandler: ObservableObject {
     @Published var dateTitle: String = ""
     @Published var weeklyGoal: WeeklyGoal = WeeklyGoal(
         distance: 0,
-        distanceGoal: 16000.0,
+        distanceGoal: Preferences.distanceGoal,
         distanceProgress: 0,
         distanceFormmated: "--",
         time: 0,
-        timeGoal: 3600,
+        timeGoal: Preferences.timeGoal,
         timeProgress: 0,
         timeFormmated: "--")
     @Published var newWorkoutLoadingIsDone: Bool = false
@@ -65,6 +61,7 @@ class HistoryViewHandler: ObservableObject {
     @Published var errorMessage: String = "Error"
     @Published var showAlert: Bool = false
     @Published var showDistanceGoal: Bool = false
+    @Published var showDurationGoal: Bool = false
 
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(echoToggled), name: .errorWithMessage, object: nil)
@@ -96,17 +93,17 @@ class HistoryViewHandler: ObservableObject {
             }
         }
 
-        let distanceFormmated = "\(totalDistance.formatDistane()) / \n\(distanceGoal.formatDistane())"
-        let timeFormmated = "\(totalDuration.format(using: [.hour, .minute]) ?? "--") / \n\(timeGoal.format(using: [.hour, .minute]) ?? "--")"
+        let distanceFormmated = "\(totalDistance.formatDistane()) / \n\(Preferences.distanceGoal.formatDistane())"
+        let timeFormmated = "\(totalDuration.format(using: [.hour, .minute]) ?? "--") / \n\(Preferences.timeGoal.format(using: [.hour, .minute]) ?? "--")"
 
         self.weeklyGoal = WeeklyGoal(
             distance: totalDistance,
-            distanceGoal: distanceGoal,
-            distanceProgress: Float(totalDistance / distanceGoal),
+            distanceGoal: Preferences.distanceGoal,
+            distanceProgress: Float(totalDistance / Preferences.distanceGoal),
             distanceFormmated:distanceFormmated,
             time: totalDuration,
-            timeGoal: timeGoal,
-            timeProgress: Float(totalDuration / timeGoal),
+            timeGoal: Preferences.timeGoal,
+            timeProgress: Float(totalDuration / Preferences.timeGoal),
             timeFormmated: timeFormmated)
 
     }
@@ -136,7 +133,6 @@ class HistoryViewHandler: ObservableObject {
         self.activityListWeekly = activitiesByWeek
         self.getMaxAltitudeList(forWeek: true)
 
-        self.barGraphModels.removeAll()
         self.gerMod()
 
     }
@@ -164,10 +160,10 @@ class HistoryViewHandler: ObservableObject {
         return week
     }
 
-    func getMonday(_ direction: graphDirection) -> Date {
+    func getMonday(_ direction: graphDirection, for date: Date) -> Date {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone.current
-        let components = calendar.dateComponents([.weekday], from: self.selectedDateForDraphs.today())
+        let components = calendar.dateComponents([.weekday], from: date.today())
 
         var isMondayToday = false
         //                              var isSundayToday = false
@@ -179,13 +175,13 @@ class HistoryViewHandler: ObservableObject {
         //                              }
 
         var currentWeekMonday = isMondayToday ?
-            selectedDateForDraphs.today() : selectedDateForDraphs.today().previous(.monday)
+            date.today() : date.today().previous(.monday)
 
         switch direction {
         case .previous:
-            currentWeekMonday = self.selectedDateForDraphs.today().previous(.monday)
+            currentWeekMonday = date.today().previous(.monday)
         case .next:
-            currentWeekMonday = self.selectedDateForDraphs.today().next(.monday)
+            currentWeekMonday = date.today().next(.monday)
         }
 
 
@@ -205,6 +201,9 @@ class HistoryViewHandler: ObservableObject {
         guard let arr =  activityListWeekly.first?.activitys else {
             return
         }
+
+        self.barGraphModels.removeAll()
+        
         for i in arr {
             self.barGraphModels.append(getProcent(arr: i.activitys ?? [Activity(start: Date(), end: Date(), activityType: .walking, intervals: [], distance: 0.1)], date: i.date))
         }

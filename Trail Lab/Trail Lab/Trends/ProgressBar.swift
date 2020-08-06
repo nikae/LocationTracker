@@ -52,6 +52,9 @@ struct ProgressBar: View {
 }
 
 struct ProgressPicker: View {
+
+    @EnvironmentObject var historyViewHandler: HistoryViewHandler
+
     let intArray: [Int] = Array(1...100)
     @Binding var open: Bool
     let isDistancePicker: Bool
@@ -66,15 +69,15 @@ struct ProgressPicker: View {
         return hArray.map { Double($0) * 3600 }
     }
 
-    let mArray: [Int] = Array(0...60)
+    let mArray: [Int] = Array(0..<60)
 
     var mstrengths: [Double] {
         return mArray.map { Double($0) * 60 }
     }
 
-    @State private var selectedStrength = 0
-    @State private var selecteHour = 0
-    @State private var selectedminute = 0
+    @State private var selectedStrength = Int(Preferences.distanceGoal.convert(fromMiters: true))
+    @State private var selecteHour = Preferences.timeGoal.secondsToHoursMinutesSeconds().hours
+    @State private var selectedminute = Preferences.timeGoal.secondsToHoursMinutesSeconds().minutes
 
     @State private var birthDate = Date()
 
@@ -126,6 +129,14 @@ struct ProgressPicker: View {
                 }
 
                 Button(action: {
+                    if self.isDistancePicker {
+                        print("distance goal here")
+                        Preferences.distanceGoal = Double(self.selectedStrength).convert(fromMiters: false)
+                    } else {
+                        Preferences.timeGoal = TimeInterval(self.selecteHour * 3600) + TimeInterval(self.selectedminute * 60)
+                    }
+
+                    self.historyViewHandler.gerMod()
                     self.open.toggle()
                 }, label: {
                     Text("Done")

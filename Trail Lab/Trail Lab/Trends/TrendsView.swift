@@ -47,6 +47,9 @@ struct TrendsView: View {
                         title: "Time")
                         .frame(minWidth: 100, maxWidth: .infinity)
                         .frame(height: 130)
+                    .onTapGesture {
+                            self.historyViewHandler.showDurationGoal.toggle()
+                    }
                 }
                 .onAppear {
                     self.animateStats = true
@@ -100,14 +103,16 @@ struct TrendsView: View {
             }
         }
         .onAppear {
-            self.historyViewHandler.selectedDateForDraphs = Date()
-            self.historyViewHandler.getWorkoutsForAWeek(for: self.historyViewHandler.selectedDateForDraphs)
+            let date = self.historyViewHandler.getMonday(.previous, for: Date())
+            self.historyViewHandler.getWorkoutsForAWeek(for: date)
         }
         .navigationBarItems(trailing:
             Button(action: {
                  self.showActivityList.toggle()
-            }, label: { 
+            }, label: {
+                if !self.historyViewHandler.activityList.isEmpty {
                 Image(systemName: "rectangle.grid.1x2.fill")
+                }
             })
         )
     }

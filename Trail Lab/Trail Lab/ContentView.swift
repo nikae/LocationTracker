@@ -38,9 +38,17 @@ struct ContentView: View {
             GeometryReader { proxy in
                 TabView(selection: self.$selectedTab) {
                     ZStack {
-                        NavigationView {
-                            ActivitiesView()
-                                .navigationBarTitle("Activities", displayMode: .large)
+                        if self.historyViewHandler.activityList.isEmpty {
+                            VStack {
+                                Text("🏜").font(.largeTitle)
+                                Text("No activities yet.").font(.headline)
+                            }
+                        } else {
+                            NavigationView {
+                                ActivitiesView()
+                                    .navigationBarTitle("Activities",
+                                                        displayMode: .large)
+                            }
                         }
                         //                        self.AppBackground()
                         //                        //FIXME: This needs to be moved into settings
@@ -70,11 +78,11 @@ struct ContentView: View {
                     }.tag(1)
                     NavigationView {
                         TrendsView()
-                            .navigationBarTitle("Trends", displayMode: .large)
+                            .navigationBarTitle("Dashboard", displayMode: .large)
                     }
                     .tabItem {
                         Image(systemName: "chart.bar.fill")
-                        Text("Trends")
+                        Text("Dashboard")
                     }.tag(2)
                 }
                 .accentColor(self.activityHandler.selectedActivityType.color())
@@ -97,7 +105,15 @@ struct ContentView: View {
             if historyViewHandler.showDistanceGoal {
                 ProgressPicker(
                     open: $historyViewHandler.showDistanceGoal,
+                    isDistancePicker: true)
+                .animation(.linear)
+            }
+
+            if historyViewHandler.showDurationGoal {
+                ProgressPicker(
+                    open: $historyViewHandler.showDurationGoal,
                     isDistancePicker: false)
+                    .animation(.linear)
             }
 
         }
