@@ -25,13 +25,13 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>We meed to write health</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>TBD</string>
+	<string>Location is used to generate a route for your activity. </string>
 	<key>NSLocationUsageDescription</key>
-	<string>TBD</string>
+	<string>Location is used to generate a route for your activity. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>TBD</string>
+	<string>Location is used to generate a route for your activity.</string>
 	<key>NSMotionUsageDescription</key>
-	<string>TBD</string>
+	<string>Trail Lab uses the motion sensor to generate steps, distance, pace, and altitude. </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

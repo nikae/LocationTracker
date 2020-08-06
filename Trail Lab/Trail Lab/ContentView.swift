@@ -41,7 +41,7 @@ struct ContentView: View {
                         if self.historyViewHandler.activityList.isEmpty {
                             VStack {
                                 Text("🏜").font(.largeTitle)
-                                Text("No activities yet.").font(.headline)
+                                Text("No activities yet").font(.headline)
                             }
                         } else {
                             NavigationView {

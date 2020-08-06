@@ -71,12 +71,12 @@ struct SingleActivityStatsView: View {
             HStack(alignment: .bottom) {
                 self.StatsViewLarge(
                     value: self.activity.elevationGain?.formatAltitude() ?? "__",
-                    title: "Elev Gain".uppercased(),
+                    title: "Elv Gain".uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
                 self.StatsViewLarge(
                     value: self.activity.reletiveAltitude?.formatAltitude() ?? "__",
-                    title: "Relat Alt".uppercased(),
+                    title: "Rel Altitude".uppercased(),
                     tintColor: self.color)
                     .frame(minWidth: 0, maxWidth: .infinity)
             }

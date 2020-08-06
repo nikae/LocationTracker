@@ -13,7 +13,11 @@ struct ProgressBar: View {
     @Binding var progressLabel: String
     @Binding var animated: Bool
     let title: String
-
+    let gradient = Gradient(stops: [
+        .init(color: Color.red, location: 0),
+        .init(color: Color.yellow, location: 0.3),
+        .init(color: Color.green, location: 0.7)
+    ])
 
     var body: some View {
         VStack {
@@ -21,9 +25,9 @@ struct ProgressBar: View {
                 Circle()
                     .trim(from: 0, to: 0.7)
                     .stroke(LinearGradient(
-                        gradient: Gradient(colors: [Color.green, Color.yellow, Color.red]),
-                        startPoint: .leading,
-                        endPoint: .trailing),
+                        gradient: gradient,
+                        startPoint: .trailing,
+                        endPoint: .topLeading),
                             lineWidth: 20)
                     .opacity(0.3)
                     .foregroundColor(Color.red)
@@ -32,9 +36,9 @@ struct ProgressBar: View {
                 Circle()
                     .trim(from: 0.0, to: CGFloat(min(self.progress * 0.7, 0.7)))
                     .stroke(LinearGradient(
-                        gradient: Gradient(colors: [Color.green, Color.yellow, Color.red]),
-                        startPoint: .leading,
-                        endPoint: .trailing),
+                        gradient: gradient,
+                        startPoint: .trailing,
+                        endPoint: .topLeading),
                             lineWidth: 20)
                     .foregroundColor(Color.red)
                     .rotationEffect(Angle(degrees: -215))
@@ -46,7 +50,6 @@ struct ProgressBar: View {
             Text(title)
                 .font(.system(.headline, design: .default))
                 .padding(.top, -30)
-            //                .offset(y: -20)
         }
     }
 }
@@ -75,7 +78,7 @@ struct ProgressPicker: View {
         return mArray.map { Double($0) * 60 }
     }
 
-    @State private var selectedStrength = Int(Preferences.distanceGoal.convert(fromMiters: true))
+    @State private var selectedStrength = Int(Preferences.distanceGoal.convert(fromMiters: true)) - 1
     @State private var selecteHour = Preferences.timeGoal.secondsToHoursMinutesSeconds().hours
     @State private var selectedminute = Preferences.timeGoal.secondsToHoursMinutesSeconds().minutes
 
@@ -130,8 +133,9 @@ struct ProgressPicker: View {
 
                 Button(action: {
                     if self.isDistancePicker {
+
                         print("distance goal here")
-                        Preferences.distanceGoal = Double(self.selectedStrength).convert(fromMiters: false)
+                        Preferences.distanceGoal = Double(self.selectedStrength + 1).convert(fromMiters: false)
                     } else {
                         Preferences.timeGoal = TimeInterval(self.selecteHour * 3600) + TimeInterval(self.selectedminute * 60)
                     }
@@ -144,9 +148,7 @@ struct ProgressPicker: View {
                         .background(AppBackground().cornerRadius(12))
                         .foregroundColor(Color(.label))
                 })
-
             }
-
         }.edgesIgnoringSafeArea(.all)
     }
 }

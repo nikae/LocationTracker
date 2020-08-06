@@ -98,7 +98,7 @@ struct ActivityStatsView: View {
                     HStack {
                         StatsView(
                             value: activityHandler.activity?.reletiveAltitude?.formatAltitude() ?? "__",
-                            title: "Relat Alt".uppercased(),
+                            title: "Rel Altitude".uppercased(),
                             tintColor: color)
                             .frame(minWidth: 0, maxWidth: .infinity)
                         StatsView(
