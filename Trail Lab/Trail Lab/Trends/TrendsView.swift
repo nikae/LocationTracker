@@ -103,7 +103,7 @@ struct TrendsView: View {
             }
         }
         .onAppear {
-            let date = self.historyViewHandler.getMonday(.previous, for: Date())
+            let date = self.historyViewHandler.getMonday(.current, for: Date())
             self.historyViewHandler.getWorkoutsForAWeek(for: date)
         }
         .navigationBarItems(trailing:

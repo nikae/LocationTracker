@@ -67,7 +67,10 @@ extension View {
             name = "chevron.left"
         case .next:
             name = "chevron.right"
+        case .current:
+            name = ""
         }
+
         return HStack {
             if direction == .previous {
                 Spacer()
