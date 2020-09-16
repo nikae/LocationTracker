@@ -32,6 +32,8 @@
 	<string>Location is used to generate a route for your activity.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Trail Lab uses the motion sensor to generate steps, distance, pace, and altitude. </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Trail Lab uses photos to generate sharable activity overlay.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

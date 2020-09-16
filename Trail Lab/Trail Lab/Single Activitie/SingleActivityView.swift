@@ -15,6 +15,10 @@ struct SingleActivityView: View {
     let activity: Activity
     let isNewActivity: Bool
 
+    @State private var showingImagePicker = false
+    @State private var showingShareView = false
+    @State private var inputImage: UIImage?
+
     var color: Color {
         return activity.activityType.color()
     }
@@ -90,9 +94,25 @@ struct SingleActivityView: View {
                     if self.singleActivityViewHandler.showMap && !self.singleActivityViewHandler.altitudeList.isEmpty {
                         linearGraph(dataPoints: self.singleActivityViewHandler.altitudeList)
                     }
+
+                    HStack {
+                        Button(action: {
+                            self.showingImagePicker.toggle()
+                        }) {
+                            ShareButton(text: "Share", color: self.color)
+                        }
+                        .padding(.top)
+                        .sheet(isPresented: self.$showingImagePicker, onDismiss: self.loadImage) {
+                            ImagePicker(image: self.$inputImage)
+                        }
+                    }
                 }
                 Spacer()
             }
+            .sheet(isPresented: self.$showingShareView) {
+                ShareImageView(image: self.inputImage)
+            }
+
             .onAppear {
                 self.getWayPointsForTheMap()
             }
@@ -112,6 +132,12 @@ struct SingleActivityView: View {
                 //                    }
             }
         }
+    }
+
+    func loadImage() {
+        guard inputImage != nil else { return }
+        showingShareView.toggle()
+       // image = Image(uiImage: inputImage)
     }
 }
 
