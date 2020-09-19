@@ -10,34 +10,6 @@ import Foundation
 import HealthKit
 import SwiftUI
 
-struct ActivitiesByDay {
-    var date: Date
-    var activitys: [Activity]?
-}
-
-struct ActivitiesByWeek {
-    var date: Date
-    var activitys: [ActivitiesByDay]?
-}
-
-enum graphDirection {
-    case previous
-    case next
-    case current
-}
-
-struct WeeklyGoal {
-    var distance: Meter
-    var distanceGoal: Meter
-    var distanceProgress: Float
-    var distanceFormmated: String
-
-    var time: TimeInterval
-    var timeGoal: TimeInterval
-    var timeProgress: Float
-    var timeFormmated: String
-}
-
 class HistoryViewHandler: ObservableObject {
 
     @Published var activityList: [Activity] = []
@@ -139,26 +111,9 @@ class HistoryViewHandler: ObservableObject {
     }
 
     private func getWeekdays(for date: Date) -> [Date] {
-        var calendar = Calendar.autoupdatingCurrent
-        calendar.firstWeekday = 2 // Start on Monday (or 1 for Sunday)
-        let today = calendar.startOfDay(for: date)
-        var week = [Date]()
-        if let weekInterval = calendar.dateInterval(of: .weekOfYear, for: today) {
-            for i in 0...6 {
-                if let day = calendar.date(byAdding: .day, value: i, to: weekInterval.start) {
-                    week += [day]
-                }
-            }
-        }
-
-        if let firstDate = week.first, let lastDate = week.last {
-            let mydf = DateFormatter()
-            mydf.dateStyle = .medium
-
-            dateTitle = "\(mydf.string(from: firstDate)) - \(mydf.string(from: lastDate))"
-        }
-
-        return week
+        let week = date.week()
+        dateTitle = week.title
+        return week.week
     }
 
     func getMonday(_ direction: graphDirection, for date: Date) -> Date {

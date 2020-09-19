@@ -19,6 +19,21 @@
 		2418139924909AEB0072389D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139824909AEB0072389D /* Color.swift */; };
 		2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139B24909CE00072389D /* WorkoutVIew.swift */; };
 		241813A12492B1990072389D /* SlideCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241813A02492B1990072389D /* SlideCard.swift */; };
+		2425195E2516900E000F1EF8 /* GraphTileWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425195425168FD8000F1EF8 /* GraphTileWidget.swift */; };
+		242519632516903C000F1EF8 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AF2499981A009BF67A /* ViewExtensions.swift */; };
+		24251969251690F9000F1EF8 /* ActivityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24251968251690F9000F1EF8 /* ActivityDataModel.swift */; };
+		2425196E25169104000F1EF8 /* ActivityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24251968251690F9000F1EF8 /* ActivityDataModel.swift */; };
+		242519742516916B000F1EF8 /* HistoryDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242519732516916B000F1EF8 /* HistoryDataModels.swift */; };
+		2425197925169198000F1EF8 /* HistoryDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242519732516916B000F1EF8 /* HistoryDataModels.swift */; };
+		2425197E251691F1000F1EF8 /* FormattingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2624A573570029137C /* FormattingExtensions.swift */; };
+		242519832516920E000F1EF8 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A62495E9EF009BF67A /* Preferences.swift */; };
+		24251996251694A6000F1EF8 /* GraphBarsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425198C25169475000F1EF8 /* GraphBarsWidget.swift */; };
+		2425199C25169577000F1EF8 /* BarGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425199B25169577000F1EF8 /* BarGraphModel.swift */; };
+		242519A125169579000F1EF8 /* BarGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425199B25169577000F1EF8 /* BarGraphModel.swift */; };
+		242519A625169A13000F1EF8 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
+		242519AB25169C20000F1EF8 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C724B6A65C001345C5 /* BarView.swift */; };
+		242519B12516A1A3000F1EF8 /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242519B02516A1A3000F1EF8 /* GraphBackgroundView.swift */; };
+		242519B22516A1A3000F1EF8 /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242519B02516A1A3000F1EF8 /* GraphBackgroundView.swift */; };
 		24301F2124A2E22D0029137C /* PedometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2024A2E22D0029137C /* PedometerManager.swift */; };
 		24301F2324A512070029137C /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2224A512070029137C /* ViewModifiers.swift */; };
 		24301F2524A516880029137C /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2424A516880029137C /* ImageExtensions.swift */; };
@@ -56,6 +71,14 @@
 		247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */; };
 		247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* ActivitiesView.swift */; };
 		247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */; };
+		24911E612513E722000EB01F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24911E602513E722000EB01F /* WidgetKit.framework */; };
+		24911E632513E722000EB01F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24911E622513E722000EB01F /* SwiftUI.framework */; };
+		24911E662513E722000EB01F /* Trail_Lab_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24911E652513E722000EB01F /* Trail_Lab_Widget.swift */; };
+		24911E692513E726000EB01F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24911E682513E726000EB01F /* Assets.xcassets */; };
+		24911E6B2513E726000EB01F /* Trail_Lab_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 24911E672513E722000EB01F /* Trail_Lab_Widget.intentdefinition */; };
+		24911E6C2513E726000EB01F /* Trail_Lab_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 24911E672513E722000EB01F /* Trail_Lab_Widget.intentdefinition */; };
+		24911E6F2513E726000EB01F /* Trail Lab WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 24911E5F2513E722000EB01F /* Trail Lab WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		24911E9B2513E8B7000EB01F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139824909AEB0072389D /* Color.swift */; };
 		24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A9142824C9260E00C9EF02 /* HealthKitManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +97,28 @@
 			remoteGlobalIDString = 24181360249073340072389D;
 			remoteInfo = "Trail Lab";
 		};
+		24911E6D2513E726000EB01F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24181359249073340072389D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24911E5E2513E722000EB01F;
+			remoteInfo = "Trail Lab WidgetExtension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		24911E702513E726000EB01F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				24911E6F2513E726000EB01F /* Trail Lab WidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		24181361249073340072389D /* Trail Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trail Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +140,12 @@
 		2418139B24909CE00072389D /* WorkoutVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutVIew.swift; sourceTree = "<group>"; };
 		2418139E2492A5300072389D /* DragBottomSheetHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragBottomSheetHandler.swift; sourceTree = "<group>"; };
 		241813A02492B1990072389D /* SlideCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCard.swift; sourceTree = "<group>"; };
+		2425195425168FD8000F1EF8 /* GraphTileWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTileWidget.swift; sourceTree = "<group>"; };
+		24251968251690F9000F1EF8 /* ActivityDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataModel.swift; sourceTree = "<group>"; };
+		242519732516916B000F1EF8 /* HistoryDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDataModels.swift; sourceTree = "<group>"; };
+		2425198C25169475000F1EF8 /* GraphBarsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBarsWidget.swift; sourceTree = "<group>"; };
+		2425199B25169577000F1EF8 /* BarGraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarGraphModel.swift; sourceTree = "<group>"; };
+		242519B02516A1A3000F1EF8 /* GraphBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBackgroundView.swift; sourceTree = "<group>"; };
 		24301F2024A2E22D0029137C /* PedometerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedometerManager.swift; sourceTree = "<group>"; };
 		24301F2224A512070029137C /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		24301F2424A516880029137C /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
@@ -133,6 +183,13 @@
 		247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityView.swift; sourceTree = "<group>"; };
 		247BA1D424A6E1D2007747BC /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		247BA1D624A6E24C007747BC /* HistoryViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewHandler.swift; sourceTree = "<group>"; };
+		24911E5F2513E722000EB01F /* Trail Lab WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Trail Lab WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24911E602513E722000EB01F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		24911E622513E722000EB01F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		24911E652513E722000EB01F /* Trail_Lab_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail_Lab_Widget.swift; sourceTree = "<group>"; };
+		24911E672513E722000EB01F /* Trail_Lab_Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Trail_Lab_Widget.intentdefinition; sourceTree = "<group>"; };
+		24911E682513E726000EB01F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		24911E6A2513E726000EB01F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24A9142824C9260E00C9EF02 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +216,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24911E5C2513E722000EB01F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24911E632513E722000EB01F /* SwiftUI.framework in Frameworks */,
+				24911E612513E722000EB01F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -168,6 +234,7 @@
 				24181363249073340072389D /* Trail Lab */,
 				2418137D249073360072389D /* Trail LabTests */,
 				24181388249073360072389D /* Trail LabUITests */,
+				24911E642513E722000EB01F /* Trail Lab Widget */,
 				24181362249073340072389D /* Products */,
 				245F78B7249BD45F009BF67A /* Frameworks */,
 			);
@@ -179,6 +246,7 @@
 				24181361249073340072389D /* Trail Lab.app */,
 				2418137A249073360072389D /* Trail LabTests.xctest */,
 				24181385249073360072389D /* Trail LabUITests.xctest */,
+				24911E5F2513E722000EB01F /* Trail Lab WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,6 +356,7 @@
 				245DF9C724B6A65C001345C5 /* BarView.swift */,
 				245DF9C924B6A809001345C5 /* GraphBars.swift */,
 				244461EC24B83A9200062194 /* GraphTile.swift */,
+				242519B02516A1A3000F1EF8 /* GraphBackgroundView.swift */,
 				243F493724C3B5B500FB9E35 /* linearGraph.swift */,
 				243F493924C67AB700FB9E35 /* ProgressBar.swift */,
 				245C8D8424C7F13B00536D1D /* ActivityCell.swift */,
@@ -305,6 +374,9 @@
 				245F78BE249D2720009BF67A /* LocationManager.swift */,
 				24301F2024A2E22D0029137C /* PedometerManager.swift */,
 				2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */,
+				24251968251690F9000F1EF8 /* ActivityDataModel.swift */,
+				242519732516916B000F1EF8 /* HistoryDataModels.swift */,
+				2425199B25169577000F1EF8 /* BarGraphModel.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -313,6 +385,8 @@
 			isa = PBXGroup;
 			children = (
 				245F78B8249BD45F009BF67A /* HealthKit.framework */,
+				24911E602513E722000EB01F /* WidgetKit.framework */,
+				24911E622513E722000EB01F /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -329,6 +403,19 @@
 			path = "Single Activitie";
 			sourceTree = "<group>";
 		};
+		24911E642513E722000EB01F /* Trail Lab Widget */ = {
+			isa = PBXGroup;
+			children = (
+				24911E652513E722000EB01F /* Trail_Lab_Widget.swift */,
+				2425195425168FD8000F1EF8 /* GraphTileWidget.swift */,
+				2425198C25169475000F1EF8 /* GraphBarsWidget.swift */,
+				24911E672513E722000EB01F /* Trail_Lab_Widget.intentdefinition */,
+				24911E682513E726000EB01F /* Assets.xcassets */,
+				24911E6A2513E726000EB01F /* Info.plist */,
+			);
+			path = "Trail Lab Widget";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -339,10 +426,12 @@
 				2418135D249073340072389D /* Sources */,
 				2418135E249073340072389D /* Frameworks */,
 				2418135F249073340072389D /* Resources */,
+				24911E702513E726000EB01F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				24911E6E2513E726000EB01F /* PBXTargetDependency */,
 			);
 			name = "Trail Lab";
 			productName = "Trail Lab";
@@ -385,14 +474,31 @@
 			productReference = 24181385249073360072389D /* Trail LabUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		24911E5E2513E722000EB01F /* Trail Lab WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24911E732513E726000EB01F /* Build configuration list for PBXNativeTarget "Trail Lab WidgetExtension" */;
+			buildPhases = (
+				24911E5B2513E722000EB01F /* Sources */,
+				24911E5C2513E722000EB01F /* Frameworks */,
+				24911E5D2513E722000EB01F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Trail Lab WidgetExtension";
+			productName = "Trail Lab WidgetExtension";
+			productReference = 24911E5F2513E722000EB01F /* Trail Lab WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		24181359249073340072389D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = nilka;
 				TargetAttributes = {
 					24181360249073340072389D = {
@@ -405,6 +511,9 @@
 					24181384249073360072389D = {
 						CreatedOnToolsVersion = 11.5;
 						TestTargetID = 24181360249073340072389D;
+					};
+					24911E5E2513E722000EB01F = {
+						CreatedOnToolsVersion = 12.0;
 					};
 				};
 			};
@@ -424,6 +533,7 @@
 				24181360249073340072389D /* Trail Lab */,
 				24181379249073360072389D /* Trail LabTests */,
 				24181384249073360072389D /* Trail LabUITests */,
+				24911E5E2513E722000EB01F /* Trail Lab WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -453,6 +563,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24911E5D2513E722000EB01F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24911E692513E726000EB01F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -462,6 +580,7 @@
 			files = (
 				245DF9C824B6A65C001345C5 /* BarView.swift in Sources */,
 				243F493824C3B5B500FB9E35 /* linearGraph.swift in Sources */,
+				24251969251690F9000F1EF8 /* ActivityDataModel.swift in Sources */,
 				24181365249073340072389D /* AppDelegate.swift in Sources */,
 				245581102511A40400503CA9 /* ShareButton.swift in Sources */,
 				245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */,
@@ -472,14 +591,17 @@
 				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
 				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
+				24911E6C2513E726000EB01F /* Trail_Lab_Widget.intentdefinition in Sources */,
 				247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */,
 				247BA1D724A6E24C007747BC /* HistoryViewHandler.swift in Sources */,
 				247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
+				242519B12516A1A3000F1EF8 /* GraphBackgroundView.swift in Sources */,
 				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */,
 				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,
 				24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */,
+				2425199C25169577000F1EF8 /* BarGraphModel.swift in Sources */,
 				2455810C25118B3B00503CA9 /* ImagePickerController.swift in Sources */,
 				243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
@@ -494,6 +616,7 @@
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
 				243F493624C39C6F00FB9E35 /* SingleActivityTitleView.swift in Sources */,
 				244461ED24B83A9200062194 /* GraphTile.swift in Sources */,
+				242519742516916B000F1EF8 /* HistoryDataModels.swift in Sources */,
 				245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */,
 				24301F2724A573570029137C /* FormattingExtensions.swift in Sources */,
 				24301F2124A2E22D0029137C /* PedometerManager.swift in Sources */,
@@ -523,6 +646,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24911E5B2513E722000EB01F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2425197E251691F1000F1EF8 /* FormattingExtensions.swift in Sources */,
+				2425195E2516900E000F1EF8 /* GraphTileWidget.swift in Sources */,
+				242519A125169579000F1EF8 /* BarGraphModel.swift in Sources */,
+				24251996251694A6000F1EF8 /* GraphBarsWidget.swift in Sources */,
+				24911E662513E722000EB01F /* Trail_Lab_Widget.swift in Sources */,
+				242519AB25169C20000F1EF8 /* BarView.swift in Sources */,
+				242519A625169A13000F1EF8 /* DateExtensions.swift in Sources */,
+				2425197925169198000F1EF8 /* HistoryDataModels.swift in Sources */,
+				2425196E25169104000F1EF8 /* ActivityDataModel.swift in Sources */,
+				24911E9B2513E8B7000EB01F /* Color.swift in Sources */,
+				242519632516903C000F1EF8 /* ViewExtensions.swift in Sources */,
+				242519B22516A1A3000F1EF8 /* GraphBackgroundView.swift in Sources */,
+				24911E6B2513E726000EB01F /* Trail_Lab_Widget.intentdefinition in Sources */,
+				242519832516920E000F1EF8 /* Preferences.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -535,6 +679,11 @@
 			isa = PBXTargetDependency;
 			target = 24181360249073340072389D /* Trail Lab */;
 			targetProxy = 24181386249073360072389D /* PBXContainerItemProxy */;
+		};
+		24911E6E2513E726000EB01F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24911E5E2513E722000EB01F /* Trail Lab WidgetExtension */;
+			targetProxy = 24911E6D2513E726000EB01F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -576,6 +725,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -636,6 +786,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -667,6 +818,7 @@
 		2418138F249073360072389D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Trail Lab/Trail Lab.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -690,6 +842,7 @@
 		24181390249073360072389D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Trail Lab/Trail Lab.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -794,6 +947,52 @@
 			};
 			name = Release;
 		};
+		24911E712513E726000EB01F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				INFOPLIST_FILE = "Trail Lab Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "room.traillab.Trail-Lab-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		24911E722513E726000EB01F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				INFOPLIST_FILE = "Trail Lab Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "room.traillab.Trail-Lab-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -829,6 +1028,15 @@
 			buildConfigurations = (
 				24181395249073360072389D /* Debug */,
 				24181396249073360072389D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24911E732513E726000EB01F /* Build configuration list for PBXNativeTarget "Trail Lab WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24911E712513E726000EB01F /* Debug */,
+				24911E722513E726000EB01F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -141,3 +141,20 @@ struct Pace {
         return seconds / meters
     }
 }
+
+extension HKWorkoutActivityType {
+    func localValue() -> ActivityType {
+        switch self {
+        case .walking:
+            return .walking
+        case .running:
+            return .running
+        case .hiking:
+            return .hiking
+        case .cycling:
+            return .biking
+        default:
+            return .walking
+        }
+    }
+}

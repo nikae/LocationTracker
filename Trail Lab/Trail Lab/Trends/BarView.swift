@@ -12,6 +12,7 @@ struct BarView: View {
     let height: CGFloat
     let gradient: Gradient
     let day: String
+    let showDays: Bool
     @State var h: CGFloat = 0
 
 
@@ -35,16 +36,20 @@ struct BarView: View {
                 }
                 }
                 }
-                VStack {
-                    Divider()
-                    Text(self.day)
-                        .font(.subheadline)
-                }
-                .frame(height: 30)
 
-            .onDisappear {
-                self.h = 0
-            }
+//                if showDays {
+                    VStack {
+                        Divider()
+                        Text(self.day)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .font(showDays ? .subheadline : .system(size: 8))
+                    }
+                    .frame(height: showDays ? 30 : 20)
+                    .onDisappear {
+                        self.h = 0
+                    }
+//                }
         }
     }
 }

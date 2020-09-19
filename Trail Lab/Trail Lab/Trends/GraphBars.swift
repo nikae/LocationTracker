@@ -8,13 +8,6 @@
 
 import SwiftUI
 
-struct BarGraphModel {
-    let id: UUID = UUID()
-    let v: CGFloat
-    let c: Gradient
-    let day: String
-}
-
 struct GraphBars: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
 
@@ -40,14 +33,15 @@ struct GraphBars: View {
                         BarView(
                             height: self.calcHeight(maxH: self.macH, height: height.v),
                             gradient: height.c,
-                            day: height.day)
+                            day: height.day,
+                            showDays: true)
                             .frame(maxWidth: 30, maxHeight: 230)
                     }
 
                 
                 }
                 .padding(.trailing)
-                Test(maxHeight: self.macH)
+                GraphBackgroundView(maxHeight: self.macH, showLess: false)
                 .frame(height: 230)
             }
         }

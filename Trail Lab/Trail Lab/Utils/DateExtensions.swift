@@ -117,8 +117,35 @@ extension Date {
                                      matching: nextDateComponent,
                                      matchingPolicy: .nextTime,
                                      direction: direction.calendarSearchDirection)
-
         return date!
     }
+
+}
+
+extension Date {
+    func week() -> (week: [Date], title: String) {
+        var calendar = Calendar.autoupdatingCurrent
+        calendar.firstWeekday = 2 // Start on Monday (or 1 for Sunday)
+        let today = calendar.startOfDay(for: self)
+        var week = [Date]()
+        var title = ""
+        if let weekInterval = calendar.dateInterval(of: .weekOfYear, for: today) {
+            for i in 0...6 {
+                if let day = calendar.date(byAdding: .day, value: i, to: weekInterval.start) {
+                    week += [day]
+                }
+            }
+        }
+
+        if let firstDate = week.first, let lastDate = week.last {
+            let mydf = DateFormatter()
+            mydf.dateStyle = .medium
+
+            title = "\(mydf.string(from: firstDate)) - \(mydf.string(from: lastDate))"
+        }
+
+        return (week, title)
+    }
+
 
 }

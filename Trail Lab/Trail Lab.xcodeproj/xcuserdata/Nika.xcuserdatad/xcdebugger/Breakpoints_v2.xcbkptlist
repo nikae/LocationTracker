@@ -36,7 +36,7 @@
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "9077A58E-25E9-4A7B-969C-5481E5B3C30F - d0043c7277e5b158"
+                  uuid = "9077A58E-25E9-4A7B-969C-5481E5B3C30F - 913576d4c9659681"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -51,7 +51,7 @@
                   offsetFromSymbolStart = "2416">
                </Location>
                <Location
-                  uuid = "9077A58E-25E9-4A7B-969C-5481E5B3C30F - f5e0e95984c29e1e"
+                  uuid = "9077A58E-25E9-4A7B-969C-5481E5B3C30F - b4d1a3ff3a42b9a6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -107,8 +107,8 @@
             filePath = "Trail Lab/Helpers/ActivityDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "getLocations(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -139,8 +139,8 @@
             filePath = "Trail Lab/Helpers/ActivityDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "getActivityList(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -155,8 +155,8 @@
             filePath = "Trail Lab/Helpers/ActivityDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "getActivityList(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -171,8 +171,8 @@
             filePath = "Trail Lab/Helpers/ActivityDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
             landmarkName = "getActivityList(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -187,8 +187,8 @@
             filePath = "Trail Lab/Helpers/ActivityDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "451"
-            endingLineNumber = "451"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "getActivityList(completion:)"
             landmarkType = "7">
          </BreakpointContent>
