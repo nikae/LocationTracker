@@ -60,31 +60,40 @@ class ActivityDataStore: NSObject {
         mySamples.append(contentsOf: distanceSamples)
 
         let group = DispatchGroup()
-        group.enter()
+        let queue = DispatchQueue(label: "Save_Activity")
 
-        //ImplementErrorHendling
 
-        healthStore.save(healthkitWorkout) { (success, error) in
-            print("DispatchGroup \(1.1)")
-            if let error = error {
-                postDebugErrorNotification(error.localizedDescription)
+        queue.async {
+            group.enter()
+
+            self.healthStore.save(healthkitWorkout) { (success, error) in
+                print("DispatchGroup \(1.1)")
+                if let error = error {
+                    postDebugErrorNotification(error.localizedDescription)
+                }
+                group.leave()
+                print("DispatchGroup \(1.2)")
             }
-            group.leave()
-            print("DispatchGroup \(1.2)")
+            group.wait()
         }
 
-        group.enter()
-        self.addLocationTotheBuilder(healthkitWorkout, location: activity.locations) { success, error in
-            print("DispatchGroup \(2.1)")
-            if let error = error {
-                postDebugErrorNotification("localized: \(error.localizedDescription) ::::: \(error)")
-            }
 
-            group.leave()
-            print("DispatchGroup \(2.2)")
+        queue.async {
+            group.enter()
+            self.addLocationTotheBuilder(healthkitWorkout, location: activity.locations) { success, error in
+                print("DispatchGroup \(2.1)")
+                if let error = error {
+                    postDebugErrorNotification("localized: \(error.localizedDescription) ::::: \(error)")
+                }
+
+                group.leave()
+                print("DispatchGroup \(2.2)")
+            }
+            group.wait()
         }
 
-        group.enter()
+        queue.async {
+            group.enter()
             self.healthStore.add(mySamples, to: healthkitWorkout) { (success, error) in
                 print("DispatchGroup \(3.1)")
                 if let error = error {
@@ -93,19 +102,20 @@ class ActivityDataStore: NSObject {
 
                 group.leave()
                 print("DispatchGroup \(3.2)")
-        }
+            }
 
-        group.notify(queue: .main) {
-             print("DispatchGroup Done")
-            completion(true, nil)
+            group.notify(queue: .main) {
+                print("DispatchGroup Done")
+                completion(true, nil)
+            }
         }
     }
 
     private func samples(for activity: Activity) -> [HKSample] {
         //1. Verify that the energy quantity type is still available to HealthKit.
         guard let energyQuantityType = HKSampleType.quantityType(
-            forIdentifier: .activeEnergyBurned) else {
-                fatalError("*** Energy Burned Type Not Available ***")
+                forIdentifier: .activeEnergyBurned) else {
+            fatalError("*** Energy Burned Type Not Available ***")
         }
 
         //2. Create a sample for each PrancerciseWorkoutInterval
@@ -130,8 +140,8 @@ class ActivityDataStore: NSObject {
         }
         //1. Verify that the energy quantity type is still available to HealthKit.
         guard let energyQuantityType = HKSampleType.quantityType(
-            forIdentifier: distanceWalkingRunning) else {
-                fatalError("*** Energy Burned Type Not Available ***")
+                forIdentifier: distanceWalkingRunning) else {
+            fatalError("*** Energy Burned Type Not Available ***")
         }
 
         //2. Create a sample for each PrancerciseWorkoutInterval
@@ -140,10 +150,10 @@ class ActivityDataStore: NSObject {
             doubleValue: activity.distance ?? 0)
 
         let samples: [HKSample] = [HKCumulativeQuantitySample(
-            type: energyQuantityType,
-            quantity: calorieQuantity,
-            start: activity.start,
-            end: activity.end)]
+                                    type: energyQuantityType,
+                                    quantity: calorieQuantity,
+                                    start: activity.start,
+                                    end: activity.end)]
 
 
         return samples
@@ -151,7 +161,7 @@ class ActivityDataStore: NSObject {
 
     //MARK: get workouts ftom health
     static func loadPrancerciseWorkouts(completion:
-        @escaping ([HKWorkout]?, Error?) -> Void) {
+                                            @escaping ([HKWorkout]?, Error?) -> Void) {
         //1. Get all workouts with the "Other" activity type.
         //        let workoutPredicateWalking = HKQuery.predicateForWorkouts(with: .walking)
         //        let workoutPredicateRunning = HKQuery.predicateForWorkouts(with: .running)
@@ -163,7 +173,7 @@ class ActivityDataStore: NSObject {
 
         //3. Combine the predicates into a single predicate.
         let compound = NSCompoundPredicate(andPredicateWithSubpredicates:
-            [sourcePredicate])
+                                            [sourcePredicate])
 
         let sortDescriptor = NSSortDescriptor(
             key: HKSampleSortIdentifierEndDate,
@@ -174,14 +184,14 @@ class ActivityDataStore: NSObject {
             predicate: compound,
             limit: 0,
             sortDescriptors: [sortDescriptor]) { query, samples, error in
-                DispatchQueue.main.async {
-                    guard let samples = samples as? [HKWorkout], error == nil else {
-                        completion(nil, error)
-                        return
-                    }
-
-                    completion(samples, nil)
+            DispatchQueue.main.async {
+                guard let samples = samples as? [HKWorkout], error == nil else {
+                    completion(nil, error)
+                    return
                 }
+
+                completion(samples, nil)
+            }
         }
 
         HKHealthStore().execute(query)
@@ -216,34 +226,34 @@ class ActivityDataStore: NSObject {
             }
 
             // Create the route query.
-                   let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNill, done, errorOrNil) in
+            let query = HKWorkoutRouteQuery(route: route) { (query, locationsOrNill, done, errorOrNil) in
 
-                       // This block may be called multiple times.
+                // This block may be called multiple times.
 
-                    if let error = errorOrNil {
-                        postDebugErrorNotification(error.localizedDescription)
-                        return
-                    }
+                if let error = errorOrNil {
+                    postDebugErrorNotification(error.localizedDescription)
+                    return
+                }
 
-                       guard let locations = locationsOrNill else {
-                           fatalError("*** Invalid State: This can only fail if there was an error. ***")
-                       }
+                guard let locations = locationsOrNill else {
+                    fatalError("*** Invalid State: This can only fail if there was an error. ***")
+                }
 
 
-                       // Do something with this batch of location data.
-                    print("DDDDDD: \(locations.count)")
-                    path.append(contentsOf: locations)
-                       if done {
-                        print("DDDDDD: 2\(locations.count)")
-                        completion(path)
-                           // The query returned all the location data associated with the route.
-                           // Do something with the complete data set.
-                       }
+                // Do something with this batch of location data.
+                print("DDDDDD: \(locations.count)")
+                path.append(contentsOf: locations)
+                if done {
+                    print("DDDDDD: 2\(locations.count)")
+                    completion(path)
+                    // The query returned all the location data associated with the route.
+                    // Do something with the complete data set.
+                }
 
-                       // You can stop the query by calling:
-                       // store.stop(query)
+                // You can stop the query by calling:
+                // store.stop(query)
 
-                   }
+            }
             self.healthStore.execute(query)
         }
 
@@ -270,7 +280,7 @@ class ActivityDataStore: NSObject {
             if let error = error {
                 print(error.localizedDescription)
                 postDebugErrorNotification("\(error.localizedDescription) <--- Error insertRouteData ////// :::::: \(error)")
-        }
+            }
 
             self.saveToRouteBuilder(workout: workout) { success, error in
                 completion(success, error)
@@ -346,20 +356,20 @@ class ActivityDataStore: NSObject {
                 let title = metadata?[MetadataKeys.title.rawValue] as? String
 
                 list.append(Activity(
-                    start: startDate,
-                    end: endDate,
-                    activityType: localValue(workoutActivityType),
-                    title: title,
-                    hkValue: activity,
-                    intervals: [],
-                    calories: calories,
-                    distance: distance ?? 0,
-                    numberOfSteps: Int(steps ?? 0),
-                    averagePace: pace,
-                    elevationGain: elevationGain,
-                    reletiveAltitude: reletiveAltitude,
-                    maxAltitude: maxAltitude,
-                    minAltitude: minAltitude))
+                                start: startDate,
+                                end: endDate,
+                                activityType: localValue(workoutActivityType),
+                                title: title,
+                                hkValue: activity,
+                                intervals: [],
+                                calories: calories,
+                                distance: distance ?? 0,
+                                numberOfSteps: Int(steps ?? 0),
+                                averagePace: pace,
+                                elevationGain: elevationGain,
+                                reletiveAltitude: reletiveAltitude,
+                                maxAltitude: maxAltitude,
+                                minAltitude: minAltitude))
             }
 
             let sortedList = list.sorted { $0.start > $1.start}

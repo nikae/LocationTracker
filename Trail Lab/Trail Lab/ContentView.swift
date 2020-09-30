@@ -122,7 +122,7 @@ struct ContentView: View {
         }
         .alert(isPresented: $historyViewHandler.showAlert) {
             Alert(title: Text("Error"), message: Text(historyViewHandler.errorMessage), dismissButton: .cancel({
-                self.historyViewHandler.showAlert.toggle()
+                self.historyViewHandler.showAlert = false
             }))
         }
         .onAppear {

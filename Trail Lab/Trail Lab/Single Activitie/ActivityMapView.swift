@@ -51,7 +51,7 @@ struct ActivityMapView: UIViewRepresentable {
 
         region = self.mapView.regionThatFits(region)
 
-        self.mapView.setRegion(region, animated: true)
+        self.mapView.setRegion(region, animated: false)
         self.mapView.addOverlay(runRoute)
     }
 

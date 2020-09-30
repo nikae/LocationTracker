@@ -15,3 +15,18 @@ struct BarGraphModel {
     let c: Gradient
     let day: String
 }
+
+struct BarGraphModelWidget: Codable {
+    let id: UUID
+    let v: CGFloat
+    let c: [Int: CGFloat]
+    let day: String
+
+    static let sharedKey = "BarGraphModelWidget"
+}
+
+extension UserDefaults {
+    static var shared: UserDefaults? {
+        return UserDefaults(suiteName: "group.room.traillab.contents")
+    }
+}

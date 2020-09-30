@@ -9,6 +9,7 @@
 import Foundation
 import HealthKit
 import SwiftUI
+import WidgetKit
 
 class HistoryViewHandler: ObservableObject {
 
@@ -37,10 +38,10 @@ class HistoryViewHandler: ObservableObject {
     @Published var showDurationGoal: Bool = false
 
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(echoToggled), name: .errorWithMessage, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showError), name: .errorWithMessage, object: nil)
     }
 
-    @objc func echoToggled(notification: Notification){
+    @objc func showError(notification: Notification){
         if let state = notification.object as? String{
             DispatchQueue.main.async {
                 self.errorMessage = state
@@ -81,7 +82,7 @@ class HistoryViewHandler: ObservableObject {
 
     }
 
-    func getWorkoutsForAWeek(for date: Date) {
+    func getWorkoutsForAWeek(for date: Date, updateWidgetData: Bool? = false) {
         let arr = getWeekdays(for: date)
         var activitiesByWeek = [ActivitiesByWeek]()
         var activitiesByDay = [ActivitiesByDay]()
@@ -106,7 +107,7 @@ class HistoryViewHandler: ObservableObject {
         self.activityListWeekly = activitiesByWeek
         self.getMaxAltitudeList(forWeek: true)
 
-        self.gerMod()
+        self.gerMod(updateWidgetData: updateWidgetData)
 
     }
 
@@ -150,15 +151,35 @@ class HistoryViewHandler: ObservableObject {
         }
     }
 
-    func gerMod() {
+    func gerMod(updateWidgetData: Bool? = false) {
         guard let arr =  activityListWeekly.first?.activitys else {
             return
         }
 
         self.barGraphModels.removeAll()
+
+        var barGraphModelWidget: [BarGraphModelWidget] = []
         
         for i in arr {
-            self.barGraphModels.append(getProcent(arr: i.activitys ?? [Activity(start: Date(), end: Date(), activityType: .walking, intervals: [], distance: 0.1)], date: i.date))
+
+            let model = getProcent(arr: i.activitys ?? [Activity(start: Date(), end: Date(), activityType: .walking, intervals: [], distance: 0.1)], date: i.date)
+            self.barGraphModels.append(model.bar)
+
+            if updateWidgetData ?? false {
+                barGraphModelWidget.append(model.barW)
+            }
+        }
+
+        if updateWidgetData ?? false {
+            let encoder = JSONEncoder()
+            guard let datastore = UserDefaults.shared else {return}
+
+            if let encoded = try? encoder.encode(barGraphModelWidget) {
+                datastore.set(encoded, forKey: BarGraphModelWidget.sharedKey)
+                if #available(iOS 14.0, *) {
+                    WidgetCenter.shared.reloadTimelines(ofKind: "Trail_Lab_Widget")
+                }
+            }
         }
 
         getGoals(activitiesByWeek: activityListWeekly.first!)
@@ -205,7 +226,8 @@ class HistoryViewHandler: ObservableObject {
     }
     
 
-    func getProcent(arr: [Activity], date: Date) -> BarGraphModel {
+    func getProcent(arr: [Activity], date: Date) -> (
+        bar: BarGraphModel, barW: BarGraphModelWidget) {
         var distance = 0.0
 
         for acrivity in arr {
@@ -216,29 +238,38 @@ class HistoryViewHandler: ObservableObject {
 
 
         var gradient = Gradient(stops: [])
+        var gradientWidgit: [Int: CGFloat] = [:]
 
         if walkProcent > 0 {
             gradient.stops.append(.init(color: ActivityType.walking.color(), location: 0))
+            gradientWidgit[ActivityType.walking.rawValue] = 0
         }
         if runProcent > 0 {
             gradient.stops.append(.init(color: ActivityType.running.color(), location: walkProcent))
+            gradientWidgit[ActivityType.running.rawValue] = walkProcent
         }
         if hikeProcent > 0 {
             gradient.stops.append(.init(
                 color: ActivityType.hiking.color(),
                 location: walkProcent + runProcent))
+            gradientWidgit[ActivityType.hiking.rawValue] = walkProcent + runProcent
         }
         if bikeProcent > 0 {
             gradient.stops.append(.init(color: ActivityType.biking.color(), location: walkProcent + runProcent + hikeProcent))
+            gradientWidgit[ActivityType.biking.rawValue] = walkProcent + runProcent + hikeProcent
         }
 
         if gradient.stops.count == 1 {
             if let newStep = gradient.stops.first {
                 gradient.stops.append(newStep)
+                gradientWidgit[arr.first?.activityType.rawValue ?? 0] = newStep.location
+
             }
         }
 
-        return BarGraphModel(v: CGFloat(distance), c: gradient, day: date.weekDay())
+        let bar = BarGraphModel(v: CGFloat(distance), c: gradient, day: date.weekDay())
+        let barW = BarGraphModelWidget(id: UUID(), v: CGFloat(distance), c: gradientWidgit, day: date.weekDay())
+        return (bar, barW)
     }
 
     func getMaxAltitudeList(forWeek: Bool) {
@@ -275,6 +306,8 @@ extension HistoryViewHandler: ActivityHandlerDelegate {
             if let activitie = self.activityList.first {
                 self.selectedActivity = activitie
                 self.newWorkoutLoadingIsDone.toggle()
+                let date = self.getMonday(.current, for: Date())
+                self.getWorkoutsForAWeek(for: date, updateWidgetData: true)
             }
         }
     }

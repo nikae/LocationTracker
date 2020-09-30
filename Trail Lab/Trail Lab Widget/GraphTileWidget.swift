@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GraphTileWidget: View {
     @Environment(\.widgetFamily) private var widgetFamily
+    let dataProvider = WidgetDataManager()
 
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct GraphTileWidget: View {
                     .foregroundColor(Color(.label))
                 Spacer()
             }
-            GraphBarsWidget()
+            GraphBarsWidget(barGraphModels: dataProvider.getData())
             if widgetFamily == .systemLarge {
                 ColorGuide()
             }

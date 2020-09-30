@@ -12,15 +12,7 @@ struct GraphBarsWidget: View {
     @Environment(\.widgetFamily) private var widgetFamily
 
     //Temp data
-    var barGraphModels: [BarGraphModel] = [
-        BarGraphModel(v: 3000, c:(Gradient(colors: [.blue, .blue])) , day: "M"),
-        BarGraphModel(v: 2500, c:(Gradient(colors: [.blue, .blue])) , day: "T"),
-        BarGraphModel(v: 1457, c:(Gradient(colors: [.blue, .blue])) , day: "W"),
-        BarGraphModel(v: 4000, c:(Gradient(colors: [.blue, .blue])) , day: "T"),
-        BarGraphModel(v: 2500, c:(Gradient(colors: [.blue, .blue])) , day: "F"),
-        BarGraphModel(v: 0, c:(Gradient(colors: [.blue, .blue])) , day: "S"),
-        BarGraphModel(v: 1600, c:(Gradient(colors: [.blue, .blue])) , day: "S"),
-    ]
+    var barGraphModels: [BarGraphModel]
 
     var macH: CGFloat {
         var max: CGFloat = 0
@@ -74,6 +66,6 @@ struct GraphBarsWidget: View {
 
 struct GraphBarsWidget_Previews: PreviewProvider {
     static var previews: some View {
-        GraphBarsWidget()
+        GraphBarsWidget(barGraphModels: [])
     }
 }
