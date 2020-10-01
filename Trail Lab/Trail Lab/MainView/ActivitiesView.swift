@@ -8,9 +8,33 @@
 
 import SwiftUI
 
+struct ActivitiesNavigationView: View {
+    @EnvironmentObject var historyViewHandler: HistoryViewHandler
+    @State var open: Bool = false
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(historyViewHandler.activityList, id: \.id) { act in
+                    ActivityCell(activity: act)
+                        .onTapGesture {
+                            self.historyViewHandler.selectedActivity = act
+                            self.open.toggle()
+                    }
+                }
+            }
+            .navigationBarTitle("Activities", displayMode: .large)
+            
+        }
+        .sheet(isPresented: $open, content: {
+            SingleActivityView(
+                activity: self.historyViewHandler.selectedActivity,
+                isNewActivity: false)
+        })
+    }
+}
+
 struct ActivitiesView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
-
     @State var open: Bool = false
     var body: some View {
             List {

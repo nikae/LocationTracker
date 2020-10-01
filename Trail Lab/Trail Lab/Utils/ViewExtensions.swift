@@ -122,8 +122,8 @@ extension View {
         return HStack {
             VStack(alignment:.leading, spacing: 2) {
               Text(value)
-                .font(.system(larger ? .largeTitle : .title, design: .rounded))
-                  .fontWeight(.bold)
+                .fontWeight(.bold)
+                .font(Font.system(larger ? .largeTitle : .title, design: .rounded).monospacedDigit())
                   Text(title)
                       .font(.headline)
                       .foregroundColor(tintColor)

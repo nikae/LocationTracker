@@ -17,6 +17,7 @@ struct GraphTile: View {
                 .foregroundColor(Color(.label))
                 Spacer()
             }
+            .padding(.bottom)
             GraphBars()
                 .background(Color(.clear)
                     .cornerRadius(10))

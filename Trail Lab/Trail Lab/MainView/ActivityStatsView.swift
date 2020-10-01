@@ -45,6 +45,7 @@ struct ActivityStatsView: View {
                             title:self.isSpeedType ? "Speed".uppercased() : "Pace".uppercased(),
                             tintColor: self.color,
                             larger: true)
+                            .minimumScaleFactor(0.2)
                             .frame(minWidth: 0, maxWidth: .infinity)
 
                     }

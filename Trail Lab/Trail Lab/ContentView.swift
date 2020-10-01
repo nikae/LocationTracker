@@ -44,11 +44,7 @@ struct ContentView: View {
                                 Text("No activities yet").font(.headline)
                             }
                         } else {
-                            NavigationView {
-                                ActivitiesView()
-                                    .navigationBarTitle("Activities",
-                                                        displayMode: .large)
-                            }
+                            ActivitiesNavigationView()
                         }
                         //                        self.AppBackground()
                         //                        //FIXME: This needs to be moved into settings

@@ -64,6 +64,7 @@ struct TrendsView: View {
             .sheet(isPresented: $showActivityList) {
                 VStack {
                     DismissIcon()
+                        .padding(4)
                     ActivitiesView()
                         .environmentObject(self.historyViewHandler)
                 }
