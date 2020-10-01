@@ -35,6 +35,7 @@ struct SingleActivityView: View {
         GeometryReader { proxy in
             VStack {
                 DismissIcon()
+                    .padding(4)
                 ScrollView {
                     SingleActivityTitleView(activity: self.activity)
                         .padding(.top)
@@ -95,17 +96,17 @@ struct SingleActivityView: View {
                         linearGraph(dataPoints: self.singleActivityViewHandler.altitudeList)
                     }
 
-                    HStack {
-                        Button(action: {
-                            self.showingImagePicker.toggle()
-                        }) {
-                            ShareButton(text: "Share", color: self.color)
-                        }
-                        .padding(.top)
-                        .sheet(isPresented: self.$showingImagePicker, onDismiss: self.loadImage) {
-                            ImagePicker(image: self.$inputImage)
-                        }
-                    }
+//                    HStack {
+//                        Button(action: {
+//                            self.showingImagePicker.toggle()
+//                        }) {
+//                            ShareButton(text: "Share", color: self.color)
+//                        }
+//                        .padding(.top)
+//                        .sheet(isPresented: self.$showingImagePicker, onDismiss: self.loadImage) {
+//                            ImagePicker(image: self.$inputImage)
+//                        }
+//                    }
                 }
                 Spacer()
             }
