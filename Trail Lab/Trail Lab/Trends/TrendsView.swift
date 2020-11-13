@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import ScalingDotsActivityIndicator
-import DotsCircularAnimation
 
 struct TrendsView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
@@ -17,18 +15,12 @@ struct TrendsView: View {
     @State var routeWaypoint: [RouteWaypoint] = []
     @State var showMap: Bool = false
     @State var animateStats: Bool = false
-    @State var showLoadingAnimations: Bool = false
 
     var body: some View {
         ScrollView(.vertical) {
             VStack {
                 GraphTile()
 
-                if showLoadingAnimations {
-                    DotsCircularAnimation(color: .green)
-                        .frame(width: 50, height: 50, alignment: .center)
-                    ScalingDotsActivityIndicator(color: .red).padding()
-                }
 
                 VStack {
                 HStack {
@@ -123,8 +115,7 @@ struct TrendsView: View {
         }
         .navigationBarItems(trailing:
             Button(action: {
-                showLoadingAnimations.toggle()
-                // self.showActivityList.toggle()
+                self.showActivityList.toggle()
             }, label: {
                 if !self.historyViewHandler.activityList.isEmpty {
                 Image(systemName: "rectangle.grid.1x2.fill")

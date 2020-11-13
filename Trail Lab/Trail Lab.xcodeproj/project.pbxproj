@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -69,8 +69,6 @@
 		24637A912538CD8100BF39BC /* StandardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24637A902538CD8100BF39BC /* StandardOverlay.swift */; };
 		2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2475683B24C0ED2E0016FADB /* GradientPolylineRenderer.swift */; };
 		2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */; };
-		2479B830254115BD0013821E /* ScalingDotsActivityIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 2479B82F254115BD0013821E /* ScalingDotsActivityIndicator */; };
-		2479B832254115BD0013821E /* DotsCircularAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 2479B831254115BD0013821E /* DotsCircularAnimation */; };
 		247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99824BE934C0004AA49 /* ActivityMapView.swift */; };
 		247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */; };
 		247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* ActivitiesView.swift */; };
@@ -210,8 +208,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */,
-				2479B832254115BD0013821E /* DotsCircularAnimation in Frameworks */,
-				2479B830254115BD0013821E /* ScalingDotsActivityIndicator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,8 +449,6 @@
 			);
 			name = "Trail Lab";
 			packageProductDependencies = (
-				2479B82F254115BD0013821E /* ScalingDotsActivityIndicator */,
-				2479B831254115BD0013821E /* DotsCircularAnimation */,
 			);
 			productName = "Trail Lab";
 			productReference = 24181361249073340072389D /* Trail Lab.app */;
@@ -549,7 +543,6 @@
 			);
 			mainGroup = 24181358249073340072389D;
 			packageReferences = (
-				2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */,
 			);
 			productRefGroup = 24181362249073340072389D /* Products */;
 			projectDirPath = "";
@@ -860,7 +853,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -884,7 +877,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = room.traillab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -993,7 +986,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "room.traillab.Trail-Lab-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1019,7 +1012,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "room.traillab.Trail-Lab-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1077,30 +1070,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nikae/Loading-Animations.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2479B82F254115BD0013821E /* ScalingDotsActivityIndicator */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */;
-			productName = ScalingDotsActivityIndicator;
-		};
-		2479B831254115BD0013821E /* DotsCircularAnimation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */;
-			productName = DotsCircularAnimation;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		24181368249073340072389D /* Trail_Lab.xcdatamodeld */ = {
