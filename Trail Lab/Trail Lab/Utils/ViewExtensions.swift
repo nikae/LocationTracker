@@ -113,6 +113,8 @@ extension View {
                 Text(title)
                     .font(.caption)
                     .foregroundColor(tintColor)
+                    .minimumScaleFactor(0.5)
+            
         }
     }
 

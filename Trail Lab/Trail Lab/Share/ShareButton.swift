@@ -21,7 +21,6 @@ struct ShareButton: View {
             Spacer()
         }
         .background(self.color.cornerRadius(8))
-        .padding()
     }
 }
 

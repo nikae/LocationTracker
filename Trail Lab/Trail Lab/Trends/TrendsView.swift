@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import ScalingDotsActivityIndicator
+import DotsCircularAnimation
 
 struct TrendsView: View {
     @EnvironmentObject var historyViewHandler: HistoryViewHandler
@@ -15,11 +17,19 @@ struct TrendsView: View {
     @State var routeWaypoint: [RouteWaypoint] = []
     @State var showMap: Bool = false
     @State var animateStats: Bool = false
+    @State var showLoadingAnimations: Bool = false
 
     var body: some View {
         ScrollView(.vertical) {
             VStack {
                 GraphTile()
+
+                if showLoadingAnimations {
+                    DotsCircularAnimation(color: .green)
+                        .frame(width: 50, height: 50, alignment: .center)
+                    ScalingDotsActivityIndicator(color: .red).padding()
+                }
+
                 VStack {
                 HStack {
                     Text("Weekly Goals")
@@ -38,8 +48,10 @@ struct TrendsView: View {
                         .frame(minWidth: 100, maxWidth: .infinity)
                         .frame(height: 130)
                         .onTapGesture {
-                            self.historyViewHandler.showDistanceGoal.toggle()
-                    }
+                            withAnimation(.linear) {
+                                self.historyViewHandler.showDistanceGoal.toggle()
+                            }
+                        }
                     ProgressBar(
                         progress: self.$historyViewHandler.weeklyGoal.timeProgress,
                         progressLabel: self.$historyViewHandler.weeklyGoal.timeFormmated,
@@ -48,7 +60,9 @@ struct TrendsView: View {
                         .frame(minWidth: 100, maxWidth: .infinity)
                         .frame(height: 130)
                     .onTapGesture {
+                        withAnimation(.linear) {
                             self.historyViewHandler.showDurationGoal.toggle()
+                        }
                     }
                 }
                 .onAppear {
@@ -109,7 +123,8 @@ struct TrendsView: View {
         }
         .navigationBarItems(trailing:
             Button(action: {
-                 self.showActivityList.toggle()
+                showLoadingAnimations.toggle()
+                // self.showActivityList.toggle()
             }, label: {
                 if !self.historyViewHandler.activityList.isEmpty {
                 Image(systemName: "rectangle.grid.1x2.fill")

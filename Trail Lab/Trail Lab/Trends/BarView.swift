@@ -18,38 +18,38 @@ struct BarView: View {
 
 
     var body: some View {
-            VStack {
-                GeometryReader { proxy in
-                    ZStack(alignment: .bottom){
-                Capsule()
-                    .foregroundColor(Color(UIColor.background.secondary))
-                    .opacity(1)
-                Capsule()
-                    .fill(LinearGradient(
-                        gradient: self.gradient,
-                        startPoint: .bottom,
-                        endPoint: .top))
-                    .frame(height: proxy.size.height * self.h)
-                    .animation(.easeOut)
-                    .onAppear {
-                        self.h = self.height
+        VStack {
+            GeometryReader { proxy in
+                ZStack(alignment: .bottom){
+                    Capsule()
+                        .foregroundColor(Color(self.height == 0 ? UIColor.background.secondary : .clear))
+                        .opacity(1)
+                    Capsule()
+                        .fill(LinearGradient(
+                                gradient: self.gradient,
+                                startPoint: .bottom,
+                                endPoint: .top))
+                        .frame(height: proxy.size.height * self.h)
+                        .animation(.easeOut)
+                        .onAppear {
+                            self.h = self.height
+                        }
                 }
-                }
-                }
+            }
 
-//                if showDays {
-                    VStack {
-                        Divider()
-                        Text(self.day)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                            .font(showDays ? .subheadline : .system(size: 8))
-                    }
-                    .frame(height: showDays ? 30 : 20)
-                    .onDisappear {
-                        self.h = 0
-                    }
-//                }
+            //                if showDays {
+            VStack {
+                Divider()
+                Text(self.day)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .font(showDays ? .subheadline : .system(size: 8))
+            }
+            .frame(height: showDays ? 30 : 20)
+            .onDisappear {
+                self.h = 0
+            }
+            //                }
         }
     }
 }

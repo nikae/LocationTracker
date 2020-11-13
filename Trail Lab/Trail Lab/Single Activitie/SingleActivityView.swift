@@ -8,6 +8,11 @@
 
 import SwiftUI
 
+enum PagesToShow {
+    case imagePicker
+    case prepareShare
+}
+
 
 struct SingleActivityView: View {
     @ObservedObject var singleActivityViewHandler = SingleActivityViewHandler()
@@ -18,6 +23,7 @@ struct SingleActivityView: View {
     @State private var showingImagePicker = false
     @State private var showingShareView = false
     @State private var inputImage: UIImage?
+    @State private var pagesToShow: PagesToShow = .imagePicker
 
     var color: Color {
         return activity.activityType.color()
@@ -72,7 +78,7 @@ struct SingleActivityView: View {
                                 .background(Color(UIColor.background.primary)
                                     .opacity(0.8)
                                     .cornerRadius(8))
-                                .frame(width:proxy.size.width - 100)
+                                .frame(width: proxy.size.width - 100)
                                 .animation(.easeOut)
                                 .opacity(self.expendMap ? 1 : 0)
                                 .padding()
@@ -96,22 +102,25 @@ struct SingleActivityView: View {
                         linearGraph(dataPoints: self.singleActivityViewHandler.altitudeList)
                     }
 
-//                    HStack {
-//                        Button(action: {
-//                            self.showingImagePicker.toggle()
-//                        }) {
-//                            ShareButton(text: "Share", color: self.color)
-//                        }
-//                        .padding(.top)
-//                        .sheet(isPresented: self.$showingImagePicker, onDismiss: self.loadImage) {
-//                            ImagePicker(image: self.$inputImage)
-//                        }
-//                    }
+                    HStack {
+                        Button(action: {
+                        //    inputImage = nil
+                            self.showingImagePicker.toggle()
+                        }) {
+                            ShareButton(text: "Share", color: self.color)
+                        }
+                        .padding(.top)
+                        .sheet(isPresented: self.$showingImagePicker, onDismiss: self.loadImage) {
+                            ImagePicker(image: self.$inputImage)
+                        }
+                    }
                 }
                 Spacer()
             }
+            EmptyView()
             .sheet(isPresented: self.$showingShareView) {
-                ShareImageView(image: self.inputImage)
+                ShareImageView(image: self.$inputImage, activity: activity)
+                    .environmentObject(ShareManager())
             }
 
             .onAppear {
@@ -137,7 +146,9 @@ struct SingleActivityView: View {
 
     func loadImage() {
         guard inputImage != nil else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         showingShareView.toggle()
+        }
        // image = Image(uiImage: inputImage)
     }
 }

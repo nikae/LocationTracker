@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -65,8 +65,12 @@
 		245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BA249BDA25009BF67A /* UserDataStore.swift */; };
 		245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */; };
 		245F78BF249D2720009BF67A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BE249D2720009BF67A /* LocationManager.swift */; };
+		24637A8B2537EBF500BF39BC /* TrailLabOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24637A8A2537EBF500BF39BC /* TrailLabOverlay.swift */; };
+		24637A912538CD8100BF39BC /* StandardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24637A902538CD8100BF39BC /* StandardOverlay.swift */; };
 		2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2475683B24C0ED2E0016FADB /* GradientPolylineRenderer.swift */; };
 		2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */; };
+		2479B830254115BD0013821E /* ScalingDotsActivityIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = 2479B82F254115BD0013821E /* ScalingDotsActivityIndicator */; };
+		2479B832254115BD0013821E /* DotsCircularAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 2479B831254115BD0013821E /* DotsCircularAnimation */; };
 		247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99824BE934C0004AA49 /* ActivityMapView.swift */; };
 		247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247AB99A24BEA07D0004AA49 /* SingleActivityView.swift */; };
 		247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BA1D424A6E1D2007747BC /* ActivitiesView.swift */; };
@@ -80,6 +84,8 @@
 		24911E6F2513E726000EB01F /* Trail Lab WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 24911E5F2513E722000EB01F /* Trail Lab WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		24911E9B2513E8B7000EB01F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139824909AEB0072389D /* Color.swift */; };
 		24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A9142824C9260E00C9EF02 /* HealthKitManager.swift */; };
+		24AA2EC7252D018E00E107D2 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AA2EC6252D018E00E107D2 /* ShareManager.swift */; };
+		24DCCE682550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCCE672550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +183,8 @@
 		245F78BA249BDA25009BF67A /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataStore.swift; sourceTree = "<group>"; };
 		245F78BE249D2720009BF67A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		24637A8A2537EBF500BF39BC /* TrailLabOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailLabOverlay.swift; sourceTree = "<group>"; };
+		24637A902538CD8100BF39BC /* StandardOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardOverlay.swift; sourceTree = "<group>"; };
 		2475683B24C0ED2E0016FADB /* GradientPolylineRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPolylineRenderer.swift; sourceTree = "<group>"; };
 		2475683D24C0F39B0016FADB /* SingleActivityViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityViewHandler.swift; sourceTree = "<group>"; };
 		247AB99824BE934C0004AA49 /* ActivityMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMapView.swift; sourceTree = "<group>"; };
@@ -192,6 +200,8 @@
 		24911E6A2513E726000EB01F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24A9142824C9260E00C9EF02 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		24A9BBE9251C1BFA003D0174 /* Trail Lab WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Trail Lab WidgetExtension.entitlements"; sourceTree = "<group>"; };
+		24AA2EC6252D018E00E107D2 /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
+		24DCCE672550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithBackgroundOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +210,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */,
+				2479B832254115BD0013821E /* DotsCircularAnimation in Frameworks */,
+				2479B830254115BD0013821E /* ScalingDotsActivityIndicator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +358,10 @@
 			children = (
 				2455810B25118B3B00503CA9 /* ImagePickerController.swift */,
 				2455810D2511935700503CA9 /* ShareImageView.swift */,
+				24637A8A2537EBF500BF39BC /* TrailLabOverlay.swift */,
+				24637A902538CD8100BF39BC /* StandardOverlay.swift */,
+				24AA2EC6252D018E00E107D2 /* ShareManager.swift */,
+				24DCCE672550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift */,
 				2455810F2511A40400503CA9 /* ShareButton.swift */,
 			);
 			path = Share;
@@ -436,6 +452,10 @@
 				24911E6E2513E726000EB01F /* PBXTargetDependency */,
 			);
 			name = "Trail Lab";
+			packageProductDependencies = (
+				2479B82F254115BD0013821E /* ScalingDotsActivityIndicator */,
+				2479B831254115BD0013821E /* DotsCircularAnimation */,
+			);
 			productName = "Trail Lab";
 			productReference = 24181361249073340072389D /* Trail Lab.app */;
 			productType = "com.apple.product-type.application";
@@ -528,6 +548,9 @@
 				Base,
 			);
 			mainGroup = 24181358249073340072389D;
+			packageReferences = (
+				2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */,
+			);
 			productRefGroup = 24181362249073340072389D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -607,10 +630,12 @@
 				2455810C25118B3B00503CA9 /* ImagePickerController.swift in Sources */,
 				243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
+				24637A912538CD8100BF39BC /* StandardOverlay.swift in Sources */,
 				245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */,
 				2455810E2511935700503CA9 /* ShareImageView.swift in Sources */,
 				243F493A24C67AB700FB9E35 /* ProgressBar.swift in Sources */,
 				245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */,
+				24DCCE682550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift in Sources */,
 				245581092510518600503CA9 /* DateExtensions.swift in Sources */,
 				245F78BF249D2720009BF67A /* LocationManager.swift in Sources */,
 				2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */,
@@ -627,8 +652,10 @@
 				2418139924909AEB0072389D /* Color.swift in Sources */,
 				24181367249073340072389D /* SceneDelegate.swift in Sources */,
 				247AB99B24BEA07D0004AA49 /* SingleActivityView.swift in Sources */,
+				24637A8B2537EBF500BF39BC /* TrailLabOverlay.swift in Sources */,
 				245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */,
 				245F78AC249932E9009BF67A /* BottomCard.swift in Sources */,
+				24AA2EC7252D018E00E107D2 /* ShareManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1050,6 +1077,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nikae/Loading-Animations.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2479B82F254115BD0013821E /* ScalingDotsActivityIndicator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */;
+			productName = ScalingDotsActivityIndicator;
+		};
+		2479B831254115BD0013821E /* DotsCircularAnimation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2479B82E254115BD0013821E /* XCRemoteSwiftPackageReference "Loading-Animations" */;
+			productName = DotsCircularAnimation;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		24181368249073340072389D /* Trail_Lab.xcdatamodeld */ = {

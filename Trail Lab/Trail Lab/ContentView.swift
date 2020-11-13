@@ -102,14 +102,12 @@ struct ContentView: View {
                 ProgressPicker(
                     open: $historyViewHandler.showDistanceGoal,
                     isDistancePicker: true)
-                .animation(.linear)
             }
 
             if historyViewHandler.showDurationGoal {
                 ProgressPicker(
                     open: $historyViewHandler.showDurationGoal,
                     isDistancePicker: false)
-                    .animation(.linear)
             }
 
         }
