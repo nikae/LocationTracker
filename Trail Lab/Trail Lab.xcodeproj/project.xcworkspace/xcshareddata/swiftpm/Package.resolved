@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Loading Animations",
+        "repositoryURL": "https://github.com/nikae/Loading-Animations.git",
+        "state": {
+          "branch": null,
+          "revision": "99ea8c5b9a94fa4fe8e68f6f790b6f28fac22dac",
+          "version": "1.0.7"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

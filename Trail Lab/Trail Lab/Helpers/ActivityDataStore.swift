@@ -62,7 +62,6 @@ class ActivityDataStore: NSObject {
         let group = DispatchGroup()
         let queue = DispatchQueue(label: "Save_Activity")
 
-
         queue.async {
             group.enter()
 
@@ -76,7 +75,6 @@ class ActivityDataStore: NSObject {
             }
             group.wait()
         }
-
 
         queue.async {
             group.enter()
@@ -197,8 +195,6 @@ class ActivityDataStore: NSObject {
         HKHealthStore().execute(query)
     }
 
-
-
     func getLocations(_ workout: HKWorkout, completion: @escaping (_ path: [CLLocation]?) -> Void) {
 
         var  path: [CLLocation] = []
@@ -273,7 +269,6 @@ class ActivityDataStore: NSObject {
 
     }
     
-
     func addLocationTotheBuilder(_ workout: HKWorkout, location: [CLLocation], completion: @escaping (_ succsess: Bool, _ error: Error?) -> Void) {
 
         self.routeBuilder?.insertRouteData(location, completion: { (success, error) in
@@ -376,5 +371,4 @@ class ActivityDataStore: NSObject {
             completion(sortedList)
         }
     }
-
 }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import DotsCircularAnimation
 
 struct ContentView: View {
 
@@ -111,6 +112,12 @@ struct ContentView: View {
             }
 
         }
+        .if(activityHandler.showLoadingAnimation)
+            { $0.blur(radius: 20) }
+        .if(activityHandler.showLoadingAnimation)
+            { $0.overlay(DotsCircularAnimation(color: activityHandler.activity?.activityType.color())
+                            .frame(width: 50, height: 50, alignment: .center)) }
+        
         .sheet(isPresented: self.$historyViewHandler.newWorkoutLoadingIsDone) {
             SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: true)
         }
@@ -147,3 +154,4 @@ struct ScreenPreferance: PreferenceKey {
         value.append(contentsOf: nextValue())
     }
 }
+

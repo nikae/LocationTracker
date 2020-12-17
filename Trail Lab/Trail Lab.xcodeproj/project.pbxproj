@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2407ADA22589454500481525 /* DotsCircularAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 2407ADA12589454500481525 /* DotsCircularAnimation */; };
 		24181365249073340072389D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181364249073340072389D /* AppDelegate.swift */; };
 		24181367249073340072389D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181366249073340072389D /* SceneDelegate.swift */; };
 		2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24181368249073340072389D /* Trail_Lab.xcdatamodeld */; };
@@ -207,6 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2407ADA22589454500481525 /* DotsCircularAnimation in Frameworks */,
 				245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,6 +451,7 @@
 			);
 			name = "Trail Lab";
 			packageProductDependencies = (
+				2407ADA12589454500481525 /* DotsCircularAnimation */,
 			);
 			productName = "Trail Lab";
 			productReference = 24181361249073340072389D /* Trail Lab.app */;
@@ -543,6 +546,7 @@
 			);
 			mainGroup = 24181358249073340072389D;
 			packageReferences = (
+				2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */,
 			);
 			productRefGroup = 24181362249073340072389D /* Products */;
 			projectDirPath = "";
@@ -1070,6 +1074,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nikae/Loading-Animations.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2407ADA12589454500481525 /* DotsCircularAnimation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */;
+			productName = DotsCircularAnimation;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		24181368249073340072389D /* Trail_Lab.xcdatamodeld */ = {

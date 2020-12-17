@@ -22,7 +22,7 @@ struct BarView: View {
             GeometryReader { proxy in
                 ZStack(alignment: .bottom){
                     Capsule()
-                        .foregroundColor(Color(self.height == 0 ? UIColor.background.secondary : .clear))
+                        .foregroundColor(.clear)
                         .opacity(1)
                     Capsule()
                         .fill(LinearGradient(

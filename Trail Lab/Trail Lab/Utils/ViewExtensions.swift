@@ -171,3 +171,15 @@ struct Extension_Previews_Previews: PreviewProvider {
     }
 }
 
+
+extension View {
+    @warn_unqualified_access
+    @ViewBuilder
+    func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}

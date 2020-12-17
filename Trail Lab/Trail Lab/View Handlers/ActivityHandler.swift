@@ -23,6 +23,7 @@ class ActivityHandler: ObservableObject {
     @Published var activity: Activity?
     @Published var tempLocation: String = ""
     @Published var statsViewOffset: CGFloat = -300
+    @Published var showLoadingAnimation: Bool = false
 
     let locationManager = LocationManager.shared
     let pedometerManager = PedometerManager()
@@ -92,8 +93,10 @@ class ActivityHandler: ObservableObject {
 
     func saveActivity() {
         guard let activity = activity else { return }
+        showLoadingAnimation = true
         ActivityDataStore().save(activity: activity) { sucsess, error in
-
+            self.showLoadingAnimation = false
+           // self.activity?.locations.removeAll()
             self.activityHandlerDelegate?.activitySaved()
 
             if let error = error {
