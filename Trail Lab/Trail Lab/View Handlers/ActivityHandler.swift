@@ -31,6 +31,7 @@ class ActivityHandler: ObservableObject {
     private (set) var startDate: Date!
     private (set) var endDate: Date!
     private var activityTimer: Timer?
+    let audioManager = AudioManager.shared
 
     weak var mapViewDelegate: MapViewDelegate?
     weak var activityHandlerDelegate: ActivityHandlerDelegate?
@@ -43,6 +44,7 @@ class ActivityHandler: ObservableObject {
                                             statsViewOffset = offset
         }
     }
+    
 
     func startActivity() {
         UIApplication.shared.isIdleTimerDisabled = true
@@ -55,6 +57,9 @@ class ActivityHandler: ObservableObject {
                             intervals: [])
         locationManager.startLocationUpdates(locationListener: { location in
             self.locationListener(location: location)
+            if !(self.audioManager.player?.isPlaying ?? false) {
+                self.audioManager.checkForLocation(location: location)
+            }
         }) { error in
             print(error)
         }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24056D31258AF80500B90FC0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24056D30258AF80500B90FC0 /* AudioManager.swift */; };
+		24056D3B258B00D600B90FC0 /* V1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 24056D3A258B00D600B90FC0 /* V1.m4a */; };
+		24056D41258B014500B90FC0 /* V2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 24056D40258B014500B90FC0 /* V2.m4a */; };
 		2407ADA22589454500481525 /* DotsCircularAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 2407ADA12589454500481525 /* DotsCircularAnimation */; };
 		24181365249073340072389D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181364249073340072389D /* AppDelegate.swift */; };
 		24181367249073340072389D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181366249073340072389D /* SceneDelegate.swift */; };
@@ -126,6 +129,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		24056D30258AF80500B90FC0 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		24056D3A258B00D600B90FC0 /* V1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = V1.m4a; path = ../../../../Downloads/V1.m4a; sourceTree = "<group>"; };
+		24056D40258B014500B90FC0 /* V2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = V2.m4a; path = ../../../../Downloads/V2.m4a; sourceTree = "<group>"; };
 		24181361249073340072389D /* Trail Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trail Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24181364249073340072389D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24181366249073340072389D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -239,6 +245,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24056D2F258AF7E200B90FC0 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				24056D30258AF80500B90FC0 /* AudioManager.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		24181358249073340072389D = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +280,8 @@
 		24181363249073340072389D /* Trail Lab */ = {
 			isa = PBXGroup;
 			children = (
+				24056D3A258B00D600B90FC0 /* V1.m4a */,
+				24056D40258B014500B90FC0 /* V2.m4a */,
 				245F78B6249BD45F009BF67A /* Trail Lab.entitlements */,
 				24181364249073340072389D /* AppDelegate.swift */,
 				24181366249073340072389D /* SceneDelegate.swift */,
@@ -276,6 +292,7 @@
 				247AB99724BE931B0004AA49 /* Single Activitie */,
 				245F78B3249BD3C5009BF67A /* Helpers */,
 				2418139724909ACF0072389D /* Utils */,
+				24056D2F258AF7E200B90FC0 /* Audio */,
 				2455810A25118B1500503CA9 /* Share */,
 				2418136D249073360072389D /* Assets.xcassets */,
 				24181372249073360072389D /* LaunchScreen.storyboard */,
@@ -565,7 +582,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24056D41258B014500B90FC0 /* V2.m4a in Resources */,
 				24181374249073360072389D /* LaunchScreen.storyboard in Resources */,
+				24056D3B258B00D600B90FC0 /* V1.m4a in Resources */,
 				24181371249073360072389D /* Preview Assets.xcassets in Resources */,
 				2418136E249073360072389D /* Assets.xcassets in Resources */,
 			);
@@ -624,6 +643,7 @@
 				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,
 				24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */,
 				2425199C25169577000F1EF8 /* BarGraphModel.swift in Sources */,
+				24056D31258AF80500B90FC0 /* AudioManager.swift in Sources */,
 				2455810C25118B3B00503CA9 /* ImagePickerController.swift in Sources */,
 				243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */,
 				241813A12492B1990072389D /* SlideCard.swift in Sources */,
