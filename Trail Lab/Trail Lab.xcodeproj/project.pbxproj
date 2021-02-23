@@ -41,7 +41,6 @@
 		24301F2724A573570029137C /* FormattingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2624A573570029137C /* FormattingExtensions.swift */; };
 		243F493424C39AE300FB9E35 /* SingleActivityStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493324C39AE300FB9E35 /* SingleActivityStatsView.swift */; };
 		243F493624C39C6F00FB9E35 /* SingleActivityTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493524C39C6F00FB9E35 /* SingleActivityTitleView.swift */; };
-		243F493824C3B5B500FB9E35 /* linearGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493724C3B5B500FB9E35 /* linearGraph.swift */; };
 		243F493A24C67AB700FB9E35 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F493924C67AB700FB9E35 /* ProgressBar.swift */; };
 		244461ED24B83A9200062194 /* GraphTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244461EC24B83A9200062194 /* GraphTile.swift */; };
 		245581092510518600503CA9 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
@@ -85,6 +84,8 @@
 		24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A9142824C9260E00C9EF02 /* HealthKitManager.swift */; };
 		24AA2EC7252D018E00E107D2 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AA2EC6252D018E00E107D2 /* ShareManager.swift */; };
 		24DCCE682550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCCE672550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift */; };
+		6284DF5B25E316F000720D56 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 6284DF5A25E316F000720D56 /* SwiftUICharts */; };
+		6284DF6225E3174A00720D56 /* LinearChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6284DF6125E3174A00720D56 /* LinearChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,7 +158,6 @@
 		24301F2624A573570029137C /* FormattingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingExtensions.swift; sourceTree = "<group>"; };
 		243F493324C39AE300FB9E35 /* SingleActivityStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityStatsView.swift; sourceTree = "<group>"; };
 		243F493524C39C6F00FB9E35 /* SingleActivityTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleActivityTitleView.swift; sourceTree = "<group>"; };
-		243F493724C3B5B500FB9E35 /* linearGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = linearGraph.swift; sourceTree = "<group>"; };
 		243F493924C67AB700FB9E35 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		244461EC24B83A9200062194 /* GraphTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTile.swift; sourceTree = "<group>"; };
 		245581082510518600503CA9 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
@@ -201,6 +201,7 @@
 		24A9BBE9251C1BFA003D0174 /* Trail Lab WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Trail Lab WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		24AA2EC6252D018E00E107D2 /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		24DCCE672550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithBackgroundOverlay.swift; sourceTree = "<group>"; };
+		6284DF6125E3174A00720D56 /* LinearChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6284DF5B25E316F000720D56 /* SwiftUICharts in Frameworks */,
 				2407ADA22589454500481525 /* DotsCircularAnimation in Frameworks */,
 				245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */,
 			);
@@ -272,6 +274,7 @@
 				2418136B249073340072389D /* ContentView.swift */,
 				2418139A24909C960072389D /* MainView */,
 				245DF9C424B6A326001345C5 /* Trends */,
+				6284DF6025E3171C00720D56 /* Graphs */,
 				2418139D2492A5150072389D /* View Handlers */,
 				247AB99724BE931B0004AA49 /* Single Activitie */,
 				245F78B3249BD3C5009BF67A /* Helpers */,
@@ -373,7 +376,6 @@
 				245DF9C924B6A809001345C5 /* GraphBars.swift */,
 				244461EC24B83A9200062194 /* GraphTile.swift */,
 				242519B02516A1A3000F1EF8 /* GraphBackgroundView.swift */,
-				243F493724C3B5B500FB9E35 /* linearGraph.swift */,
 				243F493924C67AB700FB9E35 /* ProgressBar.swift */,
 				245C8D8424C7F13B00536D1D /* ActivityCell.swift */,
 			);
@@ -432,6 +434,14 @@
 			path = "Trail Lab Widget";
 			sourceTree = "<group>";
 		};
+		6284DF6025E3171C00720D56 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				6284DF6125E3174A00720D56 /* LinearChartView.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -452,6 +462,7 @@
 			name = "Trail Lab";
 			packageProductDependencies = (
 				2407ADA12589454500481525 /* DotsCircularAnimation */,
+				6284DF5A25E316F000720D56 /* SwiftUICharts */,
 			);
 			productName = "Trail Lab";
 			productReference = 24181361249073340072389D /* Trail Lab.app */;
@@ -547,6 +558,7 @@
 			mainGroup = 24181358249073340072389D;
 			packageReferences = (
 				2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */,
+				6284DF5925E316F000720D56 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 24181362249073340072389D /* Products */;
 			projectDirPath = "";
@@ -601,7 +613,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				245DF9C824B6A65C001345C5 /* BarView.swift in Sources */,
-				243F493824C3B5B500FB9E35 /* linearGraph.swift in Sources */,
 				24251969251690F9000F1EF8 /* ActivityDataModel.swift in Sources */,
 				24181365249073340072389D /* AppDelegate.swift in Sources */,
 				245581102511A40400503CA9 /* ShareButton.swift in Sources */,
@@ -612,6 +623,7 @@
 				245C8D8524C7F13B00536D1D /* ActivityCell.swift in Sources */,
 				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
 				245F78A52495E154009BF67A /* ActivityHandler.swift in Sources */,
+				6284DF6225E3174A00720D56 /* LinearChartView.swift in Sources */,
 				2418139C24909CE00072389D /* WorkoutVIew.swift in Sources */,
 				24911E6C2513E726000EB01F /* Trail_Lab_Widget.intentdefinition in Sources */,
 				247BA1D524A6E1D2007747BC /* ActivitiesView.swift in Sources */,
@@ -776,7 +788,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -831,7 +843,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1084,6 +1096,14 @@
 				minimumVersion = 1.0.7;
 			};
 		};
+		6284DF5925E316F000720D56 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1091,6 +1111,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */;
 			productName = DotsCircularAnimation;
+		};
+		6284DF5A25E316F000720D56 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6284DF5925E316F000720D56 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -10,6 +10,7 @@ import Foundation
 import HealthKit
 import SwiftUI
 import WidgetKit
+import StoreKit
 
 class HistoryViewHandler: ObservableObject {
 
@@ -308,6 +309,13 @@ extension HistoryViewHandler: ActivityHandlerDelegate {
                 self.newWorkoutLoadingIsDone.toggle()
                 let date = self.getMonday(.current, for: Date())
                 self.getWorkoutsForAWeek(for: date, updateWidgetData: true)
+                if #available(iOS 14.0, *) {
+                       if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                           SKStoreReviewController.requestReview(in: scene)
+                       }
+                   } else {
+                       SKStoreReviewController.requestReview()
+                   }
             }
         }
     }
