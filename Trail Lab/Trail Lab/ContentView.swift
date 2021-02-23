@@ -32,7 +32,7 @@ struct ContentView: View {
     }
 
     //FIXME: This needs to be moved into settings
-    @State private var showGreeting = UnitPreferance(rawValue: Preferences.unit) == .metric
+    @State private var showGreeting = UnitPreference(rawValue: Preferences.unit) == .metric
 
     var body: some View {
         ZStack {
@@ -119,7 +119,7 @@ struct ContentView: View {
                             .frame(width: 50, height: 50, alignment: .center)) }
         
         .sheet(isPresented: self.$historyViewHandler.newWorkoutLoadingIsDone) {
-            SingleActivityView(activity: self.historyViewHandler.selectedActivity, isNewActivity: true)
+            SingleActivityView(singleActivityViewHandler: SingleActivityViewHandler(activity: self.historyViewHandler.selectedActivity), isNewActivity: true)
         }
         .alert(isPresented: $historyViewHandler.showAlert) {
             Alert(title: Text("Error"), message: Text(historyViewHandler.errorMessage), dismissButton: .cancel({
@@ -131,7 +131,6 @@ struct ContentView: View {
             self.activityHandler.activityHandlerDelegate = self.historyViewHandler
         }
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {

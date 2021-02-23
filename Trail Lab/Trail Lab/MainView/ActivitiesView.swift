@@ -26,8 +26,7 @@ struct ActivitiesNavigationView: View {
             
         }
         .sheet(isPresented: $open, content: {
-            SingleActivityView(
-                activity: self.historyViewHandler.selectedActivity,
+            SingleActivityView(singleActivityViewHandler: SingleActivityViewHandler(activity: self.historyViewHandler.selectedActivity),
                 isNewActivity: false)
         })
     }
@@ -47,8 +46,8 @@ struct ActivitiesView: View {
                 }
             }
         .sheet(isPresented: $open, content: {
-            SingleActivityView(
-                activity: self.historyViewHandler.selectedActivity,
+            let handler = SingleActivityViewHandler(activity: self.historyViewHandler.selectedActivity)
+            SingleActivityView(singleActivityViewHandler: handler,
                 isNewActivity: false)
         })
     }

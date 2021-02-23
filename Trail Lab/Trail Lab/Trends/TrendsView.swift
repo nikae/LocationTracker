@@ -99,14 +99,15 @@ struct TrendsView: View {
                         self.showRecentActivity.toggle()
                 }
                 .sheet(isPresented: $showRecentActivity) {
-                    SingleActivityView(
-                        activity: self.historyViewHandler.activityList.first!,
-                        isNewActivity: false)
-
+                    if let activity = self.historyViewHandler.activityList.first {
+                        let handler = SingleActivityViewHandler(activity: activity)
+                        SingleActivityView(singleActivityViewHandler: handler,
+                                           isNewActivity: false)
+                    }
                 }
                 SingleActivityStatsView(activity: historyViewHandler.activityList.first!)
                     .padding(.horizontal)
-             //TODO: ADD MAPVIEW HERE
+             //TODO: ADD MAP VIEW HERE
             }
         }
         .onAppear {
