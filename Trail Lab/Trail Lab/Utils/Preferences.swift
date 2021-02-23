@@ -35,15 +35,24 @@ struct Preferences {
     static var timeGoal: TimeInterval
 }
 
-enum UnitPreferance: Int {
+enum UnitPreference: Int {
     case metric = 0
     case imperial = 1
+    
+    var stringValue: String {
+        switch self {
+        case .imperial:
+            return "ft"
+        case .metric:
+            return "m"
+        }
+    }
 }
 
 /// Gets device local.
       /// This method is used to determin users default unit preferance before user explisitly sets it into the app setting
-      /// - Returns: UnitPreferance based on device local
-   func getLocal() -> UnitPreferance {
+      /// - Returns: UnitPreference based on device local
+   func getLocal() -> UnitPreference {
        //User region setting return
        let locale = Locale.current //NSLocale.current
        //Returns true if the locale uses the metric system (Note: Only three countries do not use the metric system: the US, Liberia and Myanmar.)

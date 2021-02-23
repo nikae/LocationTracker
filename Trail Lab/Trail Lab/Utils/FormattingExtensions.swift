@@ -31,7 +31,7 @@ extension TimeInterval {
 extension Double {
     //MARK: Speed
     func formatSpeed() -> String {
-        let unit = UnitPreferance(rawValue: Preferences.unit)
+        let unit = UnitPreference(rawValue: Preferences.unit)
         let unitSpeed: UnitSpeed = unit == .metric ? .kilometersPerHour : .milesPerHour
         let value = NSMeasurement(doubleValue: self, unit: UnitSpeed.metersPerSecond)
         let formatter = MeasurementFormatter()
@@ -43,7 +43,7 @@ extension Double {
 
     //MARK: Distane
     func formatDistane() -> String {
-        let unit = UnitPreferance(rawValue: Preferences.unit)
+        let unit = UnitPreference(rawValue: Preferences.unit)
         let unitLength: UnitLength = unit == .metric ? .kilometers : .miles
         let value = NSMeasurement(doubleValue: self, unit: UnitLength.meters)
         let formatter = MeasurementFormatter()
@@ -56,7 +56,7 @@ extension Double {
 
     //MARK: Distane
     func formatDistaneForGoals() -> String {
-        let unit = UnitPreferance(rawValue: Preferences.unit)
+        let unit = UnitPreference(rawValue: Preferences.unit)
         let unitLength: UnitLength = unit == .metric ? .kilometers : .miles
         let value = NSMeasurement(doubleValue: self, unit: unitLength)
         let formatter = MeasurementFormatter()
@@ -68,7 +68,7 @@ extension Double {
     }
 
     func convert(fromMiters: Bool) -> Double {
-        let unit = UnitPreferance(rawValue: Preferences.unit)
+        let unit = UnitPreference(rawValue: Preferences.unit)
         let unitLength: UnitLength = unit == .metric ? .kilometers : .miles
         let value = NSMeasurement(doubleValue: self, unit: fromMiters ? UnitLength.meters : unitLength)
         let formatter = MeasurementFormatter()
@@ -82,7 +82,7 @@ extension Double {
 
     //MARK: Pace
     func formatPace() -> String {
-        let isMetric = UnitPreferance(rawValue: Preferences.unit) == .metric
+        let isMetric = UnitPreference(rawValue: Preferences.unit) == .metric
         guard self != 0 && self != .infinity && self != -.infinity else {
             return ""
         }
@@ -103,7 +103,7 @@ extension Double {
 
     //MARK: Altitude
     func formatAltitude() -> String {
-        let unit = UnitPreferance(rawValue: Preferences.unit)
+        let unit = UnitPreference(rawValue: Preferences.unit)
         let unitLength: UnitLength = unit == .metric ? .meters : .feet
         let value = NSMeasurement(doubleValue: self, unit: UnitLength.meters)
         let formatter = MeasurementFormatter()
@@ -112,6 +112,18 @@ extension Double {
         let converted = value.converting(to: unitLength)
 
         return formatter.string(from: converted as Measurement<Unit>)
+    }
+    
+    func toMetersOrFeet() -> Double {
+        let unit = UnitPreference(rawValue: Preferences.unit)
+        let unitLength: UnitLength = unit == .metric ? .meters : .feet
+        let value = NSMeasurement(doubleValue: self, unit: UnitLength.meters)
+        let formatter = MeasurementFormatter()
+        formatter.numberFormatter.maximumFractionDigits = 2
+        formatter.unitOptions = .providedUnit
+        let converted = value.converting(to: unitLength)
+
+        return converted.value
     }
 }
 
