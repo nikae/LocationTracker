@@ -24,14 +24,16 @@ extension UIColor {
 }
 
 extension UIColor {
+    #if os(iOS)
     static func dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
         guard #available(iOS 13.0, *) else { return light }
         return UIColor { $0.userInterfaceStyle == .dark ? dark : light }
     }
+    #endif
 }
 
 extension UIColor {
-
+    #if os(iOS)
     struct background {
         static let primary = dynamicColor(
             light: .white,
@@ -46,6 +48,8 @@ extension UIColor {
                    light: UIColor(netHex: 0x454547),
                    dark: UIColor(netHex: 0x525254))
     }
+    
+#endif
 
     struct SportColors {
         static let run = UIColor(red: 254/255.0, green: 220/255.0, blue: 40/255.0, alpha: 1)

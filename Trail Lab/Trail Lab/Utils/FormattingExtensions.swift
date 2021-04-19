@@ -18,11 +18,13 @@ typealias SecondsPerMeter = Double
 
 //MARK: Time
 extension TimeInterval {
-    func format(using units: NSCalendar.Unit = [.hour, .minute, .second]) -> String? {
+    func format(using units: NSCalendar.Unit = [.hour, .minute, .second],
+                unitsStyle: DateComponentsFormatter.UnitsStyle = .abbreviated,
+                zeroFormattingBehavior: DateComponentsFormatter.ZeroFormattingBehavior = .dropLeading) -> String? {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = units
-        formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = .dropLeading
+        formatter.unitsStyle = unitsStyle
+        formatter.zeroFormattingBehavior = zeroFormattingBehavior
 
         return formatter.string(from: self)
     }
@@ -132,10 +134,10 @@ extension Date {
     var localizedStringTime: String {
         return DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
     }
-
-    var localaizedDate: String {
-        return DateFormatter.localizedString(from: self, dateStyle: .full, timeStyle: .none)
-    }
+  
+    func localaizedDate(_ dateStyle:  DateFormatter.Style = .full) -> String {
+           return DateFormatter.localizedString(from: self, dateStyle: dateStyle, timeStyle: .none)
+       }
 }
 
 extension TimeInterval {

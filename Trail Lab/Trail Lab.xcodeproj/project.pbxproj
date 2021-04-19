@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2407ADA22589454500481525 /* DotsCircularAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 2407ADA12589454500481525 /* DotsCircularAnimation */; };
 		24181365249073340072389D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181364249073340072389D /* AppDelegate.swift */; };
 		24181367249073340072389D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24181366249073340072389D /* SceneDelegate.swift */; };
 		2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24181368249073340072389D /* Trail_Lab.xcdatamodeld */; };
@@ -84,6 +83,30 @@
 		24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A9142824C9260E00C9EF02 /* HealthKitManager.swift */; };
 		24AA2EC7252D018E00E107D2 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AA2EC6252D018E00E107D2 /* ShareManager.swift */; };
 		24DCCE682550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCCE672550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift */; };
+		62034118262B916200E855C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62034117262B916200E855C3 /* Assets.xcassets */; };
+		6203411F262B916200E855C3 /* Trail Lab WatchOS Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6203411E262B916200E855C3 /* Trail Lab WatchOS Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		62034124262B916200E855C3 /* Trail_LabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034123262B916200E855C3 /* Trail_LabApp.swift */; };
+		62034126262B916200E855C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034125262B916200E855C3 /* ContentView.swift */; };
+		62034128262B916200E855C3 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034127262B916200E855C3 /* NotificationController.swift */; };
+		6203412A262B916200E855C3 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034129262B916200E855C3 /* NotificationView.swift */; };
+		6203412C262B916200E855C3 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6203412B262B916200E855C3 /* ComplicationController.swift */; };
+		6203412E262B916200E855C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6203412D262B916200E855C3 /* Assets.xcassets */; };
+		62034131262B916200E855C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62034130262B916200E855C3 /* Preview Assets.xcassets */; };
+		62034136262B916200E855C3 /* Trail Lab WatchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 62034115262B916100E855C3 /* Trail Lab WatchOS.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		62034147262B93AC00E855C3 /* ActivityManagerWatchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034146262B93AC00E855C3 /* ActivityManagerWatchOS.swift */; };
+		6203414F262B942000E855C3 /* ActivityStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6203414E262B942000E855C3 /* ActivityStartView.swift */; };
+		62034156262B944C00E855C3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2418139824909AEB0072389D /* Color.swift */; };
+		6203415D262B948A00E855C3 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
+		62034164262B949B00E855C3 /* FormattingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2624A573570029137C /* FormattingExtensions.swift */; };
+		6203416B262B94C400E855C3 /* ActivityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24251968251690F9000F1EF8 /* ActivityDataModel.swift */; };
+		62034173262B94E500E855C3 /* ActivityPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034172262B94E500E855C3 /* ActivityPlatter.swift */; };
+		62034180262B951000E855C3 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A62495E9EF009BF67A /* Preferences.swift */; };
+		6203419A262B958200E855C3 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62034199262B958200E855C3 /* SharedAssets.xcassets */; };
+		6203419B262B958200E855C3 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62034199262B958200E855C3 /* SharedAssets.xcassets */; };
+		6203419C262B958200E855C3 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62034199262B958200E855C3 /* SharedAssets.xcassets */; };
+		620341A5262B97A600E855C3 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 620341A4262B97A600E855C3 /* HealthKit.framework */; };
+		620341B0262BA0ED00E855C3 /* InActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620341AD262BA0ED00E855C3 /* InActivityView.swift */; };
+		620341D1262CF1DF00E855C3 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620341CF262CF1DF00E855C3 /* StatsView.swift */; };
 		6284DF5B25E316F000720D56 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 6284DF5A25E316F000720D56 /* SwiftUICharts */; };
 		6284DF6225E3174A00720D56 /* LinearChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6284DF6125E3174A00720D56 /* LinearChartView.swift */; };
 /* End PBXBuildFile section */
@@ -110,6 +133,20 @@
 			remoteGlobalIDString = 24911E5E2513E722000EB01F;
 			remoteInfo = "Trail Lab WidgetExtension";
 		};
+		62034120262B916200E855C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24181359249073340072389D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6203411D262B916200E855C3;
+			remoteInfo = "Trail Lab WatchOS Extension";
+		};
+		62034134262B916200E855C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24181359249073340072389D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62034114262B916100E855C3;
+			remoteInfo = "Trail Lab WatchOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -120,6 +157,28 @@
 			dstSubfolderSpec = 13;
 			files = (
 				24911E6F2513E726000EB01F /* Trail Lab WidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62034137262B916200E855C3 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				62034136262B916200E855C3 /* Trail Lab WatchOS.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6203413A262B916200E855C3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6203411F262B916200E855C3 /* Trail Lab WatchOS Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +260,27 @@
 		24A9BBE9251C1BFA003D0174 /* Trail Lab WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Trail Lab WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		24AA2EC6252D018E00E107D2 /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		24DCCE672550ED2F00A2E7C9 /* TextWithBackgroundOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithBackgroundOverlay.swift; sourceTree = "<group>"; };
+		62034115262B916100E855C3 /* Trail Lab WatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trail Lab WatchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62034117262B916200E855C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		62034119262B916200E855C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6203411E262B916200E855C3 /* Trail Lab WatchOS Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Trail Lab WatchOS Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		62034123262B916200E855C3 /* Trail_LabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail_LabApp.swift; sourceTree = "<group>"; };
+		62034125262B916200E855C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		62034127262B916200E855C3 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		62034129262B916200E855C3 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		6203412B262B916200E855C3 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		6203412D262B916200E855C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		62034130262B916200E855C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		62034132262B916200E855C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62034133262B916200E855C3 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		62034146262B93AC00E855C3 /* ActivityManagerWatchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManagerWatchOS.swift; sourceTree = "<group>"; };
+		6203414E262B942000E855C3 /* ActivityStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStartView.swift; sourceTree = "<group>"; };
+		62034172262B94E500E855C3 /* ActivityPlatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPlatter.swift; sourceTree = "<group>"; };
+		62034199262B958200E855C3 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
+		620341A3262B97A600E855C3 /* Trail Lab WatchOS Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Trail Lab WatchOS Extension.entitlements"; sourceTree = "<group>"; };
+		620341A4262B97A600E855C3 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS7.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		620341AD262BA0ED00E855C3 /* InActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActivityView.swift; sourceTree = "<group>"; };
+		620341CF262CF1DF00E855C3 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		6284DF6125E3174A00720D56 /* LinearChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,7 +290,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6284DF5B25E316F000720D56 /* SwiftUICharts in Frameworks */,
-				2407ADA22589454500481525 /* DotsCircularAnimation in Frameworks */,
 				245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +317,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6203411B262B916200E855C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				620341A5262B97A600E855C3 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -249,6 +336,8 @@
 				2418137D249073360072389D /* Trail LabTests */,
 				24181388249073360072389D /* Trail LabUITests */,
 				24911E642513E722000EB01F /* Trail Lab Widget */,
+				62034116262B916100E855C3 /* Trail Lab WatchOS */,
+				62034122262B916200E855C3 /* Trail Lab WatchOS Extension */,
 				24181362249073340072389D /* Products */,
 				245F78B7249BD45F009BF67A /* Frameworks */,
 			);
@@ -261,6 +350,8 @@
 				2418137A249073360072389D /* Trail LabTests.xctest */,
 				24181385249073360072389D /* Trail LabUITests.xctest */,
 				24911E5F2513E722000EB01F /* Trail Lab WidgetExtension.appex */,
+				62034115262B916100E855C3 /* Trail Lab WatchOS.app */,
+				6203411E262B916200E855C3 /* Trail Lab WatchOS Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -325,6 +416,7 @@
 				24301F2224A512070029137C /* ViewModifiers.swift */,
 				24301F2624A573570029137C /* FormattingExtensions.swift */,
 				245581082510518600503CA9 /* DateExtensions.swift */,
+				62034199262B958200E855C3 /* SharedAssets.xcassets */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -402,6 +494,7 @@
 		245F78B7249BD45F009BF67A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				620341A4262B97A600E855C3 /* HealthKit.framework */,
 				245F78B8249BD45F009BF67A /* HealthKit.framework */,
 				24911E602513E722000EB01F /* WidgetKit.framework */,
 				24911E622513E722000EB01F /* SwiftUI.framework */,
@@ -434,6 +527,53 @@
 			path = "Trail Lab Widget";
 			sourceTree = "<group>";
 		};
+		62034116262B916100E855C3 /* Trail Lab WatchOS */ = {
+			isa = PBXGroup;
+			children = (
+				62034117262B916200E855C3 /* Assets.xcassets */,
+				62034119262B916200E855C3 /* Info.plist */,
+			);
+			path = "Trail Lab WatchOS";
+			sourceTree = "<group>";
+		};
+		62034122262B916200E855C3 /* Trail Lab WatchOS Extension */ = {
+			isa = PBXGroup;
+			children = (
+				620341A3262B97A600E855C3 /* Trail Lab WatchOS Extension.entitlements */,
+				62034123262B916200E855C3 /* Trail_LabApp.swift */,
+				62034125262B916200E855C3 /* ContentView.swift */,
+				62034127262B916200E855C3 /* NotificationController.swift */,
+				62034129262B916200E855C3 /* NotificationView.swift */,
+				6203412B262B916200E855C3 /* ComplicationController.swift */,
+				62034145262B938500E855C3 /* Activity */,
+				6203412D262B916200E855C3 /* Assets.xcassets */,
+				62034132262B916200E855C3 /* Info.plist */,
+				62034133262B916200E855C3 /* PushNotificationPayload.apns */,
+				6203412F262B916200E855C3 /* Preview Content */,
+			);
+			path = "Trail Lab WatchOS Extension";
+			sourceTree = "<group>";
+		};
+		6203412F262B916200E855C3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				62034130262B916200E855C3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		62034145262B938500E855C3 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				62034146262B93AC00E855C3 /* ActivityManagerWatchOS.swift */,
+				6203414E262B942000E855C3 /* ActivityStartView.swift */,
+				62034172262B94E500E855C3 /* ActivityPlatter.swift */,
+				620341AD262BA0ED00E855C3 /* InActivityView.swift */,
+				620341CF262CF1DF00E855C3 /* StatsView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
 		6284DF6025E3171C00720D56 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,15 +593,16 @@
 				2418135E249073340072389D /* Frameworks */,
 				2418135F249073340072389D /* Resources */,
 				24911E702513E726000EB01F /* Embed App Extensions */,
+				62034137262B916200E855C3 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				24911E6E2513E726000EB01F /* PBXTargetDependency */,
+				62034135262B916200E855C3 /* PBXTargetDependency */,
 			);
 			name = "Trail Lab";
 			packageProductDependencies = (
-				2407ADA12589454500481525 /* DotsCircularAnimation */,
 				6284DF5A25E316F000720D56 /* SwiftUICharts */,
 			);
 			productName = "Trail Lab";
@@ -521,13 +662,47 @@
 			productReference = 24911E5F2513E722000EB01F /* Trail Lab WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		62034114262B916100E855C3 /* Trail Lab WatchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6203413E262B916200E855C3 /* Build configuration list for PBXNativeTarget "Trail Lab WatchOS" */;
+			buildPhases = (
+				62034113262B916100E855C3 /* Resources */,
+				6203413A262B916200E855C3 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				62034121262B916200E855C3 /* PBXTargetDependency */,
+			);
+			name = "Trail Lab WatchOS";
+			productName = "Trail Lab WatchOS";
+			productReference = 62034115262B916100E855C3 /* Trail Lab WatchOS.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		6203411D262B916200E855C3 /* Trail Lab WatchOS Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6203413D262B916200E855C3 /* Build configuration list for PBXNativeTarget "Trail Lab WatchOS Extension" */;
+			buildPhases = (
+				6203411A262B916200E855C3 /* Sources */,
+				6203411B262B916200E855C3 /* Frameworks */,
+				6203411C262B916200E855C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Trail Lab WatchOS Extension";
+			productName = "Trail Lab WatchOS Extension";
+			productReference = 6203411E262B916200E855C3 /* Trail Lab WatchOS Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		24181359249073340072389D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = nilka;
 				TargetAttributes = {
@@ -545,6 +720,12 @@
 					24911E5E2513E722000EB01F = {
 						CreatedOnToolsVersion = 12.0;
 					};
+					62034114262B916100E855C3 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					6203411D262B916200E855C3 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 				};
 			};
 			buildConfigurationList = 2418135C249073340072389D /* Build configuration list for PBXProject "Trail Lab" */;
@@ -557,7 +738,6 @@
 			);
 			mainGroup = 24181358249073340072389D;
 			packageReferences = (
-				2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */,
 				6284DF5925E316F000720D56 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 24181362249073340072389D /* Products */;
@@ -568,6 +748,8 @@
 				24181379249073360072389D /* Trail LabTests */,
 				24181384249073360072389D /* Trail LabUITests */,
 				24911E5E2513E722000EB01F /* Trail Lab WidgetExtension */,
+				62034114262B916100E855C3 /* Trail Lab WatchOS */,
+				6203411D262B916200E855C3 /* Trail Lab WatchOS Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -580,6 +762,7 @@
 				24181374249073360072389D /* LaunchScreen.storyboard in Resources */,
 				24181371249073360072389D /* Preview Assets.xcassets in Resources */,
 				2418136E249073360072389D /* Assets.xcassets in Resources */,
+				6203419A262B958200E855C3 /* SharedAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +785,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				24911E692513E726000EB01F /* Assets.xcassets in Resources */,
+				6203419B262B958200E855C3 /* SharedAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62034113262B916100E855C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62034118262B916200E855C3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6203411C262B916200E855C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6203419C262B958200E855C3 /* SharedAssets.xcassets in Resources */,
+				62034131262B916200E855C3 /* Preview Assets.xcassets in Resources */,
+				6203412E262B916200E855C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +907,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6203411A262B916200E855C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62034147262B93AC00E855C3 /* ActivityManagerWatchOS.swift in Sources */,
+				6203414F262B942000E855C3 /* ActivityStartView.swift in Sources */,
+				62034164262B949B00E855C3 /* FormattingExtensions.swift in Sources */,
+				62034128262B916200E855C3 /* NotificationController.swift in Sources */,
+				62034126262B916200E855C3 /* ContentView.swift in Sources */,
+				6203412C262B916200E855C3 /* ComplicationController.swift in Sources */,
+				6203415D262B948A00E855C3 /* DateExtensions.swift in Sources */,
+				6203416B262B94C400E855C3 /* ActivityDataModel.swift in Sources */,
+				620341B0262BA0ED00E855C3 /* InActivityView.swift in Sources */,
+				62034156262B944C00E855C3 /* Color.swift in Sources */,
+				62034180262B951000E855C3 /* Preferences.swift in Sources */,
+				620341D1262CF1DF00E855C3 /* StatsView.swift in Sources */,
+				62034173262B94E500E855C3 /* ActivityPlatter.swift in Sources */,
+				62034124262B916200E855C3 /* Trail_LabApp.swift in Sources */,
+				6203412A262B916200E855C3 /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -722,6 +946,16 @@
 			isa = PBXTargetDependency;
 			target = 24911E5E2513E722000EB01F /* Trail Lab WidgetExtension */;
 			targetProxy = 24911E6D2513E726000EB01F /* PBXContainerItemProxy */;
+		};
+		62034121262B916200E855C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6203411D262B916200E855C3 /* Trail Lab WatchOS Extension */;
+			targetProxy = 62034120262B916200E855C3 /* PBXContainerItemProxy */;
+		};
+		62034135262B916200E855C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62034114262B916100E855C3 /* Trail Lab WatchOS */;
+			targetProxy = 62034134262B916200E855C3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1037,6 +1271,104 @@
 			};
 			name = Release;
 		};
+		62034138262B916200E855C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				IBSC_MODULE = Trail_Lab_WatchOS_Extension;
+				INFOPLIST_FILE = "Trail Lab WatchOS/Info.plist";
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Debug;
+		};
+		62034139262B916200E855C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				IBSC_MODULE = Trail_Lab_WatchOS_Extension;
+				INFOPLIST_FILE = "Trail Lab WatchOS/Info.plist";
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Release;
+		};
+		6203413B262B916200E855C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Trail Lab WatchOS Extension/Trail Lab WatchOS Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_ASSET_PATHS = "\"Trail Lab WatchOS Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Trail Lab WatchOS Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Debug;
+		};
+		6203413C262B916200E855C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Trail Lab WatchOS Extension/Trail Lab WatchOS Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_ASSET_PATHS = "\"Trail Lab WatchOS Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2XJ7AA238S;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Trail Lab WatchOS Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = room.traillab.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1085,17 +1417,27 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		6203413D262B916200E855C3 /* Build configuration list for PBXNativeTarget "Trail Lab WatchOS Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6203413B262B916200E855C3 /* Debug */,
+				6203413C262B916200E855C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6203413E262B916200E855C3 /* Build configuration list for PBXNativeTarget "Trail Lab WatchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62034138262B916200E855C3 /* Debug */,
+				62034139262B916200E855C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nikae/Loading-Animations.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.7;
-			};
-		};
 		6284DF5925E316F000720D56 /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
@@ -1107,11 +1449,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2407ADA12589454500481525 /* DotsCircularAnimation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2407ADA02589454500481525 /* XCRemoteSwiftPackageReference "Loading-Animations" */;
-			productName = DotsCircularAnimation;
-		};
 		6284DF5A25E316F000720D56 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6284DF5925E316F000720D56 /* XCRemoteSwiftPackageReference "ChartView" */;
