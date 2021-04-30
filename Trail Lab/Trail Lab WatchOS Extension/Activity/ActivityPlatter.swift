@@ -19,6 +19,7 @@ struct ActivityPlatter: View {
             HStack {
                 Spacer()
             VStack(spacing: 8) {
+                
                 Image(activity.imageName())
                     .resizable()
                     .aspectRatio(contentMode: .fit)

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Cycling Mountain Bike_000000_25.png",
+      "filename" : "icons8-cycling_mountain_bike-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Cycling Mountain Bike_000000_32.png",
+      "filename" : "icons8-cycling_mountain_bike-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Cycling Mountain Bike_000000_50.png",
+      "filename" : "icons8-cycling_mountain_bike.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

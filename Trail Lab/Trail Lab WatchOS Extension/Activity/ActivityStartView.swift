@@ -23,8 +23,18 @@ struct ActivityStartView: View {
     @ObservedObject var handler: ActivityStartViewHandler = ActivityStartViewHandler()
     let timer = Timer.publish(every: 30, on: .current, in: .common).autoconnect()
     @State var showGreeting: Bool = true
-    
+    @State private var selection = 0
     var body: some View {
+        TabView(selection: $selection) {
+            start.tag(0)
+            Text("HistoryViewHere").tag(1)
+            
+        }
+        .tabViewStyle(PageTabViewStyle())
+      
+    }
+    
+    private var start: some View {
         GeometryReader { proxy in
             List {
                 Section(header: header

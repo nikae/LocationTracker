@@ -12,11 +12,13 @@ import WatchKit
 
 struct InActivityView: View {
     @EnvironmentObject var activityManager: ActivityManagerWatchOS
+    @State private var selection = 1
+    
     var body: some View  {
-        TabView {
-            EndView()
-            StatsView()
-            NowPlayingView()
+        TabView(selection: $selection) {
+            EndView().tag(0)
+            StatsView().tag(1)
+            NowPlayingView().tag(2)
         }
         .tabViewStyle(PageTabViewStyle())
     }
@@ -38,3 +40,5 @@ struct EndView: View {
         })
     }
 }
+
+

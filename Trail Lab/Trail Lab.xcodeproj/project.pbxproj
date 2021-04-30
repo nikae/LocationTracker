@@ -30,7 +30,6 @@
 		24251996251694A6000F1EF8 /* GraphBarsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425198C25169475000F1EF8 /* GraphBarsWidget.swift */; };
 		2425199C25169577000F1EF8 /* BarGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425199B25169577000F1EF8 /* BarGraphModel.swift */; };
 		242519A125169579000F1EF8 /* BarGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425199B25169577000F1EF8 /* BarGraphModel.swift */; };
-		242519A625169A13000F1EF8 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
 		242519AB25169C20000F1EF8 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF9C724B6A65C001345C5 /* BarView.swift */; };
 		242519B12516A1A3000F1EF8 /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242519B02516A1A3000F1EF8 /* GraphBackgroundView.swift */; };
 		242519B22516A1A3000F1EF8 /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242519B02516A1A3000F1EF8 /* GraphBackgroundView.swift */; };
@@ -99,7 +98,6 @@
 		6203415D262B948A00E855C3 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
 		62034164262B949B00E855C3 /* FormattingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2624A573570029137C /* FormattingExtensions.swift */; };
 		6203416B262B94C400E855C3 /* ActivityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24251968251690F9000F1EF8 /* ActivityDataModel.swift */; };
-		62034173262B94E500E855C3 /* ActivityPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034172262B94E500E855C3 /* ActivityPlatter.swift */; };
 		62034180262B951000E855C3 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A62495E9EF009BF67A /* Preferences.swift */; };
 		6203419A262B958200E855C3 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62034199262B958200E855C3 /* SharedAssets.xcassets */; };
 		6203419B262B958200E855C3 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62034199262B958200E855C3 /* SharedAssets.xcassets */; };
@@ -109,6 +107,8 @@
 		620341D1262CF1DF00E855C3 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620341CF262CF1DF00E855C3 /* StatsView.swift */; };
 		6284DF5B25E316F000720D56 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 6284DF5A25E316F000720D56 /* SwiftUICharts */; };
 		6284DF6225E3174A00720D56 /* LinearChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6284DF6125E3174A00720D56 /* LinearChartView.swift */; };
+		628AAF48262F56C400D44A04 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
+		628AAF5B262F573D00D44A04 /* ActivityPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034172262B94E500E855C3 /* ActivityPlatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -896,8 +896,8 @@
 				24251996251694A6000F1EF8 /* GraphBarsWidget.swift in Sources */,
 				24911E662513E722000EB01F /* Trail_Lab_Widget.swift in Sources */,
 				242519AB25169C20000F1EF8 /* BarView.swift in Sources */,
-				242519A625169A13000F1EF8 /* DateExtensions.swift in Sources */,
 				2425197925169198000F1EF8 /* HistoryDataModels.swift in Sources */,
+				628AAF48262F56C400D44A04 /* DateExtensions.swift in Sources */,
 				2425196E25169104000F1EF8 /* ActivityDataModel.swift in Sources */,
 				24911E9B2513E8B7000EB01F /* Color.swift in Sources */,
 				242519632516903C000F1EF8 /* ViewExtensions.swift in Sources */,
@@ -923,7 +923,7 @@
 				62034156262B944C00E855C3 /* Color.swift in Sources */,
 				62034180262B951000E855C3 /* Preferences.swift in Sources */,
 				620341D1262CF1DF00E855C3 /* StatsView.swift in Sources */,
-				62034173262B94E500E855C3 /* ActivityPlatter.swift in Sources */,
+				628AAF5B262F573D00D44A04 /* ActivityPlatter.swift in Sources */,
 				62034124262B916200E855C3 /* Trail_LabApp.swift in Sources */,
 				6203412A262B916200E855C3 /* NotificationView.swift in Sources */,
 			);

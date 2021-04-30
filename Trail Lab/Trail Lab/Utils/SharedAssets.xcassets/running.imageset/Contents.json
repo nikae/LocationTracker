@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Running_000000_25.png",
+      "filename" : "icons8-running.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Running_000000_32.png",
+      "filename" : "icons8-running-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Running_000000_50.png",
+      "filename" : "icons8-running-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
