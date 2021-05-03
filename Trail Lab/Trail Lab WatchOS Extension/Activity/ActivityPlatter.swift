@@ -13,7 +13,6 @@ struct ActivityPlatter: View {
     let activity: ActivityType
     var body: some View {
         Button(action: {
-            activityManager.activityType = activity
             activityManager.startWorkout(activity.hkValue())
         }, label: {
             HStack {

@@ -33,6 +33,8 @@ struct Preferences {
     static var distanceGoal: Meter
     @UserDefault("TIME_WEEKLY_GOAL", defaultValue: 9000)
     static var timeGoal: TimeInterval
+    @UserDefault("HAS_SEEN_OBNOARDING", defaultValue: false)
+    static var hasSeenOnboarding: Bool
 }
 
 enum UnitPreference: Int {

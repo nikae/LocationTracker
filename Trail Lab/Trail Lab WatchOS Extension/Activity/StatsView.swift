@@ -31,13 +31,13 @@ struct StatsView: View {
                     .font(Font.system(size: 38, weight: .bold, design: .rounded).monospacedDigit())
                     .foregroundColor(fontColor(selectedStat == .time))
                 
-                Text("\(activityManager.distance.formatDistane())")
+                Text("\(activityManager.activity?.distance?.formatDistane() ?? "--")")
                     .font(Font.system(size: fontSize(selectedStat == .distance), weight: .medium, design: .rounded).monospacedDigit())
                     .foregroundColor(fontColor(selectedStat == .distance))
 
                 
                 Label {
-                    Text("\(Int(activityManager.heartrate)) bpm")
+                    Text("\(Int(activityManager.activity?.currentHR ?? -1)) bpm")
                         .foregroundColor(fontColor(selectedStat == .hr))
                 } icon: {
                    Image(systemName: "heart.fill")
@@ -51,10 +51,10 @@ struct StatsView: View {
                         self.isAnimating = true
                     }
                 }
-                Text("\(activityManager.activeCalories.formatCalories())")
+                Text("\(activityManager.activity?.calories?.formatCalories() ?? "--")")
                     .font(Font.system(size: fontSize(selectedStat == .calories), weight: .medium, design: .rounded).monospacedDigit())
                     .foregroundColor(fontColor(selectedStat == .calories))
-                Text("\(activityManager.stepCount) Steps")
+                Text("\(activityManager.activity?.numberOfSteps ?? 0) Steps")
                     .font(Font.system(size: fontSize(selectedStat == .steps), weight: .medium, design: .rounded).monospacedDigit())
                     .foregroundColor(fontColor(selectedStat == .steps))
             }
@@ -80,9 +80,8 @@ struct StatsView: View {
     }
     
     func fontColor(_ focused: Bool) -> Color {
-        focused ? activityManager.activityType.color() : .white
+        focused ? activityManager.activity?.activityType.color() ?? .white : .white
     }
-    
 }
 
 struct StatsView_Previews: PreviewProvider {

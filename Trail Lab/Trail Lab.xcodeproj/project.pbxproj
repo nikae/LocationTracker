@@ -58,7 +58,7 @@
 		245F78AE249994F7009BF67A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AD249994F7009BF67A /* MapView.swift */; };
 		245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AF2499981A009BF67A /* ViewExtensions.swift */; };
 		245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B12499A3C7009BF67A /* ActivityStatsView.swift */; };
-		245F78B5249BD402009BF67A /* HealthPermisionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B4249BD402009BF67A /* HealthPermisionsHandler.swift */; };
+		245F78B5249BD402009BF67A /* HealthPermissionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B4249BD402009BF67A /* HealthPermissionsHandler.swift */; };
 		245F78B9249BD45F009BF67A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245F78B8249BD45F009BF67A /* HealthKit.framework */; };
 		245F78BB249BDA25009BF67A /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BA249BDA25009BF67A /* UserDataStore.swift */; };
 		245F78BD249BDC9C009BF67A /* ActivityDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */; };
@@ -105,6 +105,10 @@
 		620341A5262B97A600E855C3 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 620341A4262B97A600E855C3 /* HealthKit.framework */; };
 		620341B0262BA0ED00E855C3 /* InActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620341AD262BA0ED00E855C3 /* InActivityView.swift */; };
 		620341D1262CF1DF00E855C3 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620341CF262CF1DF00E855C3 /* StatsView.swift */; };
+		6218C67A263F81DA00BFFC79 /* HealthPermissionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B4249BD402009BF67A /* HealthPermissionsHandler.swift */; };
+		622D4480263CBEC10028F039 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BE249D2720009BF67A /* LocationManager.swift */; };
+		622D4481263F46880028F039 /* PedometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2024A2E22D0029137C /* PedometerManager.swift */; };
+		622D4483263F47630028F039 /* ContentViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622D4482263F47630028F039 /* ContentViewHandler.swift */; };
 		6284DF5B25E316F000720D56 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 6284DF5A25E316F000720D56 /* SwiftUICharts */; };
 		6284DF6225E3174A00720D56 /* LinearChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6284DF6125E3174A00720D56 /* LinearChartView.swift */; };
 		628AAF48262F56C400D44A04 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
@@ -235,7 +239,7 @@
 		245F78AD249994F7009BF67A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		245F78AF2499981A009BF67A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		245F78B12499A3C7009BF67A /* ActivityStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatsView.swift; sourceTree = "<group>"; };
-		245F78B4249BD402009BF67A /* HealthPermisionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPermisionsHandler.swift; sourceTree = "<group>"; };
+		245F78B4249BD402009BF67A /* HealthPermissionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPermissionsHandler.swift; sourceTree = "<group>"; };
 		245F78B6249BD45F009BF67A /* Trail Lab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Trail Lab.entitlements"; sourceTree = "<group>"; };
 		245F78B8249BD45F009BF67A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		245F78BA249BDA25009BF67A /* UserDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 		620341A4262B97A600E855C3 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS7.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		620341AD262BA0ED00E855C3 /* InActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActivityView.swift; sourceTree = "<group>"; };
 		620341CF262CF1DF00E855C3 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		622D4482263F47630028F039 /* ContentViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewHandler.swift; sourceTree = "<group>"; };
 		6284DF6125E3174A00720D56 /* LinearChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -477,7 +482,7 @@
 		245F78B3249BD3C5009BF67A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				245F78B4249BD402009BF67A /* HealthPermisionsHandler.swift */,
+				245F78B4249BD402009BF67A /* HealthPermissionsHandler.swift */,
 				24A9142824C9260E00C9EF02 /* HealthKitManager.swift */,
 				245F78BA249BDA25009BF67A /* UserDataStore.swift */,
 				245F78BC249BDC9C009BF67A /* ActivityDataStore.swift */,
@@ -542,6 +547,7 @@
 				620341A3262B97A600E855C3 /* Trail Lab WatchOS Extension.entitlements */,
 				62034123262B916200E855C3 /* Trail_LabApp.swift */,
 				62034125262B916200E855C3 /* ContentView.swift */,
+				622D4482263F47630028F039 /* ContentViewHandler.swift */,
 				62034127262B916200E855C3 /* NotificationController.swift */,
 				62034129262B916200E855C3 /* NotificationView.swift */,
 				6203412B262B916200E855C3 /* ComplicationController.swift */,
@@ -820,7 +826,7 @@
 				245581102511A40400503CA9 /* ShareButton.swift in Sources */,
 				245BDEDA2492B83E000A954A /* DragBottomSheetHandler.swift in Sources */,
 				2418136A249073340072389D /* Trail_Lab.xcdatamodeld in Sources */,
-				245F78B5249BD402009BF67A /* HealthPermisionsHandler.swift in Sources */,
+				245F78B5249BD402009BF67A /* HealthPermissionsHandler.swift in Sources */,
 				245DF9CA24B6A809001345C5 /* GraphBars.swift in Sources */,
 				245C8D8524C7F13B00536D1D /* ActivityCell.swift in Sources */,
 				245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */,
@@ -915,16 +921,20 @@
 				6203414F262B942000E855C3 /* ActivityStartView.swift in Sources */,
 				62034164262B949B00E855C3 /* FormattingExtensions.swift in Sources */,
 				62034128262B916200E855C3 /* NotificationController.swift in Sources */,
+				622D4480263CBEC10028F039 /* LocationManager.swift in Sources */,
 				62034126262B916200E855C3 /* ContentView.swift in Sources */,
 				6203412C262B916200E855C3 /* ComplicationController.swift in Sources */,
 				6203415D262B948A00E855C3 /* DateExtensions.swift in Sources */,
 				6203416B262B94C400E855C3 /* ActivityDataModel.swift in Sources */,
+				622D4483263F47630028F039 /* ContentViewHandler.swift in Sources */,
 				620341B0262BA0ED00E855C3 /* InActivityView.swift in Sources */,
 				62034156262B944C00E855C3 /* Color.swift in Sources */,
 				62034180262B951000E855C3 /* Preferences.swift in Sources */,
 				620341D1262CF1DF00E855C3 /* StatsView.swift in Sources */,
 				628AAF5B262F573D00D44A04 /* ActivityPlatter.swift in Sources */,
 				62034124262B916200E855C3 /* Trail_LabApp.swift in Sources */,
+				622D4481263F46880028F039 /* PedometerManager.swift in Sources */,
+				6218C67A263F81DA00BFFC79 /* HealthPermissionsHandler.swift in Sources */,
 				6203412A262B916200E855C3 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

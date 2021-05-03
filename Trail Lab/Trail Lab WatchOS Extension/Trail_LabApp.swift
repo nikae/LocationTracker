@@ -11,20 +11,16 @@ import SwiftUI
 @main
 struct Trail_LabApp: App {
     @ObservedObject var activityManager = ActivityManagerWatchOS()
+    @ObservedObject var contentViewHandler = ContentViewHandler.shared
     @SceneBuilder var body: some Scene {
-      
         WindowGroup {
-//            if activityManager.running {
-//                InActivityView()
-//                    .environmentObject(activityManager)
-//            } else {
             NavigationView {
                 ContentView()
+                    .environmentObject(contentViewHandler)
                     .environmentObject(activityManager)
-//            }
+            }
         }
-        }
-
+        
         WKNotificationScene(controller: NotificationController.self, category: "myCategory")
     }
 }

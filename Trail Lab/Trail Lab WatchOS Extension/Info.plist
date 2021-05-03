@@ -32,11 +32,21 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Health Share Usage Description</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Health Records Usage Description</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Health Share Usage Description</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Health Update Usage Description</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location is used to generate a route for your activity. </string>
+	<key>NSLocationUsageDescription</key>
+	<string>Location is used to generate a route for your activity. </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location is used to generate a route for your activity.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 </dict>
 </plist>
