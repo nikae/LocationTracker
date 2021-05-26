@@ -35,6 +35,17 @@ struct Preferences {
     static var timeGoal: TimeInterval
     @UserDefault("HAS_SEEN_OBNOARDING", defaultValue: false)
     static var hasSeenOnboarding: Bool
+    @UserDefault("SORTED_ACTIVITY_TYPES", defaultValue: [ActivityType.walking.rawValue, ActivityType.running.rawValue, ActivityType.hiking.rawValue, ActivityType.biking.rawValue])
+    static var sortedActivityTypes: [Int]
+    
+    static func addNewPreferredWorkout(type: Int) {
+        var typeList = Preferences.sortedActivityTypes
+        typeList.removeAll { (aType) -> Bool in
+            return aType == type
+        }
+        typeList.insert(type, at: 0)
+        Preferences.sortedActivityTypes = typeList
+    }
 }
 
 enum UnitPreference: Int {

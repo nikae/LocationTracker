@@ -52,10 +52,10 @@ extension UIColor {
 #endif
 
     struct SportColors {
-        static let run = UIColor(red: 254/255.0, green: 220/255.0, blue: 40/255.0, alpha: 1)
-        static let walk = UIColor(red: 255/255.0, green: 118/255.0, blue: 94/255.0, alpha: 1)
-        static let hike = UIColor(red: 147/255.0, green: 201/255.0, blue: 106/255.0, alpha: 1)
-        static let bike = UIColor(red: 100/255.0, green: 185/255.0, blue: 190/255.0, alpha: 1)
+        static let run = UIColor(red: 254/255.0, green: 220/255.0, blue: 40/255.0, alpha: 1) //#FEDC28
+        static let walk = UIColor(red: 255/255.0, green: 118/255.0, blue: 94/255.0, alpha: 1) //#FF765E
+        static let hike = UIColor(red: 147/255.0, green: 201/255.0, blue: 106/255.0, alpha: 1) //#93C96A
+        static let bike = UIColor(red: 100/255.0, green: 185/255.0, blue: 190/255.0, alpha: 1) //#64B9BE
     }
 }
 

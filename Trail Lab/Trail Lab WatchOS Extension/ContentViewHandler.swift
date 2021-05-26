@@ -14,6 +14,7 @@ enum ViewState {
     case permissions
     case beforeActivity
     case inActivity
+    case summary
 }
 
 
@@ -21,7 +22,7 @@ class ContentViewHandler: ObservableObject {
     static let shared = ContentViewHandler()
     
     @Published var viewState: ViewState = .onboarding
-    @Published var healthAuthorised: Bool = false
+    @Published var healthAuthorized: Bool = false
     
     var permissions: Bool {
         HKHealthStore.isHealthDataAvailable()

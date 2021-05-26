@@ -121,7 +121,7 @@ extension View {
     func StatsViewLarge(value: String,
                      title: String,
                      tintColor: Color, larger: Bool = false) -> some View {
-        return HStack {
+        return  HStack {
             VStack(alignment:.leading, spacing: 2) {
               Text(value)
                 .fontWeight(.bold)

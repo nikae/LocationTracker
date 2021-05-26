@@ -10,6 +10,8 @@ import Foundation
 import HealthKit
 import Combine
 import CoreLocation
+import WatchKit
+
 
 
 class ActivityManagerWatchOS: NSObject, ObservableObject {
@@ -19,11 +21,13 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
     var session: HKWorkoutSession!
     var builder: HKLiveWorkoutBuilder!
     var routeBuilder: HKWorkoutRouteBuilder!
-    
-    var finishedWorkout: HKWorkout?
+
     
     let locationManager = LocationManager.shared
     let pedometerManager = PedometerManager()
+    var isWorkoutViableToSave = false
+    
+    let contentViewHandler = ContentViewHandler.shared
     
     /// - Tag: Publishers
     @Published var activity: Activity?
@@ -37,7 +41,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
     var start: Date = Date()
     var cancellable: Cancellable?
     var accumulatedTime: Int = 0
-    
+        
     // Set up and start the timer.
     func setUpTimer() {
         start = Date()
@@ -51,9 +55,23 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
     
     // Calculate the elapsed time.
     func incrementElapsedTime() -> Int {
+        updateWorkoutViability()
         let runningTime: Int = Int(-1 * (self.start.timeIntervalSinceNow))
         return self.accumulatedTime + runningTime
     }
+    
+    private func updateWorkoutViability() {
+        guard let type = activity?.activityType else { return }
+        let wasViable = isWorkoutViableToSave
+        isWorkoutViableToSave = isWorkoutViable()
+        if !wasViable && isWorkoutViableToSave { // Save type as preferred when it becomes viable.
+            Preferences.addNewPreferredWorkout(type: type.rawValue)
+        }
+    }
+    private func isWorkoutViable() -> Bool { // Viable workouts are longer than 5 minutes
+        return elapsedSeconds >= 10
+    }
+
     
     // Request authorization to access HealthKit.
     func requestAuthorization() {
@@ -71,7 +89,9 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
                 
                 return
             }
-            ContentViewHandler.shared.healthAuthorised = true
+            DispatchQueue.main.async {
+                ContentViewHandler.shared.healthAuthorized = true
+            }
             print("HealthKit Successfully Authorized.")
         }
     }
@@ -97,7 +117,12 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
         requestLocationAuthorization()
         // Start the timer.
         setUpTimer()
-        self.running = true
+        
+        WKInterfaceDevice.current().play(.start)
+        DispatchQueue.main.async {
+            self.running = true
+            self.contentViewHandler.viewState = .inActivity
+        }
         
         // Create the session and obtain the workout builder.
         /// - Tag: CreateWorkout
@@ -133,6 +158,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
         locationManager.startLocationUpdates(locationListener: { location in
             self.locationListener(location: location)
         }) { error in
+            self.requestLocationAuthorization()
             print(error)
         }
         
@@ -157,6 +183,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
         // Save the elapsed time.
         accumulatedTime = elapsedSeconds
         running = false
+        WKInterfaceDevice.current().play(.stop)
     }
     
     func resumeWorkout() {
@@ -165,6 +192,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
         // Start the timer.
         setUpTimer()
         running = true
+        WKInterfaceDevice.current().play(.start)
     }
     
     func endWorkout() {
@@ -175,6 +203,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
             print(error)
         }
         pedometerManager.stopMonitoring()
+        WKInterfaceDevice.current().play(.stop)
     }
     
     func resetWorkout() {
@@ -186,7 +215,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
             
             self.elapsedSeconds = 0
             self.running = false
-            self.finishedWorkout = nil
+            self.contentViewHandler.viewState = .summary
         }
     }
     
@@ -299,27 +328,35 @@ extension ActivityManagerWatchOS {
             self.builder.finishWorkout { (workout, error) in
                 // Optionally display a workout summary to the user.
                 // Create, save, and associate the route with the provided workout.
-                self.finishedWorkout = workout
-                self.resetWorkout()
-                group.leave()
-            }
-            group.wait()
-        }
-        queue.async {
-            group.enter()
-            guard let workout = self.finishedWorkout else {
-                return }
-            self.routeBuilder.finishRoute(with: workout, metadata: [:]) { (newRoute, error) in
-                guard newRoute != nil else {
-                    // Handle any errors here.
-                    print("\(String(describing: error?.localizedDescription))")
+
+                guard let workout = workout else {
+                    DispatchQueue.main.async {
+                        self.resetWorkout()
+                        WKInterfaceDevice.current().play(.failure)
+                    }
                     return
                 }
-                group.leave()
-                // Optional: Do something with the route here.
+                
+                self.routeBuilder.finishRoute(with: workout, metadata: [:]) { (newRoute, error) in
+                    DispatchQueue.main.async {
+                    self.resetWorkout()
+                    }
+                    
+                    guard newRoute != nil else {
+                        // Handle any errors here.
+                        print("\(String(describing: error?.localizedDescription))")
+                        WKInterfaceDevice.current().play(.failure)
+                        return
+                    }
+                    
+                    WKInterfaceDevice.current().play(.success)
+                    group.leave()
+                    // Optional: Do something with the route here.
+                   
+                }
             }
         }
-        
+            
         group.notify(queue: .main) {
             print("DispatchGroup Done")
         }
@@ -429,3 +466,5 @@ extension ActivityManagerWatchOS {
         pedometerManager.startMonitoring(startDate)
     }
 }
+
+

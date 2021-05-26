@@ -9,9 +9,9 @@
 import SwiftUI
 
 enum SelectedStat: Int, CaseIterable {
-    case steps = 0
+    case hr = 0
+    case steps
     case calories
-    case hr
     case distance
     case time
 }
@@ -30,38 +30,70 @@ struct StatsView: View {
                 Text("\(TimeInterval(activityManager.elapsedSeconds).format(unitsStyle: .positional, zeroFormattingBehavior: .pad) ?? "-:-:-")")
                     .font(Font.system(size: 38, weight: .bold, design: .rounded).monospacedDigit())
                     .foregroundColor(fontColor(selectedStat == .time))
-                
+                    .onTapGesture {
+                        selectedStat = .time
+                    }
+                Spacer()
                 Text("\(activityManager.activity?.distance?.formatDistane() ?? "--")")
                     .font(Font.system(size: fontSize(selectedStat == .distance), weight: .medium, design: .rounded).monospacedDigit())
                     .foregroundColor(fontColor(selectedStat == .distance))
-
+                    .onTapGesture {
+                        selectedStat = .distance
+                    }
+                Spacer()
                 
-                Label {
-                    Text("\(Int(activityManager.activity?.currentHR ?? -1)) bpm")
-                        .foregroundColor(fontColor(selectedStat == .hr))
-                } icon: {
-                   Image(systemName: "heart.fill")
-                        .foregroundColor(.red)
-                    .scaleEffect(self.isAnimating ? 1 : 0.8)
+                if activityManager.activity?.activityType == .biking {
+                    Text("\((activityManager.activity?.speedCurrent ?? 0).formatSpeed())")
+                        .font(Font.system(size: fontSize(selectedStat == .steps), weight: .medium, design: .rounded).monospacedDigit())
+                        .foregroundColor(fontColor(selectedStat == .steps))
+                        .onTapGesture {
+                            selectedStat = .steps
+                        }
+                } else {
+                    Text("\((activityManager.activity?.pace ?? 0).formatPace()) Pace")
+                        .font(Font.system(size: fontSize(selectedStat == .steps), weight: .medium, design: .rounded).monospacedDigit())
+                        .foregroundColor(fontColor(selectedStat == .steps))
+                        .onTapGesture {
+                            selectedStat = .steps
+                        }
+                    
                 }
-                .font(Font.system(size: fontSize(selectedStat == .hr), weight: .medium, design: .rounded).monospacedDigit())
-               
-                .onAppear {
-                    withAnimation(Animation.easeInOut.repeatForever()) {
-                        self.isAnimating = true
+                
+                Spacer()
+                HStack {
+                    Text("\(activityManager.activity?.calories?.formatCalories() ?? "--")")
+                        .font(Font.system(size: fontSize(selectedStat == .calories), weight: .medium, design: .rounded).monospacedDigit())
+                        .foregroundColor(fontColor(selectedStat == .calories))
+                        .onTapGesture {
+                            selectedStat = .calories
+                        }
+                    Spacer()
+                    Label {
+                        Text(activityManager.activity?.currentHR == nil ? "--" : "\(Int(activityManager.activity?.currentHR ?? -1))").foregroundColor(fontColor(selectedStat == .hr))+Text("bpm").font(.system(size: 8)).foregroundColor(fontColor(selectedStat == .hr))
+                            
+                    } icon: {
+                        Image(systemName: activityManager.activity?.currentHR == nil ? "heart.slash.fill" : "heart.fill")
+                            .foregroundColor(.red)
+                            .scaleEffect(self.isAnimating ? 1 : 0.8)
+                    }
+                    .opacity(activityManager.activity?.currentHR == nil ? 0.5 : 1)
+                    .font(Font.system(size: fontSize(selectedStat == .hr), weight: .medium, design: .rounded).monospacedDigit())
+                    .onTapGesture {
+                        selectedStat = .hr
+                    }
+                    .onAppear {
+                        withAnimation(Animation.easeInOut.repeatForever()) {
+                            self.isAnimating = true
+                        }
                     }
                 }
-                Text("\(activityManager.activity?.calories?.formatCalories() ?? "--")")
-                    .font(Font.system(size: fontSize(selectedStat == .calories), weight: .medium, design: .rounded).monospacedDigit())
-                    .foregroundColor(fontColor(selectedStat == .calories))
-                Text("\(activityManager.activity?.numberOfSteps ?? 0) Steps")
-                    .font(Font.system(size: fontSize(selectedStat == .steps), weight: .medium, design: .rounded).monospacedDigit())
-                    .foregroundColor(fontColor(selectedStat == .steps))
+                
             }
             .focusable(true)
             .lineLimit(1)
             .minimumScaleFactor(0.2)
-            .frame(width: proxy.size.width, height: proxy.size.height)
+            .padding(.horizontal)
+            .frame(height: proxy.size.height)
             .digitalCrownRotation(self.$scrollAmount ,
                                   from: 0,
                                   through: Double(SelectedStat.allCases.count),
@@ -69,7 +101,9 @@ struct StatsView: View {
                                   isContinuous: false,
                                   isHapticFeedbackEnabled: true)
             .onChange(of: scrollAmount) { value in
-                selectedStat = SelectedStat(rawValue: Int(scrollAmount)) ?? .distance
+                DispatchQueue.main.async {
+                    selectedStat = SelectedStat(rawValue: Int(scrollAmount)) ?? .distance
+                }
             }
           
         }

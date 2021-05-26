@@ -14,16 +14,18 @@ struct ContentView: View {
     @EnvironmentObject var handler: ContentViewHandler
     
     var body: some View {
-        if activityManager.running {
+        switch handler.viewState {
+        case .inActivity:
             InActivityView()
-        } else {
+        case .summary:
+            SummaryView()
+        default:
             ActivityStartView()
                 .onAppear {
                     activityManager.requestAuthorization()
                 }
         }
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {

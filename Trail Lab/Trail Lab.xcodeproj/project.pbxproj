@@ -55,7 +55,6 @@
 		245F78A72495E9EF009BF67A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A62495E9EF009BF67A /* Preferences.swift */; };
 		245F78AB24987113009BF67A /* MapViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AA24987113009BF67A /* MapViewHandler.swift */; };
 		245F78AC249932E9009BF67A /* BottomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78A824986E09009BF67A /* BottomCard.swift */; };
-		245F78AE249994F7009BF67A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AD249994F7009BF67A /* MapView.swift */; };
 		245F78B02499981A009BF67A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AF2499981A009BF67A /* ViewExtensions.swift */; };
 		245F78B22499A3C7009BF67A /* ActivityStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B12499A3C7009BF67A /* ActivityStatsView.swift */; };
 		245F78B5249BD402009BF67A /* HealthPermissionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B4249BD402009BF67A /* HealthPermissionsHandler.swift */; };
@@ -105,7 +104,10 @@
 		620341A5262B97A600E855C3 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 620341A4262B97A600E855C3 /* HealthKit.framework */; };
 		620341B0262BA0ED00E855C3 /* InActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620341AD262BA0ED00E855C3 /* InActivityView.swift */; };
 		620341D1262CF1DF00E855C3 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620341CF262CF1DF00E855C3 /* StatsView.swift */; };
+		62048782265D608000D1BFCE /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62048781265D607F00D1BFCE /* SummaryView.swift */; };
+		62048787265D62F200D1BFCE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78AD249994F7009BF67A /* MapView.swift */; };
 		6218C67A263F81DA00BFFC79 /* HealthPermissionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78B4249BD402009BF67A /* HealthPermissionsHandler.swift */; };
+		62268FB62641EC2600BA9882 /* DetailedStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62268FB52641EC2600BA9882 /* DetailedStatsView.swift */; };
 		622D4480263CBEC10028F039 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F78BE249D2720009BF67A /* LocationManager.swift */; };
 		622D4481263F46880028F039 /* PedometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24301F2024A2E22D0029137C /* PedometerManager.swift */; };
 		622D4483263F47630028F039 /* ContentViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622D4482263F47630028F039 /* ContentViewHandler.swift */; };
@@ -285,6 +287,8 @@
 		620341A4262B97A600E855C3 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS7.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		620341AD262BA0ED00E855C3 /* InActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InActivityView.swift; sourceTree = "<group>"; };
 		620341CF262CF1DF00E855C3 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		62048781265D607F00D1BFCE /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		62268FB52641EC2600BA9882 /* DetailedStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedStatsView.swift; sourceTree = "<group>"; };
 		622D4482263F47630028F039 /* ContentViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewHandler.swift; sourceTree = "<group>"; };
 		6284DF6125E3174A00720D56 /* LinearChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -574,8 +578,10 @@
 				62034146262B93AC00E855C3 /* ActivityManagerWatchOS.swift */,
 				6203414E262B942000E855C3 /* ActivityStartView.swift */,
 				62034172262B94E500E855C3 /* ActivityPlatter.swift */,
+				62048781265D607F00D1BFCE /* SummaryView.swift */,
 				620341AD262BA0ED00E855C3 /* InActivityView.swift */,
 				620341CF262CF1DF00E855C3 /* StatsView.swift */,
+				62268FB52641EC2600BA9882 /* DetailedStatsView.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -839,7 +845,6 @@
 				247AB99924BE934C0004AA49 /* ActivityMapView.swift in Sources */,
 				2418136C249073340072389D /* ContentView.swift in Sources */,
 				242519B12516A1A3000F1EF8 /* GraphBackgroundView.swift in Sources */,
-				245F78AE249994F7009BF67A /* MapView.swift in Sources */,
 				2475683E24C0F39B0016FADB /* SingleActivityViewHandler.swift in Sources */,
 				24301F2324A512070029137C /* ViewModifiers.swift in Sources */,
 				24A9142924C9260E00C9EF02 /* HealthKitManager.swift in Sources */,
@@ -858,6 +863,7 @@
 				2475683C24C0ED2E0016FADB /* GradientPolylineRenderer.swift in Sources */,
 				245DF9C624B6A345001345C5 /* TrendsView.swift in Sources */,
 				245F78A72495E9EF009BF67A /* Preferences.swift in Sources */,
+				62048787265D62F200D1BFCE /* MapView.swift in Sources */,
 				243F493624C39C6F00FB9E35 /* SingleActivityTitleView.swift in Sources */,
 				244461ED24B83A9200062194 /* GraphTile.swift in Sources */,
 				242519742516916B000F1EF8 /* HistoryDataModels.swift in Sources */,
@@ -917,6 +923,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62268FB62641EC2600BA9882 /* DetailedStatsView.swift in Sources */,
 				62034147262B93AC00E855C3 /* ActivityManagerWatchOS.swift in Sources */,
 				6203414F262B942000E855C3 /* ActivityStartView.swift in Sources */,
 				62034164262B949B00E855C3 /* FormattingExtensions.swift in Sources */,
@@ -924,6 +931,7 @@
 				622D4480263CBEC10028F039 /* LocationManager.swift in Sources */,
 				62034126262B916200E855C3 /* ContentView.swift in Sources */,
 				6203412C262B916200E855C3 /* ComplicationController.swift in Sources */,
+				62048782265D608000D1BFCE /* SummaryView.swift in Sources */,
 				6203415D262B948A00E855C3 /* DateExtensions.swift in Sources */,
 				6203416B262B94C400E855C3 /* ActivityDataModel.swift in Sources */,
 				622D4483263F47630028F039 /* ContentViewHandler.swift in Sources */,

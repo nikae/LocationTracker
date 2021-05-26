@@ -123,7 +123,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
 }
 
-fileprivate enum LocationError: Error {
+enum LocationError: Error {
     case notEnabled, noPermission, noUpdates
 }
 

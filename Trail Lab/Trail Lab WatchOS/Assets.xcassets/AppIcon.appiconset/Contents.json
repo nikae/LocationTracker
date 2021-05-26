@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "24_27.5pt_Notification_Center_38mm_2x.png",
       "idiom" : "watch",
       "role" : "notificationCenter",
       "scale" : "2x",
@@ -8,6 +9,7 @@
       "subtype" : "38mm"
     },
     {
+      "filename" : "24_27.5pt_Notification_Center_40_42mm_2x.png",
       "idiom" : "watch",
       "role" : "notificationCenter",
       "scale" : "2x",
@@ -15,18 +17,21 @@
       "subtype" : "42mm"
     },
     {
+      "filename" : "29pt_Companion_Settings_2x_44mm_2x.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "29pt_Companion_Settings_3x.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
+      "filename" : "40_44_50pt_Home_Screen_38mm_2x.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -34,6 +39,7 @@
       "subtype" : "38mm"
     },
     {
+      "filename" : "40_44_50pt_Home_Screen_40_42mm_2x.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -41,6 +47,7 @@
       "subtype" : "40mm"
     },
     {
+      "filename" : "40_44_50pt_Home_Screen_44mm_2x.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -48,6 +55,7 @@
       "subtype" : "44mm"
     },
     {
+      "filename" : "86_98_108pt_Short_Look_38mm_2x.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -55,6 +63,7 @@
       "subtype" : "38mm"
     },
     {
+      "filename" : "86_98_108pt_Short_Look_40_42mm_2x.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -62,6 +71,7 @@
       "subtype" : "42mm"
     },
     {
+      "filename" : "86_98_108pt_Short_Look_44mm_2x.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -69,6 +79,7 @@
       "subtype" : "44mm"
     },
     {
+      "filename" : "1024pt_App_Store_1x.png",
       "idiom" : "watch-marketing",
       "scale" : "1x",
       "size" : "1024x1024"

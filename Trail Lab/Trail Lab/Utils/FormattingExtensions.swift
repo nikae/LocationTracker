@@ -86,7 +86,7 @@ extension Double {
     func formatPace() -> String {
         let isMetric = UnitPreference(rawValue: Preferences.unit) == .metric
         guard self != 0 && self != .infinity && self != -.infinity else {
-            return ""
+            return "--"
         }
         let convertedPace = isMetric ? self * 1000 : self * 1609
         let min = (Int(convertedPace) / 60) % 60

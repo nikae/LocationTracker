@@ -12,11 +12,12 @@ class ActivityStartViewHandler: ObservableObject {
     @EnvironmentObject var activityManager: ActivityManagerWatchOS
     @Published var activityTypes: [ActivityType] = []
     init() {
-        activityTypes.append(
-            contentsOf:
-                [ActivityType.walking, ActivityType.running, ActivityType.hiking, ActivityType.biking])
+        for i in Preferences.sortedActivityTypes {
+            if let activity = ActivityType(rawValue: i) {
+                activityTypes.append(activity)
+            }
+        }
     }
-    
 }
 
 struct ActivityStartView: View {
