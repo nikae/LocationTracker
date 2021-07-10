@@ -29,6 +29,14 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
     
     let contentViewHandler = ContentViewHandler.shared
     
+   
+    
+    #if DEBUG
+    let minDuration: Int = 10
+    #else
+    let minDuration: Int = 60
+    #endif
+    
     /// - Tag: Publishers
     @Published var activity: Activity?
     @Published var elapsedSeconds: Int = 0
@@ -69,7 +77,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
         }
     }
     private func isWorkoutViable() -> Bool { // Viable workouts are longer than 5 minutes
-        return elapsedSeconds >= 10
+        return elapsedSeconds >= minDuration
     }
 
     
@@ -206,7 +214,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
         WKInterfaceDevice.current().play(.stop)
     }
     
-    func resetWorkout() {
+    func resetWorkout(showSummary: Bool=true) {
         // Reset the published values.
         DispatchQueue.main.async {
             self.activity?.calories = 0
@@ -215,7 +223,7 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
             
             self.elapsedSeconds = 0
             self.running = false
-            self.contentViewHandler.viewState = .summary
+            self.contentViewHandler.viewState = showSummary ? .summary : .beforeActivity
         }
     }
     
@@ -278,6 +286,15 @@ extension ActivityManagerWatchOS {
         metadata[MetadataKeys.minAltitude.rawValue] = minAltitude
         
         return metadata
+    }
+    
+    
+    private func discardActivity() {
+        builder.discardWorkout()
+        DispatchQueue.main.async {
+            self.resetWorkout(showSummary: false)
+            WKInterfaceDevice.current().play(.failure)
+        }
     }
     
     func saveActivity() {
@@ -373,9 +390,12 @@ extension ActivityManagerWatchOS: HKWorkoutSessionDelegate {
         /// - Tag: SaveWorkout
         if toState == .ended {
             print("The workout has now ended.")
-            saveActivity()
+            if isWorkoutViableToSave {
+                saveActivity()
+            } else {
+                discardActivity()
+            }
         }
-        
     }
     
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
