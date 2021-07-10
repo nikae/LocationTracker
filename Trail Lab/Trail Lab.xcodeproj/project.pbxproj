@@ -115,6 +115,7 @@
 		6284DF6225E3174A00720D56 /* LinearChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6284DF6125E3174A00720D56 /* LinearChartView.swift */; };
 		628AAF48262F56C400D44A04 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245581082510518600503CA9 /* DateExtensions.swift */; };
 		628AAF5B262F573D00D44A04 /* ActivityPlatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62034172262B94E500E855C3 /* ActivityPlatter.swift */; };
+		62FBCD5E269A46A6007103E8 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FBCD5D269A46A6007103E8 /* ControlsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +292,7 @@
 		62268FB52641EC2600BA9882 /* DetailedStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedStatsView.swift; sourceTree = "<group>"; };
 		622D4482263F47630028F039 /* ContentViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewHandler.swift; sourceTree = "<group>"; };
 		6284DF6125E3174A00720D56 /* LinearChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearChartView.swift; sourceTree = "<group>"; };
+		62FBCD5D269A46A6007103E8 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +584,7 @@
 				620341AD262BA0ED00E855C3 /* InActivityView.swift */,
 				620341CF262CF1DF00E855C3 /* StatsView.swift */,
 				62268FB52641EC2600BA9882 /* DetailedStatsView.swift */,
+				62FBCD5D269A46A6007103E8 /* ControlsView.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -933,6 +936,7 @@
 				6203412C262B916200E855C3 /* ComplicationController.swift in Sources */,
 				62048782265D608000D1BFCE /* SummaryView.swift in Sources */,
 				6203415D262B948A00E855C3 /* DateExtensions.swift in Sources */,
+				62FBCD5E269A46A6007103E8 /* ControlsView.swift in Sources */,
 				6203416B262B94C400E855C3 /* ActivityDataModel.swift in Sources */,
 				622D4483263F47630028F039 /* ContentViewHandler.swift in Sources */,
 				620341B0262BA0ED00E855C3 /* InActivityView.swift in Sources */,

@@ -16,7 +16,7 @@ struct InActivityView: View {
     
     var body: some View  {
         TabView(selection: $selection) {
-            EndView().tag(0)
+            ControlsView().tag(0)
             StatsView().tag(1)
             DetailedStatsView().tag(2)
             NowPlayingView().tag(3)
@@ -30,22 +30,4 @@ struct InActivityView_Previews: PreviewProvider {
         InActivityView()
     }
 }
-
-
-
-struct EndView: View {
-    @EnvironmentObject var activityManager: ActivityManagerWatchOS
-    var body: some View {
-        VStack {
-            Button(activityManager.running ? "Pause" : "Resume" , action: {
-                activityManager.togglePause()
-            })
-            
-            Button("Done", action: {
-                activityManager.endWorkout()
-            })
-        }
-    }
-}
-
 
