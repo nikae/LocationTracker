@@ -11,7 +11,7 @@ import HealthKit
 import SwiftUI
 import CoreLocation
 
-protocol ActivityHandlerDelegate: class {
+protocol ActivityHandlerDelegate: AnyObject {
     func activitySaved()
 }
 
@@ -72,7 +72,7 @@ class ActivityHandler: ObservableObject {
 
         if (activity?.duration ?? 0) > 60 {
             if let startLocation = self.activity?.locations.first {
-                makeActivityTitle(startLocation) { placeMarkString in
+                ActivityTitleHandler().makeActivityTitle(startLocation) { placeMarkString in
                     if let placeMarkString = placeMarkString {
                         self.activity?.title = "\(placeMarkString) \(self.activity?.activityType.title() ?? "")"
                     }
@@ -104,36 +104,6 @@ class ActivityHandler: ObservableObject {
             }
             print(sucsess)
         }
-    }
-
-    func makeActivityTitle(_ loc: CLLocation, completionHandler: @escaping ((String?) -> Void)) {
-        
-        CLGeocoder().reverseGeocodeLocation(loc, completionHandler: {(placemaks, error)->Void in
-            if error != nil {
-                print("Reverse geocoder filed with error: \(error!.localizedDescription)")
-            }
-
-            if let pm = placemaks?.first {
-
-                if let areasOfInterest = pm.areasOfInterest?.first, let subLocality = pm.subLocality {
-                    let randomBool = Bool.random()
-                    completionHandler(randomBool ? areasOfInterest : subLocality)
-                } else if let areasOfInterest = pm.areasOfInterest?.first {
-                    completionHandler(areasOfInterest)
-                } else if let subLocality = pm.subLocality {
-                    completionHandler(subLocality)
-                } else if let locality = pm.locality {
-                    completionHandler(locality)
-                } else if let administrativeArea = pm.administrativeArea {
-                    completionHandler(administrativeArea)
-                } else {
-                    completionHandler(nil)
-                }
-
-            } else {
-                completionHandler(nil)
-            }
-        })
     }
 
     private func locationListener(location: CLLocation) {
@@ -199,7 +169,7 @@ class ActivityHandler: ObservableObject {
     }
 
     func authorizeHealthKit() {
-        HealthPermisionsHandler.authorizeHealthKit { (authorized, error) in
+        HealthPermissionsHandler.authorizeHealthKit { (authorized, error) in
             guard authorized else {
 
                 //TODO: ASK User to go to settings

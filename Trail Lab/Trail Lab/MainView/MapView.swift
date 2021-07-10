@@ -10,7 +10,7 @@ import SwiftUI
 import MapKit
 import UIKit
 
-protocol MapViewDelegate: class {
+protocol MapViewDelegate: AnyObject {
     func updatePolyline(with location: [CLLocation])
 }
 
@@ -26,8 +26,8 @@ struct MapView: UIViewRepresentable {
         mapViewHandler.mapView.mapType = mapViewHandler.mapType
 
         // create a 3D Camera
-        if let lat = mapViewHandler.locationManager.location?.coordinate.latitude,
-            let long = mapViewHandler.locationManager.location?.coordinate.longitude {
+        if let lat = mapViewHandler.locationManager.manager.location?.coordinate.latitude,
+           let long = mapViewHandler.locationManager.manager.location?.coordinate.longitude {
             let mapCamera = MKMapCamera()
             mapCamera.centerCoordinate = CLLocationCoordinate2D(
                 latitude: lat,
@@ -51,7 +51,7 @@ struct MapView: UIViewRepresentable {
         if activityHandler.activityState != .active {
             mapViewHandler.zoomMap(
                 val: zoom,
-                superVisor: mapViewHandler.locationManager,
+                superVisor: mapViewHandler.locationManager.manager,
                 view: uiView)
         }
 

@@ -111,6 +111,8 @@ struct Activity {
     var end: Date
     var intervals: [ActivityInterval]
     var locations: [CLLocation] = []
+    var hrSamples: [Double]?
+    var currentHR: Double?
 
     var numberOfSteps: Int?
     var distance: Meter?
@@ -136,6 +138,8 @@ struct Activity {
          intervals: [ActivityInterval],
          calories: Double? = nil,
          distance: Meter? = nil,
+         hrSamples: [Double]? = nil,
+         currentHR: Double? = nil,
          numberOfSteps: Int? = nil,
          averagePace: SecondsPerMeter? = nil,
          elevationGain: Meter? = nil,
@@ -149,6 +153,8 @@ struct Activity {
         self.title = title
         self.intervals = intervals
         self.distance = distance
+        self.hrSamples = hrSamples
+        self.currentHR = currentHR
         self.numberOfSteps = numberOfSteps
         self.averagePace = averagePace
         self.elevationGain = elevationGain
@@ -208,4 +214,36 @@ enum MetadataKeys: String {
     case maxAltitude = "Max Altitude"
     case minAltitude = "Min Altitude"
     case title = "Title"
+}
+
+class ActivityTitleHandler {
+    func makeActivityTitle(_ loc: CLLocation, completionHandler: @escaping ((String?) -> Void)) {
+        
+        CLGeocoder().reverseGeocodeLocation(loc, completionHandler: {(placemaks, error)->Void in
+            if error != nil {
+                print("Reverse geocoder filed with error: \(error!.localizedDescription)")
+            }
+
+            if let pm = placemaks?.first {
+
+                if let areasOfInterest = pm.areasOfInterest?.first, let subLocality = pm.subLocality {
+                    let randomBool = Bool.random()
+                    completionHandler(randomBool ? areasOfInterest : subLocality)
+                } else if let areasOfInterest = pm.areasOfInterest?.first {
+                    completionHandler(areasOfInterest)
+                } else if let subLocality = pm.subLocality {
+                    completionHandler(subLocality)
+                } else if let locality = pm.locality {
+                    completionHandler(locality)
+                } else if let administrativeArea = pm.administrativeArea {
+                    completionHandler(administrativeArea)
+                } else {
+                    completionHandler(nil)
+                }
+
+            } else {
+                completionHandler(nil)
+            }
+        })
+    }
 }

@@ -3,11 +3,11 @@
 //  Trail Lab
 //
 //  Created by Nika on 6/9/20.
-//  Copyright © 2020 nilka. All rights reserved.
+//  Copyright © 2020 nika. All rights reserved.
 //
 
 import SwiftUI
-import DotsCircularAnimation
+//import DotsCircularAnimation
 
 struct ContentView: View {
 
@@ -114,9 +114,9 @@ struct ContentView: View {
         }
         .if(activityHandler.showLoadingAnimation)
             { $0.blur(radius: 20) }
-        .if(activityHandler.showLoadingAnimation)
-            { $0.overlay(DotsCircularAnimation(color: activityHandler.activity?.activityType.color())
-                            .frame(width: 50, height: 50, alignment: .center)) }
+//        .if(activityHandler.showLoadingAnimation)
+//            { $0.overlay(DotsCircularAnimation(color: activityHandler.activity?.activityType.color())
+//                            .frame(width: 50, height: 50, alignment: .center)) }
         
         .sheet(isPresented: self.$historyViewHandler.newWorkoutLoadingIsDone) {
             SingleActivityView(singleActivityViewHandler: SingleActivityViewHandler(activity: self.historyViewHandler.selectedActivity), isNewActivity: true)
