@@ -13,7 +13,7 @@ class MapViewHandler: NSObject, ObservableObject, MapViewDelegate, MKMapViewDele
 
     @Published var mapType: MKMapType = .mutedStandard
     var oldMapType: MKMapType = .mutedStandard
-    var locationManager = LocationManager.shared.locationManager
+    var locationManager = LocationManager.shared
     let mapView = MKMapView(frame: UIScreen.main.bounds)
 
     override init() {
@@ -22,15 +22,10 @@ class MapViewHandler: NSObject, ObservableObject, MapViewDelegate, MKMapViewDele
     }
 
     func setupManager() {
-        let status = CLLocationManager.authorizationStatus()
-        switch status {
-        case .notDetermined, .denied:
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.requestAlwaysAuthorization()
-        default:
-            print(status)
+        if !locationManager.hasPermission {
+            locationManager.manager.requestWhenInUseAuthorization()
         }
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.manager.desiredAccuracy = kCLLocationAccuracyBest
     }
 
     func zoomMap(val: Double, superVisor: CLLocationManager? = nil, view: MKMapView) {
@@ -43,7 +38,7 @@ class MapViewHandler: NSObject, ObservableObject, MapViewDelegate, MKMapViewDele
     }
 
     func zoomToActive() {
-        zoomMap(val: 0.01, superVisor: locationManager, view: mapView)
+        zoomMap(val: 0.01, superVisor: locationManager.manager, view: mapView)
     }
 
     func configureCompass(_ mapView: MKMapView) {

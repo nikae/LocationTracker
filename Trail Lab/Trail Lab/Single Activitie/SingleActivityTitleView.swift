@@ -14,7 +14,7 @@ struct SingleActivityTitleView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("\(self.activity.start.localaizedDate)")
+                Text("\(self.activity.start.localaizedDate())")
                     .font(.subheadline)
                 Spacer()
             }

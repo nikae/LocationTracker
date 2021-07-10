@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Date {
 
@@ -148,4 +149,24 @@ extension Date {
     }
 
 
+}
+
+extension Date {
+    var greeting: String {
+          let hour = Calendar.current.component(.hour, from: self)
+
+          switch hour {
+          case 0..<4:
+              return "Hello"
+          case 4..<12:
+              return "Good Morning"
+          case 12..<18:
+              return "Good Afternoon"
+          case 18..<24:
+              return "Good Evening"
+          default:
+              break
+          }
+          return "Hello"
+      }
 }

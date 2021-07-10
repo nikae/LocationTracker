@@ -24,14 +24,16 @@ extension UIColor {
 }
 
 extension UIColor {
+    #if os(iOS)
     static func dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
         guard #available(iOS 13.0, *) else { return light }
         return UIColor { $0.userInterfaceStyle == .dark ? dark : light }
     }
+    #endif
 }
 
 extension UIColor {
-
+    #if os(iOS)
     struct background {
         static let primary = dynamicColor(
             light: .white,
@@ -46,12 +48,14 @@ extension UIColor {
                    light: UIColor(netHex: 0x454547),
                    dark: UIColor(netHex: 0x525254))
     }
+    
+#endif
 
     struct SportColors {
-        static let run = UIColor(red: 254/255.0, green: 220/255.0, blue: 40/255.0, alpha: 1)
-        static let walk = UIColor(red: 255/255.0, green: 118/255.0, blue: 94/255.0, alpha: 1)
-        static let hike = UIColor(red: 147/255.0, green: 201/255.0, blue: 106/255.0, alpha: 1)
-        static let bike = UIColor(red: 100/255.0, green: 185/255.0, blue: 190/255.0, alpha: 1)
+        static let run = UIColor(red: 254/255.0, green: 220/255.0, blue: 40/255.0, alpha: 1) //#FEDC28
+        static let walk = UIColor(red: 255/255.0, green: 118/255.0, blue: 94/255.0, alpha: 1) //#FF765E
+        static let hike = UIColor(red: 147/255.0, green: 201/255.0, blue: 106/255.0, alpha: 1) //#93C96A
+        static let bike = UIColor(red: 100/255.0, green: 185/255.0, blue: 190/255.0, alpha: 1) //#64B9BE
     }
 }
 

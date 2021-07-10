@@ -14,7 +14,7 @@ class LocationManager: NSObject {
     static let shared = LocationManager()
 
     private var locationEnabled = false
-     let locationManager = CLLocationManager()
+     let manager = CLLocationManager()
 
     var startLocation: CLLocation!
     var lastLocation: CLLocation!
@@ -26,23 +26,30 @@ class LocationManager: NSObject {
     private var singleLocationUpdate: ((CLLocation) -> ())?
 
     var hasPermission: Bool {
-        let authorizationStatus = CLLocationManager.authorizationStatus()
-        return authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            return  true
+        default:
+            return false
+        }
     }
-
+    
     override init() {
         super.init()
-
+        
         locationEnabled = CLLocationManager.locationServicesEnabled()
-        locationManager.activityType = .fitness
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.distanceFilter = 0.5
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.pausesLocationUpdatesAutomatically = false
-        locationManager.showsBackgroundLocationIndicator = true
+        manager.activityType = .fitness
+        manager.allowsBackgroundLocationUpdates = true
+        manager.distanceFilter = 0.5
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        #if os(iOS)
+        manager.pausesLocationUpdatesAutomatically = false
+        manager.showsBackgroundLocationIndicator = true
+        #endif
     }
-
+    
     func startLocationUpdates(locationListener listener: @escaping (CLLocation) -> (),
                               onError errorCallback: ((Error) -> ())?) {
         guard locationEnabled else {
@@ -55,7 +62,7 @@ class LocationManager: NSObject {
         }
 
         locationListener = listener
-        locationManager.startUpdatingLocation()
+        manager.startUpdatingLocation()
     }
 
     func stopLocationUpdates(onError errorCallback: ((Error) -> ())?) {
@@ -67,7 +74,7 @@ class LocationManager: NSObject {
             errorCallback?(LocationError.notEnabled)
             return
         }
-        locationManager.stopUpdatingLocation()
+        manager.stopUpdatingLocation()
         locationListener = nil
         traveledDistance = 0
         startLocation = nil
@@ -76,7 +83,7 @@ class LocationManager: NSObject {
 
     func getCurrentLocation(block:@escaping (CLLocation)->()) {
         singleLocationUpdate = block
-        locationManager.startUpdatingLocation()
+        manager.startUpdatingLocation()
     }
 }
 
@@ -116,7 +123,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
 }
 
-fileprivate enum LocationError: Error {
+enum LocationError: Error {
     case notEnabled, noPermission, noUpdates
 }
 
