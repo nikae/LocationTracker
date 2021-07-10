@@ -12,16 +12,16 @@ import MapKit
 struct SummaryView: View {
     @EnvironmentObject var activityManager: ActivityManagerWatchOS
     @EnvironmentObject var contentViewHandler: ContentViewHandler
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+//    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     var body: some View {
         ScrollView {
             header(activityManager.activity?.title ?? activityManager.activity?.activityType.name() ?? "", divider: false)
                 .foregroundColor(activityManager.activity?.activityType.color())
                 .padding(.horizontal)
-            Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.follow))
-                .frame(height: 120)
-                .cornerRadius(8)
-                .padding(.horizontal)
+//            Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.follow))
+//                .frame(height: 120)
+//                .cornerRadius(8)
+//                .padding(.horizontal)
             VStack {
                 duration
                 header("Stats")
