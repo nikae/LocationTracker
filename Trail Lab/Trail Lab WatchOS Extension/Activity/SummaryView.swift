@@ -15,7 +15,7 @@ struct SummaryView: View {
 //    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     var body: some View {
         ScrollView {
-            header(activityManager.activity?.title ?? activityManager.activity?.activityType.name() ?? "", divider: false)
+            header(activityManager.activity?.title ?? activityManager.activity?.activityType.name().capitalized ?? "", divider: false)
                 .foregroundColor(activityManager.activity?.activityType.color())
                 .padding(.horizontal)
 //            Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.follow))
@@ -45,11 +45,13 @@ struct SummaryView: View {
                 
             }.padding(.horizontal)
             //.foregroundColor(activityManager.activity?.activityType.color())
-            
-            Button(action: {contentViewHandler.viewState = .beforeActivity},
+           
+            //
+            Button(action: {activityManager.resetWorkout()},
                    label: {
                     Text("Done")
-                   }).accentColor(activityManager.activity?.activityType.color())
+                   })
+                .accentColor(activityManager.activity?.activityType.color())
                 .padding()
         }
     }
