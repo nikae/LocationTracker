@@ -26,12 +26,14 @@ struct ActivityStartView: View {
     @State var showGreeting: Bool = true
     @State private var selection = 0
     var body: some View {
-        TabView(selection: $selection) {
-            start.tag(0)
-            Text("HistoryViewHere").tag(1)
-            
-        }
-        .tabViewStyle(PageTabViewStyle())
+        start
+//        TabView(selection: $selection) {
+//            start.tag(0)
+//                //TODO: HistoryViewHere
+//            //Text("HistoryViewHere").tag(1)
+//            
+//        }
+//        .tabViewStyle(PageTabViewStyle())
       
     }
     

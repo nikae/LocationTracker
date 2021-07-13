@@ -214,16 +214,20 @@ class ActivityManagerWatchOS: NSObject, ObservableObject {
         WKInterfaceDevice.current().play(.stop)
     }
     
-    func resetWorkout(showSummary: Bool=true) {
+    func showSummery() {
+        DispatchQueue.main.async {
+            self.running = false
+            self.contentViewHandler.viewState = .summary
+        }
+    }
+    
+    func resetWorkout() {
         // Reset the published values.
         DispatchQueue.main.async {
-            self.activity?.calories = 0
-            self.activity?.distance = 0
-            self.activity?.hrSamples?.removeAll()
-            
+            self.activity = nil
             self.elapsedSeconds = 0
             self.running = false
-            self.contentViewHandler.viewState = showSummary ? .summary : .beforeActivity
+            self.contentViewHandler.viewState = .beforeActivity
         }
     }
     
@@ -292,9 +296,10 @@ extension ActivityManagerWatchOS {
     private func discardActivity() {
         builder.discardWorkout()
         DispatchQueue.main.async {
-            self.resetWorkout(showSummary: false)
+            self.resetWorkout()
             WKInterfaceDevice.current().play(.failure)
         }
+        
     }
     
     func saveActivity() {
@@ -348,7 +353,7 @@ extension ActivityManagerWatchOS {
 
                 guard let workout = workout else {
                     DispatchQueue.main.async {
-                        self.resetWorkout()
+                        self.showSummery()
                         WKInterfaceDevice.current().play(.failure)
                     }
                     return
@@ -356,7 +361,7 @@ extension ActivityManagerWatchOS {
                 
                 self.routeBuilder.finishRoute(with: workout, metadata: [:]) { (newRoute, error) in
                     DispatchQueue.main.async {
-                    self.resetWorkout()
+                        self.showSummery()
                     }
                     
                     guard newRoute != nil else {
