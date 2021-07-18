@@ -33,11 +33,11 @@
 		<string>com.apple.watchkit</string>
 	</dict>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Health Records Usage Description</string>
+	<string>The app uses HealthKit to read and right your workouts data </string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Health Share Usage Description</string>
+	<string>The app uses HealthKit to read and right your workouts data </string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Health Update Usage Description</string>
+	<string>The app uses HealthKit to read and right your workouts data </string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location is used to generate a route for your activity. </string>
 	<key>NSLocationUsageDescription</key>

@@ -25,9 +25,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
-	<string>We meed to write health</string>
+	<string>The app uses HealthKit to read and right your workouts data </string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>We meed to write health</string>
+	<string>The app uses HealthKit to read and right your workouts data </string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location is used to generate a route for your activity. </string>
 	<key>NSLocationUsageDescription</key>
